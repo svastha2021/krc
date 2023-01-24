@@ -113,8 +113,23 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" [routerLink]="'/payment-receipts'" href="#">Create Entry</a></li>
-            <li><a class="dropdown-item" [routerLink]="'/update-payreceipts'" href="#">View/Update</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/update-payreceipts'" href="#">View/Update</a></li>           
             
+            
+          </ul>
+        </li>
+        <!-- //Master -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Master
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" [routerLink]="'/account-master'" href="#">Account Master</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/doctor-master'" href="#">Doctor Master</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/inventory'" href="#">Inventory Config</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/main-supp'" href="#">Main to Supp</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/user-master'" href="#">User Master</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -137,6 +152,7 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" [routerLink]="'/eod'" href="#">EOD</a></li>
             <li><a class="dropdown-item" [routerLink]="'/upload'" href="#">Upload</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/pwd'" href="#">Reset Password</a></li>
           </ul>
         </li>
         

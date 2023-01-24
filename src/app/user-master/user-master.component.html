@@ -1,0 +1,195 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row">
+        <h3>USER MASTER</h3>
+    </div>
+    <form [formGroup]="userMasterForm">
+        <div class="row">
+            <div class="col-4">
+                    <mat-form-field class="d-flex" appearance="fill">
+                        <mat-label>User Name</mat-label>
+                        <input type="text" matInput name="user_name" required [(ngModel)]="search"
+                          placeholder="Pick one" aria-label="user_name" formControlName="user_name" [matAutocomplete]="auto" [maxLength]="500">
+                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="fetchUserDetails($event.option.value)">
+                            <mat-option *ngFor="let f of (userList | userFilter:search)as folder" [value]="f.user_id">
+                                {{f?.user_name}}
+                            </mat-option>
+                          </mat-autocomplete>
+                    </mat-form-field>
+            </div>
+            <div class="col-4">
+                <div>
+                    <mat-form-field class="d-flex" appearance="fill">
+                        <mat-select placeholder="User Branch" formControlName="branch_id" >
+                            <mat-option *ngFor="let branch of branchList;" [value]="branch.branch_id">{{branch.branch_name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field class="d-flex" appearance="fill">
+                            <mat-label>DOB</mat-label>
+                            <input matInput type="date" formControlName="dob" name="dob">
+                        
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class="d-flex" appearance="fill">
+                            <mat-label>DOJ</mat-label>
+                            <input matInput type="date" formControlName="doj" name="doj">
+                        </mat-form-field>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Mobile Number</mat-label>
+                    <input matInput type="text" formControlName="mobile_no" name="mobile_no">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <div>
+                    <mat-form-field class="d-flex" appearance="fill">
+                        <mat-label>Home Contact #</mat-label>
+                        <input matInput type="text" formControlName="home_contact_no" name="home_contact_no">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Residence Address</mat-label>
+                    <input matInput type="text" formControlName="residence_address" name="residence_address">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Email ID</mat-label>
+                    <input matInput type="text" formControlName="email_id" name="email_id">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <div>
+                    <mat-form-field class="d-flex" appearance="fill">
+                        <mat-label>Aadhar Number</mat-label>
+                        <input matInput type="text" formControlName="aadhar_no" name="aadhar_no">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Pan Number</mat-label>
+                    <input matInput type="text" formControlName="pan_no" name="pan_no">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Passport Number</mat-label>
+                    <input matInput type="text" formControlName="passport" name="passport">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <div>
+                    <mat-form-field class="d-flex" appearance="fill">
+                        <mat-label>Bank Account Number</mat-label>
+                        <input matInput type="text" formControlName="bank_account_no" name="bank_account_no">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>IFSC Code</mat-label>
+                    <input matInput type="text" formControlName="ifsc_code" name="ifsc_code">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Bank Name</mat-label>
+                    <input matInput type="text" formControlName="bank_name" name="bank_name">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Bank Address</mat-label>
+                    <input matInput type="text" formControlName="bank_address" name="bank_address">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Bank Branch</mat-label>
+                    <input matInput type="text" formControlName="attached_branch" name="attached_branch">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Signature</mat-label>
+                    <input matInput type="text" formControlName="signature" name="signature">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-select placeholder="PF Available" formControlName="pf_employee">
+                        <mat-option value="Y">Yes</mat-option>
+                        <mat-option value="N">No</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>PF Number</mat-label>
+                    <input matInput type="text" formControlName="pf_number" name="pf_number">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>PF Start Date</mat-label>
+                    <input matInput type="date" formControlName="pf_start_date" name="pf_start_date">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-select placeholder="User Type" formControlName="user_type">
+                        <mat-option *ngFor="let user of usertype" value="{{user.ref_code}}">{{user.ref_desc}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <!-- <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>PWD</mat-label>
+                    <input matInput type="text" formControlName="pwd" name="pwd">
+                
+                </mat-form-field>
+            </div> -->
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-select placeholder="User Status" formControlName="user_status">
+                        <mat-option value="Y">Active</mat-option>
+                        <mat-option value="N">In Active</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-12 d-flex text-center">
+                    <button mat-raised-button color="bg-clr" class="bg-clr" (click)="submit()">Save</button>
+            </div>
+        </div>
+    </form>
+    <br>
+</div>

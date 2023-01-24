@@ -79,6 +79,13 @@ import { RpTableComponent } from './receipt-payment-report/rp-table/rp-table.com
 import { StockRegisterReportComponent } from './stock-register-report/stock-register-report.component';
 import { SRegTableComponent } from './stock-register-report/s-reg-table/s-reg-table.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
+import { AccountMasterComponent } from './account-master/account-master.component';
+import { DoctorMasterComponent } from './doctor-master/doctor-master.component';
+import { InventoryConfigComponent } from './inventory-config/inventory-config.component';
+import { SuppProdMapComponent } from './supp-prod-map/supp-prod-map.component';
+import { UserMasterComponent } from './user-master/user-master.component';
+import { userFilterPipe } from './user-master/user-filter';
+import { LoginUserComponent } from './login-user/login-user.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -147,7 +154,14 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
     RpTableComponent,
     StockRegisterReportComponent,
     SRegTableComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    AccountMasterComponent,
+    DoctorMasterComponent,
+    InventoryConfigComponent,
+    SuppProdMapComponent,
+    UserMasterComponent,
+    userFilterPipe,
+    LoginUserComponent
   ],
   imports: [
     BrowserModule,

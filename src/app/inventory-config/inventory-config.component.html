@@ -1,0 +1,98 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row">
+        <h3>INVENTORY CONFIG</h3>
+    </div>
+    <form [formGroup]="inventoryForm">
+        <div class="row">
+            <div class="col-6">
+                    <mat-form-field class="d-flex" appearance="fill">
+                        <mat-select placeholder="Inventory Branch" formControlName="inventory_branch" (valueChange)="getInvConfig($event)"
+                        [disabled]="isDisable">
+                            <mat-option *ngFor="let branch of branchList;" [value]="branch.branch_id">{{branch.branch_name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+            </div>
+            <div class="col-6">
+                <div>
+                    <mat-form-field class="d-flex" appearance="fill">
+                        <mat-select placeholder="BU ID" formControlName="bu_id" (valueChange)="getProduct($event)"
+                        [disabled]="isDisable">
+                            <mat-option *ngFor="let bu of buList" [value]="bu.bu_id">
+                              {{bu.bu_name}}
+                            </mat-option>
+                          </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-6">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-select placeholder="Product" formControlName="product_id"
+                    [disabled]="isDisable">
+                        <mat-option *ngFor="let prod of prodList" [value]="prod.product_id">
+                            {{prod.product_name}}
+                          </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <!-- <mat-label>Part Of Inventory</mat-label>
+                    <input matInput type="text" formControlName="inventory_part" name="inventory_part"> -->
+                    <mat-select placeholder="Part Of Inventory" formControlName="part_of_inventory" >
+                    <mat-option value = 'Y'> Yes </mat-option>
+                    <mat-option value = 'N'> No </mat-option>
+                      </mat-select>
+                </mat-form-field>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-12 d-flex text-center">
+                        <button mat-raised-button color="bg-clr" class="bg-clr" (click)="submit()">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <br>
+
+    <div *ngIf="isShowTable">
+        <section class="example-container mat-elevation-z8" tabindex="0">
+            
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        
+              <ng-container matColumnDef="bu_id">
+                <th mat-header-cell *matHeaderCellDef>BU ID</th>
+                <td mat-cell *matCellDef="let element"> {{element.bu_id}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="product_name">
+                <th mat-header-cell *matHeaderCellDef> Product </th>
+                <td mat-cell *matCellDef="let element"> {{element.product_name}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="part_of_inventory">
+                <th mat-header-cell *matHeaderCellDef> Part of Inventory </th>
+                <td mat-cell *matCellDef="let element"> {{element.part_of_inventory}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="edit">
+                <th mat-header-cell *matHeaderCellDef> Edit </th>
+                <td mat-cell *matCellDef="let element"> <button mat-icon-button matTooltip="Click to Edit" class="iconbutton"
+                    color="primary" (click)="edit(element)">
+                    <mat-icon>edit</mat-icon>
+                  </button> </td>
+              </ng-container>
+              
+            
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </section>
+          <br>
+          <!-- <div class="row">
+              <div class="col-12 d-flex text-center">
+                      <button mat-raised-button color="bg-clr" class="bg-clr" (click)="submit()">Save</button>
+              </div>
+          </div> -->
+    </div>
+</div>

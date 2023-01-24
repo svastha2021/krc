@@ -1,0 +1,139 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row">
+        <h3>DIAYLSIS TO FLOOR MAP FOR INVENTORY</h3>
+    </div>
+    <form [formGroup]="mainSuppForm">
+        <div class="row">
+            <div class="col-4">
+                    <mat-form-field class="d-flex" appearance="fill">
+                        <mat-select placeholder="Inventory Branch" formControlName="inventory_branch" (ngModelChange)="getProdList()">
+                            <mat-option *ngFor="let branch of branchList;" [value]="branch.branch_id">{{branch.branch_name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+            </div>
+            <div class="col-4">
+                <div>
+                    <mat-form-field class="d-flex" appearance="fill">
+                        <mat-label>Source BU ID</mat-label>
+                        <mat-select placeholder="Source BU ID" formControlName="source_bu_id" (valueChange)="getProduct($event)">
+                            <mat-option *ngFor="let bu of buList" [value]="bu.bu_id">
+                                {{bu.bu_name}}
+                              </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-select placeholder="Source Product" formControlName="source_product_id" (ngModelChange)="getProdList()">
+                        <mat-option *ngFor="let prod of prodList" [value]="prod.product_id">
+                            {{prod.product_name}}
+                          </mat-option>
+                    </mat-select>
+                
+                </mat-form-field>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-3">
+                    <mat-form-field class="d-flex" appearance="fill">
+                        <mat-select placeholder="Target BU" formControlName="target_bu_id" (valueChange)="getProduct($event)"
+                        [disabled]="isDisable">
+                            <mat-option *ngFor="let bu of buList" [value]="bu.bu_id">
+                                {{bu.bu_name}}
+                              </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+            </div>
+            <div class="col-3">
+                <div>
+                    <mat-form-field class="d-flex" appearance="fill">
+                        <mat-select placeholder="Target Product" formControlName="target_product_id" (valueChange)="getProductName($event)"
+                        [disabled]="isDisable">
+                            <mat-option *ngFor="let prod of prodList" [value]="prod.product_id">
+                                {{prod.product_name}}
+                              </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-3">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Quantity Impact</mat-label>
+                    <input matInput type="text" formControlName="qty_impact" name="qty_impact">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-3">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-select placeholder="Active" formControlName="active_flag" >
+                        <mat-option value="Y">Yes</mat-option>
+                        <mat-option value="N">No</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <div class="col-6 d-flex">
+                        <div class="col-3" *ngIf="isShowEdit">
+                            <button mat-raised-button class="bg-clr"  color="bg-clr" (click)="addToList()">Add Record</button>
+                        </div>
+                        <div class="col-3" *ngIf="!isShowEdit">
+                            <button mat-raised-button class="bg-clr"  color="bg-clr" (click)="editList()">Update Record</button>
+                        </div>
+                </div>
+                
+            </div>
+            
+        </div>
+        <br>
+        
+        <div *ngIf="isShowTable">
+            <section class="example-container mat-elevation-z8" tabindex="0">
+                
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="goods-table">
+            
+                  <ng-container matColumnDef="target_bu_id">
+                    <th mat-header-cell *matHeaderCellDef> Target BU </th>
+                    <td mat-cell *matCellDef="let element"> {{element.target_bu_id}} </td>
+                  </ng-container>
+                
+                  <ng-container matColumnDef="target_product_name">
+                    <th mat-header-cell *matHeaderCellDef> Target Product </th>
+                    <td mat-cell *matCellDef="let element"> {{element.target_product_name}} </td>
+                  </ng-container>
+                
+                  <ng-container matColumnDef="qty_impact">
+                    <th mat-header-cell *matHeaderCellDef> Quantity Impact </th>
+                    <td mat-cell *matCellDef="let element"> {{element.qty_impact}} </td>
+                  </ng-container>
+                
+                  <ng-container matColumnDef="active_flag">
+                    <th mat-header-cell *matHeaderCellDef> Active </th>
+                    <td mat-cell *matCellDef="let element"> {{element.active_flag}} </td>
+                  </ng-container>
+    
+                  <ng-container matColumnDef="edit">
+                    <th mat-header-cell *matHeaderCellDef> Edit </th>
+                    <td mat-cell *matCellDef="let element"> <button mat-icon-button matTooltip="Click to Edit" class="iconbutton"
+                        color="primary" (click)="edit(element)">
+                        <mat-icon>edit</mat-icon>
+                      </button> </td>
+                  </ng-container>
+                  
+                
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+              </section>
+              <br>
+              <div class="row">
+                  <div class="col-12 d-flex text-center">
+                          <button mat-raised-button color="bg-clr" class="bg-clr" (click)="submit()">Save</button>
+                  </div>
+              </div>
+        </div>
+    </form>
+    <br>
+</div>

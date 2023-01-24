@@ -1,0 +1,87 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row">
+        <h3>DOCTOR MASTER</h3>
+    </div>
+    <div class="row">
+        <div class="col-12 d-flex txt-right">
+                <button mat-raised-button color="bg-clr" class="bg-clr" (click)="clear()">Clear</button>
+        </div>
+    </div>
+    <br>
+    <form [formGroup]="docForm">
+        <div class="row">
+            <div class="col-4">
+                <mat-form-field class="d-flex"  appearance="fill">
+                    <mat-label>Doctor Name</mat-label>
+                    <input type="text" matInput name="doctor_name" required [(ngModel)]="search"
+                      placeholder="Pick one" aria-label="doctor_name" formControlName="doctor_name" [matAutocomplete]="auto" [maxLength]="500">
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="setProductCost($event.option.value)">
+                      <mat-option *ngFor="let f of (doctorList | filter:search)as folder" [value]="f.doctor_name">
+                        {{f?.doctor_name}}
+                      </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <div>
+                    <mat-form-field class="d-flex" appearance="fill">
+                        <mat-label>Doctor ID</mat-label>
+                        <input matInput type="text" formControlName="doctor_id" name="doctor_id" readonly>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Doctor Contact</mat-label>
+                    <input matInput type="number" formControlName="doctor_contact_no" name="doctor_contact_no">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Doctor Email ID</mat-label>
+                    <input matInput type="text" formControlName="doctor_email_id" name="doctor_email_id">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Doctor Assistence Name</mat-label>
+                    <input matInput type="text" formControlName="doctor_assistant_name" name="doctor_assistant_name">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Doctor Assistence Contact #</mat-label>
+                    <input matInput type="number" formControlName="doctor_assistant_contact_no" name="doctor_assistant_contact_no">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Doctor Assistence Email ID</mat-label>
+                    <input matInput type="text" formControlName="doctor_asst_emailid" name="doctor_asst_emailid">
+                
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Doctor Branch</mat-label>
+                    <mat-select placeholder="Doctor Branch" formControlName="doc_branch" >
+                        <mat-option *ngFor="let branch of branchList;" [value]="branch.branch_id">{{branch.branch_name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-12 d-flex text-center">
+                        <button mat-raised-button color="bg-clr" class="bg-clr" (click)="submit()">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <br>
+</div>

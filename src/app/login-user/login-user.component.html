@@ -1,0 +1,61 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row">
+        <h3>Reset password</h3>
+    </div>
+    <form [formGroup]="pwdForm">
+        <mat-card class="example-card">
+            <div class="row txt-center" *ngIf="isShowNewPwd">
+                <div class="col-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Enter current password</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required>
+                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+                <br>
+                <div class="col-6 p-3" *ngIf="isCheckPwd">
+                    <div class="col-12 d-flex text-center">
+                            <button mat-raised-button color="bg-clr" class="bg-clr" (click)="check()">Check</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row txt-center" *ngIf="!isShowNewPwd">
+                <div class="col-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Enter new password</mat-label>
+                        <input matInput [type]="hide1 ? 'password' : 'text'" formControlName="newPwd" required>
+                        <button mat-icon-button matSuffix (click)="hide1 = !hide1" [attr.aria-label]="'Hide1 password'" [attr.aria-pressed]="hide1">
+                        <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </mat-form-field>
+                    <div *ngIf="pwdForm.controls.newPwd.errors">Password should be atleast 8 characters long
+                          and should contain one number,one character, one lowercase letters, uppercase letters and one special
+                          character
+                    </div>
+                </div>
+                <div class="col-6">
+                    <mat-form-field appearance="fill">
+                        <mat-label>ReEnter new password</mat-label>
+                        <input matInput [type]="hide2 ? 'password' : 'text'" formControlName="reEnterPwd" required>
+                        <button mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide2 password'" [attr.aria-pressed]="hide2">
+                        <!-- <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon> -->
+                        </button>
+                    </mat-form-field>
+                    <div *ngIf="pwdForm.controls.reEnterPwd.errors" class="text-align-left">Password should be atleast 8 characters long
+                        and should contain one number,one character, one lowercase letters, uppercase letters and one special
+                        character
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row" *ngIf="!isCheckPwd">
+                <div class="col-12 d-flex text-center">
+                        <button mat-raised-button color="bg-clr" class="bg-clr" (click)="submit()">Save</button>
+                </div>
+            </div>
+        </mat-card>
+    </form>
+</div>
