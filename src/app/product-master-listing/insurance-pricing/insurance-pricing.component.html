@@ -12,6 +12,11 @@
             
             <td>Insurance Type</td>
             <td>Product Price</td>
+
+            <td>Patient Price</td>
+            <td>Insurance Price</td>
+            <td>Doctor Price</td>
+
             <td>Effective From</td>
             <td>MRP</td>
             <td>Discount Amount</td>
@@ -32,7 +37,10 @@
                   </select>
             </td>
 
-            <td class="w-5"><input type="number" class="form-control no-border" min="0" onkeypress="return event.charCode >= 48" [(ngModel)]="item.product_price"></td>
+            <td class="w-5"><input type="number" class="form-control no-border" readonly min="0" onkeypress="return event.charCode >= 48" [(ngModel)]="item.product_price"></td>
+            <td class="w-5"><input type="number" class="form-control no-border" min="0" onkeypress="return event.charCode >= 48" (change)="setProductPrice(item)" [(ngModel)]="item.patient_price"></td>
+            <td class="w-5"><input type="number" class="form-control no-border" min="0" onkeypress="return event.charCode >= 48" (change)="setProductPrice(item)" [(ngModel)]="item.insurance_price"></td>
+            <td class="w-5"><input type="number" class="form-control no-border" min="0" onkeypress="return event.charCode >= 48" [(ngModel)]="item.doctor_price" [value]="item.doctor_price" [max]="item.patient_price" (ngModelChange)="validateDocPrice(item)"></td>
             <td class="w-5"><input type="date" min="{{minDate |date:'yyyy-MM-dd'}}" class="form-control no-border" [(ngModel)]="item.eff_from"></td> 
             <td class="w-5"><input type="number" class="form-control no-border" onkeypress="return event.charCode >= 48" min="0"  [(ngModel)]="item.mrp_price"></td>
             <td class="w-5"><input type="number" class="form-control no-border" onkeypress="return event.charCode >= 48" min="0"  [(ngModel)]="item.discount_value"></td>

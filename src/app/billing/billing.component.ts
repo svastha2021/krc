@@ -10,6 +10,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { PatientListDialogComponent } from '../utilities/patient-list-dialog/patient-list-dialog.component';
 import { InvoiceComponent } from '../invoice/invoice.component';
 import { ReferenceService } from '../utilities/services/reference.service';
+import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.component';
+import { InfoObjDialogComponent } from '../utilities/info-obj-dialog/info-obj-dialog.component';
 @Component({
   selector: 'app-billing',
   templateUrl: './billing.component.html',
@@ -22,7 +24,8 @@ export class BillingComponent implements OnInit {
       validators: [Validators.required],
       updateOn: "change"
     }],
-    product_cost: [, {
+
+    patient_base_price: [, {
       validators: [Validators.required, Validators.min(1)],
       updateOn: "change"
     }],
@@ -35,6 +38,7 @@ export class BillingComponent implements OnInit {
     other_charge3: [],
     total_charges: [],
     gross_inv_amount: [],
+    patient_inv_gross_amt: [],
     other_charge_remark1: [],
     other_charge_remark2: [],
     other_charge_remark3: [],
@@ -45,7 +49,8 @@ export class BillingComponent implements OnInit {
     discount2: [],
     discount3: [],
     total_discount: [],
-    net_amount: []
+    net_amount: [],
+    net_patient_amount: []
 
   });
   showItemDetails = false;
@@ -73,6 +78,7 @@ export class BillingComponent implements OnInit {
     product_id: '',
     product_type: '',
     product_cost: Number(0),
+    patient_base_price: Number(0),
     product_name: '',
     product_qty: 1,
     product_value: Number(0),
@@ -84,6 +90,7 @@ export class BillingComponent implements OnInit {
     other_charge_remark2: '',
     other_charge_remark3: '',
     gross_inv_amount: Number(0),
+    patient_inv_gross_amt: Number(0),
     discount1: Number(0),
     discount2: Number(0),
     discount3: Number(0),
@@ -92,19 +99,23 @@ export class BillingComponent implements OnInit {
     discount_remark3: '',
     gross_discount: Number(0),
     net_amount: Number(0),
+    net_patient_amount: Number(0),
     net_balance: Number(0),
     net_paid: Number(0),
+    patient_inv_value: Number(0),
+    insurance_inv_value: Number(0),
+    doctor_inv_value: Number(0)
 
   }
   totalAmount = 0;
-  eodData:any;
+  eodData: any;
   totalOtherCharges = 0;
   totalGrossDiscount = 0;
   filteredOptions: Observable<any[]> | undefined;
   headerDetailData: any;
   constructor(private bs: BillingService,
     private dialog: MatDialog, private router: Router, private fb: FormBuilder,
-    private ref:ReferenceService) { }
+    private ref: ReferenceService) { }
 
   ngOnInit(): void {
 
@@ -120,7 +131,7 @@ export class BillingComponent implements OnInit {
     this.ref.getEodDetailData().subscribe(data => {
       console.log("EOD data", data.results);
       this.eodData = data.results[0].eod_date;
-      
+
     })
   }
 
@@ -162,6 +173,11 @@ export class BillingComponent implements OnInit {
   setProductCost(data: any) {
     this.billingItem.product_id = data.value.product_id;
     this.billingItem.product_cost = parseInt(data.value.product_price);
+    this.billingItem.patient_base_price = parseInt(data.value.patient_price);
+    this.billingItem.product_value = (this.billingItem.product_qty * this.billingItem.product_cost);
+    this.billingItem.patient_inv_value = (this.billingItem.product_qty * this.billingItem.patient_base_price);
+    this.billingItem.insurance_inv_value = parseInt(data.value.insurance_price)
+
     this.calclulateOthercharges(this.billingItem.product_cost);
   }
   displayProperty(value: any) {
@@ -179,7 +195,7 @@ export class BillingComponent implements OnInit {
     this.resetFieldsCalculation();
     switch (data) {
       case 'DIALY': {
-        this.bs.fetchProducts(data, patientType,this.eodData).subscribe(data => {
+        this.bs.fetchProducts(data, patientType, this.eodData).subscribe(data => {
           this.options = data.results;
           this.filteredOptions = this.myControl.valueChanges.pipe(
             startWith(''),
@@ -189,7 +205,7 @@ export class BillingComponent implements OnInit {
         break;
       }
       case 'PHARM': {
-        this.bs.fetchProducts(data, patientType,this.eodData).subscribe(data => {
+        this.bs.fetchProducts(data, patientType, this.eodData).subscribe(data => {
           this.options = data.results;
           this.filteredOptions = this.myControl.valueChanges.pipe(
             startWith(''),
@@ -199,7 +215,7 @@ export class BillingComponent implements OnInit {
         break;
       }
       case 'LAB': {
-        this.bs.fetchProducts(data, patientType,this.eodData).subscribe(data => {
+        this.bs.fetchProducts(data, patientType, this.eodData).subscribe(data => {
           this.options = data.results;
           this.filteredOptions = this.myControl.valueChanges.pipe(
             startWith(''),
@@ -221,7 +237,7 @@ export class BillingComponent implements OnInit {
     this.billingItem.bu_id = data;
     let patientType = this.headerDetailData.patient_type;
     this.resetFieldsCalculation();
-    this.bs.fetchProducts(data, patientType,this.eodData).subscribe(data => {
+    this.bs.fetchProducts(data, patientType, this.eodData).subscribe(data => {
       this.options = data.results;
       this.filteredOptions = this.myControl.valueChanges.pipe(
         startWith(''),
@@ -239,13 +255,18 @@ export class BillingComponent implements OnInit {
 
   calculateAmountPerQty(data: number) {
     this.billingItem.product_value = (this.billingItem.product_qty * this.billingItem.product_cost);
+    this.billingItem.patient_inv_value = (this.billingItem.product_qty * this.billingItem.patient_base_price);//new code
     this.calclulateOthercharges(data);
   }
 
   calclulateOthercharges(data: number) {
     this.setChargesMandatory();
     this.billingItem.total_charges = this.billingItem.other_charge1 + this.billingItem.other_charge2 + this.billingItem.other_charge3;
+    // this.billingItem.gross_inv_amount = (this.billingItem.product_qty * this.billingItem.product_cost) + this.billingItem.other_charge1 + this.billingItem.other_charge2 + this.billingItem.other_charge3;
     this.billingItem.gross_inv_amount = (this.billingItem.product_qty * this.billingItem.product_cost) + this.billingItem.other_charge1 + this.billingItem.other_charge2 + this.billingItem.other_charge3;
+    //new code
+    this.billingItem.patient_inv_gross_amt = (this.billingItem.product_qty * this.billingItem.patient_base_price) + this.billingItem.other_charge1 + this.billingItem.other_charge2 + this.billingItem.other_charge3;
+    //ends
     this.calclulateNetPay();
     //this.billingItem.gross = 4+5;
   }
@@ -324,12 +345,16 @@ export class BillingComponent implements OnInit {
   }
 
   calclulateNetPay() {
-    this.billingItem.net_amount = (this.billingItem.gross_inv_amount) - this.billingItem.gross_discount;
+
+    this.billingItem.net_patient_amount = this.billingItem.patient_inv_gross_amt - this.billingItem.gross_discount;
+    //new code ends
+    this.billingItem.doctor_inv_value = this.billingItem.net_patient_amount;
+    this.billingItem.net_amount = (this.billingItem.net_patient_amount) + this.billingItem.insurance_inv_value;
     //this.calculateFinal();
   }
 
   calculateFinal() {
-    this.finalPay = this.finalPay + this.billingItem.net_amount;
+    this.finalPay = this.finalPay + this.billingItem.net_patient_amount;
     localStorage.setItem('billingarray', JSON.stringify(this.billingArray));
 
   }
@@ -378,9 +403,9 @@ export class BillingComponent implements OnInit {
   }
   addItem() {
     this.billingArray.push(this.billingItem);
-    this.totalAmount = this.totalAmount + this.billingItem.net_amount;
-    this.totalOtherCharges = this.totalOtherCharges + this.billingItem.total_charges;
-    this.totalGrossDiscount = this.totalGrossDiscount + this.billingItem.gross_discount;
+    this.totalAmount = this.totalAmount + this.billingItem.net_patient_amount;
+    this.totalOtherCharges = this.totalOtherCharges + this.billingItem.total_charges; 
+    this.totalGrossDiscount = this.totalGrossDiscount + this.billingItem.patient_inv_gross_amt;
     this.showBillingForm = false;
     //this.options = [];
     this.calculateFinal();
@@ -438,6 +463,8 @@ export class BillingComponent implements OnInit {
       product_id: '',
       product_type: '',
       product_cost: Number(0),
+      patient_base_price: Number(0),
+
       product_name: '',
       product_qty: Number(1),
       product_value: Number(0),
@@ -449,6 +476,7 @@ export class BillingComponent implements OnInit {
       other_charge_remark2: '',
       other_charge_remark3: '',
       gross_inv_amount: Number(0),
+      patient_inv_gross_amt: Number(0),
       discount1: Number(0),
       discount2: Number(0),
       discount3: Number(0),
@@ -457,8 +485,12 @@ export class BillingComponent implements OnInit {
       discount_remark3: '',
       gross_discount: Number(0),
       net_amount: Number(0),
+      net_patient_amount: Number(0),
       net_balance: Number(0),
       net_paid: Number(0),
+      patient_inv_value: Number(0),
+      insurance_inv_value: Number(0),
+      doctor_inv_value: Number(0)
     }
     //this.myForm.get('bu_id')?.setValue('');
   }
@@ -469,6 +501,8 @@ export class BillingComponent implements OnInit {
       product_id: '',
       product_type: '',
       product_cost: Number(0),
+      patient_base_price: Number(0),
+
       product_name: '',
       product_qty: Number(1),
       product_value: Number(0),
@@ -480,6 +514,7 @@ export class BillingComponent implements OnInit {
       other_charge_remark2: '',
       other_charge_remark3: '',
       gross_inv_amount: Number(0),
+      patient_inv_gross_amt: Number(0),
       discount1: Number(0),
       discount2: Number(0),
       discount3: Number(0),
@@ -488,8 +523,12 @@ export class BillingComponent implements OnInit {
       discount_remark3: '',
       gross_discount: Number(0),
       net_amount: Number(0),
+      net_patient_amount: Number(0),
       net_balance: Number(0),
       net_paid: Number(0),
+      patient_inv_value: Number(0),
+      insurance_inv_value: Number(0),
+      doctor_inv_value: Number(0)
     }
     // this.myForm.get('bu_id')?.setValue('');
   }
@@ -513,6 +552,28 @@ export class BillingComponent implements OnInit {
   patientHeaderData(data: any) {
     this.headerDetail = true;
     this.headerDetailData = data;
+  }
+  showHiddenDetails = false;
+  priceEditable = false;
+  displayHidden() {
+    this.showHiddenDetails = true;
+    
+    const dialogRef = this.dialog.open(InfoObjDialogComponent, {
+      width: '500px',
+      data:this.billingItem,
+    });
+  }
+
+  validatePatientPrice(price: number) {
+    if (price === 0) {
+      this.priceEditable = true;
+      return false;
+    } else if (this.priceEditable) {
+      return false;
+    } else {
+      this.priceEditable = false;
+      return true;
+    }
   }
 
 

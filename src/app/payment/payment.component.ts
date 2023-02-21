@@ -16,6 +16,7 @@ export interface DialogData {
   payment_mode: '',
   updated_by: '',
   net_balance: 0,
+  bu_patient_amt_bal:0,
   advance_amount_balance?: 0
 }
 @Component({
@@ -42,6 +43,7 @@ export class PaymentComponent implements OnInit {
     payment_amount: '',
     payment_mode: '',
     payment_remark: '',
+    payment_source:'P',
     updated_by: localStorage.getItem('user_id')
   }
   constructor(private bs: BillingService,
@@ -135,6 +137,7 @@ export class PaymentComponent implements OnInit {
         payment_amount: '',
         payment_mode: '',
         payment_remark: '',
+        payment_source:'P',
         updated_by: localStorage.getItem('user_id')
       }
 
@@ -165,6 +168,7 @@ export class PaymentComponent implements OnInit {
       payment_amount: '',
       payment_mode: '',
       payment_remark: '',
+      payment_source:'P',
       updated_by: localStorage.getItem('user_id')
     }
   }
@@ -212,8 +216,8 @@ export class DialogOverviewExampleDialog implements OnInit {
       console.log(types);
       this.payTypes = types.results;
     })
-    this.maxAmount = this.data.net_balance;
-    this.data.amt_payment = this.data.net_balance
+    this.maxAmount = this.data.bu_patient_amt_bal;
+    this.data.amt_payment = this.data.bu_patient_amt_bal
   }
 
   onNoClick(): void {
@@ -243,7 +247,7 @@ export class DialogOverviewExampleDialog implements OnInit {
   }
 
   validateAmount() {
-    if (this.data.amt_payment <= this.data.net_balance) {
+    if (this.data.amt_payment <= this.data.bu_patient_amt_bal) {
       this.showamountError = false;
       return false;
     } else {

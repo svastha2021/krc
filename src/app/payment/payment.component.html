@@ -4,24 +4,24 @@
         <h1>Payment</h1>
     </div>
     <div class="row">
-        <div class="container" *ngIf="patientHeader">  
+        <div class="container" *ngIf="patientHeader">
             <div class="row header-border margin-20t">
-              <div class="">
-                <label class="mar20">Patient Id: {{patientHeader?.patient_id}}</label>
-                <label class="mar20">Patient Name: {{patientHeader?.patient_name}}</label>
-                <label class="mar20">Age: {{patientHeader?.age}}</label>
-                <label class="mar20">Sex: {{patientHeader?.sex}}</label>
-                <label class="mar20">Phone: {{patientHeader?.mobile_no}}</label>
-                <label class="mar20">Patient Type: {{patientHeader?.patient_type_name}}</label>
-                
-                <label class="mar20">Total Invoice Amount: {{patientHeader?.net_inv_amount}}</label>
-                <label class="mar20">Total Paid: {{patientHeader?.net_inv_paid}}</label>
-                <label class="mar20">Total Balance: {{patientHeader?.net_inv_balance}}</label>
-                <label class="mar20">Advance Adjusted: {{patientHeader?.advance_amount_paid}}</label>
-                <label class="mar20">Advance Balance: {{patientHeader?.advance_amount_balance}}</label>
-              </div>
+                <div class="">
+                    <label class="mar20">Patient Id: {{patientHeader?.patient_id}}</label>
+                    <label class="mar20">Patient Name: {{patientHeader?.patient_name}}</label>
+                    <label class="mar20">Age: {{patientHeader?.age}}</label>
+                    <label class="mar20">Sex: {{patientHeader?.sex}}</label>
+                    <label class="mar20">Phone: {{patientHeader?.mobile_no}}</label>
+                    <label class="mar20">Patient Type: {{patientHeader?.patient_type_name}}</label>
+
+                    <label class="mar20">Total Invoice Amount: {{patientHeader?.net_inv_amount}}</label>
+                    <label class="mar20">Total Paid: {{patientHeader?.net_inv_paid}}</label>
+                    <label class="mar20">Total Balance: {{patientHeader?.net_inv_balance}}</label>
+                    <label class="mar20">Advance Adjusted: {{patientHeader?.advance_amount_paid}}</label>
+                    <label class="mar20">Advance Balance: {{patientHeader?.advance_amount_balance}}</label>
+                </div>
             </div>
-    </div>
+        </div>
     </div>
     <div *ngIf="billingArray?.length > 0">
         Invoice#: {{invoice}}
@@ -30,7 +30,7 @@
                 <tr>
                     <th scope="col">Serial#</th>
                     <th scope="col">BU</th>
-                    <th scope="col">Net Amount</th>                    
+                    <th scope="col">Net Amount</th>
                     <th scope="col">Net Paid</th>
                     <th scope="col">Net Balance</th>
                     <th scope="col">Payable Amount</th>
@@ -41,12 +41,13 @@
 
                     <td>{{item.inv_srl_no}}</td>
                     <td>{{item.bu_id}}</td>
-                    <td>{{item.net_amount}}</td> 
-                    <td>{{item.net_paid}}</td>
-                    <td>{{item.net_balance}}</td>
-                                      
-                   
-                    <td><button [disabled]="item.inv_status === 'F'" (click)="showPayment(item)">Make Payment</button></td>                    
+                    <td>{{item.bu_patient_amt}}</td>
+                    <td>{{item.bu_patient_amt_paid}}</td>
+                    <td>{{item.bu_patient_amt_bal}}</td>
+
+
+                    <td><button [disabled]="item.bu_patient_inv_status === 'F'" (click)="showPayment(item)">Make Payment</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -55,7 +56,7 @@
         No pending Invoice Payment
     </div>
     <div><button (click)="navigateToInvoice()" class="btn btn-primary mar20">Back to Invoice
-        </button> 
+        </button>
         <button (click)="displayProducts()" class="btn btn-primary mar20">View Products
         </button>
         <button (click)="navigateToPrint()" class="btn btn-primary mar20">Print Invoice

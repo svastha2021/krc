@@ -5,14 +5,14 @@
             <tr>
                 <th scope="col">BU ID</th>
                 <th scope="col">Prod Description</th>
-                <th scope="col">Net Amount</th>
+                <th scope="col">Patient Net Amount</th>
             </tr>
         </thead>
         <tbody *ngIf="productList?.length > 0">
             <tr *ngFor="let item of productList">
                 <td>{{item.bu_id}}</td>
                 <td>{{item.product_name}}</td>
-                <td>{{item.net_amount}}</td>
+                <td>{{item.net_patient_amount}}</td>
             </tr>
 
         </tbody>

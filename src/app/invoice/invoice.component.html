@@ -35,7 +35,7 @@
                 <tr>
                     <th scope="col">Inv#</th>
                     <th scope="col">Inv Date</th>
-                    <th scope="col">Inv Amt</th>
+                    <!-- <th scope="col">Inv Amt</th> -->
                     <th scope="col">Total (Addl) Charges</th>
                     <th scope="col">Gross Amt</th>
                     <th scope="col">Total Discount</th>
@@ -52,13 +52,13 @@
                             [routerLink]="['/invoice', item.invoice_no]">{{item.invoice_no}}</a>
                     </td>
                     <td>{{item.inv_date | date: 'dd/MM/yyyy'}}</td>
-                    <td>{{item.total_base_amt}}</td>
+                    <!-- <td>{{item.total_base_amt}}</td> -->
                     <td>{{item.total_charges}}</td>
                     <td>{{item.gross_amt}}</td>
                     <td>{{item.total_discounts}}</td>
-                    <td>{{item.net_inv_amount}}</td>
-                    <td>{{item.net_inv_paid}}</td>
-                    <td>{{item.net_inv_balance}}</td>
+                    <td>{{item.net_patient_inv_amount}}</td>
+                    <td>{{item.net_patient_inv_paid}}</td>
+                    <td>{{item.net_patient_inv_balance}}</td>
                    <td><mat-icon title="delete" class="cancel-icon" aria-hidden="false" aria-label="Example home icon" (click)="cancelInvoice(item)">delete</mat-icon></td>
                 </tr>
             </tbody>

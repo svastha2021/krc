@@ -67,12 +67,21 @@
     </mat-form-field>
 
 
-    <mat-form-field class="mar20lr" appearance="fill">
+    <!-- <mat-form-field class="mar20lr" appearance="fill">
       <mat-label>Amount</mat-label>
       <input matInput type="number" min='0' formControlName="product_cost" required
-        [(ngModel)]="billingItem.product_cost" name="product_cost" readonly>
+        [(ngModel)]="billingItem.patient_inv_value" name="product_cost" readonly>
+
+    </mat-form-field> -->
+    <mat-form-field class="mar20lr" appearance="fill">
+      <mat-label>Amount</mat-label>
+      <input matInput type="number" min='0' formControlName="patient_base_price" required
+        [(ngModel)]="billingItem.patient_base_price" name="patient_base_price" [readonly]="validatePatientPrice(billingItem.patient_base_price)">
 
     </mat-form-field>
+    <button type="button" class="btn btn-primary" (click)="displayHidden()">
+      ...
+    </button>
 
     <mat-form-field class="mar20lr" appearance="fill">
       <mat-label>Quantity</mat-label>
@@ -97,8 +106,8 @@
       </mat-form-field>
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Gross Amount</mat-label>
-        <input matInput type="number" min='0' formControlName="gross_inv_amount"
-          [(ngModel)]="billingItem.gross_inv_amount" name="gross_inv_amount" readonly>
+        <input matInput type="number" min='0' formControlName="patient_inv_gross_amt"
+          [(ngModel)]="billingItem.patient_inv_gross_amt" name="patient_inv_gross_amt" readonly>
       </mat-form-field>
     </div>
 
@@ -167,10 +176,12 @@
     <div>
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Net Amount</mat-label>
-        <input matInput type="number" min='0' required formControlName="net_amount"
-          [(ngModel)]="this.billingItem.net_amount" name="netamount" readonly>
+        <input matInput type="number" min='0' required formControlName="net_patient_amount"
+          [(ngModel)]="this.billingItem.net_patient_amount" name="net_patient_amount" readonly>
       </mat-form-field>
+      <!-- {{billingItem.net_amount}} -->
 
+     
     </div>
 
     <button type="button" class="btn btn-primary" *ngIf="!editBillingItem" [disabled]="!myForm.valid"
@@ -201,6 +212,7 @@
           <tr>
             <th scope="col">Product Name</th>
             <th scope="col">Net Amount</th>
+            <th scope="col">Gross Amount</th>
             <th scope="col">Total Other Charges</th>
             <th scope="col">Total Discount</th>
             <th scope="col"></th>
@@ -211,7 +223,8 @@
           <tr *ngFor="let item of billingArray;let i=index">
 
             <td>{{item.product_name.product_name}}</td>
-            <td>{{item.net_amount}}</td>
+            <td>{{item.net_patient_amount}}</td>
+            <td>{{item.patient_inv_gross_amt}}</td>
             <td>{{item.total_charges}}</td>
             <td>{{item.gross_discount}}</td>
             <td>

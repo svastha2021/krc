@@ -21,7 +21,7 @@ export class InsurancePricingComponent implements OnInit {
   tableData: any = [];
   ins_types: any = [];
   eod: any;
-  minDate:any;
+  minDate: any;
   constructor(private ref: ReferenceService, private pms: ProductMasterService,
     private dialog: MatDialog, private util: UtilityService) { }
 
@@ -33,13 +33,18 @@ export class InsurancePricingComponent implements OnInit {
     this.ref.getPatientTypes().subscribe(data => {
       this.ins_types = data.results;
     })
-   
+
   }
   addRecord() {
     this.tableData.push({
       id: this.tableData.length,
       product_id: this.prod_obj.product_id,
       product_price: 0,
+
+      patient_price: 0,
+      insurance_price: 0,
+      doctor_price: 0,
+
       eff_from: this.util.convertTodayTostr(),
       mrp_price: 0,
       discount_value: 0,
@@ -91,7 +96,7 @@ export class InsurancePricingComponent implements OnInit {
     // dialogRef.afterClosed().subscribe(data => {
   }
 
-  showHistoryPrice(){
+  showHistoryPrice() {
     this.pms.sellingPricePerProduct(this.prod_obj.product_id).subscribe(data => {
       const dialogRef = this.dialog.open(PreviousPriceListDialogComponent, {
         width: '500px',
@@ -112,10 +117,22 @@ export class InsurancePricingComponent implements OnInit {
   fetchMinDate() {
     let eod = new Date(this.eod.eod_date);
     let today = new Date();
-    if(eod<today){
+    if (eod < today) {
       this.minDate = eod;
     } else {
       this.minDate = today;
+    }
+  }
+
+
+  setProductPrice(item: any) {
+    console.log(item);
+    item.product_price = item.patient_price + item.insurance_price;
+  }
+
+  validateDocPrice(item: any) {
+    if (item.doctor_price > item.patient_price) {
+     return item.doctor_price = 0;
     }
   }
 }

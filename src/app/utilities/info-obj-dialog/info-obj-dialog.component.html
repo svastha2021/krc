@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Information</h1>
+<div mat-dialog-content>
+    
+        <h5>Insurance : Rs.{{this.billing.insurance_inv_value}}</h5>
+        <h5>Patient   : Rs. {{this.billing.patient_base_price}}</h5>
+        <h5>Total     : Rs.{{this.billing.net_amount}}</h5>
+        <h5>Mgmt      : Rs.{{this.billing.doctor_inv_value}}</h5>
+   
+
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">OK</button>    
+</div>
