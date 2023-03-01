@@ -10,10 +10,10 @@ export class receiptPaymentReportsService {
 
     constructor(private http: HttpClient) { }
 
-    retrieveData(branchId: any, fromDate: any, toDate: any):Observable<any>{
+    retrieveData(org_id: any, branchId: any, fromDate: any, toDate: any):Observable<any>{
       let headers = new HttpHeaders();
       headers.append('Content-Type', 'application/json');
-      return this.http.get(environment.apiUrl + 'receiptpaymentreport/KRC/'+branchId+'?from_date='+fromDate+'&to_date'+toDate,
+      return this.http.get(environment.apiUrl + 'receiptpaymentreport/'+org_id+'/'+branchId+'?from_date='+fromDate+'&to_date'+toDate,
       { headers: headers })
     }
 }

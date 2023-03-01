@@ -79,6 +79,7 @@ import { SuppProdMapComponent } from './supp-prod-map/supp-prod-map.component';
 import { UserMasterComponent } from './user-master/user-master.component';
 import { userFilterPipe } from './user-master/user-filter';
 import { LoginUserComponent } from './login-user/login-user.component';
+import { PatientHealthComponent } from './patient-health/patient-health.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -153,7 +154,8 @@ import { LoginUserComponent } from './login-user/login-user.component';
     SuppProdMapComponent,
     UserMasterComponent,
     userFilterPipe,
-    LoginUserComponent
+    LoginUserComponent,
+    PatientHealthComponent
   ],
   imports: [
     BrowserModule,
