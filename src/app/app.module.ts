@@ -87,6 +87,7 @@ import { UserMasterComponent } from './user-master/user-master.component';
 import { userFilterPipe } from './user-master/user-filter';
 import { LoginUserComponent } from './login-user/login-user.component';
 import { InfoObjDialogComponent } from './utilities/info-obj-dialog/info-obj-dialog.component';
+import { PatientHealthComponent } from './patient-health/patient-health.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -163,7 +164,8 @@ import { InfoObjDialogComponent } from './utilities/info-obj-dialog/info-obj-dia
     UserMasterComponent,
     userFilterPipe,
     LoginUserComponent,
-    InfoObjDialogComponent
+    InfoObjDialogComponent,
+    PatientHealthComponent
   ],
   imports: [
     BrowserModule,

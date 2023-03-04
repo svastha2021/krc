@@ -79,7 +79,8 @@ export class SupplierPaymentComponent implements OnInit {
   getPoSuppPayment() {
     const branchId = this.supplierPaymentForm.controls.branch_id.value;
     const suppId = this.supplierPaymentForm.controls.supplier_id.value;
-    this.SuppPayService.getPoSuppPay(branchId, suppId).subscribe(data =>{
+    const org_id = localStorage.getItem('org_id');
+    this.SuppPayService.getPoSuppPay(org_id, branchId, suppId).subscribe(data =>{
       console.log("suppPay", data);
       this.suppPayData = data.results;
     })
@@ -88,7 +89,8 @@ export class SupplierPaymentComponent implements OnInit {
   getSuppPayDetails(data: any) {
     const branchId = data.branch_id; const suppId = data.supplier_id;
     const poNumber = data.po_number; const suppInvNum = data.supplier_invoice_num;
-    this.SuppPayService.getSuppPayDetails(branchId, suppId, poNumber, suppInvNum).subscribe(data =>{
+    const org_id = localStorage.getItem('org_id');
+    this.SuppPayService.getSuppPayDetails(org_id, branchId, suppId, poNumber, suppInvNum).subscribe(data =>{
       console.log("suppPay", data);
       this.paymentTableData = data.results;
     })

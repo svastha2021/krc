@@ -13,19 +13,19 @@ export class SupplierService {
     constructor(public http: HttpClient) {}
 
     //get supplier list
-    public getSupplierList(branch_id: any): Observable<any> {
+    public getSupplierList(org_id: any, branch_id: any): Observable<any> {
         const httpOptions = {
             headers: new HttpHeaders({
                 "content-Type": "application/json",
             }),
         };
-        const api_url = this.getSupplierListUrl(branch_id);
+        const api_url = this.getSupplierListUrl(org_id, branch_id);
         return this.http.get(api_url, httpOptions);
     }
 
-    private getSupplierListUrl(branch_id: any) {
+    private getSupplierListUrl(org_id: any, branch_id: any) {
         const baseUrl = environment.apiUrl;
-        let returnUrl = baseUrl + "suppliers/KRC/" + branch_id;
+        let returnUrl = baseUrl + 'suppliers/'+org_id+'/' + branch_id;
         return returnUrl;
     }
 
@@ -37,10 +37,10 @@ export class SupplierService {
           { headers: headers })
       }
 
-    public fetchSupplier(branch_id: any, supplierId: any): Observable<any> {
+    public fetchSupplier(org_id: any, branch_id: any, supplierId: any): Observable<any> {
         let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
-        return this.http.get(environment.apiUrl + "suppliers/KRC/" + branch_id +"?supplier_id=" +supplierId,
+        return this.http.get(environment.apiUrl + 'suppliers/'+org_id+'/' + branch_id +"?supplier_id=" +supplierId,
           { headers: headers })
     }
 }

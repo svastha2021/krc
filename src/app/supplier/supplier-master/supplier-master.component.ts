@@ -60,7 +60,8 @@ export class SupplierMasterComponent implements OnInit {
 
   getSupplierList(){
     let branchId = localStorage.getItem('branch_id');
-    this.supplierService.getSupplierList(branchId).subscribe(data => {
+    let org_id = localStorage.getItem('org_id');
+    this.supplierService.getSupplierList(org_id, branchId).subscribe(data => {
       console.log("supplier",data.results);
       this.folderObjs = data.results;
     })
@@ -68,6 +69,7 @@ export class SupplierMasterComponent implements OnInit {
 
   setProductCost(data: any) {
     let branchId = localStorage.getItem('branch_id');
+    let org_id = localStorage.getItem('org_id');
 
     this.folderObjs.forEach((element: any) => {
       if(data === element.supplier_name){
@@ -76,7 +78,7 @@ export class SupplierMasterComponent implements OnInit {
     });
     if(this.supplierInputForm.controls.supplier_id.value  !== null){
       let supplierId = this.supplierInputForm.controls.supplier_id.value;
-      this.supplierService.fetchSupplier(branchId, supplierId).subscribe(data => {
+      this.supplierService.fetchSupplier(org_id, branchId, supplierId).subscribe(data => {
         this.fetchSupplierdata = data.results;
         let get_date1 = (this.fetchSupplierdata.supplier_opendate);
         let get_date = (get_date1).split("-");

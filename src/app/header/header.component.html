@@ -14,13 +14,13 @@
             OP
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item"  [routerLink]="'/apt-booking'" href="#">Appointment System</a></li>
+            <li><a class="dropdown-item" [routerLink]="'/apt-booking'" href="#">Appointment System</a></li>
             <li><a class="dropdown-item" [routerLink]="'/patient-reg'">Patient Registration</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle"  href="#" id="navbarDropdownMenuLink2"
-            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
             Doctor Consultation
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
@@ -49,61 +49,78 @@
             </li>
             <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/adv-payment'" href="#"> Advance
                 Payment Receipt</a></li>
-            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/print'" href="#">Invoice View/Print</a></li>
+            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/print'" href="#">Invoice View/Print</a>
+            </li>
             <!-- <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/insurance'" href="#">Insurance</a></li> -->
           </ul>
         </li>
 
         <!-- Insurance Summary -->
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="pattientwise-report" role="button"
-            data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="pattientwise-report" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
             Insurance
           </a>
           <ul class="dropdown-menu" aria-labelledby="pattientwise-report">
-            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/insurance-summary'" href="#">Patient Insurance Summary Screen</a></li>
-            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/insurance'" href="#">Patient Insurance Entry</a></li>
+            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/insurance-summary'" href="#">Patient
+                Insurance Summary Screen</a></li>
+            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/insurance'" href="#">Patient Insurance
+                Entry</a></li>
           </ul>
         </li>
 
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="pattientwise-report" role="button"
-            data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="pattientwise-report" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
             Reports
           </a>
           <ul class="dropdown-menu" aria-labelledby="pattientwise-report">
-            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/collectionwise-report'" href="#">Invoice wise Collection Report</a></li>
-            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/patientwise-report'" href="#">Patient Type wise </a></li>
-            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/collection-paymentwise-report'" href="#"> Payment Mode wise</a></li>
-            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/outstanding-invwise-report'" href="#">Outstanding Invoice - Date wise</a></li>
-            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/outstanding-ptwise-report'" href="#">Outstanding Invoice - Patient wise</a></li>
-            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/stock-reports'" href="#">Stock Register</a></li>
-            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/po-reports'" href="#">Po Invoice Summary</a></li>
-            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/goods-reports'" href="#">Goods Receipt</a></li>
-            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/supplier-reports'" href="#">Supplier Payment </a></li>
-            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/patient-listing'" href="#">Patient Listing</a></li>
-            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/payment-reports'" href="#">Receipt Payment Reports</a></li>
+            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/collectionwise-report'" href="#">Invoice
+                wise Collection Report</a></li>
+            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/patientwise-report'" href="#">Patient
+                Type wise </a></li>
+            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/collection-paymentwise-report'" href="#">
+                Payment Mode wise</a></li>
+            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/outstanding-invwise-report'"
+                href="#">Outstanding Invoice - Date wise</a></li>
+            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/outstanding-ptwise-report'"
+                href="#">Outstanding Invoice - Patient wise</a></li>
+            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/stock-reports'" href="#">Stock
+                Register</a></li>
+            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/po-reports'" href="#">Po Invoice
+                Summary</a></li>
+            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/goods-reports'" href="#">Goods
+                Receipt</a></li>
+            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/supplier-reports'" href="#">Supplier
+                Payment </a></li>
+            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/patient-listing'" href="#">Patient
+                Listing</a></li>
+            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/payment-reports'" href="#">Receipt
+                Payment Reports</a></li>
             <!-- <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/collection-payment-wise'" href="#">Collection Payment wise Report</a></li> -->
-            
+
           </ul>
         </li>
 
         <!-- supplier -->
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="pattientwise-report" role="button"
-            data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="pattientwise-report" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
             Supplier
           </a>
           <ul class="dropdown-menu" aria-labelledby="pattientwise-report">
-            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/supplier-master'" href="#">Supplier Master Maintainence </a></li>
-            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/supplier-product'" href="#">Product/Supplier Price Master</a></li>
+            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/supplier-master'" href="#">Supplier
+                Master Maintainence </a></li>
+            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/supplier-product'"
+                href="#">Product/Supplier Price Master</a></li>
             <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/po'" href="#">Purchase Order</a></li>
-            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/po-submission'" href="#">Purchase Order Submission</a></li>
-            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/goods-receipt'" href="#">Goods Receipt</a></li>
-            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/supplier-payment'" href="#">Supplier Payment</a></li>
-            
-           
-            <!-- <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/patient-health'" href="#">Patient Health</a></li> -->
+            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/po-submission'" href="#">Purchase Order
+                Submission</a></li>
+            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/goods-receipt'" href="#">Goods
+                Receipt</a></li>
+            <li class="dropdown-item"><a class="dropdown-item" [routerLink]="'/supplier-payment'" href="#">Supplier
+                Payment</a></li>
+
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -113,9 +130,9 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" [routerLink]="'/payment-receipts'" href="#">Create Entry</a></li>
-            <li><a class="dropdown-item" [routerLink]="'/update-payreceipts'" href="#">View/Update</a></li>           
-            
-            
+            <li><a class="dropdown-item" [routerLink]="'/update-payreceipts'" href="#">View/Update</a></li>
+
+
           </ul>
         </li>
         <!-- //Master -->
@@ -140,7 +157,7 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" [routerLink]="'/product-master'" href="#">Create New Product</a></li>
             <li><a class="dropdown-item" [routerLink]="'/product-master-listing'" href="#">View//Update Product</a></li>
-            
+
           </ul>
         </li>
         <!-- //EOD -->
@@ -155,8 +172,8 @@
             <li><a class="dropdown-item" [routerLink]="'/pwd'" href="#">Reset Password</a></li>
           </ul>
         </li>
-        
-        
+
+
         <li class="nav-item">
           <a class="nav-link" (click)="logout()">Logout</a>
         </li>

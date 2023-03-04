@@ -44,6 +44,7 @@ import { InventoryConfigComponent } from './inventory-config/inventory-config.co
 import { SuppProdMapComponent } from './supp-prod-map/supp-prod-map.component';
 import { UserMasterComponent } from './user-master/user-master.component';
 import { LoginUserComponent } from './login-user/login-user.component';
+import { PatientHealthComponent } from './patient-health/patient-health.component';
 
 const routes: Routes = [
   {
@@ -224,6 +225,10 @@ const routes: Routes = [
   {
     path: 'pwd',
     component: LoginUserComponent
+  },
+  {
+    path: 'patient-health',
+    component: PatientHealthComponent
   }
 
 

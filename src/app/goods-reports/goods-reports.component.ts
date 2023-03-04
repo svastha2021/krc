@@ -35,9 +35,10 @@ export class GoodsReportsComponent implements OnInit {
   }
   getReports() {
     const branchId = localStorage.getItem('branch_id');
+    const org_id = localStorage.getItem('org_id');
     let from_date = this.dp.transform(this.from_date, 'yyyy-MM-dd');
     let to_date = this.dp.transform(this.to_date, 'yyyy-MM-dd');
-    this.grService.retrieveData(branchId, from_date, to_date).subscribe(data => {
+    this.grService.retrieveData(org_id, branchId, from_date, to_date).subscribe(data => {
       console.log(data);
       this.reportData = data.results;
       this.dataSource = this.reportData;
