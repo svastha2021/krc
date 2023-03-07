@@ -19,9 +19,9 @@ import { AuthService } from './services/auth.service';
 import { DocConsultationComponent } from './doc-consultation/doc-consultation.component';
 import { BillingComponent } from './billing/billing.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MaterialModule} from './material.module';
+import { MaterialModule } from './material.module';
 import { PaymentComponent } from './payment/payment.component';
-import {DialogOverviewExampleDialog} from './payment/payment.component';
+import { DialogOverviewExampleDialog } from './payment/payment.component';
 import { DialogPatientList } from './apt-booking/apt-booking.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { ManageDialogComponent } from './manage-dialog/manage-dialog.component';
@@ -35,13 +35,13 @@ import { PatientHeaderComponent } from './patient-header/patient-header.componen
 import { LabPrescriptionComponent } from './lab-prescription/lab-prescription.component';
 import { MedPrescriptionComponent } from './med-prescription/med-prescription.component';
 import { ManageAppointmentComponent } from './manage-appointment/manage-appointment.component';
-import {AdvancePaymentComponent} from './advance-payment/advance-payment.component';
+import { AdvancePaymentComponent } from './advance-payment/advance-payment.component';
 import { InvoicePrintComponent } from './invoice-print/invoice-print.component';
 import { PreviousMedComponent } from './previous-med/previous-med.component';
 import { BaseDetailComponent } from './base-detail/base-detail.component';
 import { ManagePatientComponent } from './manage-patient/manage-patient.component';
 import { InsuranceComponent } from './insurance/insurance.component';
-import {PatientwiseReportComponent} from './patientwise-report/patientwise-report.component';
+import { PatientwiseReportComponent } from './patientwise-report/patientwise-report.component';
 import { CollectionwiseReportComponent } from './collectionwise-report/collectionwise-report.component';
 import { OutstantingInvwiseComponent } from './outstanting-invwise/outstanting-invwise.component';
 import { OutstantingPtwiseComponent } from './outstanting-ptwise/outstanting-ptwise.component';
@@ -56,7 +56,7 @@ import { PoComponent } from './po/po.component';
 import { InsuranceSummaryComponent } from './insurance-summary/insurance-summary.component';
 import { PatientScheduleComponent } from './patient-schedule/patient-schedule.component';
 import { PatientListingReportComponent } from './patient-listing-report/patient-listing-report.component';
-import {ListTable}from './patient-listing-report/list-table/list-table.component';
+import { ListTable } from './patient-listing-report/list-table/list-table.component';
 import { PoSubmissionComponent } from './po-submission/po-submission.component';
 import { GoodsReceiptComponent } from './goods-receipt/goods-receipt.component';
 import { SupplierPaymentComponent } from './supplier-payment/supplier-payment.component';
@@ -65,7 +65,7 @@ import { UpdatePayreceiptsComponent } from './update-payreceipts/update-payrecei
 import { PrTableComponent } from './update-payreceipts/pr-table/pr-table.component';
 import { ProductMasterComponent } from './product-master/product-master.component';
 import { ProductMasterListingComponent } from './product-master-listing/product-master-listing.component'
-import {PMTableComponent} from './product-master-listing/pr-table/pr-table.component';
+import { PMTableComponent } from './product-master-listing/pr-table/pr-table.component';
 import { NormalPricingComponent } from './product-master-listing/normal-pricing/normal-pricing.component';
 import { InsurancePricingComponent } from './product-master-listing/insurance-pricing/insurance-pricing.component'
 import { PoReportsComponent } from './po-reports/po-reports.component'
@@ -88,6 +88,7 @@ import { userFilterPipe } from './user-master/user-filter';
 import { LoginUserComponent } from './login-user/login-user.component';
 import { InfoObjDialogComponent } from './utilities/info-obj-dialog/info-obj-dialog.component';
 import { PatientHealthComponent } from './patient-health/patient-health.component';
+import { DoctorReportComponent } from './doctor-report/doctor-report.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -105,6 +106,7 @@ import { PatientHealthComponent } from './patient-health/patient-health.componen
     ManageDialogComponent,
     InfoDialogComponent,
     PatientListDialogComponent,
+    DoctorReportComponent,
     BillingEditComponent,
     PromptDialogComponent,
     PatientHeaderComponent,
@@ -126,7 +128,7 @@ import { PatientHealthComponent } from './patient-health/patient-health.componen
     FilterPipe,
     EodComponent,
     CancelInvoiceDialogComponent,
-    ViewProductDialogComponent,    
+    ViewProductDialogComponent,
     PoComponent,
     CollectionPaymentwiseReportComponent,
     InsuranceSummaryComponent,
@@ -146,7 +148,7 @@ import { PatientHealthComponent } from './patient-health/patient-health.componen
     InsurancePricingComponent,
     SupplierListDialogComponent,
     PreviousPriceListDialogComponent,
-    
+
     PoReportsComponent,
     GoodsReportsComponent,
     SupplierReportsComponent,

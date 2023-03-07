@@ -45,6 +45,7 @@ import { SuppProdMapComponent } from './supp-prod-map/supp-prod-map.component';
 import { UserMasterComponent } from './user-master/user-master.component';
 import { LoginUserComponent } from './login-user/login-user.component';
 import { PatientHealthComponent } from './patient-health/patient-health.component';
+import { DoctorReportComponent } from './doctor-report/doctor-report.component';
 
 const routes: Routes = [
   {
@@ -117,8 +118,8 @@ const routes: Routes = [
     component: OutstantingPtwiseComponent
   },
   {
-    path:'collection-payment-wise',
-    component:CollectionPaymentwiseReportComponent
+    path: 'collection-payment-wise',
+    component: CollectionPaymentwiseReportComponent
   },
   {
     path: 'supplier-master',
@@ -176,9 +177,9 @@ const routes: Routes = [
     component: ProductMasterComponent
   },
   {
-    path:'product-master-listing',
-    component:ProductMasterListingComponent
-  },{
+    path: 'product-master-listing',
+    component: ProductMasterListingComponent
+  }, {
     path: 'po-reports',
     component: PoReportsComponent
   },
@@ -199,10 +200,10 @@ const routes: Routes = [
     component: StockRegisterReportComponent
   },
   {
-    path:'upload',
+    path: 'upload',
     component: FileUploadComponent
   },
-  { 
+  {
     path: 'account-master',
     component: AccountMasterComponent
   },
@@ -229,6 +230,10 @@ const routes: Routes = [
   {
     path: 'patient-health',
     component: PatientHealthComponent
+  },
+  {
+    path: 'doc-report',
+    component: DoctorReportComponent
   }
 
 
