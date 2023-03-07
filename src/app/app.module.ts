@@ -80,6 +80,7 @@ import { UserMasterComponent } from './user-master/user-master.component';
 import { userFilterPipe } from './user-master/user-filter';
 import { LoginUserComponent } from './login-user/login-user.component';
 import { PatientHealthComponent } from './patient-health/patient-health.component';
+import { doctorMasterFilter } from './doctor-master/doctorMasterFilter';
 @NgModule({
   declarations: [
     AppComponent,
@@ -155,7 +156,8 @@ import { PatientHealthComponent } from './patient-health/patient-health.componen
     UserMasterComponent,
     userFilterPipe,
     LoginUserComponent,
-    PatientHealthComponent
+    PatientHealthComponent,
+    doctorMasterFilter
   ],
   imports: [
     BrowserModule,

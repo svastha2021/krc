@@ -17,7 +17,7 @@
                     <input type="text" matInput name="doctor_name" required [(ngModel)]="search"
                       placeholder="Pick one" aria-label="doctor_name" formControlName="doctor_name" [matAutocomplete]="auto" [maxLength]="500">
                     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="setProductCost($event.option.value)">
-                      <mat-option *ngFor="let f of (doctorList | filter:search)as folder" [value]="f.doctor_name">
+                      <mat-option *ngFor="let f of (doctorList | doctorMasterFilter:search)as folder" [value]="f.doctor_name">
                         {{f?.doctor_name}}
                       </mat-option>
                     </mat-autocomplete>

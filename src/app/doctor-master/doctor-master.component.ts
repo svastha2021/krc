@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { idText } from 'typescript';
 import { AptBookingService } from '../apt-booking/apt-booking.service';
 import { PoService } from '../po/po.service';
 import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.component';
@@ -78,6 +77,7 @@ export class DoctorMasterComponent implements OnInit {
         data: 'Doctor Master Created Successfully!!!'
       })
       this.docForm.reset();
+      this.fetchDoctorsByBranchId();
     })
   }
 

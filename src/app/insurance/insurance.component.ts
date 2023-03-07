@@ -426,7 +426,9 @@ export class InsuranceComponent implements OnInit {
 
   //patientHeaderData
   patientHeaderData(data: any) {
-    console.log("data---->>>",data.data);
+    if(!data){
+      return;
+    }
     this.dateForm.controls.month.setValue(data.month);
     this.dateForm.controls.year.setValue(data.year);
     this.showPatientList(data.data);
