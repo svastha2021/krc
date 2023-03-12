@@ -25,6 +25,8 @@ export class SuppProdMapComponent implements OnInit {
   displayedColumns: string[] = ['target_bu_id', 'target_product_name', 'qty_impact', 'active_flag', 'edit'];
   updateData: any;
   isDisable: boolean = false;
+  prodSourceList: any;
+  prodTargetList: any;
 
   constructor(private formBuilder: FormBuilder, private spService: suppProdService, 
       private bs: BillingService, private pos: PoService, private dialog: MatDialog, private refService: ReferenceService) { }
@@ -114,10 +116,17 @@ export class SuppProdMapComponent implements OnInit {
     })
   }
 
-  getProduct(event: any) {
-    this.prodList = null;
+  getSourceProduct(event: any) {
+    this.prodSourceList = null;
     this.refService.fetchProducts(event).subscribe(data => {
-      this.prodList = data.results;
+      this.prodSourceList = data.results;
+    })
+  }
+
+  getTargetProduct(event: any) {
+    this.prodTargetList = null;
+    this.refService.fetchProducts(event).subscribe(data => {
+      this.prodTargetList = data.results;
     })
   }
 
@@ -176,7 +185,7 @@ export class SuppProdMapComponent implements OnInit {
   }
 
   getProductName(event: any) {
-    this.prodList.forEach((element: any) => {
+    this.prodTargetList.forEach((element: any) => {
       if(element.product_id == event){
         this.mainSuppForm.controls.target_product_name.setValue(element.product_name);
       }

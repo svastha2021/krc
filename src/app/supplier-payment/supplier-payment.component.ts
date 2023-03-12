@@ -164,6 +164,7 @@ export class SupplierPaymentComponent implements OnInit {
         width: '400px',
         data: 'Payment Entry Saved Successfully!!!'
       })
+      this.getPoSuppPayment();
       this.paymentTableData.length = 0;
       this.clearFields();
     })

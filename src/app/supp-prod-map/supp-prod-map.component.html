@@ -7,6 +7,7 @@
         <div class="row">
             <div class="col-4">
                     <mat-form-field class="d-flex" appearance="fill">
+                        <mat-label>Inventory Branch</mat-label>
                         <mat-select placeholder="Inventory Branch" formControlName="inventory_branch" (ngModelChange)="getProdList()">
                             <mat-option *ngFor="let branch of branchList;" [value]="branch.branch_id">{{branch.branch_name}}</mat-option>
                         </mat-select>
@@ -16,7 +17,7 @@
                 <div>
                     <mat-form-field class="d-flex" appearance="fill">
                         <mat-label>Source BU ID</mat-label>
-                        <mat-select placeholder="Source BU ID" formControlName="source_bu_id" (valueChange)="getProduct($event)">
+                        <mat-select placeholder="Source BU ID" formControlName="source_bu_id" (valueChange)="getSourceProduct($event)">
                             <mat-option *ngFor="let bu of buList" [value]="bu.bu_id">
                                 {{bu.bu_name}}
                               </mat-option>
@@ -26,8 +27,9 @@
             </div>
             <div class="col-4">
                 <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Source Product</mat-label>
                     <mat-select placeholder="Source Product" formControlName="source_product_id" (ngModelChange)="getProdList()">
-                        <mat-option *ngFor="let prod of prodList" [value]="prod.product_id">
+                        <mat-option *ngFor="let prod of prodSourceList" [value]="prod.product_id">
                             {{prod.product_name}}
                           </mat-option>
                     </mat-select>
@@ -39,7 +41,8 @@
         <div class="row">
             <div class="col-3">
                     <mat-form-field class="d-flex" appearance="fill">
-                        <mat-select placeholder="Target BU" formControlName="target_bu_id" (valueChange)="getProduct($event)"
+                        <mat-label>Target BU</mat-label>
+                        <mat-select placeholder="Target BU" formControlName="target_bu_id" (valueChange)="getTargetProduct($event)"
                         [disabled]="isDisable">
                             <mat-option *ngFor="let bu of buList" [value]="bu.bu_id">
                                 {{bu.bu_name}}
@@ -50,9 +53,10 @@
             <div class="col-3">
                 <div>
                     <mat-form-field class="d-flex" appearance="fill">
+                        <mat-label>Target Product</mat-label>
                         <mat-select placeholder="Target Product" formControlName="target_product_id" (valueChange)="getProductName($event)"
                         [disabled]="isDisable">
-                            <mat-option *ngFor="let prod of prodList" [value]="prod.product_id">
+                            <mat-option *ngFor="let prod of prodTargetList" [value]="prod.product_id">
                                 {{prod.product_name}}
                               </mat-option>
                         </mat-select>
@@ -68,6 +72,7 @@
             </div>
             <div class="col-3">
                 <mat-form-field class="d-flex" appearance="fill">
+                    <mat-label>Active</mat-label>
                     <mat-select placeholder="Active" formControlName="active_flag" >
                         <mat-option value="Y">Yes</mat-option>
                         <mat-option value="N">No</mat-option>
