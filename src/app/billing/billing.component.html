@@ -75,13 +75,13 @@
     </mat-form-field> -->
     <mat-form-field class="mar20lr" appearance="fill">
       <mat-label>Amount</mat-label>
-      <input matInput type="number" min='0' formControlName="patient_base_price" required
-        [(ngModel)]="billingItem.patient_base_price" name="patient_base_price" [readonly]="validatePatientPrice(billingItem.patient_base_price)">
+      <input matInput type="number" min='0' formControlName="product_cost" required
+        [(ngModel)]="billingItem.product_cost" name="product_cost" readonly>
 
     </mat-form-field>
-    <button type="button" class="btn btn-primary" (click)="displayHidden()">
+    <!-- <button type="button" class="btn btn-primary" (click)="displayHidden()">
       ...
-    </button>
+    </button> -->
 
     <mat-form-field class="mar20lr" appearance="fill">
       <mat-label>Quantity</mat-label>
@@ -106,8 +106,8 @@
       </mat-form-field>
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Gross Amount</mat-label>
-        <input matInput type="number" min='0' formControlName="patient_inv_gross_amt"
-          [(ngModel)]="billingItem.patient_inv_gross_amt" name="patient_inv_gross_amt" readonly>
+        <input matInput type="number" min='0' formControlName="gross_inv_amount"
+          [(ngModel)]="billingItem.gross_inv_amount" name="gross_inv_amount" readonly>
       </mat-form-field>
     </div>
 
@@ -130,21 +130,45 @@
       </mat-form-field>
 
     </div>
+    <!-- <div *ngIf="showInsurancePriceAsDiscount">
+      <mat-form-field class="mar20lr" appearance="fill">
+        <mat-label>Concession</mat-label>
+        <input matInput type="number" min='0' onkeypress="return event.charCode >= 48" formControlName="discount1"
+          [(ngModel)]="billingItem.patient_base_price" name="discount1" readonly>
+      </mat-form-field>
+      <mat-form-field class="mar20lr" appearance="fill">
+        <mat-label>Insurance</mat-label>
+        <input matInput type="number" min='0' onkeypress="return event.charCode >= 48" formControlName="discount2"
+          [(ngModel)]="billingItem.insurance_inv_value" name="discount2" readonly>
+      </mat-form-field>
+      <mat-form-field class="mar20lr" appearance="fill">
+        <mat-label>Discount</mat-label>
+        <input matInput type="number" min='0' onkeypress="return event.charCode >= 48" formControlName="discount3"
+          [(ngModel)]="billingItem.discount3" name="dIscount3" (ngModelChange)="calclulateDiscount($event)">
+      </mat-form-field>
+
+      <mat-form-field class="mar20lr" appearance="fill">
+        <mat-label>Total Discount</mat-label>
+        <input matInput type="number" min='0' formControlName="total_discount" [(ngModel)]="billingItem.gross_discount"
+          name="total_discount" readonly>
+      </mat-form-field>
+    </div> -->
+
     <div>
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Dicscount 1</mat-label>
         <input matInput type="number" min='0' onkeypress="return event.charCode >= 48" formControlName="discount1"
-          [(ngModel)]="billingItem.discount1" name="discount1" (ngModelChange)="calclulateDiscount($event)">
+          [(ngModel)]="billingItem.discount1" name="discount1" (ngModelChange)="calclulateDiscount()">
       </mat-form-field>
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Discount 2</mat-label>
         <input matInput type="number" min='0' onkeypress="return event.charCode >= 48" formControlName="discount2"
-          [(ngModel)]="billingItem.discount2" name="discount2" (ngModelChange)="calclulateDiscount($event)">
+          [(ngModel)]="billingItem.discount2" name="discount2" (ngModelChange)="calclulateDiscount()">
       </mat-form-field>
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Discount 3</mat-label>
         <input matInput type="number" min='0' onkeypress="return event.charCode >= 48" formControlName="discount3"
-          [(ngModel)]="billingItem.discount3" name="dIscount3" (ngModelChange)="calclulateDiscount($event)">
+          [(ngModel)]="billingItem.discount3" name="dIscount3" (ngModelChange)="calclulateDiscount()">
       </mat-form-field>
 
       <mat-form-field class="mar20lr" appearance="fill">
@@ -156,17 +180,17 @@
     <div>
 
       <mat-form-field class="mar20lr" appearance="fill">
-        <mat-label>Discount Comments 1</mat-label>
+        <mat-label>Comments</mat-label>
         <input matInput formControlName="discount_remark1" [(ngModel)]="billingItem.discount_remark1"
           name="discount_remark1">
       </mat-form-field>
       <mat-form-field class="mar20lr" appearance="fill">
-        <mat-label>Discount Comments 1</mat-label>
+        <mat-label>Comments</mat-label>
         <input matInput formControlName="discount_remark2" [(ngModel)]="billingItem.discount_remark2"
           name="discount_remark2">
       </mat-form-field>
       <mat-form-field class="mar20lr" appearance="fill">
-        <mat-label>Discount Comments 1</mat-label>
+        <mat-label>Comments</mat-label>
         <input matInput formControlName="discount_remark3" [(ngModel)]="billingItem.discount_remark3"
           name="discount_remark3">
       </mat-form-field>
@@ -224,7 +248,7 @@
 
             <td>{{item.product_name.product_name}}</td>
             <td>{{item.net_patient_amount}}</td>
-            <td>{{item.patient_inv_gross_amt}}</td>
+            <td>{{item.gross_inv_amount}}</td>
             <td>{{item.total_charges}}</td>
             <td>{{item.gross_discount}}</td>
             <td>

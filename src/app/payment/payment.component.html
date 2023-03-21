@@ -46,7 +46,7 @@
                     <td>{{item.bu_patient_amt_bal}}</td>
 
 
-                    <td><button [disabled]="item.bu_patient_inv_status === 'F'" (click)="showPayment(item)">Make Payment</button>
+                    <td><button [disabled]="item.bu_patient_inv_status === 'F' || item.bu_patient_amt === 0" (click)="showPayment(item)">Make Payment</button>
                     </td>
                 </tr>
             </tbody>

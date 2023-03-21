@@ -25,7 +25,7 @@ export class BillingComponent implements OnInit {
       updateOn: "change"
     }],
 
-    patient_base_price: [, {
+    product_cost: [, {
       validators: [Validators.required, Validators.min(1)],
       updateOn: "change"
     }],
@@ -72,6 +72,7 @@ export class BillingComponent implements OnInit {
   dialysisProducts: BillingItem[] = [];
   labProducts: BillingItem[] = [];
   pharmacyProducts: BillingItem[] = [];
+  showInsurancePriceAsDiscount = false;
   billingItem = {
     bu_id: '',
     patient_id: '',
@@ -179,6 +180,15 @@ export class BillingComponent implements OnInit {
     this.billingItem.insurance_inv_value = parseInt(data.value.insurance_price)
 
     this.calclulateOthercharges(this.billingItem.product_cost);
+    if(this.showInsurancePriceAsDiscount){
+      this.billingItem.discount_remark1 = "Patient concession";
+      this.billingItem.discount_remark2 = "Patient insurance";
+      this.billingItem.discount1 = this.billingItem.patient_base_price;
+      this.billingItem.discount2 = this.billingItem.insurance_inv_value;
+      this.calclulateDiscount();
+      // this.billingItem.gross_discount = this.billingItem.patient_base_price + this.billingItem.insurance_inv_value + this.billingItem.discount3;
+      // this.calclulateNetPay();
+    }
   }
   displayProperty(value: any) {
     if (value) {
@@ -230,9 +240,19 @@ export class BillingComponent implements OnInit {
 
     }
   }
+  checkForInsuranceCustomer(type: string) {
+    if (type === "DIALY" && this.headerDetailData.patient_type === 'C') {
+      this.showInsurancePriceAsDiscount = true;
+      
+    } else {
+      this.showInsurancePriceAsDiscount = false;
+      this.billingItem.discount_remark1 = "";
+      this.billingItem.discount_remark2 = "";
+    }
+  }
 
   fetchProductsDynamic(data: any) {
-
+    this.checkForInsuranceCustomer(data);
     this.options = [];
     this.billingItem.bu_id = data;
     let patientType = this.headerDetailData.patient_type;
@@ -270,7 +290,7 @@ export class BillingComponent implements OnInit {
     this.calclulateNetPay();
     //this.billingItem.gross = 4+5;
   }
-  calclulateDiscount(data: number) {
+  calclulateDiscount() {
     this.setDiscountMandatory();
     this.billingItem.gross_discount = this.billingItem.discount1 + this.billingItem.discount2 + this.billingItem.discount3;
     this.calclulateNetPay();
@@ -346,15 +366,15 @@ export class BillingComponent implements OnInit {
 
   calclulateNetPay() {
 
-    this.billingItem.net_patient_amount = this.billingItem.patient_inv_gross_amt - this.billingItem.gross_discount;
+    this.billingItem.net_amount = this.billingItem.gross_inv_amount - this.billingItem.gross_discount;
     //new code ends
-    this.billingItem.doctor_inv_value = this.billingItem.net_patient_amount;
-    this.billingItem.net_amount = (this.billingItem.net_patient_amount) + this.billingItem.insurance_inv_value;
+    // this.billingItem.doctor_inv_value = this.billingItem.net_patient_amount;
+    // this.billingItem.net_amount = (this.billingItem.net_patient_amount) + this.billingItem.insurance_inv_value;
     //this.calculateFinal();
   }
 
   calculateFinal() {
-    this.finalPay = this.finalPay + this.billingItem.net_patient_amount;
+    this.finalPay = this.finalPay + this.billingItem.net_amount;
     localStorage.setItem('billingarray', JSON.stringify(this.billingArray));
 
   }
@@ -404,8 +424,8 @@ export class BillingComponent implements OnInit {
   addItem() {
     this.billingArray.push(this.billingItem);
     this.totalAmount = this.totalAmount + this.billingItem.net_patient_amount;
-    this.totalOtherCharges = this.totalOtherCharges + this.billingItem.total_charges; 
-    this.totalGrossDiscount = this.totalGrossDiscount + this.billingItem.patient_inv_gross_amt;
+    this.totalOtherCharges = this.totalOtherCharges + this.billingItem.total_charges;
+    this.totalGrossDiscount = this.totalGrossDiscount + this.billingItem.gross_inv_amount;
     this.showBillingForm = false;
     //this.options = [];
     this.calculateFinal();
@@ -557,10 +577,10 @@ export class BillingComponent implements OnInit {
   priceEditable = false;
   displayHidden() {
     this.showHiddenDetails = true;
-    
+
     const dialogRef = this.dialog.open(InfoObjDialogComponent, {
       width: '500px',
-      data:this.billingItem,
+      data: this.billingItem,
     });
   }
 
