@@ -65,11 +65,11 @@
       <label class="mar15">Phone: {{patientHeader?.mobile_no}}</label>
       <label class="mar15">Patient Type: {{patientHeader?.patient_type_name}}</label>
       <br>
-      <label class="mar15">Total Invoice Amount: {{patientHeader?.net_inv_amount}}</label>
-      <label class="mar15">Total Paid: {{patientHeader?.net_inv_paid}}</label>
-      <label class="mar15">Total Balance: {{patientHeader?.net_inv_balance}}</label>
-      <label class="mar15">Advance Adjusted: {{patientHeader?.advance_amount_paid}}</label>
-      <label class="mar15">Advance Balance: {{patientHeader?.advance_amount_balance}}</label>
+      <label class="mar15" *ngIf="showAmountLabels">Total Invoice Amount: {{patientHeader?.net_inv_amount}}</label>
+      <label class="mar15" *ngIf="showAmountLabels">Total Paid: {{patientHeader?.net_inv_paid}}</label>
+      <label class="mar15" *ngIf="showAmountLabels">Total Balance: {{patientHeader?.net_inv_balance}}</label>
+      <label class="mar15" *ngIf="showAmountLabels">Advance Adjusted: {{patientHeader?.advance_amount_paid}}</label>
+      <label class="mar15" *ngIf="showAmountLabels">Advance Balance: {{patientHeader?.advance_amount_balance}}</label>
     </div>
   </div>
 </div>

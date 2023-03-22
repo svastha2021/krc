@@ -25,6 +25,7 @@ export class PatientHeaderComponent implements OnInit {
   @ViewChild(MatTable, { static: true }) table: MatTable<any> | undefined;
   displayedColumns: string[] = ['radio','patient_name', 'father_name','mobile_no','age', 'dob','sex','patient_type' ];
   selectedPerson:any;
+  showAmountLabels = true;
   //insurance
   month: string = '';
   year: string = '';
@@ -61,10 +62,20 @@ export class PatientHeaderComponent implements OnInit {
     this.patientHeaderService.fetchHeader(rowData.patient_id).subscribe(data => {
       this.headerDetail = true;
       this.patientHeader = data;
+      this.validatePatientType(data);
       localStorage.setItem('header', JSON.stringify(data));
       this.outputPatientHeader.emit(this.patientHeader);
     });
   }
+validatePatientType(patient:any){
+  if(patient.patient_type === 'C'||patient.patient_type === 'W' || patient.patient_type === 'P'){
+    this.showAmountLabels = false;
+  } else {
+    this.showAmountLabels = true;
+  }
+}
+
+  
 
   showPatientList(result: any) {
     const dialogRef = this.dialog.open(PatientListDialogComponent, {

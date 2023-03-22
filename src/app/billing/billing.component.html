@@ -158,17 +158,17 @@
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Dicscount 1</mat-label>
         <input matInput type="number" min='0' onkeypress="return event.charCode >= 48" formControlName="discount1"
-          [(ngModel)]="billingItem.discount1" name="discount1" (ngModelChange)="calclulateDiscount()">
+          [(ngModel)]="billingItem.discount1" name="discount1" (ngModelChange)="calclulateDiscount()" [readonly]="showInsurancePriceAsDiscount">
       </mat-form-field>
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Discount 2</mat-label>
         <input matInput type="number" min='0' onkeypress="return event.charCode >= 48" formControlName="discount2"
-          [(ngModel)]="billingItem.discount2" name="discount2" (ngModelChange)="calclulateDiscount()">
+          [(ngModel)]="billingItem.discount2" name="discount2" (ngModelChange)="calclulateDiscount()" [readonly]="showInsurancePriceAsDiscount">
       </mat-form-field>
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Discount 3</mat-label>
         <input matInput type="number" min='0' onkeypress="return event.charCode >= 48" formControlName="discount3"
-          [(ngModel)]="billingItem.discount3" name="dIscount3" (ngModelChange)="calclulateDiscount()">
+          [(ngModel)]="billingItem.discount3" name="dIscount3" (ngModelChange)="calclulateDiscount()" [readonly]="showInsurancePriceAsDiscount">
       </mat-form-field>
 
       <mat-form-field class="mar20lr" appearance="fill">
@@ -200,8 +200,8 @@
     <div>
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Net Amount</mat-label>
-        <input matInput type="number" min='0' required formControlName="net_patient_amount"
-          [(ngModel)]="this.billingItem.net_patient_amount" name="net_patient_amount" readonly>
+        <input matInput type="number" min='0' required formControlName="net_amount"
+          [(ngModel)]="this.billingItem.net_amount" name="net_amount" readonly>
       </mat-form-field>
       <!-- {{billingItem.net_amount}} -->
 
@@ -247,7 +247,7 @@
           <tr *ngFor="let item of billingArray;let i=index">
 
             <td>{{item.product_name.product_name}}</td>
-            <td>{{item.net_patient_amount}}</td>
+            <td>{{item.net_amount}}</td>
             <td>{{item.gross_inv_amount}}</td>
             <td>{{item.total_charges}}</td>
             <td>{{item.gross_discount}}</td>
