@@ -409,14 +409,14 @@ export class BillingComponent implements OnInit {
   submitData() {
     let payload = this.constructBillPayload();
     console.log("payload",payload)
-    // this.bs.submitInvoice(payload).subscribe(data => {
-    //   console.log(data);
-    //   this.bs.invoice_no = data.invoice_no;
-    //   this.bs.patient_id = this.headerDetailData.patient_id;
-    //   localStorage.setItem('header', JSON.stringify(this.headerDetailData));
-    //   // this.router.navigate(['invoice']);
-    //   this.router.navigate(['invoice', this.bs.invoice_no]);
-    // })
+    this.bs.submitInvoice(payload).subscribe(data => {
+      console.log(data);
+      this.bs.invoice_no = data.invoice_no;
+      this.bs.patient_id = this.headerDetailData.patient_id;
+      localStorage.setItem('header', JSON.stringify(this.headerDetailData));
+      // this.router.navigate(['invoice']);
+      this.router.navigate(['invoice', this.bs.invoice_no]);
+    })
 
 
 
