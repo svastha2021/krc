@@ -168,7 +168,7 @@
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Discount 3</mat-label>
         <input matInput type="number" min='0' onkeypress="return event.charCode >= 48" formControlName="discount3"
-          [(ngModel)]="billingItem.discount3" name="dIscount3" (ngModelChange)="calclulateDiscount()" [readonly]="showInsurancePriceAsDiscount">
+          [(ngModel)]="billingItem.discount3" name="dIscount3" (ngModelChange)="calclulateDiscount()">
       </mat-form-field>
 
       <mat-form-field class="mar20lr" appearance="fill">

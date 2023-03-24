@@ -216,8 +216,8 @@ export class DialogOverviewExampleDialog implements OnInit {
       console.log(types);
       this.payTypes = types.results;
     })
-    this.maxAmount = this.data.bu_patient_amt_bal;
-    this.data.amt_payment = this.data.bu_patient_amt_bal
+    this.maxAmount = this.data.net_balance;
+    this.data.amt_payment = this.data.net_balance
   }
 
   onNoClick(): void {
@@ -247,7 +247,7 @@ export class DialogOverviewExampleDialog implements OnInit {
   }
 
   validateAmount() {
-    if (this.data.amt_payment <= this.data.bu_patient_amt_bal) {
+    if (this.data.amt_payment <= this.data.net_balance) {
       this.showamountError = false;
       return false;
     } else {
