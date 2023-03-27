@@ -26,8 +26,8 @@
     </div>
     <div>
         <!-- <button mat-button (click)="onNoClick()">No Thanks</button> -->
-        <button mat-button [disabled]="!phone_no && !patient_name"  (click)="fetchDetails()"
-            >Retrieve</button>
+        <button  mat-button [disabled]="!phone_no && !patient_name"  (click)="fetchDetails()"
+        >Retrieve</button>
     </div>
 
 
@@ -42,7 +42,7 @@
                 </mat-cell>
             </ng-container>
             <ng-container matColumnDef="patient_name">
-                <mat-header-cell *matHeaderCellDef>patient Name</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef>Patient Name</mat-header-cell>
                 <mat-cell *matCellDef="let element;let i = index;"> {{element.patient_name}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="father_name">

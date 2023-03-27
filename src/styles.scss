@@ -1,8 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
- html, body {
-    height : 100%;
+html,
+body {
+    height: 100%;
 }
 body {
     margin: 0;
@@ -10,62 +11,109 @@ body {
     overflow-x: hidden;
 }
 
-.mar20t{
+.mar20t {
     margin-top: 20px;
 }
 
-.error-container{
-    color:red;
+.error-container {
+    color: red;
     font-weight: bold;
 }
 
-
-.margin-20b{
+.margin-20b {
     margin-bottom: 20px;
 }
 
-.pad0{
-    padding:0;
+.pad0 {
+    padding: 0;
 }
 
-.mar20tb{
+.mar20tb {
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
-.margin-20l{
-    margin-left:20px;
+.margin-20l {
+    margin-left: 20px;
 }
 
-.pad20lr{
+.pad20lr {
     padding-left: 20px;
-    padding-right:20px;
+    padding-right: 20px;
 }
 
-.margin-20r{
-    margin-right:20px;
+.margin-20r {
+    margin-right: 20px;
 }
-.overflow-hidden{
+.overflow-hidden {
     overflow: hidden;
 }
-.mar15{
-    margin: 10px;;
+.mar15 {
+    margin: 10px;
 }
 
-.error{
+.error {
     color: red;
     font-size: 12px;
     font-weight: bold;
     font-style: italic;
 }
 
-.mar20lr{
+.mar20lr {
     margin-left: 20px;
     margin-right: 20px;
 }
-.pad10r{
-    padding-right:15px
+.pad10r {
+    padding-right: 15px;
 }
-.mar5r{
-    margin-right:5px;
+.mar5r {
+    margin-right: 5px;
+}
+
+.back-btn {
+    background-color: orange;
+    border-color: orange;
+    border-radius: 1rem;
+    &:hover {
+        background-color: orange;
+        border-color: orange;
+        border-radius: 1rem;
+        opacity: 0.6;
+    }
+}
+
+.submit-btn {
+    background-color: green;
+    border-color: green;
+    border-radius: 1rem;
+    &:disabled {
+        background-color: green;
+        border-color: green;
+        border-radius: 1rem;
+        opacity: 0.3;
+    }
+    &:hover {
+        background-color: green;
+        border-color: green;
+        border-radius: 1rem;
+        opacity: 0.6;
+    }
+    &:focus {
+        background-color: green;
+        border-color: green;
+        border-radius: 1rem;
+        border-color: #198754;
+        box-shadow: 0 0 0 0.25rem green;
+    }
+}
+
+.mat-button {
+    background-color: green;
+    color: white !important;
+    border-radius: 2rem !important;
+    &:disabled {
+        background-color: rgb(169, 231, 169);
+        color: white !important;
+        border-radius: 2rem !important;
+    }
 }

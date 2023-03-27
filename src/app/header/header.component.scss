@@ -1,13 +1,24 @@
-.app-logo{
-    background-image: url('../../assets/swastha_logo.png');
-    height:65px;
-    width:80px;
+.app-logo {
+    background-image: url("../../assets/swastha_logo.png");
+    height: 65px;
+    width: 80px;
     background-size: contain;
     background-repeat: no-repeat;
 }
-.nav-link{
-    color:white!important;
+.nav-link {
+    color: white !important;
 }
-.menu-list{
+.menu-list {
     background-color: green;
+}
+
+nav .navbar-nav li a {
+    &:active {
+        background-color: green;
+    }
+}
+nav .navbar-nav li .dropdown-item {
+    &:active {
+        background-color: green;
+    }
 }
