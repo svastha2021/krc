@@ -15,7 +15,8 @@ export class CollectionwiseReportService {
     let branch_id = localStorage.getItem('branch_id');
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.get(environment.apiUrl + 'collectionwisereport/'+org_id+'/'+branch_id+'?from_date='+fromDate+'&to_date='+toDate,
+    ///krc-collectionwisereport/KRC/KRC0001?from_date=2023-03-01&to_date=2023-03-24
+    return this.http.get(environment.apiUrl + 'krc-collectionwisereport/'+org_id+'/'+branch_id+'?from_date='+fromDate+'&to_date='+toDate,
       { headers: headers })
     //return this.http.get(environment.apiUrl)
 

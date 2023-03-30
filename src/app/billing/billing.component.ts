@@ -73,6 +73,7 @@ export class BillingComponent implements OnInit {
   labProducts: BillingItem[] = [];
   pharmacyProducts: BillingItem[] = [];
   showInsurancePriceAsDiscount = false;
+  discount = { label1: 'Discount 1', label2: 'Discount 2', label3: 'Discount 3' };
   billingItem = {
     bu_id: '',
     patient_id: '',
@@ -180,9 +181,12 @@ export class BillingComponent implements OnInit {
     this.billingItem.insurance_inv_value = parseInt(data.value.insurance_price)
 
     this.calclulateOthercharges(this.billingItem.product_cost);
-    if(this.showInsurancePriceAsDiscount){
+    if (this.showInsurancePriceAsDiscount) {
       this.billingItem.discount_remark1 = "Patient concession";
       this.billingItem.discount_remark2 = "Patient insurance";
+      this.discount.label1 = 'Concession';
+      this.discount.label2 = 'Insurance';
+      this.discount.label3 = 'Discount';
       this.billingItem.discount1 = this.billingItem.patient_base_price;
       this.billingItem.discount2 = this.billingItem.insurance_inv_value;
       this.calclulateDiscount();
@@ -241,13 +245,16 @@ export class BillingComponent implements OnInit {
     }
   }
   checkForInsuranceCustomer(type: string) {
-    if (type === "DIALY" && (this.headerDetailData.patient_type === 'C' || this.headerDetailData.patient_type === 'P'||this.headerDetailData.patient_type === 'W')) {
+    if (type === "DIALY" && (this.headerDetailData.patient_type === 'C' || this.headerDetailData.patient_type === 'P' || this.headerDetailData.patient_type === 'W')) {
       this.showInsurancePriceAsDiscount = true;
-      
+
     } else {
       this.showInsurancePriceAsDiscount = false;
       this.billingItem.discount_remark1 = "";
       this.billingItem.discount_remark2 = "";
+      this.discount.label1 = 'Discount 1';
+      this.discount.label2 = 'Discount 2';
+      this.discount.label3 = 'Discount 3';
     }
   }
 
@@ -408,7 +415,7 @@ export class BillingComponent implements OnInit {
 
   submitData() {
     let payload = this.constructBillPayload();
-    console.log("payload",payload)
+    console.log("payload", payload)
     this.bs.submitInvoice(payload).subscribe(data => {
       console.log(data);
       this.bs.invoice_no = data.invoice_no;
