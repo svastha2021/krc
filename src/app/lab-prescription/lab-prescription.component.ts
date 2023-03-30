@@ -29,6 +29,7 @@ export class LabPrescriptionComponent implements OnInit {
     private ref: ReferenceService) { }
 
   ngOnInit(): void {
+    console.log(this.visit_no)
     // this.visit_no = '2';
     this.ref.getEodDetailData().subscribe(data => {
       this.eod = data.results[0].eod_date;

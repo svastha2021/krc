@@ -35,21 +35,36 @@
 
             <!-- vital paramaters tab -->
             <mat-tab label="Vital" class="overflow-hidden">
-                
-               <div *ngFor="let param of vitalParametersList; let i=index">
-                   <div class="row margin-20l">
-                    <label [for]="param.khi_desc" class="form-label margin-20t">{{param.khi_desc}}</label>
-
-                    <input type="text"  class="form-control col-lg-6 contact-input" [placeholder]="param.khi_desc" [id]="param.khi_code"  />
-
-                    <input type="text"  class="form-control col-lg-6 contact-input margin-20l" placeholder="Notes" [id]="setNotesId(param.khi_code)"/>
-                </div>         
-                    
-               </div> 
-               <button type="button" [disabled]="!visit_no" class="btn btn-primary margin-20t" (click)="saveVitalParams()">
-                Save
-            </button> 
+    
+                <div *ngFor="let param of vitalParametersList; let i=index">
+                    <div class="row margin-20l">
+                        <label [for]="param.khi_desc" class="form-label margin-20t">{{param.khi_desc}}</label>
+    
+                        <input type="text"  class="form-control col-lg-6 contact-input" [placeholder]="param.khi_desc" [id]="param.khi_code"  />
+    
+                        <input type="text"  class="form-control col-lg-6 contact-input margin-20l" placeholder="Notes" [id]="setNotesId(param.khi_code)"/>
+                    </div>         
+                        
+                </div> 
+                <button type="button" [disabled]="!visit_no" class="btn btn-primary margin-20t" (click)="saveVitalParams()">
+                    Save
+                </button> 
             </mat-tab>
+
+            <!-- Opthal Basic paramaters tab -->
+            <mat-tab label="Basic" class="overflow-hidden">
+                <app-opthal-basic [visit_no]="visit_no" [visit_date]="visit_date" [headerDetail]="headerDetail"></app-opthal-basic>
+             </mat-tab>
+
+            <!-- Opthal Refraction paramaters tab -->
+            <mat-tab label="Refraction" class="overflow-hidden">
+                <app-opthal-refraction [visit_no]="visit_no" [visit_date]="visit_date" [headerDetail]="headerDetail"></app-opthal-refraction>
+             </mat-tab>
+             
+             <!-- Opthal Spectacle paramaters tab -->
+            <mat-tab label="Spectacle" class="overflow-hidden">
+                <app-opthal-spectacle [visit_no]="visit_no" [visit_date]="visit_date" [headerDetail]="headerDetail"></app-opthal-spectacle>
+             </mat-tab>
 
             <!-- pharma -->
             <mat-tab label="Medicine">

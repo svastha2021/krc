@@ -24,6 +24,7 @@ export class DocConsultationComponent implements OnInit {
   currentPatientDialysisDetail = { dialysis_notes: '', visit_no: '', prescription_date: '' }
   vitalParam = { khi_code: '', khi_value: '', khi_notes: '' }
   vitalParametersList: any;
+  visit_date: any;
   // [{khi_code:'bp',khi_desc:'Bloop pressure'}, {khi_code:'height',khi_desc:'Height'}];
   constructor(private docService: DocConsultationService,
     private utility: UtilityService, private dialog: MatDialog) { }
@@ -80,6 +81,7 @@ export class DocConsultationComponent implements OnInit {
       console.log(data);
 
       this.visit_no = data.visit_no;
+      this.visit_date = data.visit_date;
 
       this.dialog.open(InfoDialogComponent, {
         width: '500px',

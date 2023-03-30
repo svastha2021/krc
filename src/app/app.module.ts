@@ -90,6 +90,9 @@ import { InfoObjDialogComponent } from './utilities/info-obj-dialog/info-obj-dia
 import { PatientHealthComponent } from './patient-health/patient-health.component';
 import { DoctorReportComponent } from './doctor-report/doctor-report.component';
 import { doctorMasterFilter } from './doctor-master/doctorMasterFilter';
+import { OpthalBasicComponent } from './opthal-basic/opthal-basic.component';
+import { OpthalRefractionComponent } from './opthal-refraction/opthal-refraction.component';
+import { OpthalSpectacleComponent } from './opthal-spectacle/opthal-spectacle.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -168,7 +171,10 @@ import { doctorMasterFilter } from './doctor-master/doctorMasterFilter';
     userFilterPipe,
     LoginUserComponent,
     PatientHealthComponent,
-    doctorMasterFilter
+    doctorMasterFilter,
+    OpthalBasicComponent,
+    OpthalRefractionComponent,
+    OpthalSpectacleComponent
   ],
   imports: [
     BrowserModule,
