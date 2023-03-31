@@ -73,7 +73,7 @@ export class BillingComponent implements OnInit {
   labProducts: BillingItem[] = [];
   pharmacyProducts: BillingItem[] = [];
   showInsurancePriceAsDiscount = false;
-  discount = { label1: 'Discount 1', label2: 'Discount 2', label3: 'Discount 3' };
+  discount = { label1: 'Concession', label2: 'Insurance', label3: 'Discount' };
   billingItem = {
     bu_id: '',
     patient_id: '',
@@ -252,9 +252,9 @@ export class BillingComponent implements OnInit {
       this.showInsurancePriceAsDiscount = false;
       this.billingItem.discount_remark1 = "";
       this.billingItem.discount_remark2 = "";
-      this.discount.label1 = 'Discount 1';
-      this.discount.label2 = 'Discount 2';
-      this.discount.label3 = 'Discount 3';
+      this.discount.label1 = 'Concession';
+      this.discount.label2 = 'Insurance';
+      this.discount.label3 = 'Discount';
     }
   }
 
