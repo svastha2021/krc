@@ -46,7 +46,8 @@
                     <td>{{item.bu_patient_amt_bal}}</td>
 
 
-                    <td><button [disabled]="item.bu_patient_inv_status === 'F' || item.bu_patient_amt === 0" (click)="showPayment(item)">Make Payment</button>
+                    <td><button class="btn btn-success" [disabled]="item.bu_patient_inv_status === 'F' || item.bu_patient_amt === 0" (click)="showPayment(item)">
+                        <i class="fa-brands fa-amazon-pay mar5r"></i>Make Payment</button>
                     </td>
                 </tr>
             </tbody>
@@ -55,11 +56,11 @@
     <div *ngIf="billingArray.length === 0">
         No pending Invoice Payment
     </div>
-    <div><button (click)="navigateToInvoice()" class="btn btn-primary mar20">Back to Invoice
+    <div><button (click)="navigateToInvoice()" class="btn btn-danger mar20"><i class="fa-solid fa-arrow-left mar5r"></i>Back to Invoice
         </button>
-        <button (click)="displayProducts()" class="btn btn-primary mar20">View Products
+        <button (click)="displayProducts()" class="btn btn-success mar20"><i class="fa-solid fa-eye mar5r"></i>View Products
         </button>
-        <button (click)="navigateToPrint()" class="btn btn-primary mar20">Print Invoice
+        <button (click)="navigateToPrint()" class="btn btn-warning mar20"><i class="fa-solid fa-print mar5r"></i>Print Invoice
         </button>
     </div>
 </div>

@@ -35,7 +35,7 @@
     </div>
   </div>
 </div> -->
-<div class="container mar30" *ngIf="showBillingForm">
+<div class="container mar30" *ngIf="showBillingForm" style="margin-left: 80px">
   <form class="example-form" [formGroup]="myForm" novalidate>
     <!-- <mat-form-field class="mar20lr" appearance="fill">
       <mat-label>Select</mat-label>
@@ -208,20 +208,20 @@
      
     </div>
 
-    <button type="button" class="btn btn-primary" *ngIf="!editBillingItem" [disabled]="!myForm.valid"
-      (click)="addItem()">
+    <button type="button" class="btn btn-success" *ngIf="!editBillingItem" [disabled]="!myForm.valid"
+      (click)="addItem()"><i class="fa-solid fa-circle-plus mar5r"></i>
       Add Item
     </button>
 
     <button type="button" class="btn btn-primary" *ngIf="editBillingItem" [disabled]="!myForm.valid"
-      (click)="updateItem()">
+      (click)="updateItem()"><i class="fa-solid fa-file-pen mar5r"></i>
       Update
     </button>
-    <button type="button" class="btn btn-primary mar30" (click)="cancelNewItem()">
+    <button type="button" class="btn btn-danger mar30" (click)="cancelNewItem()"><i class="fa-solid fa-circle-xmark mar5r"></i>
       Cancel
     </button>
 
-    <button type="button" class="btn btn-primary mar30" (click)="resetFields()">
+    <button type="button" class="btn btn-warning mar30" (click)="resetFields()"><i class="fa-solid fa-rotate-left mar5r"></i>
       Reset
     </button>
   </form>
@@ -266,11 +266,11 @@
       </div>
     </div>
 
-    <button type="button" class="btn btn-primary mar30" *ngIf="!showBillingForm" (click)="createItem()">
-      Create Item
+    <button type="button" class="btn btn-success mar30" *ngIf="!showBillingForm" (click)="createItem()">
+      <i class="fa-solid fa-circle-plus mar5r"></i>  Create Item
     </button>
-    <button type="button" class="btn btn-primary mar30" [disabled]="billingArray.length === 0"
-      *ngIf="!showBillingForm && billingArray?.length>0" (click)=submitData()>
+    <button type="button" class="btn btn-success mar30" [disabled]="billingArray.length === 0"
+      *ngIf="!showBillingForm && billingArray?.length>0" (click)=submitData()><i class="fa-solid fa-file-invoice"></i>
       Generate Invoice
     </button>
 
