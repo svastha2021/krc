@@ -11,7 +11,7 @@
                         <input type="number" pattern=".{10}" class="form-control" required name="contact" [(ngModel)]="aptObj.phone_no"
                             id="contact" [readonly]="updateApt">
                         <button (click)="fetchUser()" [disabled]="!aptObj.phone_no || updateApt"
-                            class="btn btn-primary submit-btn mar20t"><i class="fa-solid fa-magnifying-glass mar5r"></i>fetch contact details</button>
+                            class="btn btn-success mar20t"><i class="fa-solid fa-magnifying-glass mar5r"></i>fetch contact details</button>
                     </div>
                     <div class=" patient-apt-item">
                         <label for="patientID" class="form-label">Patient ID</label>
@@ -54,10 +54,10 @@
                 </div>
 
             </div>
-            <button class="btn btn-primary back-btn mar20t mar10lr" (click)="goBack()"><i class="fa-solid fa-arrow-left mar5r"></i>Back</button>
+            <button class="btn btn-danger mar20t mar10lr" (click)="goBack()"><i class="fa-solid fa-arrow-left mar5r"></i>Back</button>
             <button [disabled]="!aptBookingForm.valid" *ngIf="!updateApt" (click)="bookApt()"
                 class="btn btn-primary submit-btn mar20t mar10lr"><i class="fa-solid fa-paper-plane mar5r"></i>Book</button>
-            <button *ngIf="updateApt" [disabled]="!aptBookingForm.valid" (click)="updateAppointment()" class="btn btn-primary submit-btn mar20t mar10lr"><i class="fa-solid fa-paper-plane mar5r"></i>Update</button>
+            <button *ngIf="updateApt" [disabled]="!aptBookingForm.valid" (click)="updateAppointment()" class="btn btn-warning mar20t mar10lr"><i class="fa-solid fa-paper-plane mar5r"></i>Update</button>
         </form>
     </div>
 </div>

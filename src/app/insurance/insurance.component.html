@@ -238,19 +238,19 @@
                             </button>
                         </div> -->
                         <div class="col-md-4">
-                            <button type="button" class="btn btn-primary mar30 fs-12"
+                            <button type="button" class="btn btn-success mar30 fs-12"
                             (click)="isrequiredSaveBtn()">
                             Save
                             </button>
                         </div>
                         <div class="col-md-4">
-                            <button type="button" class="btn btn-primary mar30 fs-12" [ngClass]="{'disabled': recordIndexDialysis === undefined || recordIndexDialysis === getLastDialysisRecordIndex() }"
+                            <button type="button" class="btn btn-warning mar30 fs-12" [ngClass]="{'disabled': recordIndexDialysis === undefined || recordIndexDialysis === getLastDialysisRecordIndex() }"
                             (click)="prev()" >
                             Prev
                             </button>
                         </div>
                         <div class="col-md-4">
-                            <button type="button" class="btn btn-primary mar30 fs-12"
+                            <button type="button" class="btn btn-warning mar30 fs-12"
                             (click)="next()" [ngClass]="{'disabled': recordIndexDialysis === 0 }">
                             Next
                             </button>
@@ -284,7 +284,7 @@
                             </tr> 
                         </tbody>
                         <div class="d-flex-center">
-                            <button type="button" class="btn btn-primary mar20t" [useExistingCss]="true" id="print-to-pdf" printSectionId="print-section"  ngxPrint [disabled]="isrequiredBtn"  (click)="printAllData()">Print All</button>
+                            <button type="button" class="btn btn-success mar20t" [useExistingCss]="true" id="print-to-pdf" printSectionId="print-section"  ngxPrint [disabled]="isrequiredBtn"  (click)="printAllData()">Print All</button>
                         </div>
                     </table>
                 </div>   

@@ -82,10 +82,11 @@
             <div class="row">
                 <div class="col-6 d-flex">
                         <div class="col-3" *ngIf="isShowEdit">
-                            <button mat-raised-button class="bg-clr"  color="bg-clr" (click)="addToList()">Add Record</button>
+                            <button class="btn btn-success" (click)="addToList()"><i class="fa-solid fa-circle-plus mar5r"></i>
+                                Add Record</button>
                         </div>
                         <div class="col-3" *ngIf="!isShowEdit">
-                            <button mat-raised-button class="bg-clr"  color="bg-clr" (click)="editList()">Update Record</button>
+                            <button class="btn btn-warning" (click)="editList()"><i class="fa-solid fa-file-pen mar5r"></i>Update Record</button>
                         </div>
                 </div>
                 

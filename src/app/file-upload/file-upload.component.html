@@ -33,10 +33,10 @@
                 </div>
                 <div class="mar20t">
                     <button class="btn btn-success btn-sm" [disabled]="!selectedFiles || doc_tag === ''" (click)="upload()">
-                        Upload
+                        <i class="fa-solid fa-cloud-arrow-up mar5r"></i>Upload
                     </button>
-                    <button class="btn btn-success btn-sm margin-20l" (click)="reset()">
-                        Reset
+                    <button class="btn btn-warning btn-sm margin-20l" (click)="reset()">
+                        <i class="fa-solid fa-rotate-left mar5r"></i>Reset
                     </button>
                 </div>
                 <div *ngIf="currentFileUpload" class="progress mt-2">

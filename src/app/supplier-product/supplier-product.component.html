@@ -36,7 +36,7 @@
             <br>
             <div class="row card">
                 <div class="col-12 text-right">
-                    <button class="btn btn-primary pointer" (click)="clear()">Clear</button>
+                    <button class="btn btn-warning pointer" (click)="clear()"><i class="fa-solid fa-rotate-left mar5r"></i>Clear</button>
                 </div>
                 <div class="col">
                     <div class=" supplier-item">
@@ -89,10 +89,10 @@
             <div class="row">
                 <div class="col-6 d-flex">
                         <div class="col-3" *ngIf="isShowEdit">
-                            <button class="btn btn-primary" (click)="addRecord()">Add Record</button>
+                            <button class="btn btn-success" (click)="addRecord()"><i class="fa-solid fa-circle-plus mar5r"></i>Add Record</button>
                         </div>
                         <div class="col-3" *ngIf="!isShowEdit">
-                            <button class="btn btn-primary pointer" (click)="editList()">Update Record</button>
+                            <button class="btn btn-warning pointer" (click)="editList()"><i class="fa-solid fa-file-pen mar5r"></i>Update Record</button>
                         </div>
                         <!-- <div class="col-2">
                             <button class="btn btn-primary" (click)="submit()">Save</button>
@@ -178,7 +178,7 @@
               <br>
                 <div class="col-6 d-flex">
                     <div class="col-2">
-                        <button class="btn btn-primary" [disabled]="!isShowEdit" (click)="submit()">Save</button>
+                        <button class="btn btn-success" [disabled]="!isShowEdit" (click)="submit()"><i class="fa-solid fa-paper-plane mar5r"></i>Save</button>
                     </div>
                 </div>
         <!-- </form> -->
