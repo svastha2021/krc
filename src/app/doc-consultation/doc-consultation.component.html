@@ -66,6 +66,11 @@
                 <app-opthal-spectacle [visit_no]="visit_no" [visit_date]="visit_date" [headerDetail]="headerDetail"></app-opthal-spectacle>
              </mat-tab>
 
+            <!-- Opthal Slit-Lamp paramaters tab -->
+            <mat-tab label="Slit-Lamp" class="overflow-hidden">
+                <app-slit-lamp [visit_no]="visit_no" [visit_date]="visit_date" [headerDetail]="headerDetail"></app-slit-lamp>
+             </mat-tab>
+
             <!-- pharma -->
             <mat-tab label="Medicine">
                 <app-med-prescription [visit_no]="visit_no" [headerDetail]="headerDetail"></app-med-prescription>    

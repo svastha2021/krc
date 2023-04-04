@@ -93,6 +93,7 @@ import { doctorMasterFilter } from './doctor-master/doctorMasterFilter';
 import { OpthalBasicComponent } from './opthal-basic/opthal-basic.component';
 import { OpthalRefractionComponent } from './opthal-refraction/opthal-refraction.component';
 import { OpthalSpectacleComponent } from './opthal-spectacle/opthal-spectacle.component';
+import { SlitLampComponent } from './slit-lamp/slit-lamp.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -174,7 +175,8 @@ import { OpthalSpectacleComponent } from './opthal-spectacle/opthal-spectacle.co
     doctorMasterFilter,
     OpthalBasicComponent,
     OpthalRefractionComponent,
-    OpthalSpectacleComponent
+    OpthalSpectacleComponent,
+    SlitLampComponent
   ],
   imports: [
     BrowserModule,
