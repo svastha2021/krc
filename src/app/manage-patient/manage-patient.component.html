@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="container">
   <app-base-detail></app-base-detail>
-    <h1>Manage Patient</h1>
+    <h1>Manage Customer</h1>
     <div class="row">
 
     </div>
@@ -10,11 +10,11 @@
             <mat-label>Select Search Type</mat-label>
             <mat-select placeholder="select"  required [(ngModel)]="searchType" (valueChange)="changeSearchType()">
                 <mat-option value="phone_no">Phone Number</mat-option>
-                <mat-option value="patient_name">Patient Name</mat-option>
+                <mat-option value="patient_name">Customer Name</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field class="mar20lr" appearance="fill" *ngIf="searchType === 'patient_name'">
-            <mat-label>Patient Name</mat-label>
+            <mat-label>Customer Name</mat-label>
             <input required matInput type="text" [(ngModel)]="patient_name">
         </mat-form-field>
 
@@ -42,34 +42,20 @@
                 </mat-cell>
             </ng-container>
             <ng-container matColumnDef="patient_name">
-                <mat-header-cell *matHeaderCellDef>Patient Name</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef>Customer Name</mat-header-cell>
                 <mat-cell *matCellDef="let element;let i = index;"> {{element.patient_name}} </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="father_name">
-                <mat-header-cell *matHeaderCellDef>Father's Name</mat-header-cell>
-                <mat-cell *matCellDef="let element;let i = index;"> {{element.father_name}} </mat-cell>
-            </ng-container>
+            </ng-container>           
             <ng-container matColumnDef="mobile_no">
                 <mat-header-cell *matHeaderCellDef>Phone Number</mat-header-cell>
                 <mat-cell *matCellDef="let element;let i = index;"> {{element.mobile_no}} </mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="age">
-                <mat-header-cell *matHeaderCellDef>Age</mat-header-cell>
-                <mat-cell *matCellDef="let element;let i = index;"> {{element.age}} </mat-cell>
-            </ng-container>
+           
             <ng-container matColumnDef="dob">
                 <mat-header-cell *matHeaderCellDef>DOB</mat-header-cell>
                 <mat-cell *matCellDef="let element;let i = index;"> {{element.dob | date: 'dd/MM/yyyy'}} </mat-cell>
             </ng-container>
-            <ng-container matColumnDef="sex">
-                <mat-header-cell *matHeaderCellDef>Sex</mat-header-cell>
-                <mat-cell *matCellDef="let element;let i = index;"> {{element.sex}} </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="patient_type">
-                <mat-header-cell *matHeaderCellDef>Patient Type</mat-header-cell>
-                <mat-cell *matCellDef="let element;let i = index;"> {{element.patient_type}} </mat-cell>
-            </ng-container>
+                  
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>

@@ -17,7 +17,7 @@ export class ManagePatientComponent implements OnInit {
   patientNameList: Patient[] = [];
   dataSource = new MatTableDataSource(this.patientNameList);
   @ViewChild(MatTable, { static: true }) table: MatTable<any> | undefined;
-  displayedColumns: string[] = ['radio', 'patient_name', 'father_name', 'mobile_no', 'age', 'dob', 'sex', 'patient_type'];
+  displayedColumns: string[] = ['radio', 'patient_name',  'mobile_no',  'dob'];
   selectedPerson: any;
   constructor(
     private manageDialog: ManagePatientService, private router: Router

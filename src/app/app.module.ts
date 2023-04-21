@@ -15,6 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { LandingComponent } from './landing/landing.component';
 import { AptBookingComponent } from './apt-booking/apt-booking.component';
 import { PatientRegistrationComponent } from './patient-registration/patient-registration.component';
+import { CustomerRegistrationComponent } from './customer-registration/customerregistration.component';
 import { AuthService } from './services/auth.service';
 import { DocConsultationComponent } from './doc-consultation/doc-consultation.component';
 import { BillingComponent } from './billing/billing.component';
@@ -93,6 +94,7 @@ import { doctorMasterFilter } from './doctor-master/doctorMasterFilter';
 @NgModule({
   declarations: [
     AppComponent,
+    CustomerRegistrationComponent,
     HeaderComponent,
     LoginComponent,
     LandingComponent,

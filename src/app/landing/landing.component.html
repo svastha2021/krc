@@ -4,43 +4,9 @@
   <div class="row margin10t">
     <div>
       <button  (click)="managePatient()"
-      class="btn btn-success  mar20t manage-button"><i class="fa-solid fa-list-check pad10r"></i>Manage Patient</button>
+      class="btn btn-success  mar20t manage-button"><i class="fa-solid fa-list-check pad10r"></i>Manage Customer</button>
     </div>
     </div>
     
-  <div class="row margin10t">
-    <h2>Appointments</h2>
-    <button  (click)="openAppointmentPopup()"
-      class="btn btn-success mar20t"><i class="fa-solid fa-list-check mar5r"></i>Manage Appointment</button>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Patient ID</th>
-          <th scope="col">Patient Name</th>
-          <th scope="col">Mobile</th>
-          <th scope="col">Date of Appointment</th>
-          <th scope="col">Appointment No</th>
-          <th scope="col">Doctor Name</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody *ngIf="aptData?.length > 0">
-        <tr *ngFor="let apt of aptData">
-
-          <td>{{apt.patient_id}}</td>
-          <td>{{apt.patient_name}}</td>
-          <td>{{apt.phone_no}}</td>
-          <td>{{apt.appoint_date | date:'dd/MM/yyyy'}}</td>
-          <td>{{apt.appoint_no}}</td>
-          <td>{{apt.doctor_name}}</td>
-          <td>
-            <mat-icon title="edit" class="edit-icon"aria-hidden="false" aria-label="Example home icon" (click)="edit_apt(apt)">edit</mat-icon>
-            <!-- <mat-icon title="delete" class="delete-icon" aria-hidden="false" aria-label="Example home icon" (click)="delete_apt(apt)">delete</mat-icon> -->
-          </td>
-        </tr>
-
-      </tbody>
-      <span *ngIf="aptData?.length === 0">No records</span>
-    </table>
-  </div>
+ 
 </div>

@@ -46,6 +46,7 @@ import { UserMasterComponent } from './user-master/user-master.component';
 import { LoginUserComponent } from './login-user/login-user.component';
 import { PatientHealthComponent } from './patient-health/patient-health.component';
 import { DoctorReportComponent } from './doctor-report/doctor-report.component';
+import { CustomerRegistrationComponent } from './customer-registration/customerregistration.component';
 
 const routes: Routes = [
   {
@@ -63,7 +64,7 @@ const routes: Routes = [
   },
   {
     path: 'patient-reg',
-    component: PatientRegistrationComponent
+    component: CustomerRegistrationComponent
   },
   {
     path: 'apt-booking',

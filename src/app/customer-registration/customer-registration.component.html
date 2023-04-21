@@ -1,0 +1,87 @@
+<app-header></app-header>
+<div class="container">
+    <div class="row">
+        <h1 *ngIf="!updatePatient">Customer Registration</h1>
+        <h1 *ngIf="updatePatient">Customer Update</h1>
+        <form #patientReg="ngForm">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class=" patient-reg-item">
+                        <label for="patient_id" class="form-label">Patient ID</label>
+                        <input readonly type="text" class="form-control" name="patient_id" id="patient_id"
+                            [(ngModel)]="patient_id">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class=" patient-reg-item">
+                        <label for="patientName" class="form-label">Patient Name<span
+                                class="txt-danger">*</span></label>
+                        <input type="text" class="form-control" name="patientName"
+                            [(ngModel)]="patientRegObj.patient_name" id="patientName" required>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="patient-reg-item">
+                        <label for="patient_dob" class="form-label">DOB</label>
+                        <input type="date" class="form-control" name="patient_dob" [(ngModel)]="patientRegObj.dob"
+                            id="patient_dob">
+                        <!-- max="{{currentDate|date:'yyyy-MM-dd'}}"  -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+
+                <div class="col-md-4">
+                    <div class=" patient-reg-item">
+                        <label for="contact" class="form-label">Mobile<span class="txt-danger">*</span></label>
+                        <input type="number" pattern=".{10}" required class="form-control" name="contact"
+                            [(ngModel)]="patientRegObj.mobile_no" id="contact">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class=" patient-reg-item">
+                        <label for="lastDoc" class="form-label">Alternate Mobile</label>
+                        <input type="text" class="form-control" name="lastDoc" [(ngModel)]="patientRegObj.alt_mobile_no"
+                            id="lastDoc">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class=" patient-reg-item">
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" class="form-control" name="email" [(ngModel)]="patientRegObj.email_id"
+                            id="email" aria-describedby="emailHelp">
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class=" patient-reg-item">
+                        <label for="address" class="form-label">Address<span class="txt-danger">*</span></label>
+                        <textarea class="form-control" name="address" [(ngModel)]="patientRegObj.address" id="address"
+                            required></textarea>
+                    </div>
+                </div>
+                <div class="col-md-2 patient-reg-item">
+                    <label for="pincode" class="form-label">Pin Code</label>
+                    <input type="number" class="form-control" name="pincode" id="pincode"
+                        [(ngModel)]="patientRegObj.pincode">
+                </div>
+            </div>
+
+            <button class="btn btn-danger mar20t mar10lr" (click)="goBack()"><i
+                    class="fa-solid fa-arrow-left mar5r"></i>Back</button>
+            <button [disabled]="!patientReg.valid" *ngIf="!updatePatient" (click)="registerPatient()"
+                class="btn btn-success mar20t"><i class="fa-solid fa-arrow-right mar5r"></i>Submit</button>
+
+            <button [disabled]="!patientReg.valid" *ngIf="updatePatient" (click)="updatePatientDetails()"
+                class="btn btn-warning  mar20t"><i class="fa-solid fa-paper-plane mar5r"></i>Update</button>
+        </form>
+    </div>
+</div>
