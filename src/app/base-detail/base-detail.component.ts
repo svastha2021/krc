@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ReferenceService } from '../utilities/services/reference.service';
-
+import { UtilityService } from '../utilities/services/utility.service';
 @Component({
   selector: 'app-base-detail',
   templateUrl: './base-detail.component.html',
@@ -9,9 +9,9 @@ import { ReferenceService } from '../utilities/services/reference.service';
 export class BaseDetailComponent implements OnInit, OnDestroy {
   today = new Date();
   intervalId: any;
-  eod:any
+  eod: any
   userData = { user_name: '', branch_name: '', branch_id: '' }
-  constructor(private ref:ReferenceService) { }
+  constructor(private ref: ReferenceService, private us: UtilityService) { }
 
   ngOnInit(): void {
     this.fetchUserData();
@@ -30,9 +30,10 @@ export class BaseDetailComponent implements OnInit, OnDestroy {
     this.userData.branch_id = localStorage.getItem('branch_id')!
   }
 
-  fetchEOD(){
-    this.ref.getEodDetailData().subscribe(data=>{     
-      this.eod = new Date(data.results[0].eod_date)
+  fetchEOD() {
+    this.ref.getEodDetailData().subscribe(data => {
+
+      this.eod = this.us.convertTodayTostrDDMMYYYY(data.results[0].eod_date);
     })
   }
 }

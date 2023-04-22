@@ -41,7 +41,8 @@
           <th rowspan="2">Date</th>
           <th rowspan="2">Type</th>
           <th colspan="2">Cash</th>
-          <th colspan="2">Card</th>
+          <th colspan="2">Credit Card</th>
+          <th colspan="2">Debit Card</th>
           <th colspan="2">Chq</th>
           <th colspan="2">UPI</th>
           <th colspan="2">Adj Amount</th>
@@ -68,6 +69,8 @@
           <th>Amt</th>
           <th>No of inv</th>
           <th>Amt</th>
+          <th>No of inv</th>
+          <th>Amt</th>
         </tr>
 
         <tr *ngFor="let invoice of item?.details">
@@ -77,6 +80,10 @@
           <td>{{invoice.cash_amt.toLocaleString('en-IN') }}</td>
           <td>{{invoice.card_inv_cnt.toLocaleString('en-IN')}}</td>
           <td>{{invoice.card_amt.toLocaleString('en-IN') }}</td>
+
+          <td>{{invoice.debit_card_inv_cnt.toLocaleString('en-IN')}}</td>
+          <td>{{invoice.debit_card_amt.toLocaleString('en-IN') }}</td>
+
           <td>{{invoice.chq_inv_cnt.toLocaleString('en-IN') }}</td>
           <td>{{invoice.chq_amt.toLocaleString('en-IN') }}</td>
           <td>{{invoice.upi_inv_cnt.toLocaleString('en-IN') }}</td>
@@ -96,6 +103,8 @@
           <td>{{item.cash_amt.toLocaleString('en-IN') }}</td>
           <td>{{item.card_inv_cnt.toLocaleString('en-IN')}}</td>
           <td>{{item.card_amt.toLocaleString('en-IN') }}</td>
+          <td>{{item.debit_card_inv_cnt.toLocaleString('en-IN')}}</td>
+          <td>{{item.debit_card_amt.toLocaleString('en-IN') }}</td>
           <td>{{item.chq_inv_cnt.toLocaleString('en-IN') }}</td>
           <td>{{item.chq_amt.toLocaleString('en-IN') }}</td>
           <td>{{item.upi_inv_cnt.toLocaleString('en-IN') }}</td>
