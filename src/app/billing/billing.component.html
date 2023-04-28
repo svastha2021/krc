@@ -3,56 +3,19 @@
   <div class="row">
     <h1>Billing</h1>
   </div>
-  <!-- <div class="row" *ngIf="!headerDetail">
-    <h3>Patient Details</h3>
-    <div class="patient-details">
-      <label for="contact" class="form-label">Contact</label>
-      <input type="text" class="form-control contact-input" required name="contact" [(ngModel)]="mobile_no"
-        id="contact">
-      <br>
-      <button (click)="fetchUser()" [disabled]="!mobile_no" class="btn btn-primary mar20t">fetch
-        contact details</button>
-    </div> 
-  </div> -->
-  <app-patient-header (outputPatientHeader)="patientHeaderData($event)"></app-patient-header>
+  
 </div>
 
-<!-- <div class="container" *ngIf="isShowHeader">
-  <div class="row header-border margin-20t">
-    <div class="">
-      <label class="mar15">Patient Id: {{patientHeader?.patient_id}}</label>
-      <label class="mar15">Patient Name: {{patientHeader?.patient_name}}</label>
-      <label class="mar15">Age: {{patientHeader?.age}}</label>
-      <label class="mar15">Sex: {{patientHeader?.sex}}</label>
-      <label class="mar15">Phone: {{patientHeader?.mobile_no}}</label>
-      <label class="mar15">Patient Type: {{patientHeader?.patient_type_name}}</label><br>
-      
-      <label class="mar15">Total Invoice Amount: {{patientHeader?.net_inv_amount}}</label>
-      <label class="mar15">Total Paid: {{patientHeader?.net_inv_paid}}</label>
-      <label class="mar15">Total Balance: {{patientHeader?.net_inv_balance}}</label>
-      <label class="mar15">Advance Adjusted: {{patientHeader?.advance_amount_paid}}</label>
-      <label class="mar15">Advance Balance: {{patientHeader?.advance_amount_balance}}</label>
-    </div>
-  </div>
-</div> -->
 <div class="container mar30" *ngIf="showBillingForm" style="margin-left: 80px">
-  <form class="example-form" [formGroup]="myForm" novalidate>
-    <!-- <mat-form-field class="mar20lr" appearance="fill">
-      <mat-label>Select</mat-label>
-      <mat-select  name="bu_id" formControlName="bu_id" [(ngModel)]="billingItem.bu_id"
-        required (selectionChange)="fetchProductNew($event)">
-        <mat-option *ngFor="let bu of buList" [value]="bu">{{bu.bu_name}}</mat-option>
-        
-      </mat-select>
-    </mat-form-field> -->
+  <form class="example-form" [formGroup]="myForm" novalidate>    
 
-    <mat-form-field class="mar20lr" appearance="fill">
+    <!-- <mat-form-field class="mar20lr" appearance="fill">
       <mat-select placeholder="select" formControlName="bu_id" required (valueChange)="fetchProductsDynamic($event)">
         <mat-option *ngFor="let bu of buList" [value]="bu.bu_id">
           {{bu.bu_name}}
         </mat-option>
       </mat-select>
-    </mat-form-field>
+    </mat-form-field> -->
 
     <mat-form-field class="width25-perc mar20lr" appearance="fill">
       <mat-label>Product</mat-label>
@@ -160,16 +123,7 @@
         <input matInput type="number" min='0' onkeypress="return event.charCode >= 48" formControlName="discount1"
           [(ngModel)]="billingItem.discount1" name="discount1" (ngModelChange)="calclulateDiscount()" [readonly]="showInsurancePriceAsDiscount">
       </mat-form-field>
-      <mat-form-field class="mar20lr" appearance="fill">
-        <mat-label>Discount 2</mat-label>
-        <input matInput type="number" min='0' onkeypress="return event.charCode >= 48" formControlName="discount2"
-          [(ngModel)]="billingItem.discount2" name="discount2" (ngModelChange)="calclulateDiscount()" [readonly]="showInsurancePriceAsDiscount">
-      </mat-form-field>
-      <mat-form-field class="mar20lr" appearance="fill">
-        <mat-label>Discount 3</mat-label>
-        <input matInput type="number" min='0' onkeypress="return event.charCode >= 48" formControlName="discount3"
-          [(ngModel)]="billingItem.discount3" name="dIscount3" (ngModelChange)="calclulateDiscount()" [readonly]="showInsurancePriceAsDiscount">
-      </mat-form-field>
+      
 
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Total Discount</mat-label>
@@ -177,26 +131,7 @@
           name="total_discount" readonly>
       </mat-form-field>
     </div>
-    <div>
-
-      <mat-form-field class="mar20lr" appearance="fill">
-        <mat-label>Comments</mat-label>
-        <input matInput formControlName="discount_remark1" [(ngModel)]="billingItem.discount_remark1"
-          name="discount_remark1">
-      </mat-form-field>
-      <mat-form-field class="mar20lr" appearance="fill">
-        <mat-label>Comments</mat-label>
-        <input matInput formControlName="discount_remark2" [(ngModel)]="billingItem.discount_remark2"
-          name="discount_remark2">
-      </mat-form-field>
-      <mat-form-field class="mar20lr" appearance="fill">
-        <mat-label>Comments</mat-label>
-        <input matInput formControlName="discount_remark3" [(ngModel)]="billingItem.discount_remark3"
-          name="discount_remark3">
-      </mat-form-field>
-
-
-    </div>
+    
     <div>
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Net Amount</mat-label>
@@ -228,7 +163,7 @@
 </div>
 <div>
 
-  <div class="container" *ngIf="!showBillingForm &&headerDetail">
+  <div class="container" >
 
     <div *ngIf="billingArray?.length > 0">
       <table class="table">
@@ -266,7 +201,7 @@
       </div>
     </div>
 
-    <button type="button" class="btn btn-success mar30" *ngIf="!showBillingForm" (click)="createItem()">
+    <button type="button" class="btn btn-success mar30"  (click)="createItem()">
       <i class="fa-solid fa-circle-plus mar5r"></i>  Create Item
     </button>
     <button type="button" class="btn btn-success mar30" [disabled]="billingArray.length === 0"

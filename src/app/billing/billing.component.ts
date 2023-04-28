@@ -41,10 +41,7 @@ export class BillingComponent implements OnInit {
     patient_inv_gross_amt: [],
     other_charge_remark1: [],
     other_charge_remark2: [],
-    other_charge_remark3: [],
-    discount_remark1: [],
-    discount_remark2: [],
-    discount_remark3: [],
+    other_charge_remark3: [],   
     discount1: [],
     discount2: [],
     discount3: [],
@@ -95,9 +92,7 @@ export class BillingComponent implements OnInit {
     discount1: Number(0),
     discount2: Number(0),
     discount3: Number(0),
-    discount_remark1: '',
-    discount_remark2: '',
-    discount_remark3: '',
+    
     gross_discount: Number(0),
     net_amount: Number(0),
     net_patient_amount: Number(0),
@@ -120,7 +115,7 @@ export class BillingComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.fetchBu();
+    //this.fetchBu();
     this.getEodDetails();
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
@@ -132,16 +127,223 @@ export class BillingComponent implements OnInit {
     this.ref.getEodDetailData().subscribe(data => {
       console.log("EOD data", data.results);
       this.eodData = data.results[0].eod_date;
-
+      //this.fetchBu()
+      this.options = [
+        {
+          "org_id": "KRC",
+          "branch_id": "KRC0001",
+          "product_id": "PRD000000",
+          "product_name": "Shan test",
+          "uom": "2",
+          "bu_id": "DIALY",
+          "stock_in_hand": 10000,
+          "min_stock": null,
+          "max_stock": null,
+          "reorder_level": null,
+          "price_deviation": null,
+          "updated_by": "KRC0010002",
+          "updated_date": "2022-11-05T00:00:00.000Z",
+          "created_by": "KRC0010002",
+          "created_date": "2022-10-24T00:00:00.000Z",
+          "product_price": 1000,
+          "insurance_type_id": "C",
+          "prod_name_invoice": null,
+          "gst_value": 0,
+          "product_name_price": "Shan test - 1000",
+          "patient_price": null,
+          "insurance_price": null,
+          "doctor_price": null
+        },
+        {
+          "org_id": "KRC",
+          "branch_id": "KRC0001",
+          "product_id": "PRD000001",
+          "product_name": "F6 First use dialysis",
+          "uom": null,
+          "bu_id": "DIALY",
+          "stock_in_hand": null,
+          "min_stock": null,
+          "max_stock": null,
+          "reorder_level": null,
+          "price_deviation": null,
+          "updated_by": null,
+          "updated_date": null,
+          "created_by": null,
+          "created_date": null,
+          "product_price": 2000,
+          "insurance_type_id": "C",
+          "prod_name_invoice": null,
+          "gst_value": null,
+          "product_name_price": "F6 First use dialysis - 2000",
+          "patient_price": 1000,
+          "insurance_price": 1000,
+          "doctor_price": 0
+        },
+        {
+          "org_id": "KRC",
+          "branch_id": "KRC0001",
+          "product_id": "PRD000002",
+          "product_name": "Reuse dialysis",
+          "uom": null,
+          "bu_id": "DIALY",
+          "stock_in_hand": null,
+          "min_stock": null,
+          "max_stock": null,
+          "reorder_level": null,
+          "price_deviation": null,
+          "updated_by": null,
+          "updated_date": null,
+          "created_by": null,
+          "created_date": null,
+          "product_price": 1900,
+          "insurance_type_id": "C",
+          "prod_name_invoice": null,
+          "gst_value": null,
+          "product_name_price": "Reuse dialysis - 1900",
+          "patient_price": 700,
+          "insurance_price": 1100,
+          "doctor_price": 700
+        },
+        {
+          "org_id": "KRC",
+          "branch_id": "KRC0001",
+          "product_id": "PRD000003",
+          "product_name": "B6 dialysis",
+          "uom": null,
+          "bu_id": "DIALY",
+          "stock_in_hand": null,
+          "min_stock": null,
+          "max_stock": null,
+          "reorder_level": null,
+          "price_deviation": null,
+          "updated_by": "KRC0010002",
+          "updated_date": "2022-11-07T00:00:00.000Z",
+          "created_by": null,
+          "created_date": null,
+          "product_price": 2400,
+          "insurance_type_id": "C",
+          "prod_name_invoice": "B6 Dialysis",
+          "gst_value": null,
+          "product_name_price": "B6 dialysis - 2400",
+          "patient_price": 1200,
+          "insurance_price": 1100,
+          "doctor_price": 1200
+        },
+        {
+          "org_id": "KRC",
+          "branch_id": "KRC0001",
+          "product_id": "PRD000004",
+          "product_name": "14 L dialysis",
+          "uom": null,
+          "bu_id": "DIALY",
+          "stock_in_hand": null,
+          "min_stock": null,
+          "max_stock": null,
+          "reorder_level": null,
+          "price_deviation": null,
+          "updated_by": null,
+          "updated_date": null,
+          "created_by": null,
+          "created_date": null,
+          "product_price": 2450,
+          "insurance_type_id": "C",
+          "prod_name_invoice": null,
+          "gst_value": null,
+          "product_name_price": "14 L dialysis - 2450",
+          "patient_price": 1250,
+          "insurance_price": 1100,
+          "doctor_price": 1250
+        },
+        {
+          "org_id": "KRC",
+          "branch_id": "KRC0001",
+          "product_id": "PRD000005",
+          "product_name": "Fx80 dialysis",
+          "uom": null,
+          "bu_id": "DIALY",
+          "stock_in_hand": null,
+          "min_stock": null,
+          "max_stock": null,
+          "reorder_level": null,
+          "price_deviation": null,
+          "updated_by": null,
+          "updated_date": null,
+          "created_by": null,
+          "created_date": null,
+          "product_price": 2650,
+          "insurance_type_id": "C",
+          "prod_name_invoice": null,
+          "gst_value": null,
+          "product_name_price": "Fx80 dialysis - 2650",
+          "patient_price": 1500,
+          "insurance_price": 1100,
+          "doctor_price": 1500
+        },
+        {
+          "org_id": "KRC",
+          "branch_id": "KRC0001",
+          "product_id": "PRD000006",
+          "product_name": "170 H dialysis",
+          "uom": null,
+          "bu_id": "DIALY",
+          "stock_in_hand": null,
+          "min_stock": null,
+          "max_stock": null,
+          "reorder_level": null,
+          "price_deviation": null,
+          "updated_by": null,
+          "updated_date": null,
+          "created_by": null,
+          "created_date": null,
+          "product_price": 2650,
+          "insurance_type_id": "C",
+          "prod_name_invoice": null,
+          "gst_value": null,
+          "product_name_price": "170 H dialysis - 2650",
+          "patient_price": 1450,
+          "insurance_price": 1100,
+          "doctor_price": 1450
+        },
+        {
+          "org_id": "KRC",
+          "branch_id": "KRC0001",
+          "product_id": "PRD000007",
+          "product_name": "5008 dialysis accessory ",
+          "uom": null,
+          "bu_id": "DIALY",
+          "stock_in_hand": null,
+          "min_stock": null,
+          "max_stock": null,
+          "reorder_level": null,
+          "price_deviation": null,
+          "updated_by": null,
+          "updated_date": null,
+          "created_by": null,
+          "created_date": null,
+          "product_price": 1000,
+          "insurance_type_id": "C",
+          "prod_name_invoice": null,
+          "gst_value": null,
+          "product_name_price": "5008 dialysis accessory  - 1000",
+          "patient_price": 1000,
+          "insurance_price": 0,
+          "doctor_price": 0
+        }
+      ];
+      this.filteredOptions = this.myControl.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value)),
+      );
     })
   }
-
-  fetchBu() {
-    this.bs.fetchBuList().subscribe(data => {
-      this.buList = data.results;
-      // this.myForm.get('bu_id')?.setValue('PHARM');
-      // this.fetchProductNew('PHARM');
-      // this.myControl.setValue('EID Injection');
+  //new method to fetch products
+  fetchProducts() {
+    this.bs.fetchProducts('DIALY', 'C', this.eodData).subscribe(data => {
+      this.options = data.results;
+      this.filteredOptions = this.myControl.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value)),
+      );
     })
   }
 
@@ -180,15 +382,7 @@ export class BillingComponent implements OnInit {
     this.billingItem.insurance_inv_value = parseInt(data.value.insurance_price)
 
     this.calclulateOthercharges(this.billingItem.product_cost);
-    if(this.showInsurancePriceAsDiscount){
-      this.billingItem.discount_remark1 = "Patient concession";
-      this.billingItem.discount_remark2 = "Patient insurance";
-      this.billingItem.discount1 = this.billingItem.patient_base_price;
-      this.billingItem.discount2 = this.billingItem.insurance_inv_value;
-      this.calclulateDiscount();
-      // this.billingItem.gross_discount = this.billingItem.patient_base_price + this.billingItem.insurance_inv_value + this.billingItem.discount3;
-      // this.calclulateNetPay();
-    }
+    
   }
   displayProperty(value: any) {
     if (value) {
@@ -240,31 +434,31 @@ export class BillingComponent implements OnInit {
 
     }
   }
-  checkForInsuranceCustomer(type: string) {
-    if (type === "DIALY" && (this.headerDetailData.patient_type === 'C' || this.headerDetailData.patient_type === 'P'||this.headerDetailData.patient_type === 'W')) {
-      this.showInsurancePriceAsDiscount = true;
-      
-    } else {
-      this.showInsurancePriceAsDiscount = false;
-      this.billingItem.discount_remark1 = "";
-      this.billingItem.discount_remark2 = "";
-    }
-  }
+  // checkForInsuranceCustomer(type: string) {
+  //   if (type === "DIALY" && (this.headerDetailData.patient_type === 'C' || this.headerDetailData.patient_type === 'P' || this.headerDetailData.patient_type === 'W')) {
+  //     this.showInsurancePriceAsDiscount = true;
 
-  fetchProductsDynamic(data: any) {
-    this.checkForInsuranceCustomer(data);
-    this.options = [];
-    this.billingItem.bu_id = data;
-    let patientType = this.headerDetailData.patient_type;
-    this.resetFieldsCalculation();
-    this.bs.fetchProducts(data, patientType, this.eodData).subscribe(data => {
-      this.options = data.results;
-      this.filteredOptions = this.myControl.valueChanges.pipe(
-        startWith(''),
-        map(value => this._filter(value)),
-      );
-    })
-  }
+  //   } else {
+  //     this.showInsurancePriceAsDiscount = false;
+  //     this.billingItem.discount_remark1 = "";
+  //     this.billingItem.discount_remark2 = "";
+  //   }
+  // }
+
+  // fetchProductsDynamic(data: any) {
+  //   this.checkForInsuranceCustomer(data);
+  //   this.options = [];
+  //   this.billingItem.bu_id = data;
+  //   let patientType = this.headerDetailData.patient_type;
+  //   this.resetFieldsCalculation();
+  //   this.bs.fetchProducts(data, patientType, this.eodData).subscribe(data => {
+  //     this.options = data.results;
+  //     this.filteredOptions = this.myControl.valueChanges.pipe(
+  //       startWith(''),
+  //       map(value => this._filter(value)),
+  //     );
+  //   })
+  // }
 
 
   private _filter(value: string): string[] {
@@ -408,7 +602,7 @@ export class BillingComponent implements OnInit {
 
   submitData() {
     let payload = this.constructBillPayload();
-    console.log("payload",payload)
+    console.log("payload", payload)
     this.bs.submitInvoice(payload).subscribe(data => {
       console.log(data);
       this.bs.invoice_no = data.invoice_no;
@@ -499,10 +693,7 @@ export class BillingComponent implements OnInit {
       patient_inv_gross_amt: Number(0),
       discount1: Number(0),
       discount2: Number(0),
-      discount3: Number(0),
-      discount_remark1: '',
-      discount_remark2: '',
-      discount_remark3: '',
+      discount3: Number(0),      
       gross_discount: Number(0),
       net_amount: Number(0),
       net_patient_amount: Number(0),
@@ -537,10 +728,7 @@ export class BillingComponent implements OnInit {
       patient_inv_gross_amt: Number(0),
       discount1: Number(0),
       discount2: Number(0),
-      discount3: Number(0),
-      discount_remark1: '',
-      discount_remark2: '',
-      discount_remark3: '',
+      discount3: Number(0),     
       gross_discount: Number(0),
       net_amount: Number(0),
       net_patient_amount: Number(0),
@@ -564,9 +752,9 @@ export class BillingComponent implements OnInit {
   createItem() {
     this.showBillingForm = true;
     this.isShowHeader = true;
-    if (this.billingItem.bu_id) {
-      this.fetchProductsDynamic(this.billingItem.bu_id);
-    }
+    // if (this.billingItem.bu_id) {
+    //   this.fetchProductsDynamic(this.billingItem.bu_id);
+    // }
   }
 
   patientHeaderData(data: any) {
