@@ -3,55 +3,126 @@
   <div class="row">
     <h1>Billing</h1>
   </div>
-  
+
 </div>
 
-<div class="container mar30" *ngIf="showBillingForm" style="margin-left: 80px">
-  <form class="example-form" [formGroup]="myForm" novalidate>    
+<div class="container">
 
-    <!-- <mat-form-field class="mar20lr" appearance="fill">
+  <div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Product Name</th>
+          <th scope="col">Net Amount</th>
+          <th scope="col">Gross Amount</th>          
+          <th scope="col">Total Discount</th>
+          <th scope="col"></th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of billingArray;let i=index">
+
+          <td>{{item.product_name.product_name}}</td>
+          <td>{{item.net_amount}}</td>
+          <td>{{item.gross_inv_amount}}</td>
+          <td>{{item.gross_discount}}</td>
+          <td>
+            <mat-icon title="edit" class="edit-icon" aria-hidden="false" aria-label="edit icon"
+              (click)="editItem(item, i)">edit
+            </mat-icon>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      <label class="mar15">Total Amount: {{totalAmount}}</label>
+      <!-- <label class="mar15">Total Other Charges: {{totalOtherCharges}}</label> -->
+      <label class="mar15">Total Gross Discount: {{totalGrossDiscount}}</label>
+    </div>
+  </div>
+
+  <button type="button" class="btn btn-success mar30" (click)="createItem()">
+    <i class="fa-solid fa-circle-plus mar5r"></i> Create Item
+  </button>
+  <button type="button" class="btn btn-success mar30" [disabled]="billingArray.length === 0"
+    *ngIf="!showBillingForm && billingArray?.length>0" (click)=submitData()><i class="fa-solid fa-file-invoice"></i>
+    Generate Invoice
+  </button>
+
+  <div class="container mar30" *ngIf="showBillingForm" style="margin-left: 80px">
+    <form class="example-form" [formGroup]="myForm" novalidate>
+
+      <!-- <mat-form-field class="mar20lr" appearance="fill">
       <mat-select placeholder="select" formControlName="bu_id" required (valueChange)="fetchProductsDynamic($event)">
         <mat-option *ngFor="let bu of buList" [value]="bu.bu_id">
           {{bu.bu_name}}
         </mat-option>
       </mat-select>
     </mat-form-field> -->
+      <div class="row">
+        <mat-form-field class="col-lg-3" appearance="fill">
+          <mat-label>Product</mat-label>
+          <input type="text" matInput name="product_name" required [(ngModel)]="billingItem.product_name"
+            placeholder="Pick one" aria-label="Product" [formControl]="myControl" [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="setProductCost($event.option)"
+            [displayWith]="displayProperty">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              {{option?.product_name}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
 
-    <mat-form-field class="width25-perc mar20lr" appearance="fill">
-      <mat-label>Product</mat-label>
-      <input type="text" matInput name="product_name" required [(ngModel)]="billingItem.product_name"
-        placeholder="Pick one" aria-label="Product" [formControl]="myControl" [matAutocomplete]="auto">
-      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="setProductCost($event.option)"
-        [displayWith]="displayProperty">
-        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-          {{option?.product_name}}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
+        <mat-form-field class="col-lg-2 " appearance="fill">
+          <mat-label>Amount</mat-label>
+          <input matInput type="number" min='0' formControlName="product_cost" required
+            [(ngModel)]="billingItem.product_cost" name="product_cost" readonly>
+
+        </mat-form-field>
+
+        <mat-form-field class="col-lg-1 " appearance="fill">
+          <mat-label>Quantity</mat-label>
+          <input matInput type="number" min='0' formControlName="product_qty" required min="1"
+            [(ngModel)]="billingItem.product_qty" name="product_qty" (ngModelChange)="calculateAmountPerQty($event)">
+        </mat-form-field>
+
+        <mat-form-field class="col-lg-2 " appearance="fill">
+          <mat-label>Gross Amount</mat-label>
+          <input matInput type="number" min='0' formControlName="gross_inv_amount"
+            [(ngModel)]="billingItem.gross_inv_amount" name="gross_inv_amount" readonly>
+        </mat-form-field>
+
+        <mat-form-field class="col-lg-1" appearance="fill">
+          <mat-label>Discount</mat-label>
+          <input matInput type="number" min='0' onkeypress="return event.charCode >= 48" formControlName="discount1"
+            [(ngModel)]="billingItem.discount1" name="discount1" (ngModelChange)="calclulateDiscount()"
+            [readonly]="showInsurancePriceAsDiscount">
+        </mat-form-field>
+
+        <mat-form-field class="col-lg-2 " appearance="fill">
+          <mat-label>Net Amount</mat-label>
+          <input matInput type="number" min='0' required formControlName="net_amount"
+            [(ngModel)]="this.billingItem.net_amount" name="net_amount" readonly>
+        </mat-form-field>
+      </div>
 
 
-    <!-- <mat-form-field class="mar20lr" appearance="fill">
+
+      <!-- <mat-form-field class="mar20lr" appearance="fill">
       <mat-label>Amount</mat-label>
       <input matInput type="number" min='0' formControlName="product_cost" required
         [(ngModel)]="billingItem.patient_inv_value" name="product_cost" readonly>
 
     </mat-form-field> -->
-    <mat-form-field class="mar20lr" appearance="fill">
-      <mat-label>Amount</mat-label>
-      <input matInput type="number" min='0' formControlName="product_cost" required
-        [(ngModel)]="billingItem.product_cost" name="product_cost" readonly>
 
-    </mat-form-field>
-    <!-- <button type="button" class="btn btn-primary" (click)="displayHidden()">
+
+
+      <!-- <button type="button" class="btn btn-primary" (click)="displayHidden()">
       ...
     </button> -->
 
-    <mat-form-field class="mar20lr" appearance="fill">
-      <mat-label>Quantity</mat-label>
-      <input matInput type="number" min='0' formControlName="product_qty" required min="1"
-        [(ngModel)]="billingItem.product_qty" name="product_qty" (ngModelChange)="calculateAmountPerQty($event)">
-    </mat-form-field>
-    <div>
+
+      <!-- <div>
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Other charges 1</mat-label>
         <input matInput type="number" min='0' onkeypress="return event.charCode >= 48" formControlName="other_charge1"
@@ -67,33 +138,11 @@
         <input matInput type="number" min='0' onkeypress="return event.charCode >= 48" formControlName="other_charge3"
           [(ngModel)]="billingItem.other_charge3" (ngModelChange)="calclulateOthercharges($event)" name="charge3">
       </mat-form-field>
-      <mat-form-field class="mar20lr" appearance="fill">
-        <mat-label>Gross Amount</mat-label>
-        <input matInput type="number" min='0' formControlName="gross_inv_amount"
-          [(ngModel)]="billingItem.gross_inv_amount" name="gross_inv_amount" readonly>
-      </mat-form-field>
-    </div>
+      
+    </div> -->
 
-    <div>
 
-      <mat-form-field class="mar20lr" appearance="fill">
-        <mat-label>Comments 1</mat-label>
-        <input matInput formControlName="other_charge_remark1" [(ngModel)]="billingItem.other_charge_remark1"
-          name="cgremark1">
-      </mat-form-field>
-      <mat-form-field class="mar20lr" appearance="fill">
-        <mat-label>Comments 2</mat-label>
-        <input matInput formControlName="other_charge_remark2" [(ngModel)]="billingItem.other_charge_remark2"
-          name="cgremark2">
-      </mat-form-field>
-      <mat-form-field class="mar20lr" appearance="fill">
-        <mat-label>Comments 3</mat-label>
-        <input matInput formControlName="other_charge_remark3" [(ngModel)]="billingItem.other_charge_remark3"
-          name="cgremark3">
-      </mat-form-field>
-
-    </div>
-    <!-- <div *ngIf="showInsurancePriceAsDiscount">
+      <!-- <div *ngIf="showInsurancePriceAsDiscount">
       <mat-form-field class="mar20lr" appearance="fill">
         <mat-label>Concession</mat-label>
         <input matInput type="number" min='0' onkeypress="return event.charCode >= 48" formControlName="discount1"
@@ -117,97 +166,43 @@
       </mat-form-field>
     </div> -->
 
-    <div>
-      <mat-form-field class="mar20lr" appearance="fill">
-        <mat-label>Dicscount 1</mat-label>
-        <input matInput type="number" min='0' onkeypress="return event.charCode >= 48" formControlName="discount1"
-          [(ngModel)]="billingItem.discount1" name="discount1" (ngModelChange)="calclulateDiscount()" [readonly]="showInsurancePriceAsDiscount">
-      </mat-form-field>
-      
-
-      <mat-form-field class="mar20lr" appearance="fill">
-        <mat-label>Total Discount</mat-label>
-        <input matInput type="number" min='0' formControlName="total_discount" [(ngModel)]="billingItem.gross_discount"
-          name="total_discount" readonly>
-      </mat-form-field>
-    </div>
-    
-    <div>
-      <mat-form-field class="mar20lr" appearance="fill">
-        <mat-label>Net Amount</mat-label>
-        <input matInput type="number" min='0' required formControlName="net_amount"
-          [(ngModel)]="this.billingItem.net_amount" name="net_amount" readonly>
-      </mat-form-field>
-      <!-- {{billingItem.net_amount}} -->
-
-     
-    </div>
-
-    <button type="button" class="btn btn-success" *ngIf="!editBillingItem" [disabled]="!myForm.valid"
-      (click)="addItem()"><i class="fa-solid fa-circle-plus mar5r"></i>
-      Add Item
-    </button>
-
-    <button type="button" class="btn btn-primary" *ngIf="editBillingItem" [disabled]="!myForm.valid"
-      (click)="updateItem()"><i class="fa-solid fa-file-pen mar5r"></i>
-      Update
-    </button>
-    <button type="button" class="btn btn-danger mar30" (click)="cancelNewItem()"><i class="fa-solid fa-circle-xmark mar5r"></i>
-      Cancel
-    </button>
-
-    <button type="button" class="btn btn-warning mar30" (click)="resetFields()"><i class="fa-solid fa-rotate-left mar5r"></i>
-      Reset
-    </button>
-  </form>
-</div>
-<div>
-
-  <div class="container" >
-
-    <div *ngIf="billingArray?.length > 0">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Product Name</th>
-            <th scope="col">Net Amount</th>
-            <th scope="col">Gross Amount</th>
-            <th scope="col">Total Other Charges</th>
-            <th scope="col">Total Discount</th>
-            <th scope="col"></th>
-
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of billingArray;let i=index">
-
-            <td>{{item.product_name.product_name}}</td>
-            <td>{{item.net_amount}}</td>
-            <td>{{item.gross_inv_amount}}</td>
-            <td>{{item.total_charges}}</td>
-            <td>{{item.gross_discount}}</td>
-            <td>
-              <mat-icon title="edit" class="edit-icon" aria-hidden="false" aria-label="edit icon"
-                (click)="editItem(item, i)">edit
-              </mat-icon>
-            </td>
-          </tr>
-        </tbody>
-      </table>
       <div>
-        <label class="mar15">Total Amount: {{totalAmount}}</label>
-        <label class="mar15">Total Other Charges: {{totalOtherCharges}}</label>
-        <label class="mar15">Total Gross Discount: {{totalGrossDiscount}}</label>
-      </div>
-    </div>
 
-    <button type="button" class="btn btn-success mar30"  (click)="createItem()">
-      <i class="fa-solid fa-circle-plus mar5r"></i>  Create Item
-    </button>
-    <button type="button" class="btn btn-success mar30" [disabled]="billingArray.length === 0"
-      *ngIf="!showBillingForm && billingArray?.length>0" (click)=submitData()><i class="fa-solid fa-file-invoice"></i>
-      Generate Invoice
-    </button>
+
+
+
+      </div>
+
+      <div>
+
+        <!-- {{billingItem.net_amount}} -->
+
+
+      </div>
+
+      <button type="button" class="btn btn-success" *ngIf="!editBillingItem" [disabled]="!myForm.valid"
+        (click)="addItem()"><i class="fa-solid fa-circle-plus mar5r"></i>
+        Add Item
+      </button>
+
+      <button type="button" class="btn btn-primary" *ngIf="editBillingItem" [disabled]="!myForm.valid"
+        (click)="updateItem()"><i class="fa-solid fa-file-pen mar5r"></i>
+        Update
+      </button>
+      <button type="button" class="btn btn-danger mar30" (click)="cancelNewItem()"><i
+          class="fa-solid fa-circle-xmark mar5r"></i>
+        Cancel
+      </button>
+
+      <button type="button" class="btn btn-warning mar30" (click)="resetFields()"><i
+          class="fa-solid fa-rotate-left mar5r"></i>
+        Reset
+      </button>
+    </form>
+  </div>
+  <div>
+
+
 
 
   </div>

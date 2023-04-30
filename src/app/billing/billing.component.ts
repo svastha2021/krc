@@ -19,11 +19,7 @@ import { InfoObjDialogComponent } from '../utilities/info-obj-dialog/info-obj-di
 })
 export class BillingComponent implements OnInit {
 
-  myForm: FormGroup = this.fb.group({
-    bu_id: [null, {
-      validators: [Validators.required],
-      updateOn: "change"
-    }],
+  myForm: FormGroup = this.fb.group({   
 
     product_cost: [, {
       validators: [Validators.required, Validators.min(1)],
@@ -33,15 +29,10 @@ export class BillingComponent implements OnInit {
       validators: [Validators.required, Validators.min(1)],
       updateOn: "change"
     }],
-    other_charge1: [],
-    other_charge2: [],
-    other_charge3: [],
+   
     total_charges: [],
     gross_inv_amount: [],
-    patient_inv_gross_amt: [],
-    other_charge_remark1: [],
-    other_charge_remark2: [],
-    other_charge_remark3: [],   
+    patient_inv_gross_amt: [],     
     discount1: [],
     discount2: [],
     discount3: [],
@@ -71,9 +62,9 @@ export class BillingComponent implements OnInit {
   pharmacyProducts: BillingItem[] = [];
   showInsurancePriceAsDiscount = false;
   billingItem = {
-    bu_id: '',
-    patient_id: '',
+    bu_id: 'DIALY',    
     product_id: '',
+    patient_id:'',
     product_type: '',
     product_cost: Number(0),
     patient_base_price: Number(0),
@@ -83,10 +74,7 @@ export class BillingComponent implements OnInit {
     other_charge1: Number(0),
     other_charge2: Number(0),
     other_charge3: Number(0),
-    total_charges: Number(0),
-    other_charge_remark1: '',
-    other_charge_remark2: '',
-    other_charge_remark3: '',
+    total_charges: Number(0),   
     gross_inv_amount: Number(0),
     patient_inv_gross_amt: Number(0),
     discount1: Number(0),
@@ -347,31 +335,31 @@ export class BillingComponent implements OnInit {
     })
   }
 
-  fetchUser() {
-    this.bs.fetchUserData(this.mobile_no).subscribe(data => {
-      this.patientDetail = true;
-      //this.patientHeader = data.results;
-      this.patientList = data.results;
-      this.showPatientList(this.patientList);
-      console.log(data);
-    })
-  }
-  showPatientList(result: any) {
-    const dialogRef = this.dialog.open(PatientListDialogComponent, {
-      width: '500px',
-      data: result,
-    });
+  // fetchUser() {
+  //   this.bs.fetchUserData(this.mobile_no).subscribe(data => {
+  //     this.patientDetail = true;
+  //     //this.patientHeader = data.results;
+  //     this.patientList = data.results;
+  //     this.showPatientList(this.patientList);
+  //     console.log(data);
+  //   })
+  // }
+  // showPatientList(result: any) {
+  //   const dialogRef = this.dialog.open(PatientListDialogComponent, {
+  //     width: '500px',
+  //     data: result,
+  //   });
 
-    dialogRef.afterClosed().subscribe(data => {
-      this.billingItem.patient_id = data.patient_id;
-      this.bs.fetchHeader(data.patient_id).subscribe(data => {
-        this.headerDetail = true;
-        this.isShowHeader = true;
-        this.patientHeader = data;
-      });
+  //   dialogRef.afterClosed().subscribe(data => {
+  //     this.billingItem.patient_id = data.patient_id;
+  //     this.bs.fetchHeader(data.patient_id).subscribe(data => {
+  //       this.headerDetail = true;
+  //       this.isShowHeader = true;
+  //       this.patientHeader = data;
+  //     });
 
-    })
-  }
+  //   })
+  // }
 
   setProductCost(data: any) {
     this.billingItem.product_id = data.value.product_id;
@@ -395,7 +383,7 @@ export class BillingComponent implements OnInit {
 
     this.options = [];
     this.billingItem.bu_id = data;
-    let patientType = this.headerDetailData.patient_type;
+    let patientType = 'C';
     this.resetFieldsCalculation();
     switch (data) {
       case 'DIALY': {
@@ -474,7 +462,7 @@ export class BillingComponent implements OnInit {
   }
 
   calclulateOthercharges(data: number) {
-    this.setChargesMandatory();
+    //this.setChargesMandatory();
     this.billingItem.total_charges = this.billingItem.other_charge1 + this.billingItem.other_charge2 + this.billingItem.other_charge3;
     // this.billingItem.gross_inv_amount = (this.billingItem.product_qty * this.billingItem.product_cost) + this.billingItem.other_charge1 + this.billingItem.other_charge2 + this.billingItem.other_charge3;
     this.billingItem.gross_inv_amount = (this.billingItem.product_qty * this.billingItem.product_cost) + this.billingItem.other_charge1 + this.billingItem.other_charge2 + this.billingItem.other_charge3;
@@ -491,7 +479,7 @@ export class BillingComponent implements OnInit {
   }
 
   setDiscountMandatory() {
-    this.clearDiscountValidator();
+   // this.clearDiscountValidator();
     if (this.billingItem.discount1) {
       this.myForm.get('discount_remark1')?.setValidators([Validators.required]);
       this.myForm.get('discount_remark1')?.updateValueAndValidity();
@@ -506,57 +494,57 @@ export class BillingComponent implements OnInit {
     }
   }
 
-  setChargesMandatory() {
-    this.clearOtherChargesValidator();
-    if (this.billingItem.other_charge1) {
-      this.myForm.get('other_charge_remark1')?.setValidators([Validators.required]);
-      this.myForm.get('other_charge_remark1')?.updateValueAndValidity();
-    }
-    if (this.billingItem.other_charge2) {
-      this.myForm.get('other_charge_remark2')?.setValidators([Validators.required]);
-      this.myForm.get('other_charge_remark2')?.updateValueAndValidity();
-    }
-    if (this.billingItem.other_charge3) {
-      this.myForm.get('other_charge_remark3')?.setValidators([Validators.required]);
-      this.myForm.get('other_charge_remark3')?.updateValueAndValidity();
-    }
-  }
+  // setChargesMandatory() {
+  //   this.clearOtherChargesValidator();
+  //   if (this.billingItem.other_charge1) {
+  //     this.myForm.get('other_charge_remark1')?.setValidators([Validators.required]);
+  //     this.myForm.get('other_charge_remark1')?.updateValueAndValidity();
+  //   }
+  //   if (this.billingItem.other_charge2) {
+  //     this.myForm.get('other_charge_remark2')?.setValidators([Validators.required]);
+  //     this.myForm.get('other_charge_remark2')?.updateValueAndValidity();
+  //   }
+  //   if (this.billingItem.other_charge3) {
+  //     this.myForm.get('other_charge_remark3')?.setValidators([Validators.required]);
+  //     this.myForm.get('other_charge_remark3')?.updateValueAndValidity();
+  //   }
+  // }
   //clear validators
-  clearOtherChargesValidator() {
-    if (this.billingItem.other_charge1 === 0) {
-      this.myForm.get('other_charge_remark1')?.clearValidators();
-      this.myForm.get('other_charge_remark1')?.updateValueAndValidity();
+  // clearOtherChargesValidator() {
+  //   if (this.billingItem.other_charge1 === 0) {
+  //     this.myForm.get('other_charge_remark1')?.clearValidators();
+  //     this.myForm.get('other_charge_remark1')?.updateValueAndValidity();
 
-    }
-    if (this.billingItem.other_charge2 === 0) {
-      this.myForm.get('other_charge_remark2')?.clearValidators();
-      this.myForm.get('other_charge_remark2')?.updateValueAndValidity();
+  //   }
+  //   if (this.billingItem.other_charge2 === 0) {
+  //     this.myForm.get('other_charge_remark2')?.clearValidators();
+  //     this.myForm.get('other_charge_remark2')?.updateValueAndValidity();
 
-    }
-    if (this.billingItem.other_charge3 === 0) {
-      this.myForm.get('other_charge_remark3')?.clearValidators();
-      this.myForm.get('other_charge_remark3')?.updateValueAndValidity();
+  //   }
+  //   if (this.billingItem.other_charge3 === 0) {
+  //     this.myForm.get('other_charge_remark3')?.clearValidators();
+  //     this.myForm.get('other_charge_remark3')?.updateValueAndValidity();
 
-    }
-  }
+  //   }
+  // }
 
-  clearDiscountValidator() {
-    if (this.billingItem.discount1 === 0) {
-      this.myForm.get('discount_remark1')?.clearValidators();
-      this.myForm.get('discount_remark1')?.updateValueAndValidity();
+  // clearDiscountValidator() {
+  //   if (this.billingItem.discount1 === 0) {
+  //     this.myForm.get('discount_remark1')?.clearValidators();
+  //     this.myForm.get('discount_remark1')?.updateValueAndValidity();
 
-    }
-    if (this.billingItem.discount2 === 0) {
-      this.myForm.get('discount_remark2')?.clearValidators();
-      this.myForm.get('discount_remark2')?.updateValueAndValidity();
+  //   }
+  //   if (this.billingItem.discount2 === 0) {
+  //     this.myForm.get('discount_remark2')?.clearValidators();
+  //     this.myForm.get('discount_remark2')?.updateValueAndValidity();
 
-    }
-    if (this.billingItem.discount3 === 0) {
-      this.myForm.get('discount_remark3')?.clearValidators();
-      this.myForm.get('discount_remark3')?.updateValueAndValidity();
+  //   }
+  //   if (this.billingItem.discount3 === 0) {
+  //     this.myForm.get('discount_remark3')?.clearValidators();
+  //     this.myForm.get('discount_remark3')?.updateValueAndValidity();
 
-    }
-  }
+  //   }
+  // }
 
   calclulateNetPay() {
 
@@ -647,7 +635,7 @@ export class BillingComponent implements OnInit {
     this.showBillingForm = true;
     //item.bu_id = 'PHARMA';
     this.myForm.get('bu_id')?.setValue(item.bu_id);
-    this.fetchProductNew(item.bu_id);
+    this.fetchProductNew('DIALY');
     this.billingItem = item;
     this.billingItemCopy = Object.assign({}, this.billingItem);
     this.billingArray.splice(index, 1)
@@ -685,10 +673,8 @@ export class BillingComponent implements OnInit {
       other_charge1: Number(0),
       other_charge2: Number(0),
       other_charge3: Number(0),
-      total_charges: Number(0),
-      other_charge_remark1: '',
-      other_charge_remark2: '',
-      other_charge_remark3: '',
+      total_charges: Number(0),    
+     
       gross_inv_amount: Number(0),
       patient_inv_gross_amt: Number(0),
       discount1: Number(0),
@@ -721,9 +707,7 @@ export class BillingComponent implements OnInit {
       other_charge2: Number(0),
       other_charge3: Number(0),
       total_charges: Number(0),
-      other_charge_remark1: '',
-      other_charge_remark2: '',
-      other_charge_remark3: '',
+      
       gross_inv_amount: Number(0),
       patient_inv_gross_amt: Number(0),
       discount1: Number(0),
