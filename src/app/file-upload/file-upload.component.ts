@@ -46,26 +46,26 @@ export class FileUploadComponent implements OnInit {
   }
 
   upload(): void {
-    if (this.selectedFiles) {
-      const file: File | null = this.selectedFiles.item(0);
-      this.selectedFiles = undefined;
+    // if (this.selectedFiles) {
+    //   const file: File | null = this.selectedFiles.item(0);
+    //   this.selectedFiles = undefined;
 
-      if (file) {
-        this.currentFileUpload = new FileUpload(file);
+    //   if (file) {
+    //     this.currentFileUpload = new FileUpload(file);
 
-        this.uploadService.pushFileToStorage(this.currentFileUpload, this.doc_type, this.headerDetailData.patient_id, this.doc_tag).subscribe(
-          percentage => {
-            this.percentage = Math.round(percentage ? percentage : 0);   
-            if(this.percentage === 100){
-              this.reset();
-            }         
-          },
-          error => {
-            console.log(error);
-          }
-        );
-      }
-    }
+    //     this.uploadService.pushFileToStorage(this.currentFileUpload, this.doc_type, this.headerDetailData.patient_id, this.doc_tag).subscribe(
+    //       percentage => {
+    //         this.percentage = Math.round(percentage ? percentage : 0);   
+    //         if(this.percentage === 100){
+    //           this.reset();
+    //         }         
+    //       },
+    //       error => {
+    //         console.log(error);
+    //       }
+    //     );
+    //   }
+    // }
 
   }
 
@@ -73,7 +73,7 @@ export class FileUploadComponent implements OnInit {
   fileName = '';
   getFIles() {
     this.uploads = [];
-    this.uploads = this.uploadService.getFileList(this.headerDetailData.patient_id);
+   // this.uploads = this.uploadService.getFileList(this.headerDetailData.patient_id);
     console.log(this.uploads)
   }
   headerDetail = false;

@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule,  } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { AngularFireStorageModule } from '@angular/fire/storage';
+// import { AngularFireModule } from '@angular/fire';
+// import { AngularFireDatabaseModule } from '@angular/fire/database';
+// import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -178,9 +178,9 @@ import { doctorMasterFilter } from './doctor-master/doctorMasterFilter';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireDatabaseModule,
-    AngularFireStorageModule
+    // AngularFireModule.initializeApp(environment.firebaseConfig),
+    // AngularFireDatabaseModule,
+    // AngularFireStorageModule
   ],
   providers: [AuthService, DatePipe],
   bootstrap: [AppComponent]
