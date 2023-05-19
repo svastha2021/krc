@@ -5,8 +5,12 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { BillingService } from './billing.service';
 import { BillingItem, Bu } from './billing.model';
-import { FormGroup, FormBuilder } from "@angular/forms";
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { PatientListDialogComponent } from '../utilities/patient-list-dialog/patient-list-dialog.component';
 import { InvoiceComponent } from '../invoice/invoice.component';
 import { ReferenceService } from '../utilities/services/reference.service';
@@ -15,31 +19,34 @@ import { InfoObjDialogComponent } from '../utilities/info-obj-dialog/info-obj-di
 @Component({
   selector: 'app-billing',
   templateUrl: './billing.component.html',
-  styleUrls: ['./billing.component.scss']
+  styleUrls: ['./billing.component.scss'],
 })
 export class BillingComponent implements OnInit {
+  myForm: FormGroup = this.fb.group({
+    product_cost: [
+      ,
+      {
+        validators: [Validators.required, Validators.min(1)],
+        updateOn: 'change',
+      },
+    ],
+    product_qty: [
+      ,
+      {
+        validators: [Validators.required, Validators.min(1)],
+        updateOn: 'change',
+      },
+    ],
 
-  myForm: FormGroup = this.fb.group({   
-
-    product_cost: [, {
-      validators: [Validators.required, Validators.min(1)],
-      updateOn: "change"
-    }],
-    product_qty: [, {
-      validators: [Validators.required, Validators.min(1)],
-      updateOn: "change"
-    }],
-   
     total_charges: [],
     gross_inv_amount: [],
-    patient_inv_gross_amt: [],     
+    patient_inv_gross_amt: [],
     discount1: [],
     discount2: [],
     discount3: [],
     total_discount: [],
     net_amount: [],
-    net_patient_amount: []
-
+    net_patient_amount: [],
   });
   showItemDetails = false;
   editBillingItem = false;
@@ -62,9 +69,9 @@ export class BillingComponent implements OnInit {
   pharmacyProducts: BillingItem[] = [];
   showInsurancePriceAsDiscount = false;
   billingItem = {
-    bu_id: 'DIALY',    
+    bu_id: 'DIALY',
     product_id: '',
-    patient_id:'',
+    patient_id: '',
     product_type: '',
     product_cost: Number(0),
     patient_base_price: Number(0),
@@ -74,13 +81,13 @@ export class BillingComponent implements OnInit {
     other_charge1: Number(0),
     other_charge2: Number(0),
     other_charge3: Number(0),
-    total_charges: Number(0),   
+    total_charges: Number(0),
     gross_inv_amount: Number(0),
     patient_inv_gross_amt: Number(0),
     discount1: Number(0),
     discount2: Number(0),
     discount3: Number(0),
-    
+
     gross_discount: Number(0),
     net_amount: Number(0),
     net_patient_amount: Number(0),
@@ -88,251 +95,48 @@ export class BillingComponent implements OnInit {
     net_paid: Number(0),
     patient_inv_value: Number(0),
     insurance_inv_value: Number(0),
-    doctor_inv_value: Number(0)
-
-  }
+    doctor_inv_value: Number(0),
+  };
   totalAmount = 0;
   eodData: any;
   totalOtherCharges = 0;
   totalGrossDiscount = 0;
   filteredOptions: Observable<any[]> | undefined;
   headerDetailData: any;
-  constructor(private bs: BillingService,
-    private dialog: MatDialog, private router: Router, private fb: FormBuilder,
-    private ref: ReferenceService) { }
+  constructor(
+    private bs: BillingService,
+    private dialog: MatDialog,
+    private router: Router,
+    private fb: FormBuilder,
+    private ref: ReferenceService
+  ) {}
 
   ngOnInit(): void {
-
     //this.fetchBu();
     this.getEodDetails();
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
-      map(value => this._filter(value)),
+      map((value) => this._filter(value))
     );
   }
 
   getEodDetails() {
-    this.ref.getEodDetailData().subscribe(data => {
-      console.log("EOD data", data.results);
+    this.ref.getEodDetailData().subscribe((data) => {
+      console.log('EOD data', data.results);
       this.eodData = data.results[0].eod_date;
       //this.fetchBu()
-      this.options = [
-        {
-          "org_id": "KRC",
-          "branch_id": "KRC0001",
-          "product_id": "PRD000000",
-          "product_name": "Shan test",
-          "uom": "2",
-          "bu_id": "DIALY",
-          "stock_in_hand": 10000,
-          "min_stock": null,
-          "max_stock": null,
-          "reorder_level": null,
-          "price_deviation": null,
-          "updated_by": "KRC0010002",
-          "updated_date": "2022-11-05T00:00:00.000Z",
-          "created_by": "KRC0010002",
-          "created_date": "2022-10-24T00:00:00.000Z",
-          "product_price": 1000,
-          "insurance_type_id": "C",
-          "prod_name_invoice": null,
-          "gst_value": 0,
-          "product_name_price": "Shan test - 1000",
-          "patient_price": null,
-          "insurance_price": null,
-          "doctor_price": null
-        },
-        {
-          "org_id": "KRC",
-          "branch_id": "KRC0001",
-          "product_id": "PRD000001",
-          "product_name": "F6 First use dialysis",
-          "uom": null,
-          "bu_id": "DIALY",
-          "stock_in_hand": null,
-          "min_stock": null,
-          "max_stock": null,
-          "reorder_level": null,
-          "price_deviation": null,
-          "updated_by": null,
-          "updated_date": null,
-          "created_by": null,
-          "created_date": null,
-          "product_price": 2000,
-          "insurance_type_id": "C",
-          "prod_name_invoice": null,
-          "gst_value": null,
-          "product_name_price": "F6 First use dialysis - 2000",
-          "patient_price": 1000,
-          "insurance_price": 1000,
-          "doctor_price": 0
-        },
-        {
-          "org_id": "KRC",
-          "branch_id": "KRC0001",
-          "product_id": "PRD000002",
-          "product_name": "Reuse dialysis",
-          "uom": null,
-          "bu_id": "DIALY",
-          "stock_in_hand": null,
-          "min_stock": null,
-          "max_stock": null,
-          "reorder_level": null,
-          "price_deviation": null,
-          "updated_by": null,
-          "updated_date": null,
-          "created_by": null,
-          "created_date": null,
-          "product_price": 1900,
-          "insurance_type_id": "C",
-          "prod_name_invoice": null,
-          "gst_value": null,
-          "product_name_price": "Reuse dialysis - 1900",
-          "patient_price": 700,
-          "insurance_price": 1100,
-          "doctor_price": 700
-        },
-        {
-          "org_id": "KRC",
-          "branch_id": "KRC0001",
-          "product_id": "PRD000003",
-          "product_name": "B6 dialysis",
-          "uom": null,
-          "bu_id": "DIALY",
-          "stock_in_hand": null,
-          "min_stock": null,
-          "max_stock": null,
-          "reorder_level": null,
-          "price_deviation": null,
-          "updated_by": "KRC0010002",
-          "updated_date": "2022-11-07T00:00:00.000Z",
-          "created_by": null,
-          "created_date": null,
-          "product_price": 2400,
-          "insurance_type_id": "C",
-          "prod_name_invoice": "B6 Dialysis",
-          "gst_value": null,
-          "product_name_price": "B6 dialysis - 2400",
-          "patient_price": 1200,
-          "insurance_price": 1100,
-          "doctor_price": 1200
-        },
-        {
-          "org_id": "KRC",
-          "branch_id": "KRC0001",
-          "product_id": "PRD000004",
-          "product_name": "14 L dialysis",
-          "uom": null,
-          "bu_id": "DIALY",
-          "stock_in_hand": null,
-          "min_stock": null,
-          "max_stock": null,
-          "reorder_level": null,
-          "price_deviation": null,
-          "updated_by": null,
-          "updated_date": null,
-          "created_by": null,
-          "created_date": null,
-          "product_price": 2450,
-          "insurance_type_id": "C",
-          "prod_name_invoice": null,
-          "gst_value": null,
-          "product_name_price": "14 L dialysis - 2450",
-          "patient_price": 1250,
-          "insurance_price": 1100,
-          "doctor_price": 1250
-        },
-        {
-          "org_id": "KRC",
-          "branch_id": "KRC0001",
-          "product_id": "PRD000005",
-          "product_name": "Fx80 dialysis",
-          "uom": null,
-          "bu_id": "DIALY",
-          "stock_in_hand": null,
-          "min_stock": null,
-          "max_stock": null,
-          "reorder_level": null,
-          "price_deviation": null,
-          "updated_by": null,
-          "updated_date": null,
-          "created_by": null,
-          "created_date": null,
-          "product_price": 2650,
-          "insurance_type_id": "C",
-          "prod_name_invoice": null,
-          "gst_value": null,
-          "product_name_price": "Fx80 dialysis - 2650",
-          "patient_price": 1500,
-          "insurance_price": 1100,
-          "doctor_price": 1500
-        },
-        {
-          "org_id": "KRC",
-          "branch_id": "KRC0001",
-          "product_id": "PRD000006",
-          "product_name": "170 H dialysis",
-          "uom": null,
-          "bu_id": "DIALY",
-          "stock_in_hand": null,
-          "min_stock": null,
-          "max_stock": null,
-          "reorder_level": null,
-          "price_deviation": null,
-          "updated_by": null,
-          "updated_date": null,
-          "created_by": null,
-          "created_date": null,
-          "product_price": 2650,
-          "insurance_type_id": "C",
-          "prod_name_invoice": null,
-          "gst_value": null,
-          "product_name_price": "170 H dialysis - 2650",
-          "patient_price": 1450,
-          "insurance_price": 1100,
-          "doctor_price": 1450
-        },
-        {
-          "org_id": "KRC",
-          "branch_id": "KRC0001",
-          "product_id": "PRD000007",
-          "product_name": "5008 dialysis accessory ",
-          "uom": null,
-          "bu_id": "DIALY",
-          "stock_in_hand": null,
-          "min_stock": null,
-          "max_stock": null,
-          "reorder_level": null,
-          "price_deviation": null,
-          "updated_by": null,
-          "updated_date": null,
-          "created_by": null,
-          "created_date": null,
-          "product_price": 1000,
-          "insurance_type_id": "C",
-          "prod_name_invoice": null,
-          "gst_value": null,
-          "product_name_price": "5008 dialysis accessory  - 1000",
-          "patient_price": 1000,
-          "insurance_price": 0,
-          "doctor_price": 0
-        }
-      ];
-      this.filteredOptions = this.myControl.valueChanges.pipe(
-        startWith(''),
-        map(value => this._filter(value)),
-      );
-    })
+      this.fetchProducts();
+    });
   }
   //new method to fetch products
   fetchProducts() {
-    this.bs.fetchProducts('DIALY', 'C', this.eodData).subscribe(data => {
+    this.bs.fetchProducts('SAREE', 'N', this.eodData).subscribe((data) => {
       this.options = data.results;
       this.filteredOptions = this.myControl.valueChanges.pipe(
         startWith(''),
-        map(value => this._filter(value)),
+        map((value) => this._filter(value))
       );
-    })
+    });
   }
 
   // fetchUser() {
@@ -365,61 +169,65 @@ export class BillingComponent implements OnInit {
     this.billingItem.product_id = data.value.product_id;
     this.billingItem.product_cost = parseInt(data.value.product_price);
     this.billingItem.patient_base_price = parseInt(data.value.patient_price);
-    this.billingItem.product_value = (this.billingItem.product_qty * this.billingItem.product_cost);
-    this.billingItem.patient_inv_value = (this.billingItem.product_qty * this.billingItem.patient_base_price);
-    this.billingItem.insurance_inv_value = parseInt(data.value.insurance_price)
+    this.billingItem.product_value =
+      this.billingItem.product_qty * this.billingItem.product_cost;
+    this.billingItem.patient_inv_value =
+      this.billingItem.product_qty * this.billingItem.patient_base_price;
+    this.billingItem.insurance_inv_value = parseInt(data.value.insurance_price);
 
     this.calclulateOthercharges(this.billingItem.product_cost);
-    
   }
   displayProperty(value: any) {
     if (value) {
-      //this.billingItem.amount = value.selling_price;      
+      //this.billingItem.amount = value.selling_price;
       return value.product_name;
     }
   }
 
   fetchProductNew(data: any) {
-
     this.options = [];
     this.billingItem.bu_id = data;
     let patientType = 'C';
     this.resetFieldsCalculation();
     switch (data) {
       case 'DIALY': {
-        this.bs.fetchProducts(data, patientType, this.eodData).subscribe(data => {
-          this.options = data.results;
-          this.filteredOptions = this.myControl.valueChanges.pipe(
-            startWith(''),
-            map(value => this._filter(value)),
-          );
-        })
+        this.bs
+          .fetchProducts(data, patientType, this.eodData)
+          .subscribe((data) => {
+            this.options = data.results;
+            this.filteredOptions = this.myControl.valueChanges.pipe(
+              startWith(''),
+              map((value) => this._filter(value))
+            );
+          });
         break;
       }
       case 'PHARM': {
-        this.bs.fetchProducts(data, patientType, this.eodData).subscribe(data => {
-          this.options = data.results;
-          this.filteredOptions = this.myControl.valueChanges.pipe(
-            startWith(''),
-            map(value => this._filter(value)),
-          );
-        })
+        this.bs
+          .fetchProducts(data, patientType, this.eodData)
+          .subscribe((data) => {
+            this.options = data.results;
+            this.filteredOptions = this.myControl.valueChanges.pipe(
+              startWith(''),
+              map((value) => this._filter(value))
+            );
+          });
         break;
       }
       case 'LAB': {
-        this.bs.fetchProducts(data, patientType, this.eodData).subscribe(data => {
-          this.options = data.results;
-          this.filteredOptions = this.myControl.valueChanges.pipe(
-            startWith(''),
-            map(value => this._filter(value)),
-          );
-        })
+        this.bs
+          .fetchProducts(data, patientType, this.eodData)
+          .subscribe((data) => {
+            this.options = data.results;
+            this.filteredOptions = this.myControl.valueChanges.pipe(
+              startWith(''),
+              map((value) => this._filter(value))
+            );
+          });
         break;
       }
       default: {
-
       }
-
     }
   }
   // checkForInsuranceCustomer(type: string) {
@@ -448,38 +256,55 @@ export class BillingComponent implements OnInit {
   //   })
   // }
 
-
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.options.filter((option: { product_name: string; }) => option.product_name.toLowerCase().includes(filterValue));
+    return this.options.filter((option: { product_name: string }) =>
+      option.product_name.toLowerCase().includes(filterValue)
+    );
   }
 
   calculateAmountPerQty(data: number) {
-    this.billingItem.product_value = (this.billingItem.product_qty * this.billingItem.product_cost);
-    this.billingItem.patient_inv_value = (this.billingItem.product_qty * this.billingItem.patient_base_price);//new code
+    this.billingItem.product_value =
+      this.billingItem.product_qty * this.billingItem.product_cost;
+    this.billingItem.patient_inv_value =
+      this.billingItem.product_qty * this.billingItem.patient_base_price; //new code
     this.calclulateOthercharges(data);
   }
 
   calclulateOthercharges(data: number) {
     //this.setChargesMandatory();
-    this.billingItem.total_charges = this.billingItem.other_charge1 + this.billingItem.other_charge2 + this.billingItem.other_charge3;
+    this.billingItem.total_charges =
+      this.billingItem.other_charge1 +
+      this.billingItem.other_charge2 +
+      this.billingItem.other_charge3;
     // this.billingItem.gross_inv_amount = (this.billingItem.product_qty * this.billingItem.product_cost) + this.billingItem.other_charge1 + this.billingItem.other_charge2 + this.billingItem.other_charge3;
-    this.billingItem.gross_inv_amount = (this.billingItem.product_qty * this.billingItem.product_cost) + this.billingItem.other_charge1 + this.billingItem.other_charge2 + this.billingItem.other_charge3;
+    this.billingItem.gross_inv_amount =
+      this.billingItem.product_qty * this.billingItem.product_cost +
+      this.billingItem.other_charge1 +
+      this.billingItem.other_charge2 +
+      this.billingItem.other_charge3;
     //new code
-    this.billingItem.patient_inv_gross_amt = (this.billingItem.product_qty * this.billingItem.patient_base_price) + this.billingItem.other_charge1 + this.billingItem.other_charge2 + this.billingItem.other_charge3;
+    this.billingItem.patient_inv_gross_amt =
+      this.billingItem.product_qty * this.billingItem.patient_base_price +
+      this.billingItem.other_charge1 +
+      this.billingItem.other_charge2 +
+      this.billingItem.other_charge3;
     //ends
     this.calclulateNetPay();
     //this.billingItem.gross = 4+5;
   }
   calclulateDiscount() {
     this.setDiscountMandatory();
-    this.billingItem.gross_discount = this.billingItem.discount1 + this.billingItem.discount2 + this.billingItem.discount3;
+    this.billingItem.gross_discount =
+      this.billingItem.discount1 +
+      this.billingItem.discount2 +
+      this.billingItem.discount3;
     this.calclulateNetPay();
   }
 
   setDiscountMandatory() {
-   // this.clearDiscountValidator();
+    // this.clearDiscountValidator();
     if (this.billingItem.discount1) {
       this.myForm.get('discount_remark1')?.setValidators([Validators.required]);
       this.myForm.get('discount_remark1')?.updateValueAndValidity();
@@ -547,8 +372,8 @@ export class BillingComponent implements OnInit {
   // }
 
   calclulateNetPay() {
-
-    this.billingItem.net_amount = this.billingItem.gross_inv_amount - this.billingItem.gross_discount;
+    this.billingItem.net_amount =
+      this.billingItem.gross_inv_amount - this.billingItem.gross_discount;
     //new code ends
     // this.billingItem.doctor_inv_value = this.billingItem.net_patient_amount;
     // this.billingItem.net_amount = (this.billingItem.net_patient_amount) + this.billingItem.insurance_inv_value;
@@ -558,76 +383,73 @@ export class BillingComponent implements OnInit {
   calculateFinal() {
     this.finalPay = this.finalPay + this.billingItem.net_amount;
     localStorage.setItem('billingarray', JSON.stringify(this.billingArray));
-
   }
   getBuName(bu: any) {
-
     switch (bu.bu_id) {
       case 'DIALY': {
-        return 'Dialysis'
+        return 'Dialysis';
         break;
       }
       case 'PHARM': {
-        return 'Pharmacy'
+        return 'Pharmacy';
         break;
       }
       case 'LAB': {
-        return 'Lab'
+        return 'Lab';
         break;
       }
       default: {
-        return 'none'
+        return 'none';
       }
     }
   }
   constructBillPayload() {
     let billPayload = {
-      org_id: localStorage.getItem('org_id'), branch_id: localStorage.getItem('branch_id'), user_id: localStorage.getItem('user_id'),
-      patient_id: this.headerDetailData.patient_id, invoice_details: this.billingArray
-    }
+      org_id: localStorage.getItem('org_id'),
+      branch_id: localStorage.getItem('branch_id'),
+      user_id: localStorage.getItem('user_id'),
+      invoice_details: this.billingArray,
+    };
     return billPayload;
   }
 
   submitData() {
     let payload = this.constructBillPayload();
-    console.log("payload", payload)
-    this.bs.submitInvoice(payload).subscribe(data => {
+    console.log('payload', payload);
+    this.bs.submitInvoice(payload).subscribe((data) => {
       console.log(data);
       this.bs.invoice_no = data.invoice_no;
       this.bs.patient_id = this.headerDetailData.patient_id;
       localStorage.setItem('header', JSON.stringify(this.headerDetailData));
       // this.router.navigate(['invoice']);
       this.router.navigate(['invoice', this.bs.invoice_no]);
-    })
-
-
-
+    });
   }
   addItem() {
     this.billingArray.push(this.billingItem);
     this.totalAmount = this.totalAmount + this.billingItem.net_patient_amount;
-    this.totalOtherCharges = this.totalOtherCharges + this.billingItem.total_charges;
-    this.totalGrossDiscount = this.totalGrossDiscount + this.billingItem.gross_inv_amount;
+    this.totalOtherCharges =
+      this.totalOtherCharges + this.billingItem.total_charges;
+    this.totalGrossDiscount =
+      this.totalGrossDiscount + this.billingItem.gross_inv_amount;
     this.showBillingForm = false;
     //this.options = [];
     this.calculateFinal();
     this.resetFields();
-    //this.clearValidation(this.myForm, this.myControl);   
-
+    //this.clearValidation(this.myForm, this.myControl);
   }
   clearValidation(myForm: any, myControl: any) {
     this.bs.clearValidation(myForm, myControl);
   }
   cancelNewItem() {
     if (this.editBillingItem) {
-      this.billingArray.push(this.billingItemCopy)
+      this.billingArray.push(this.billingItemCopy);
     }
 
     this.resetFields();
     this.showBillingForm = false;
     this.editBillingItem = false;
     this.clearValidation(this.myForm, this.myControl);
-
   }
   billingItemCopy: any;
   editItem(item: any, index: any) {
@@ -638,13 +460,13 @@ export class BillingComponent implements OnInit {
     this.fetchProductNew('DIALY');
     this.billingItem = item;
     this.billingItemCopy = Object.assign({}, this.billingItem);
-    this.billingArray.splice(index, 1)
+    this.billingArray.splice(index, 1);
   }
   updateItem() {
     this.editBillingItem = false;
     this.showBillingForm = false;
     this.billingArray.push(this.billingItem);
-    let total = 0
+    let total = 0;
     let tgdisc = 0;
     let tgother = 0;
     this.billingArray.forEach((element: any) => {
@@ -658,7 +480,6 @@ export class BillingComponent implements OnInit {
     this.resetFields();
   }
   resetFields() {
-
     this.billingItem = {
       bu_id: this.billingItem.bu_id,
       patient_id: '',
@@ -673,13 +494,13 @@ export class BillingComponent implements OnInit {
       other_charge1: Number(0),
       other_charge2: Number(0),
       other_charge3: Number(0),
-      total_charges: Number(0),    
-     
+      total_charges: Number(0),
+
       gross_inv_amount: Number(0),
       patient_inv_gross_amt: Number(0),
       discount1: Number(0),
       discount2: Number(0),
-      discount3: Number(0),      
+      discount3: Number(0),
       gross_discount: Number(0),
       net_amount: Number(0),
       net_patient_amount: Number(0),
@@ -687,8 +508,8 @@ export class BillingComponent implements OnInit {
       net_paid: Number(0),
       patient_inv_value: Number(0),
       insurance_inv_value: Number(0),
-      doctor_inv_value: Number(0)
-    }
+      doctor_inv_value: Number(0),
+    };
     //this.myForm.get('bu_id')?.setValue('');
   }
   resetFieldsCalculation() {
@@ -707,12 +528,12 @@ export class BillingComponent implements OnInit {
       other_charge2: Number(0),
       other_charge3: Number(0),
       total_charges: Number(0),
-      
+
       gross_inv_amount: Number(0),
       patient_inv_gross_amt: Number(0),
       discount1: Number(0),
       discount2: Number(0),
-      discount3: Number(0),     
+      discount3: Number(0),
       gross_discount: Number(0),
       net_amount: Number(0),
       net_patient_amount: Number(0),
@@ -720,15 +541,14 @@ export class BillingComponent implements OnInit {
       net_paid: Number(0),
       patient_inv_value: Number(0),
       insurance_inv_value: Number(0),
-      doctor_inv_value: Number(0)
-    }
+      doctor_inv_value: Number(0),
+    };
     // this.myForm.get('bu_id')?.setValue('');
   }
 
   editBilling(item: any) {
-
     this.showItemDetails = true;
-    item.invoice_details[0].bu_id = 'PHARMA'
+    item.invoice_details[0].bu_id = 'PHARMA';
 
     this.billingArray = item.invoice_details;
   }
@@ -767,10 +587,7 @@ export class BillingComponent implements OnInit {
       return true;
     }
   }
-
-
 }
 function MdAutocompleteTrigger(MdAutocompleteTrigger: any) {
   throw new Error('Function not implemented.');
 }
-

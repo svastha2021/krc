@@ -77,12 +77,12 @@ export class CustomerRegistrationComponent implements OnInit {
     return value;
   }
   registerPatient() {
-    // this.patientRegObj.updated_date = '2021-06-23';
+    console.log(this.patientRegObj)
     this.ps.registerPatient(this.patientRegObj).subscribe(response => {
-      //alert('Patient Registered successfully!!!')
+      
       this.dialog.open(InfoDialogComponent, {
         width: '300px',
-        data: 'Patient Registered successfully!!!'
+        data: 'Customer Registered successfully!!!'
       })
       this.router.navigate(['landing']);
     }, error => {
@@ -90,7 +90,7 @@ export class CustomerRegistrationComponent implements OnInit {
         if (error.error.code === 4001 && error.error.message === 'Sorry, Patient Mobile No Already Exists!.') {
           const duplicateuser = this.dialog.open(PromptDialogComponent, {
             width: '300px',
-            data: 'Patient Already registered. Do you want to proceed registration?'
+            data: 'Customer Already registered. Do you want to proceed registration?'
           });
           duplicateuser.afterClosed().subscribe(result => {
             if (result) {
@@ -99,7 +99,7 @@ export class CustomerRegistrationComponent implements OnInit {
                 //alert('Patient Registered successfully!!!')
                 this.dialog.open(InfoDialogComponent, {
                   width: '300px',
-                  data: 'Patient Registered successfully!!!'
+                  data: 'Customer Registered successfully!!!'
                 })
                 this.router.navigate(['landing']);
               })

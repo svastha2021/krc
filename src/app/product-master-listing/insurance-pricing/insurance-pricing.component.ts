@@ -50,7 +50,7 @@ export class InsurancePricingComponent implements OnInit {
       discount_value: 0,
       discount_perc: 0,
       prod_name_invoice: '',
-      insurance_type: 'C',
+      insurance_type: 'N',
 
     })
   }
