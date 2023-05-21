@@ -7,6 +7,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
+import { NgxBarcodeModule } from 'ngx-barcode';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -90,6 +91,7 @@ import { InfoObjDialogComponent } from './utilities/info-obj-dialog/info-obj-dia
 import { PatientHealthComponent } from './patient-health/patient-health.component';
 import { DoctorReportComponent } from './doctor-report/doctor-report.component';
 import { doctorMasterFilter } from './doctor-master/doctorMasterFilter';
+import { BarcodeComponent } from './utilities/common-modal/barcode/barcode.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -168,7 +170,8 @@ import { doctorMasterFilter } from './doctor-master/doctorMasterFilter';
     userFilterPipe,
     LoginUserComponent,
     PatientHealthComponent,
-    doctorMasterFilter
+    doctorMasterFilter,
+    BarcodeComponent
   ],
   imports: [
     BrowserModule,
@@ -178,6 +181,7 @@ import { doctorMasterFilter } from './doctor-master/doctorMasterFilter';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    NgxBarcodeModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireStorageModule

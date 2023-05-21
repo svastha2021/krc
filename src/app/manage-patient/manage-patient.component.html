@@ -70,10 +70,15 @@
                 <mat-header-cell *matHeaderCellDef>Patient Type</mat-header-cell>
                 <mat-cell *matCellDef="let element;let i = index;"> {{element.patient_type}} </mat-cell>
             </ng-container>
+            <ng-container matColumnDef="bar_code">
+                <mat-header-cell *matHeaderCellDef>Bar Code</mat-header-cell>
+                <mat-cell *matCellDef="let element;let i = index;"> <button (click)="showBarCode(element)">BarCode
+                </button> </mat-cell>
+            </ng-container>
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
         <div *ngIf="patientNameList.length===0">no Records</div>
     </div>
-
+    
 </div>
