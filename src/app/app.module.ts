@@ -90,6 +90,7 @@ import { InfoObjDialogComponent } from './utilities/info-obj-dialog/info-obj-dia
 import { PatientHealthComponent } from './patient-health/patient-health.component';
 import { DoctorReportComponent } from './doctor-report/doctor-report.component';
 import { doctorMasterFilter } from './doctor-master/doctorMasterFilter';
+import { ExportReportComponent } from './export-report/export-report.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -168,7 +169,8 @@ import { doctorMasterFilter } from './doctor-master/doctorMasterFilter';
     userFilterPipe,
     LoginUserComponent,
     PatientHealthComponent,
-    doctorMasterFilter
+    doctorMasterFilter,
+    ExportReportComponent
   ],
   imports: [
     BrowserModule,
