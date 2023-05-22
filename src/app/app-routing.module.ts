@@ -239,6 +239,10 @@ const routes: Routes = [
   {
     path: 'invoice-payment-report',
     component: ExportReportComponent
+  },
+  {
+    path: 'invoice-product-report',
+    component: ExportReportComponent
   }
 
 
