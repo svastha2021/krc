@@ -1,0 +1,69 @@
+.inv-report-table {
+    overflow: scroll;
+  }
+  mat-table {
+    width: 130%;
+    height: 300px;
+  }
+  .example-header {
+    width:100%;
+    min-height: 64px;
+    padding: 8px 24px 0;
+  }
+  .example-container {
+    margin-top: 20px;
+  }
+  
+//   .mat-form-field {
+//     font-size: 14px;
+//     width: 100%;
+//   }
+  
+  .mat-column-inv_date {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 9% !important;
+    width: 9% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  
+    word-break: break-word;
+  
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+  
+  .mat-column-patient_name {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 12% !important;
+    width: 12% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  
+    word-break: break-word;
+  
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+  
+  .mat-column-invoice_no {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 14% !important;
+    width: 14% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  
+    word-break: break-word;
+  
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+  
