@@ -1,0 +1,115 @@
+<div class="inv-product-table-container mat-elevation-z8">
+  <div>
+    <button style="background-color: aliceblue" mat-button (click)="export()">
+      Export
+    </button>
+  </div>
+  <div class="inv-prd-header">
+    <mat-form-field>
+      <input
+        matInput
+        (keyup)="applyFilter($any($event.target).value)"
+        placeholder="Filter"
+      />
+    </mat-form-field>
+  </div>
+  <div class="inv-report-table">
+    <mat-table #table [dataSource]="dataSource" matSort>
+      <!-- Position Column -->
+      <ng-container matColumnDef="inv_date">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Inv Date
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.inv_date }} </mat-cell>
+      </ng-container>
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="invoice_no">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Inv #
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.invoice_no }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="patient_id">
+        <mat-header-cell *matHeaderCellDef>Patient's ID </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.patient_id }}
+        </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="patient_name">
+        <mat-header-cell *matHeaderCellDef>Patient's Name </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.patient_name }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="patient_type">
+        <mat-header-cell *matHeaderCellDef>Description </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.patient_type }}
+        </mat-cell>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="bu_id">
+        <mat-header-cell *matHeaderCellDef> BU </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.bu_id }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="product_name">
+        <mat-header-cell *matHeaderCellDef> Product </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.product_name }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="product_qty">
+        <mat-header-cell *matHeaderCellDef> Product Qty </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.product_qty }}
+        </mat-cell>
+      </ng-container>
+      
+
+      <ng-container matColumnDef="gross_discount">
+        <mat-header-cell *matHeaderCellDef> Gross Discount </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.gross_discount }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="net_amount">
+        <mat-header-cell *matHeaderCellDef> Net Amount </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.net_amount }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="product_value">
+        <mat-header-cell *matHeaderCellDef> Net Balance </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.product_value }}
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="tot_charges">
+        <mat-header-cell *matHeaderCellDef> Total </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.tot_charges }}
+        </mat-cell>
+      </ng-container>
+
+      
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+  </div>
+</div>
+
+<!-- Copyright 2017 Google Inc. All Rights Reserved.
+      Use of this source code is governed by an MIT-style license that
+      can be found in the LICENSE file at http://angular.io/license -->

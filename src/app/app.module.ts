@@ -92,9 +92,10 @@ import { DoctorReportComponent } from './doctor-report/doctor-report.component';
 import { doctorMasterFilter } from './doctor-master/doctorMasterFilter';
 import { ExportReportComponent } from './export-report/export-report.component';
 import { InvoicePaymentReportComponent } from './invoice-payment-report/invoice-payment-report.component';
+import { InvoiceProductReportComponent } from './invoice-product-report/invoice-product-report.component';
+import { InvoiceProductTable } from './invoice-product-report/invoice-product-table/invoice-product-table.component';
 //import { InvoicePaymentTable } from './invoice-payment-report/invoice-payment-table/invoice-payment-table.component';
 //import { InvoiceProductTable } from './invoice-product-report/invoice-product-table/invoice-product-table.component';
-//import { InvoiceProductReportComponent } from './invoice-product-report/invoice-product-report.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -175,8 +176,9 @@ import { InvoicePaymentReportComponent } from './invoice-payment-report/invoice-
     PatientHealthComponent,
     doctorMasterFilter,
     ExportReportComponent,
-    InvoicePaymentReportComponent
-    
+    InvoicePaymentReportComponent,
+    InvoiceProductReportComponent,
+    InvoiceProductTable
     
   ],
   imports: [
