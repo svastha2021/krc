@@ -34,16 +34,15 @@ export class InvoicePaymentReportComponent implements OnInit {
     'patient_type',
     'bu_id',
     'base_cost',
-    'gross_discount',
+    'tot_charges',
     'gross_inv_amount',
+    'gross_discount',    
     'net_amount',
-    'net_balance',
     'net_paid',
+    'net_balance',    
     'payment_amount',
     'pay_mode',
-    'payment_date',
-    'inv_srl_no',
-    'tot_charges',
+    'payment_date'
   ];
   constructor(
     private dp: DatePipe,

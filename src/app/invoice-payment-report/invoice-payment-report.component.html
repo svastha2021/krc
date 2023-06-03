@@ -3,12 +3,16 @@
   <app-base-detail></app-base-detail>
   <h4>Invoice Payment Report</h4>
   <div class="row">
-
     <mat-form-field appearance="fill" class="col-lg-3">
       <mat-label>Enter a date range</mat-label>
       <mat-date-range-input [rangePicker]="picker">
-        <input matStartDate placeholder="Start date" [(ngModel)]="from_date">
-        <input matEndDate placeholder="End date" [max]="today" [(ngModel)]="to_date">
+        <input matStartDate placeholder="Start date" [(ngModel)]="from_date" />
+        <input
+          matEndDate
+          placeholder="End date"
+          [max]="today"
+          [(ngModel)]="to_date"
+        />
       </mat-date-range-input>
       <mat-hint>DD/MM/YYYY – DD/MM/YYYY</mat-hint>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -16,18 +20,22 @@
     </mat-form-field>
   </div>
   <div class="row mt-4">
-    <button class="btn btn-primary col-lg-2" (click)="getReports()">Retrieve</button>
+    <button class="btn btn-primary col-lg-2" (click)="getReports()">
+      Retrieve
+    </button>
 
     <!-- <button class="btn btn-primary col-lg-2 ms-2" [disabled]="reportData.length === 0"
       (click)="export2Excel()">Export</button> -->
-
   </div>
 
   <!-- <div *ngIf="reportData && reportData.length>0">
     <inv-payment-list-table [patientList]="reportData"></inv-payment-list-table>
   </div> -->
 
-  <div class="example-container mat-elevation-z8" *ngIf="dataSource.data.length>0">
+  <div
+    class="example-container mat-elevation-z8"
+    *ngIf="dataSource.data.length > 0"
+  >
     <div>
       <button style="background-color: aliceblue" mat-button (click)="export()">
         Export
@@ -49,19 +57,21 @@
           <mat-header-cell *matHeaderCellDef mat-sort-header
             >Invoice Date
           </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{ element.inv_date }} </mat-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.inv_date }}
+          </mat-cell>
         </ng-container>
-  
+
         <!-- Position Column -->
         <ng-container matColumnDef="invoice_no">
           <mat-header-cell *matHeaderCellDef mat-sort-header
-            >Inv #
+            >Inv No
           </mat-header-cell>
           <mat-cell *matCellDef="let element">
             {{ element.invoice_no }}
           </mat-cell>
         </ng-container>
-  
+
         <!-- Name Column -->
         <ng-container matColumnDef="patient_name">
           <mat-header-cell *matHeaderCellDef>Patient's Name </mat-header-cell>
@@ -70,64 +80,80 @@
           </mat-cell>
         </ng-container>
         <ng-container matColumnDef="patient_type">
-          <mat-header-cell *matHeaderCellDef>Description </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{ element.patient_type }} </mat-cell>
+          <mat-header-cell *matHeaderCellDef>Patient Type </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.patient_type }}
+          </mat-cell>
         </ng-container>
-  
+
         <!-- Weight Column -->
         <ng-container matColumnDef="bu_id">
           <mat-header-cell *matHeaderCellDef> BU </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{ element.bu_id }} </mat-cell>
         </ng-container>
-  
+
         <!-- Symbol Column -->
         <ng-container matColumnDef="base_cost">
           <mat-header-cell *matHeaderCellDef> Base Cost </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{ element.base_cost }} </mat-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.base_cost }}
+          </mat-cell>
         </ng-container>
-  
+
+        <ng-container matColumnDef="tot_charges">
+          <mat-header-cell *matHeaderCellDef> Total charges </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.tot_charges }}
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="gross_inv_amount">
+          <mat-header-cell *matHeaderCellDef> Gross Inv </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.gross_inv_amount }}
+          </mat-cell>
+        </ng-container>
+
         <ng-container matColumnDef="gross_discount">
           <mat-header-cell *matHeaderCellDef> Gross Discount </mat-header-cell>
           <mat-cell *matCellDef="let element">
             {{ element.gross_discount }}
           </mat-cell>
         </ng-container>
-  
-        <ng-container matColumnDef="gross_inv_amount">
-          <mat-header-cell *matHeaderCellDef> Gross Inv Amt </mat-header-cell>
-          <mat-cell *matCellDef="let element">
-            {{ element.gross_inv_amount }}
-          </mat-cell>
-        </ng-container>
-  
+
         <ng-container matColumnDef="net_amount">
           <mat-header-cell *matHeaderCellDef> Net Amount </mat-header-cell>
           <mat-cell *matCellDef="let element">
             {{ element.net_amount }}
           </mat-cell>
         </ng-container>
+
+        <ng-container matColumnDef="net_paid">
+          <mat-header-cell *matHeaderCellDef> Net Paid </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.net_paid }}
+          </mat-cell>
+        </ng-container>
+
         <ng-container matColumnDef="net_balance">
           <mat-header-cell *matHeaderCellDef> Net Balance </mat-header-cell>
           <mat-cell *matCellDef="let element">
             {{ element.net_balance }}
           </mat-cell>
         </ng-container>
-  
-        <ng-container matColumnDef="net_paid">
-          <mat-header-cell *matHeaderCellDef> Net Paid </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{ element.net_paid }} </mat-cell>
-        </ng-container>
-  
+
         <ng-container matColumnDef="payment_amount">
           <mat-header-cell *matHeaderCellDef> Payment Amt </mat-header-cell>
           <mat-cell *matCellDef="let element">
             {{ element.payment_amount }}
           </mat-cell>
         </ng-container>
-  
+
         <ng-container matColumnDef="pay_mode">
-          <mat-header-cell *matHeaderCellDef> Mode </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{ element.pay_mode }} </mat-cell>
+          <mat-header-cell *matHeaderCellDef> Payment Mode </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.pay_mode }}
+          </mat-cell>
         </ng-container>
         <ng-container matColumnDef="payment_date">
           <mat-header-cell *matHeaderCellDef> Payment Date </mat-header-cell>
@@ -135,24 +161,10 @@
             {{ element.payment_date }}
           </mat-cell>
         </ng-container>
-  
-        <ng-container matColumnDef="inv_srl_no">
-          <mat-header-cell *matHeaderCellDef> Inv Sr# </mat-header-cell>
-          <mat-cell *matCellDef="let element">
-            {{ element.inv_srl_no }}
-          </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="tot_charges">
-          <mat-header-cell *matHeaderCellDef> Total </mat-header-cell>
-          <mat-cell *matCellDef="let element">
-            {{ element.tot_charges }}
-          </mat-cell>
-        </ng-container>
-  
+
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
       </mat-table>
     </div>
   </div>
-
- 
+</div>

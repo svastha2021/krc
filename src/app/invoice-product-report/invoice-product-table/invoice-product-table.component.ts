@@ -29,13 +29,15 @@ export class InvoiceProductTable implements OnInit {
     'patient_name',
     'patient_id',
     'patient_type',
-    'bu_id',
-    'product_qty',
+    'bu_id',    
     'product_name',
-    'gross_discount',
-    'net_amount',
+    'product_qty',
     'product_value',
     'tot_charges',
+    'gross_discount',
+    'net_amount',
+    
+   
   ];
   ngOnInit() {
     //this.

@@ -13,7 +13,7 @@
       />
     </mat-form-field>
   </div>
-  <div class="inv-report-table">
+  <div class="inv-report-table mat-elevation-z8">
     <mat-table #table [dataSource]="dataSource" matSort>
       <!-- Position Column -->
       <ng-container matColumnDef="inv_date">
@@ -26,7 +26,7 @@
       <!-- Position Column -->
       <ng-container matColumnDef="invoice_no">
         <mat-header-cell *matHeaderCellDef mat-sort-header
-          >Inv #
+          >Inv No
         </mat-header-cell>
         <mat-cell *matCellDef="let element">
           {{ element.invoice_no }}
@@ -34,7 +34,7 @@
       </ng-container>
 
       <ng-container matColumnDef="patient_id">
-        <mat-header-cell *matHeaderCellDef>Patient's ID </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>Patient ID </mat-header-cell>
         <mat-cell *matCellDef="let element">
           {{ element.patient_id }}
         </mat-cell>
@@ -42,13 +42,13 @@
 
       <!-- Name Column -->
       <ng-container matColumnDef="patient_name">
-        <mat-header-cell *matHeaderCellDef>Patient's Name </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>Patient Name </mat-header-cell>
         <mat-cell *matCellDef="let element">
           {{ element.patient_name }}
         </mat-cell>
       </ng-container>
       <ng-container matColumnDef="patient_type">
-        <mat-header-cell *matHeaderCellDef>Description </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>Patient Type </mat-header-cell>
         <mat-cell *matCellDef="let element">
           {{ element.patient_type }}
         </mat-cell>
@@ -73,7 +73,19 @@
           {{ element.product_qty }}
         </mat-cell>
       </ng-container>
-      
+
+      <ng-container matColumnDef="product_value">
+        <mat-header-cell *matHeaderCellDef> Product Value </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.product_value }}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="tot_charges">
+        <mat-header-cell *matHeaderCellDef> Total Charges </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.tot_charges }}
+        </mat-cell>
+      </ng-container>
 
       <ng-container matColumnDef="gross_discount">
         <mat-header-cell *matHeaderCellDef> Gross Discount </mat-header-cell>
@@ -88,23 +100,13 @@
           {{ element.net_amount }}
         </mat-cell>
       </ng-container>
-      <ng-container matColumnDef="product_value">
-        <mat-header-cell *matHeaderCellDef> Net Balance </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          {{ element.product_value }}
-        </mat-cell>
-      </ng-container>
+     
 
-      <ng-container matColumnDef="tot_charges">
-        <mat-header-cell *matHeaderCellDef> Total </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          {{ element.tot_charges }}
-        </mat-cell>
-      </ng-container>
+     
 
       
 
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
     </mat-table>
   </div>

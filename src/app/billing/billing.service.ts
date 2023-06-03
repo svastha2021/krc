@@ -25,7 +25,7 @@ export class BillingService {
   submitInvoice(billingArray: any): Observable<any> {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(environment.apiUrl + 'tempbilling',billingArray,
+    return this.http.post(environment.apiUrl + 'billing',billingArray,
       { headers: headers })
   }  
 
