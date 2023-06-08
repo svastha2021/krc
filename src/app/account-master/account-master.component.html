@@ -3,7 +3,7 @@
     <div class="row">
         <h3>ACCOUNT MASTER</h3>
         <div class="col-12 d-flex txt-ed">
-            <button mat-raised-button color="bg-clr" class="bg-clr" (click)="clear()">Clear</button>
+            <button class="btn btn-warning" (click)="clear()"><i class="fa-solid fa-rotate-left mar5r"></i>Clear</button>
         </div>
     </div>
     <form [formGroup]="accForm">
@@ -42,7 +42,7 @@
             <br>
             <div class="row">
                 <div class="col-12 d-flex text-center">
-                        <button mat-raised-button color="bg-clr" class="bg-clr" (click)="submit()">Save</button>
+                        <button class="btn btn-success" (click)="submit()"><i class="fa-solid fa-paper-plane mar5r"></i>Save</button>
                 </div>
             </div>
         </div>

@@ -196,12 +196,12 @@
                     <input type="number" class="form-control" name="attender2_contact" id="attender2_contact" [(ngModel)]="patientRegObj.attender2_contact">
                 </div>
         </div>
-            <button class="btn btn-primary mar20t mar10lr" (click)="goBack()">Back</button>
+            <button class="btn btn-danger mar20t mar10lr" (click)="goBack()"><i class="fa-solid fa-arrow-left mar5r"></i>Back</button>
             <button [disabled]="!patientReg.valid" *ngIf="!updatePatient" (click)="registerPatient()"
-                class="btn btn-primary mar20t">Submit</button>
+                class="btn btn-success mar20t"><i class="fa-solid fa-arrow-right mar5r"></i>Submit</button>
 
             <button [disabled]="!patientReg.valid" *ngIf="updatePatient" (click)="updatePatientDetails()"
-                class="btn btn-primary mar20t">Update</button>
+                class="btn btn-warning  mar20t"><i class="fa-solid fa-paper-plane mar5r"></i>Update</button>
         </form>
     </div>
 </div>

@@ -3,7 +3,7 @@
   <div class="patient-details">
 
     <label class="form-label">Select Search Type</label>
-    <select class="form-control contact-input margin-20b" name="patient_type" [(ngModel)]="searchType">
+    <select class="form-control contact-input margin-20b dd" name="patient_type" [(ngModel)]="searchType">
       <option value="patient_name">Patient Name</option>
       <option value="phone_no">Phone Number</option>
     </select>
@@ -39,7 +39,7 @@
                 id="year">
         </div>
       </div>
-      <button (click)="fetchUser()" [disabled]="!mobile_no" class="btn btn-primary mar20t">fetch
+      <button (click)="fetchUser()" [disabled]="!mobile_no" class="btn btn-success mar20t margin-20b"><i class="fa-solid fa-magnifying-glass mar5r"></i>fetch
         contact details</button>
     </div>
 
@@ -49,7 +49,7 @@
       <input type="text" class="form-control contact-input" required name="contact" [(ngModel)]="patient_name"
         id="contact">
       <br>
-      <button (click)="fetchUserByName()" [disabled]="!patient_name" class="btn btn-primary mar20t margin-20b">fetch
+      <button (click)="fetchUserByName()" [disabled]="!patient_name" class="btn btn-success mar20t margin-20b"><i class="fa-solid fa-magnifying-glass mar5r"></i>fetch
         contact details</button>
     </div>
 
@@ -85,7 +85,7 @@
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="patient_name">
-      <mat-header-cell *matHeaderCellDef>patient Name</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>Patient Name</mat-header-cell>
       <mat-cell *matCellDef="let element;let i = index;"> {{element.patient_name}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="father_name">

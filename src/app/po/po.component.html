@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="col-1">
-                <button class="btn btn-primary mt-30" (click)="getPoList()">Get PO</button>
+                <button class="btn btn-success mt-30" (click)="getPoList()"><i class="fa-solid fa-magnifying-glass mar5r"></i> PO</button>
             </div>
             <div class="col-3">
                 <div class="supplier-item">
@@ -119,10 +119,10 @@
         <div class="row">
             <div class="col-6 d-flex">
                     <div class="col-3" *ngIf="isShowEdit">
-                        <button class="btn btn-primary pointer" (click)="addToList()">Add Record</button>
+                        <button class="btn btn-success pointer" (click)="addToList()"><i class="fa-solid fa-circle-plus mar5r"></i>Add Record</button>
                     </div>
                     <div class="col-3" *ngIf="!isShowEdit">
-                        <button class="btn btn-primary pointer" (click)="editList()">Update Record</button>
+                        <button class="btn btn-warning pointer" (click)="editList()"><i class="fa-solid fa-file-pen mar5r"></i>Update Record</button>
                     </div>
             </div>
         </div>
@@ -191,7 +191,8 @@
       <div class="row">
         <div class="col-6 d-flex">
                 <div class="col-2">
-                    <button class="btn btn-primary" (click)="submit()">Save</button>
+                    <button class="btn btn-success" (click)="submit()"><i class="fa-solid fa-paper-plane mar5r"></i>
+                        Save</button>
                 </div>
         </div>
     </div>

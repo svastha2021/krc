@@ -415,7 +415,7 @@ export class BillingComponent implements OnInit {
 
   submitData() {
     let payload = this.constructBillPayload();
-    console.log("payload", payload)
+    console.log("payload",payload)
     this.bs.submitInvoice(payload).subscribe(data => {
       console.log(data);
       this.bs.invoice_no = data.invoice_no;
