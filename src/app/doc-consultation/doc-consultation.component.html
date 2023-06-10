@@ -89,6 +89,13 @@
                 </button>
 
             </mat-tab>
+
+            <!-- Previous Visit Details -->
+            <mat-tab label="Previous Visit Details">
+                <div *ngIf="patientHistory">
+                    <app-prev-vist-details [tableData]="patientHistory" ></app-prev-vist-details>
+                </div>
+            </mat-tab>
         </mat-tab-group>
     </div>
     

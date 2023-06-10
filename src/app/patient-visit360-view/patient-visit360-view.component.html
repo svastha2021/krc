@@ -1,60 +1,24 @@
 <app-header></app-header>
 <div class="container">
-    <div class="row" *ngIf="!patientInvoiceDetail">
-        <app-patient-header (outputPatientHeader)="patientHeaderDetails($event)"></app-patient-header>
-    </div>
-    <div *ngIf="patientInvoiceDetail">
         <div class="txt-left">
-            <button type="button" class="btn btn-clr mar20t" [useExistingCss]="true" id="print-to-pdf" printSectionId="print-section"  ngxPrint >Print to Pdf</button>
-            <!-- <button type="button" class="btn btn-primary mar20t ml-10" (click)="back()" >Back</button> -->
+            <button type="button" class="btn btn-clr  mar20t" [useExistingCss]="true" id="print-to-pdf" printSectionId="print-section"  ngxPrint >Print to Pdf</button>
         </div>
         <div id="print-section">
-            <h3>Patient Health Bulletin</h3>
-                <h5>Personal Information</h5>
-                    <mat-card *ngIf="patientHeaderData">
-                        <mat-card-content class="row d-flex fs-medium">
-                            <div class="col-4">Patient Id: {{patientHeaderData.patient_id}}</div>
-                            <div class="col-4">Patient Name: {{patientHeaderData.patient_name}}</div>
-                            <div class="col-4">Age: {{patientHeaderData.age}}</div>
-                            <div class="col-4">Sex: {{patientHeaderData.sex}}</div>
-                            <div class="col-4">Phone: {{patientHeaderData.mobile_no}}</div>
-                            <div class="col-4">Patient Type: {{patientHeaderData.patient_type_name}}</div>
-                            <div class="col-4">Blood Group: {{patientHeaderData.blood_group}}</div>
-                            <div class="col-4">Contact #: {{patientHeaderData.contact}}</div>
-                            <div class="col-4">Address: {{patientHeaderData.address}}</div>
-                        </mat-card-content>
-                      </mat-card>
-                <!-- </div> -->
                 <div class="space-10"></div>
-                <h5>Financial Information</h5>
-                <mat-card *ngIf="patientHeader">
-                    <mat-card-content class="row d-flex fs-medium">
-                        <div class="col-4"># of outstanding Invoices: {{patientHeader.outstanding}}</div>
-                        <div class="col-4">Total Invoice Amt: {{patientHeader.net_inv_amount}}</div>
-                        <div class="col-4">Total Paid: {{patientHeader.net_inv_paid}}</div>
-                        <div class="col-4">Total Balance: {{patientHeader.net_inv_balance}}</div>
-                        <div class="col-4">Adv Received: {{patientHeader.advance_amount_paid}}</div>
-                        <div class="col-4">Adv adjusted: {{patientHeader.advance_amount_adjust}}</div>
-                        <div class="col-4">Adv Balance: {{patientHeader.advance_amount_balance}}</div>
-                        <div class="col-4">Claims Incurred: {{patientHeader.claim}}</div>
-                        <div class="col-4">Claims Balance: {{patientHeader.claim_bal}}</div>
-                    </mat-card-content>
-                  </mat-card>
-                <div class="space-10"></div>
-                <h5>Health Information</h5>
+                <h5>Visit Information</h5>
                 <mat-card *ngIf="patientData">
                     <mat-card-content class="row d-flex fs-medium">
-                        <div class="col-6"># of OP Visits: {{patientData.last_visit_count}}</div>
-                        <div class="col-6">Last OP Visit Date: {{patientData.last_visit_date | date: 'dd-MM-yyyy'}}</div>
-                        <div class="col-6"># of Dialysis done: {{patientData.last_dialysis_count}}</div>
-                        <div class="col-6">Last Dialysis Date: {{patientData.last_dialysis_date | date: 'dd-MM-yyyy'}}</div>
+                        <div class="col-6">Visit No: {{patientData.visit_no}}</div>
+                        <div class="col-6">Visit Date: {{patientData.visit_date | date: 'dd-MM-yyyy'}}</div>
+                        <div class="col-6">Prev Visit No: {{patientData.prev_visit_no}}</div>
+                        <div class="col-6">Prev Visit Date: {{patientData.prev_visit_date | date: 'dd-MM-yyyy'}}</div>
                     </mat-card-content>
-                  </mat-card>
+                </mat-card>
                 <div class="space-10"></div>
-                <h5>Latest Vital Parameter</h5>
-                <div *ngIf="patientData?.patient_last_visit_health_details">
+                <div class="mat-card" *ngIf="patientData?.health_lastvisit">
+                    <h5>Vital Parameter</h5>
                     <table class="table table-bordered fs-medium">
-                        <thead class="thead-dark">
+                        <thead class="thead-dark table-header-background">
                             <tr>
                                 <th>Parameter</th>
                                 <th>Value</th>
@@ -62,35 +26,34 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let paramData of patientData.patient_last_visit_health_details">
+                            <tr *ngFor="let vitalData of patientData.health_lastvisit">
                                 <td>
-                                    {{paramData.khi_desc}}
+                                    {{vitalData.khi_desc}}
                                 </td>
                                 <td>
-                                    {{paramData.khi_value}}
+                                    {{vitalData.khi_value}}
                                 </td>
                                 <td>
-                                    {{paramData.khi_notes}}
+                                    {{vitalData.khi_notes}}
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="space-10"></div>
-                <h5>Last Tests Underwent</h5>
-                <div *ngIf="patientData?.patient_last_visit_test_details">
+                <div class="mat-card" *ngIf="patientData?.test_lastvisit">
+                    <h5>Tests Underwent</h5>
                     <table class="table table-bordered fs-medium">
-                        <thead class="thead-dark">
+                        <thead class="thead-dark table-header-background">
                             <tr>
                                 <th>Sl No</th>
                                 <th>Visit #</th>
                                 <th>Visit Date</th>
                                 <th>Test</th>
-                                <!-- <th>Link</th> -->
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let testData of patientData.patient_last_visit_test_details; let i = index">
+                            <tr *ngFor="let testData of patientData.test_lastvisit; let i = index">
                                 <td>
                                     {{i+1}}
                                 </td>
@@ -103,18 +66,15 @@
                                 <td>
                                     {{testData.test_notes}}
                                 </td>
-                                <!-- <td>
-                                    {{testData.test_notes}}
-                                </td> -->
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="space-10"></div>
-                <div class="table-responsive-lg col-lg-12" style="margin-top:20px" *ngIf="patientData && patientData.patient_last_visit_medicine_prescribed">
-                    <h5>Last Medicines recommended</h5>
+                <div class="table-responsive-lg col-lg-12 mat-card" style="margin-top:20px" *ngIf="patientData && patientData.medicine_lastvisit">
+                    <h5>Medicines recommended</h5>
                     <table class="table table-bordered fs-small">
-                        <thead class="thead-dark">
+                        <thead class="thead-dark table-header-background">
                           <tr>
                             <th  rowspan="2">#</th>
                             <th rowspan="2">Product Name</th>
@@ -141,8 +101,8 @@
                             <th>AF</th>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let medicineData of patientData.patient_last_visit_medicine_prescribed; let i=index">
-                            <td scope="row">{{i + 1}}</td>
+                          <tr *ngFor="let medicineData of patientData.medicine_lastvisit; let i=index">
+                            <td scope="row">{{i+1}}</td>
                             <td>
                                 {{medicineData.product_name}}
                             </td>
@@ -169,7 +129,28 @@
                         </tbody>
                     </table>
                 </div>
-        </div>
+                <div class="space-10"></div>
+                <div class="mat-card" *ngIf="patientData?.dialysis_notes">
+                    <h5>Dialysis Notes</h5>
+                    <table class="table table-bordered fs-medium">
+                        <thead class="thead-dark table-header-background">
+                            <tr>
+                                <th>Dialysis Notes</th>
+                                <th>Prescription Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let dialysisData of patientData.dialysis_notes">
+                                <td>
+                                    {{dialysisData.dialysis_notes}}
+                                </td>
+                                <td>
+                                    {{dialysisData.prescription_date | date: 'dd-MM-yyyy'}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         <br>
-    </div>
 </div>
