@@ -4,14 +4,14 @@ import { UtilityService } from '../utilities/services/utility.service';
 @Component({
   selector: 'app-base-detail',
   templateUrl: './base-detail.component.html',
-  styleUrls: ['./base-detail.component.scss']
+  styleUrls: ['./base-detail.component.scss'],
 })
 export class BaseDetailComponent implements OnInit, OnDestroy {
   today = new Date();
   intervalId: any;
-  eod: any
-  userData = { user_name: '', branch_name: '', branch_id: '' }
-  constructor(private ref: ReferenceService, private us: UtilityService) { }
+  eod: any;
+  userData = { user_name: '', branch_name: '', branch_id: '' };
+  constructor(private ref: ReferenceService, private us: UtilityService) {}
 
   ngOnInit(): void {
     this.fetchUserData();
@@ -26,14 +26,14 @@ export class BaseDetailComponent implements OnInit, OnDestroy {
 
   fetchUserData() {
     this.userData.user_name = localStorage.getItem('user_name')!;
-    this.userData.branch_name = localStorage.getItem('branch_name')!
-    this.userData.branch_id = localStorage.getItem('branch_id')!
+    this.userData.branch_name = localStorage.getItem('branch_name')!;
+    this.userData.branch_id = localStorage.getItem('branch_id')!;
   }
 
   fetchEOD() {
-    this.ref.getEodDetailData().subscribe(data => {
-
+    this.ref.getEodDetailData().subscribe((data) => {
       this.eod = this.us.convertTodayTostrDDMMYYYY(data.results[0].eod_date);
-    })
+      this.ref.setEodDate(this.eod);
+    });
   }
 }

@@ -7,6 +7,16 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ReferenceService {
+  
+  public eod:BehaviorSubject<string> = new BehaviorSubject<string>('');
+  public eodDate = this.eod.asObservable();
+
+  public getEod(){
+    return this.eodDate;
+  }
+  setEodDate(date:any){
+    this.eod.next(date);
+  }
 
   constructor(private http:HttpClient) { }
 
