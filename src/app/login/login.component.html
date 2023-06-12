@@ -8,16 +8,16 @@
       </div>
       <div class="mb-3">
         <label for="userId" class="form-label">User ID</label>
-        <input type="text" required class="form-control" name="userId" [(ngModel)]="loginObj.userId" id="userId"
+        <input data-cy="login-user" type="text" required class="form-control" name="userId" [(ngModel)]="loginObj.userId" id="userId"
           aria-describedby="userid">
 
       </div>
       <div class="mb-3">
         <label for="pwd" class="form-label">Password</label>
-        <input type="password" required class="form-control" name="pwd" [(ngModel)]="loginObj.pwd" id="pwd">
+        <input data-cy="login-pwd"  type="password" required class="form-control" name="pwd" [(ngModel)]="loginObj.pwd" id="pwd">
       </div>
 
-      <button [disabled]="!loginForm.valid " (click)="login()" class="btn btn-success submit-btn"><i class="fa fa-right-to-bracket pad10r"></i>Login</button>
+      <button [disabled]="!loginForm.valid " data-cy="login-btn" (click)="login()" class="btn btn-success submit-btn"><i class="fa fa-right-to-bracket pad10r"></i>Login</button>
     </form>
     <div class="col-lg-6">
       <img src="/assets/login_image2.png" class="login-image"/>
