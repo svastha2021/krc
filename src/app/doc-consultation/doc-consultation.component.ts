@@ -5,6 +5,7 @@ import { LabPrescriptionComponent } from '../lab-prescription/lab-prescription.c
 import { UtilityService } from '../utilities/services/utility.service';
 import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ReferenceService } from '../utilities/services/reference.service';
 @Component({
   selector: 'app-doc-consultation',
   templateUrl: './doc-consultation.component.html',
@@ -32,6 +33,7 @@ export class DocConsultationComponent implements OnInit {
   // [{khi_code:'bp',khi_desc:'Bloop pressure'}, {khi_code:'height',khi_desc:'Height'}];
   constructor(
     private docService: DocConsultationService,
+    private ref:ReferenceService,
     private utility: UtilityService,
     private dialog: MatDialog
   ) {}
@@ -39,15 +41,18 @@ export class DocConsultationComponent implements OnInit {
   ngOnInit(): void {
     if (history.state && history.state.patient_id) {
       this.aptObj = history.state;
-      let header = localStorage.getItem('header') ?? '';
-      this.patientHeader(JSON.parse(header));
+      let header = this.ref
+        .fetchHeader(history.state.patient_id)
+        .subscribe((data) => {
+          this.patientHeader(data);
+        });
     }
     this.docService.fetchVitalParams().subscribe((data) => {
       this.vitalParametersList = data;
     });
   }
   patientHeader(data: any) {
-    this.headerDetail = data;
+    this.headerDetail = {...data};
     this.docService
       .fetchPrevDeatils(this.headerDetail.patient_id)
       .subscribe((data) => {

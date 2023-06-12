@@ -21,7 +21,14 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./patient-header.component.scss'],
 })
 export class PatientHeaderComponent implements OnInit {
-  @Input() header: any;
+  _header: any;
+  @Input() set header(value: string) {
+    console.log('input', value);
+    if (value) {
+      this.headerDetail = true;
+      this.patientHeader = value;
+    }
+  }
   @Output()
   outputPatientHeader = new EventEmitter();
   @Output() outputPatientInsHeader = new EventEmitter();
@@ -58,12 +65,8 @@ export class PatientHeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchType = 'phone_no';
-    
+
     // when navigatin from appointment table from landing page.
-    if (this.header) {
-      this.headerDetail = true;
-      this.patientHeader = this.header;
-    }
   }
 
   fetchUser() {

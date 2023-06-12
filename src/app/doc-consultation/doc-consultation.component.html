@@ -3,7 +3,7 @@
     <div class="row">
         <h1>Doctor consulation</h1>
     </div>
-    <app-patient-header [header]="headerDetail" (outputPatientHeader)="patientHeader($event)"></app-patient-header>
+    <app-patient-header [(header)]="headerDetail" (outputPatientHeader)="patientHeader($event)"></app-patient-header>
     <div *ngIf="headerDetail" class="margin-20t">
         <mat-tab-group>
             <!-- Doc notes -->
