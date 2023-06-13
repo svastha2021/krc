@@ -101,18 +101,18 @@
                     <td class="bg-grey w-10">{{poData.supp_inv_amt}}</td>
 
                     <td class="bg-grey w-10">{{poData.item_status_name}}</td>
-                        <td class=""><input type="text" placeholder="Enter Inv no" #focus class="form-control" [disabled]="poData.item_status_name=='Fully Received'"[(ngModel)]="poData.supp_inv_number"></td>
+                        <td class="w-12"><input type="text" placeholder="Enter Inv no" #focus class="form-control" [disabled]="poData.item_status_name=='Fully Received'"[(ngModel)]="poData.supp_inv_number"></td>
                         
-                        <td class=""><input type="date" class="form-control" [disabled]="poData.item_status_name=='Fully Received'" [(ngModel)]="poData.supp_inv_date"
+                        <td class="w-12"><input type="date" class="form-control" [disabled]="poData.item_status_name=='Fully Received'" [(ngModel)]="poData.supp_inv_date"
                             (change)="validateInvDate(poData)"></td> 
 
-                        <td class=""><input type="date" class="form-control" [disabled]="poData.item_status_name=='Fully Received'" [(ngModel)]="poData.receipt_date"
+                        <td class="w-12"><input type="date" class="form-control" [disabled]="poData.item_status_name=='Fully Received'" [(ngModel)]="poData.receipt_date"
                             (change)="validateReceiptDate(poData)"></td> 
                         
-                        <td class="w-10"><input type="number" class="form-control" [disabled]="poData.item_status_name=='Fully Received'" [(ngModel)]="poData.gr_qty_received"
+                        <td class=""><input type="number" class="form-control" [disabled]="poData.item_status_name=='Fully Received'" [(ngModel)]="poData.gr_qty_received"
                             (change)="validateQty(poData)"></td>
                         
-                        <td class="w-10"><input type="number" class="form-control" [disabled]="poData.item_status_name=='Fully Received'" [(ngModel)]="poData.gr_supp_inv_amt"></td>
+                        <td class=""><input type="number" class="form-control" [disabled]="poData.item_status_name=='Fully Received'" [(ngModel)]="poData.gr_supp_inv_amt"></td>
 
                         <td class="pointer" (click)="view(poData)"><mat-icon>visibility</mat-icon></td>
                     

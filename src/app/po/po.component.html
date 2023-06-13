@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="container">
     <div class="row">
-        <h3>PO</h3>
+        <h3>Purchase Order</h3>
     </div>
     <form [formGroup]="poForm">
         <div class="row">
@@ -83,7 +83,7 @@
                     </select>
                 </div>
             </div>
-            <div class="col-1">
+            <div class="col-2">
                 <div class="supplier-item">
                     <label for="qty_ordered" class="form-label">Qty Order</label>
                     <input type="number" min="0" class="form-control" formControlName="qty_ordered"
@@ -106,7 +106,7 @@
                     </select>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-3">
                 <div class="supplier-item">
                     <label for="remarks" class="form-label">Remarks</label>
                     <textarea type="text" class="form-control" formControlName="remarks"

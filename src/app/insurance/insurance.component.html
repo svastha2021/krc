@@ -270,7 +270,7 @@
                         <tbody>
                              <tr *ngFor = "let patientDialysisData of patientDialysisHistory">
             
-                                <td>{{patientDialysisData.invoice_date}}</td>
+                                <td>{{patientDialysisData.invoice_date | date: "dd-MM-yyyy"}}</td>
                                 <td>{{patientDialysisData.invoice_num}}</td>
                                 <td *ngIf="patientDialysisData.active_flag == null">
                                     <div class="circle-red"></div>
