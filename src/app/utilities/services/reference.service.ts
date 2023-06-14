@@ -3,10 +3,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, ObservedValueOf, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { UtilityService } from './utility.service';
 @Injectable({
   providedIn: 'root',
 })
 export class ReferenceService {
+  public eodDDMMYYY: string = '';
   public eod: BehaviorSubject<string> = new BehaviorSubject<string>('');
   public eodDate = this.eod.asObservable();
 
@@ -14,10 +16,16 @@ export class ReferenceService {
     return this.eodDate;
   }
   setEodDate(date: any) {
+    this.eodDDMMYYY = this.us.convertTodayTostrDDMMYYYY(date);
     this.eod.next(date);
   }
 
-  constructor(private http: HttpClient) {}
+  //to return the dd-MM-YYYY format of EOD
+  getEODDDMMYYYY() {
+    return this.eodDDMMYYY;
+  }
+
+  constructor(private http: HttpClient, private us: UtilityService) {}
 
   getPaymentModes(mode: string): Observable<any> {
     let headers = new HttpHeaders();

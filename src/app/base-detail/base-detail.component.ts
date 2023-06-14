@@ -33,7 +33,7 @@ export class BaseDetailComponent implements OnInit, OnDestroy {
   fetchEOD() {
     this.ref.getEodDetailData().subscribe((data) => {
       this.eod = this.us.convertTodayTostrDDMMYYYY(data.results[0].eod_date);
-      this.ref.setEodDate(this.eod);
+      this.ref.setEodDate(data.results[0].eod_date);
     });
   }
 }

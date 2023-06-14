@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { LoginService } from '../login/login.service';
 import { AptBookingService } from '../apt-booking/apt-booking.service';
 import { Router } from '@angular/router';
@@ -8,6 +8,7 @@ import { ManageAppointmentComponent } from '../manage-appointment/manage-appoint
 import { ManagePatientService } from '../manage-patient/manage-patient.service';
 import { ReferenceService } from '../utilities/services/reference.service';
 import { UtilityService } from '../utilities/services/utility.service';
+import { Subscription } from 'rxjs';
 type PatientSchedule = {
   patient_id: number;
   patient_name: string;
@@ -20,12 +21,13 @@ type PatientSchedule = {
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.scss'],
 })
-export class LandingComponent implements OnInit {
+export class LandingComponent implements OnInit, OnDestroy {
   doctorList = [];
   userData: any;
   aptData: any = [];
   patientScheduleData: PatientSchedule[] = [];
   eodDate: string = '';
+  eodSubscrition: Subscription | undefined;
   constructor(
     private login: LoginService,
     private dialog: MatDialog,
@@ -35,13 +37,16 @@ export class LandingComponent implements OnInit {
     private ref: ReferenceService,
     private us: UtilityService
   ) {}
+  ngOnDestroy(): void {
+    this.eodSubscrition?.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.userData = this.login.userData;
     this.fetchAppointments();
     this.fetchDoctorsByBranchId();
 
-    this.ref.getEod().subscribe((data) => {
+    this.eodSubscrition = this.ref.getEod().subscribe((data) => {
       this.eodDate = data;
       if (this.eodDate !== '') {
         this.fetchPatientSchedule();
