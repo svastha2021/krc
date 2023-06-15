@@ -33,7 +33,7 @@ export class DocConsultationComponent implements OnInit {
   // [{khi_code:'bp',khi_desc:'Bloop pressure'}, {khi_code:'height',khi_desc:'Height'}];
   constructor(
     private docService: DocConsultationService,
-    private ref:ReferenceService,
+    private ref: ReferenceService,
     private utility: UtilityService,
     private dialog: MatDialog
   ) {}
@@ -52,7 +52,8 @@ export class DocConsultationComponent implements OnInit {
     });
   }
   patientHeader(data: any) {
-    this.headerDetail = {...data};
+    this.headerDetail = { ...data };
+    localStorage.setItem('header', JSON.stringify(this.headerDetail));
     this.docService
       .fetchPrevDeatils(this.headerDetail.patient_id)
       .subscribe((data) => {
