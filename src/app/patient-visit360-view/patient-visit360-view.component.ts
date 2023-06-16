@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { InvoiceService } from '../invoice/invoice.service';
 import { PatientVisit360ViewService } from './patient-visit360-view.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-patient-visit360-view',
@@ -24,7 +24,7 @@ export class PatientVisit360ViewComponent implements OnInit {
   visitData: any;
   
   constructor(private formBuilder: FormBuilder, private is: InvoiceService, private dialog: MatDialog, 
-    private pvService: PatientVisit360ViewService, private route: ActivatedRoute) {
+    private pvService: PatientVisit360ViewService, private route: ActivatedRoute, private router: Router) {
     this.route.params.subscribe(data => {
       if (data) {
         this.visitData = data;
@@ -67,7 +67,10 @@ export class PatientVisit360ViewComponent implements OnInit {
 
   printToPdf() {
     let element: HTMLElement = document.getElementById('print-section') as HTMLElement;
-    
     element.click();
+  }
+
+  back() {
+    this.router.navigate(['doc-consult']);
   }
 }

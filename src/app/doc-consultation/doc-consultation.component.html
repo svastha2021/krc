@@ -96,6 +96,27 @@
                     <app-prev-vist-details [tableData]="patientHistory" ></app-prev-vist-details>
                 </div>
             </mat-tab>
+
+            <!-- Opthal Basic paramaters tab -->
+            <mat-tab label="Basic" class="overflow-hidden">
+                <app-opthal-basic [visit_no]="visit_no" [visit_date]="visit_date" [headerDetail]="headerDetail"></app-opthal-basic>
+             </mat-tab>
+
+            <!-- Opthal Refraction paramaters tab -->
+            <mat-tab label="Refraction" class="overflow-hidden">
+                <app-opthal-refraction [visit_no]="visit_no" [visit_date]="visit_date" [headerDetail]="headerDetail"></app-opthal-refraction>
+             </mat-tab>
+             
+             <!-- Opthal Spectacle paramaters tab -->
+            <mat-tab label="Spectacle" class="overflow-hidden">
+                <app-opthal-spectacle [visit_no]="visit_no" [visit_date]="visit_date" [headerDetail]="headerDetail"></app-opthal-spectacle>
+             </mat-tab>
+
+            <!-- Opthal Slit-Lamp paramaters tab -->
+            <mat-tab label="Slit-Lamp" class="overflow-hidden">
+                <app-slit-lamp [visit_no]="visit_no" [visit_date]="visit_date" [headerDetail]="headerDetail"></app-slit-lamp>
+             </mat-tab>
+             
         </mat-tab-group>
     </div>
     

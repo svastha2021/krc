@@ -1,0 +1,98 @@
+<div class="error-container" *ngIf="!visit_no">Please save doctor notes to save refraction details</div>
+<div class="row margin-20l">
+    <div class="col-md-4">
+        <div><label class="form-label margin-20t"></label></div>
+        <div><label class="form-label margin-20t">Unaided VA</label></div>
+        <div><label class="form-label margin-20t">VA with RX</label></div>
+        <div><label class="form-label margin-20t">OLD RX</label></div>
+        <div><label class="form-label margin-20t">Retinoscopy findings</label></div>
+        <div><label class="form-label margin-20t">VA with New RX</label></div>
+        <div><label class="form-label margin-20t">Final suggestible RX</label></div>
+    </div>
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-4">
+                <h6>RE</h6>
+            </div>
+            <div class="col-md-4">
+                <h6>LE</h6>
+            </div>
+            <div class="col-md-4" *ngIf="!showPreviousTable">
+                <!-- <button class="btn btn-primary" (click)="addRecord()">Add Record</button> -->
+                <button class="btn btn-primary ms-2" (click)="displayPrevious()">Show Previous</button>
+            </div>
+            <div class="col-md-4" *ngIf="showPreviousTable">
+                <ul class="pagination pointer">
+                    <li class="page-item" [ngClass]="{'disabled': recordIndex === 0 }">
+                        <a class="page-link" (click)="prevItem()">Previous</a>
+                    </li>
+                    <li class="page-item" [ngClass]="{'disabled': recordIndex === undefined || recordIndex === getLastRecordIndex() }">
+                        <a class="page-link" (click)="nextItem()">Next</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <form [formGroup]="refractionForm">
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="text"  class="form-control margin-10t" formControlName="unaided_va_re" required/>
+                </div>
+                <div class="col-md-4">
+                    <input type="text"  class="form-control margin-10t" formControlName="unaided_va_le" required/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="text"  class="form-control margin-10t" formControlName="varx_re" required/>
+                </div>
+                <div class="col-md-4">
+                    <input type="text"  class="form-control margin-10t" formControlName="varx_le" required/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="text"  class="form-control margin-10t" formControlName="old_rx_re" required/>
+                </div>
+                <div class="col-md-4">
+                    <input type="text"  class="form-control margin-10t" formControlName="old_rx_le" required/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="text"  class="form-control margin-10t" formControlName="retina_re" required/>
+                </div>
+                <div class="col-md-4">
+                    <input type="text"  class="form-control margin-10t" formControlName="retina_le" required/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="text"  class="form-control margin-10t" formControlName="va_newrx_re" required/>
+                </div>
+                <div class="col-md-4">
+                    <input type="text"  class="form-control margin-10t" formControlName="va_newrx_le" required/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="text"  class="form-control margin-10t" formControlName="final_rx_re" required/>
+                </div>
+                <div class="col-md-4">
+                    <input type="text"  class="form-control margin-10t" formControlName="final_rx_le" required/>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 pointer">
+        <button type="button" class="btn btn-primary margin-20t" (click)="saveRefractionParams()" *ngIf="!showPreviousTable" [disabled]="!visit_no || refractionForm.invalid">
+            Save
+        </button>
+        <button type="button" class="btn btn-primary margin-20t" (click)="back()" *ngIf="showPreviousTable">
+            Back
+        </button>
+    </div>
+    <div class="col-md-4"></div>
+</div>

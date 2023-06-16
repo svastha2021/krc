@@ -1,0 +1,152 @@
+<div class="error-container" *ngIf="!visit_no">Please save doctor notes to save Slit Lamp Examination</div>
+<div class="row">
+    <div class="col-md-12 align-end" *ngIf="!showPreviousTable">
+        <button class="btn btn-primary ms-2" (click)="displayPrevious()">Show Previous</button>
+    </div>
+    <div class="col-md-12 align-end" *ngIf="showPreviousTable">
+        <ul class="pagination pointer">
+            <li class="page-item" [ngClass]="{'disabled': recordIndex === 0 }">
+                <a class="page-link" (click)="prevItem()">Previous</a>
+            </li>
+            <li class="page-item" [ngClass]="{'disabled': recordIndex === undefined || recordIndex === getLastRecordIndex() }">
+                <a class="page-link" (click)="nextItem()">Next</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<form [formGroup]="slitLampForm">
+    <div class="row margin-20l">
+            <div class="col-md-4 pg-10">
+                <label class="form-label margin-20t">LIDS / LASHES/ LACRIMAL SYSTEM</label>
+            </div>
+            <div class="col-md-4 pg-10">
+                <select formControlName="lids_lashes" class="form-control" required>
+                <option [ngValue]="null" disabled>-Select-</option>
+                <option *ngFor="let ref of slit1" [ngValue]="ref.ref_code">{{ref.ref_desc}}</option>
+                </select>
+            </div>
+            <div class="col-md-4 pg-10">
+                <textarea type="textarea" formControlName="lids_lashes_remarks" class="form-control"></textarea>
+            </div>
+            <div class="col-md-4 pg-10">
+                <label class="form-label margin-20t">CONJUNCTIVA / SCLERA</label>
+            </div>
+            <div class="col-md-4 pg-10">
+                <select formControlName="conjuctiva" class="form-control" required>
+                <option [ngValue]="null" disabled>-Select-</option>
+                <option *ngFor="let ref of slit2" [ngValue]="ref.ref_code">{{ref.ref_desc}}</option>
+                </select>
+            </div>
+            <div class="col-md-4 pg-10">
+                <textarea type="textarea" formControlName="conjuctiva_remarks" class="form-control"></textarea>
+            </div>
+            <div class="col-md-4 pg-10">
+                <label class="form-label margin-20t">CORNEA</label>
+            </div>
+            <div class="col-md-4 pg-10">
+                <select formControlName="cornea" class="form-control" required>
+                <option [ngValue]="null" disabled>-Select-</option>
+                <option *ngFor="let ref of slit3" [ngValue]="ref.ref_code">{{ref.ref_desc}}</option>
+                </select>
+            </div>
+            <div class="col-md-4 pg-10">
+                <textarea type="textarea" formControlName="cornea_remarks" class="form-control"></textarea>
+            </div>
+            <div class="col-md-4 pg-10">
+                <label class="form-label margin-20t">ANTERIOR CHAMBER</label>
+            </div>
+            <div class="col-md-4 pg-10">
+                <select formControlName="anterior_chamber" class="form-control" required>
+                <option [ngValue]="null" disabled>-Select-</option>
+                <option *ngFor="let ref of slit4" [ngValue]="ref.ref_code">{{ref.ref_desc}}</option>
+                </select>
+            </div>
+            <div class="col-md-4 pg-10">
+                <textarea type="textarea" formControlName="anterior_chamber_remarks" class="form-control"></textarea>
+            </div>
+            <div class="col-md-4 pg-10">
+                <label class="form-label margin-20t">IRIS</label>
+            </div>
+            <div class="col-md-4 pg-10">
+                <select formControlName="iris" class="form-control" required>
+                <option [ngValue]="null" disabled>-Select-</option>
+                <option *ngFor="let ref of slit5" [ngValue]="ref.ref_code">{{ref.ref_desc}}</option>
+                </select>
+            </div>
+            <div class="col-md-4 pg-10">
+                <textarea type="textarea" formControlName="iris_remarks" class="form-control"></textarea>
+            </div>
+            <div class="col-md-4 pg-10">
+                <label class="form-label margin-20t">LENS</label>
+            </div>
+            <div class="col-md-4 pg-10">
+                <select formControlName="lens" class="form-control" required>
+                <option [ngValue]="null" disabled>-Select-</option>
+                <option *ngFor="let ref of slit6" [ngValue]="ref.ref_code">{{ref.ref_desc}}</option>
+                </select>
+            </div>
+            <div class="col-md-4 pg-10">
+                <textarea type="textarea" formControlName="lens_remarks" class="form-control"></textarea>
+            </div>
+            <div class="col-md-4 pg-10">
+                <label class="form-label margin-20t">ANTERIOR VITREOUS</label>
+            </div>
+            <div class="col-md-4 pg-10">
+                <select formControlName="anterior_vitrious" class="form-control" required>
+                <option [ngValue]="null" disabled>-Select-</option>
+                <option *ngFor="let ref of slit7" [ngValue]="ref.ref_code">{{ref.ref_desc}}</option>
+                </select>
+            </div>
+            <div class="col-md-4 pg-10">
+                <textarea type="textarea" formControlName="anterior_vitrious_remarks" class="form-control"></textarea>
+            </div>
+            <div class="col-md-4 pg-10">
+                <label class="form-label margin-20t">UNDILATED FUNDUS</label>
+            </div>
+            <div class="col-md-4 pg-10">
+                <select formControlName="undilated_fundus" class="form-control" required>
+                <option [ngValue]="null" disabled>-Select-</option>
+                <option *ngFor="let ref of slit8" [ngValue]="ref.ref_code">{{ref.ref_desc}}</option>
+                </select>
+            </div>
+            <div class="col-md-4 pg-10">
+                <textarea type="textarea" formControlName="undilated_fundus_remarks" class="form-control"></textarea>
+            </div>
+            <div class="col-md-4 pg-10">
+                <label class="form-label margin-20t">DILATED FUNDUS</label>
+            </div>
+            <div class="col-md-4 pg-10">
+                <select formControlName="dilated_fundus" class="form-control" required>
+                <option [ngValue]="null" disabled>-Select-</option>
+                <option *ngFor="let ref of slit9" [ngValue]="ref.ref_code">{{ref.ref_desc}}</option>
+                </select>
+            </div>
+            <div class="col-md-4 pg-10">
+                <textarea type="textarea" formControlName="dilated_fundus_remarks" class="form-control"></textarea>
+            </div>
+            <div class="col-md-4 pg-10">
+                <label class="form-label margin-20t">FUNDUS FINDINGS</label>
+            </div>
+            <div class="col-md-4 pg-10">
+                <select formControlName="fundus_findings" class="form-control" required>
+                <option [ngValue]="null" disabled>-Select-</option>
+                <option *ngFor="let ref of slit10" [ngValue]="ref.ref_code">{{ref.ref_desc}}</option>
+                </select>
+            </div>
+            <div class="col-md-4 pg-10">
+                <textarea type="textarea" formControlName="fundus_findings_remarks" class="form-control"></textarea>
+            </div>
+    </div>
+</form>
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 pointer">
+        <button type="button" class="btn btn-primary margin-20t" (click)="saveSlitLamp()" *ngIf="!showPreviousTable" [disabled]="!visit_no || slitLampForm.invalid">
+            Save
+        </button>
+        <button type="button" class="btn btn-primary margin-20t" (click)="back()" *ngIf="showPreviousTable">
+            Back
+        </button>
+    </div>
+    <div class="col-md-4"></div>
+</div>

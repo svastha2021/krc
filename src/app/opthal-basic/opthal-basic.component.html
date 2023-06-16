@@ -1,0 +1,98 @@
+<div class="error-container" *ngIf="!visit_no">Please save doctor notes to save basic details</div>
+<div class="row margin-20l">
+    <div class="col-md-4">
+        <div><label class="form-label margin-20t"></label></div>
+        <div><label class="form-label margin-20t">Visual Acuity</label></div>
+        <div><label class="form-label margin-20t">Pupils</label></div>
+        <div><label class="form-label margin-20t">Extra Ocular Motility & Alignment</label></div>
+        <div><label class="form-label margin-20t">External Examination</label></div>
+        <div><label class="form-label margin-20t">Slit Lamp Examination</label></div>
+        <div><label class="form-label margin-20t">Fundoscopic Examination</label></div>
+    </div>
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-4">
+                <h6>RE</h6>
+            </div>
+            <div class="col-md-4">
+                <h6>LE</h6>
+            </div>
+            <div class="col-md-4" *ngIf="!showPreviousTable">
+                <!-- <button class="btn btn-primary" (click)="addRecord()">Add Record</button> -->
+                <button class="btn btn-primary ms-2" (click)="displayPrevious()">Show Previous</button>
+            </div>
+            <div class="col-md-4" *ngIf="showPreviousTable">
+                <ul class="pagination pointer">
+                    <li class="page-item" [ngClass]="{'disabled': recordIndex === 0 }">
+                        <a class="page-link" (click)="prevItem()">Previous</a>
+                    </li>
+                    <li class="page-item" [ngClass]="{'disabled': recordIndex === undefined || recordIndex === getLastRecordIndex() }">
+                        <a class="page-link" (click)="nextItem()">Next</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <form [formGroup]="basicForm">
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="text"  class="form-control margin-10t" formControlName="vis_act_re" required/>
+                </div>
+                <div class="col-md-4">
+                    <input type="text"  class="form-control margin-10t" formControlName="vis_act_le" required/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="text"  class="form-control margin-10t" formControlName="pupils_re" required/>
+                </div>
+                <div class="col-md-4">
+                    <input type="text"  class="form-control margin-10t" formControlName="pupils_le" required/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="text"  class="form-control margin-10t" formControlName="ocular_re" required/>
+                </div>
+                <div class="col-md-4">
+                    <input type="text"  class="form-control margin-10t" formControlName="ocular_le" required/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="text"  class="form-control margin-10t" formControlName="ext_exam_re" required/>
+                </div>
+                <div class="col-md-4">
+                    <input type="text"  class="form-control margin-10t" formControlName="ext_exam_le" required/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="text"  class="form-control margin-10t" formControlName="slit_exam_re" required/>
+                </div>
+                <div class="col-md-4">
+                    <input type="text"  class="form-control margin-10t" formControlName="slit_exam_le" required/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="text"  class="form-control margin-10t" formControlName="fund_exam_re" required/>
+                </div>
+                <div class="col-md-4">
+                    <input type="text"  class="form-control margin-10t" formControlName="fund_exam_le" required/>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 pointer">
+        <button type="button" class="btn btn-primary margin-20t" (click)="saveBasicParams()" *ngIf="!showPreviousTable" [disabled]="!visit_no || basicForm.invalid">
+            Save
+        </button>
+        <button type="button" class="btn btn-primary margin-20t" (click)="back()" *ngIf="showPreviousTable">
+            Back
+        </button>
+    </div>
+    <div class="col-md-4"></div>
+</div>
