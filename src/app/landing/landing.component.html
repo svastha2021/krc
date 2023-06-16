@@ -26,7 +26,7 @@
           <th></th>
         </tr>
       </thead>
-      <tbody *ngIf="aptData?.length > 0">
+      <tbody *ngIf="aptData.length > 0">
         <tr *ngFor="let apt of aptData">
           <td>{{ apt.patient_id }}</td>
           <td>{{ apt.patient_name }}</td>
@@ -52,7 +52,7 @@
           </td>
         </tr>
       </tbody>
-      <span *ngIf="aptData?.length === 0">No records</span>
+      <span *ngIf="aptData.length === 0">No records</span>
     </table>
   </div>
   <hr />

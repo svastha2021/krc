@@ -1,14 +1,33 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { LoginService } from '../login/login.service';
-import { AptBookingService } from '../apt-booking/apt-booking.service';
+import { loginUserData, LoginService } from '../login/login.service';
+import {
+  AptBookingService,
+  aptModel,
+} from '../apt-booking/apt-booking.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { ManageDialogComponent } from '../manage-dialog/manage-dialog.component';
 import { ManageAppointmentComponent } from '../manage-appointment/manage-appointment.component';
 import { ManagePatientService } from '../manage-patient/manage-patient.service';
 import { ReferenceService } from '../utilities/services/reference.service';
 import { UtilityService } from '../utilities/services/utility.service';
 import { Subscription } from 'rxjs';
+
+type doctor = {
+  doctor_id: string;
+  org_id: string;
+  branch_id: string;
+  doctor_status: string;
+  doctor_name: string;
+  doctor_contact_no: string;
+  doctor_email_id: string;
+  doctor_assistant_name: string;
+  doctor_assistant_contact_no: string;
+  updated_by: string;
+  created_by: string;
+  created_date: string;
+  updated_date: string;
+  doctor_asst_emailid: string;
+};
 type PatientSchedule = {
   patient_id: number;
   patient_name: string;
@@ -22,9 +41,9 @@ type PatientSchedule = {
   styleUrls: ['./landing.component.scss'],
 })
 export class LandingComponent implements OnInit, OnDestroy {
-  doctorList = [];
-  userData: any;
-  aptData: any = [];
+  doctorList: doctor[] = [];
+  userData: loginUserData | undefined;
+  aptData: aptModel[] = [];
   patientScheduleData: PatientSchedule[] = [];
   eodDate: string = '';
   eodSubscrition: Subscription | undefined;
@@ -61,43 +80,18 @@ export class LandingComponent implements OnInit, OnDestroy {
   }
 
   fetchAppointments() {
-    let currentDate = new Date();
-    let appointDate =
-      currentDate.getFullYear() +
-      '-' +
-      this.appendZero(currentDate.getMonth() + 1) +
-      '-' +
-      this.appendZero(currentDate.getDate());
-    //this.aptData = [{"patient_id":"PATKRC002000003","patient_name":"rams","mobile_no":"7418530091","doa":"2022-04-16"}];
     this.aptService
-      .getCurrentAppointments(appointDate)
+      .getCurrentAppointments(this.us.convertTodayTostr())
       .subscribe((response: { results: any }) => {
         this.aptData = response.results;
       });
   }
-  appendZero(value: any) {
-    if (value < 10) {
-      return '0' + value;
-    }
-    return value;
-  }
 
   edit_apt(value: any) {
-    console.log(value);
     this.router.navigate(['/apt-booking'], { state: value });
-  }
-  delete_apt(apt: any) {
-    //delete service
   }
 
   managePatient() {
-    // const dialogRef = this.dialog.open(ManageDialogComponent, {
-    //   width: '300px',
-    // });
-
-    // dialogRef.afterClosed().subscribe(data => {
-    //   console.log(data);
-    // })
     this.router.navigate(['manage-patient']);
   }
 
@@ -108,14 +102,12 @@ export class LandingComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe((data) => {
-      console.log(data);
       this.retrieveAppointments(data);
     });
   }
 
   retrieveAppointments(data: any) {
     this.aptService.getAppointments(data).subscribe((response) => {
-      console.log(response);
       this.aptData = response.results;
     });
   }

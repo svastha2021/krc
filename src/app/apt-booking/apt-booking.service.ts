@@ -4,6 +4,27 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { environment } from '../../environments/environment';
+
+export type aptModel = {
+  org_id: string;
+  branch_id: string;
+  patient_id: string;
+  phone_no: string;
+  patient_name: string;
+  doctor_id: string;
+  ailment: string;
+  appoint_date: string;
+  appoint_time: string;
+  appoint_no: string;
+  appoint_status: string;
+  updated_by: string;
+  updated_on: string;
+  department_id: string;
+  created_by: string;
+  created_on: string;
+  doctor_name: string;
+};
+
 @Injectable({
   providedIn: 'root',
 })
@@ -15,8 +36,7 @@ export class AptBookingService {
   ) {}
 
   //fetch patient details from mobile number
-  fetchUserData(mobile_no: string): Observable<any> {
-    let branch_id = localStorage.getItem('branch_id');
+  fetchUserData(mobile_no: string): Observable<any> {    
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.get(
@@ -47,7 +67,7 @@ export class AptBookingService {
     );
   }
 
-  getCurrentAppointments(appointDate: any): any {
+  getCurrentAppointments(appointDate: string): any {
     let branch_id = localStorage.getItem('branch_id');
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
