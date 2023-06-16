@@ -1,0 +1,127 @@
+<div class="row margin-20l">
+    <div class="error-container" *ngIf="!visit_no">Please save doctor notes to save Spectacle details</div>
+    <!-- <div class="row">
+        <div class="col-md-6">
+            <div class="error-container" *ngIf="!visit_no">Please save doctor notes to save Spectacle details</div>
+        </div>
+        <div class="col-md-6 pointer text-right">
+            <button class="btn btn-primary ms-2" (click)="displayPrevious()" *ngIf="!showPreviousTable">Show Previous</button>
+        </div>
+        <ul class="pagination content-right" *ngIf="showPreviousTable">
+            <li class="page-item" [ngClass]="{'disabled': recordIndex === 0 }">
+                <a class="page-link" (click)="prevItem()">Previous</a>
+            </li>
+            <li class="page-item" [ngClass]="{'disabled': recordIndex === undefined || recordIndex === getLastRecordIndex() }">
+                <a class="page-link" (click)="nextItem()">Next</a>
+            </li>
+        </ul>
+    </div> -->
+        <div class="col-md-4">
+            <div><label class="form-label margin-20t"></label></div>
+            <div><label class="form-label margin-20t">Spl</label></div>
+            <div><label class="form-label margin-20t">Cyl</label></div>
+            <div><label class="form-label margin-20t">Axis</label></div>
+            <div><label class="form-label margin-20t">Add</label></div>
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-4">
+                    <h6>RE</h6>
+                </div>
+                <div class="col-md-4">
+                    <h6>LE</h6>
+                </div>
+                <div class="col-md-4" *ngIf="!showPreviousTable">
+                    <button class="btn btn-primary ms-2 pointer" (click)="displayPrevious()">Show Previous</button>
+                </div>
+                <div class="col-md-4" *ngIf="showPreviousTable">
+                    <ul class="pagination pointer content-right">
+                        <li class="page-item" [ngClass]="{'disabled': recordIndex === 0 }">
+                            <a class="page-link" (click)="prevItem()">Previous</a>
+                        </li>
+                        <li class="page-item" [ngClass]="{'disabled': recordIndex === undefined || recordIndex === getLastRecordIndex() }">
+                            <a class="page-link" (click)="nextItem()">Next</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <form [formGroup]="specForm">
+                <div class="row">
+                    <div class="col-md-4">
+                        <input type="text"  class="form-control margin-10t" formControlName="sphere_re" required/>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text"  class="form-control margin-10t" formControlName="sphere_le" required/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <input type="text"  class="form-control margin-10t" formControlName="cylinder_re" required/>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text"  class="form-control margin-10t" formControlName="cylinder_le" required/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <input type="text"  class="form-control margin-10t" formControlName="axis_re" required/>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text"  class="form-control margin-10t" formControlName="axis_le" required/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <input type="text"  class="form-control margin-10t" formControlName="add_re" required/>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text"  class="form-control margin-10t" formControlName="add_le" required/>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    <!-- <table class="table table-bordered" *ngIf="showPreviousTable">
+        <thead>
+            <tr>
+                <th colspan="4" scope="colgroup" class="txt-center">RE</th>
+                <th colspan="4" scope="colgroup" class="txt-center">LE</th>
+            </tr>
+            <tr>
+                <th scope="col">Sph</th>
+                <th scope="col">Cyl</th>
+                <th scope="col">Axis</th>
+                <th scope="col">ADD</th>
+                <th scope="col">Sph</th>
+                <th scope="col">Cyl</th>
+                <th scope="col">Axis</th>
+                <th scope="col">ADD</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let spec of SpectacleData">
+                <td>{{spec.sphere_re}}</td>
+                <td>{{spec.cylinder_re}}</td>
+                <td>{{spec.axis_re}}</td>
+                <td>{{spec.add_re}}</td>
+                <td>{{spec.sphere_le}}</td>
+                <td>{{spec.cylinder_le}}</td>
+                <td>{{spec.axis_le}}</td>
+                <td>{{spec.add_le}}</td>
+            </tr>
+        </tbody>
+    </table> -->
+</div>
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 pointer text-center">
+        <button type="button" class="btn btn-primary margin-20t" (click)="saveSpectacleParams()" *ngIf="!showPreviousTable" [disabled]="!visit_no || specForm.invalid">
+            Save
+        </button>
+        <button type="button" class="btn btn-primary margin-20t" (click)="back()" *ngIf="showPreviousTable">
+            Back
+        </button>
+    </div>
+    <div class="col-md-4"></div>
+</div>

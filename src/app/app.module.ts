@@ -96,6 +96,10 @@ import { InvoiceProductReportComponent } from './invoice-product-report/invoice-
 import { InvoiceProductTable } from './invoice-product-report/invoice-product-table/invoice-product-table.component';
 import { PrevVistDetailsComponent } from './prev-vist-details/prev-vist-details.component';
 import { PatientVisit360ViewComponent } from './patient-visit360-view/patient-visit360-view.component';
+import { OpthalBasicComponent } from './opthal-basic/opthal-basic.component';
+import { OpthalRefractionComponent } from './opthal-refraction/opthal-refraction.component';
+import { OpthalSpectacleComponent } from './opthal-spectacle/opthal-spectacle.component';
+import { SlitLampComponent } from './slit-lamp/slit-lamp.component';
 //import { InvoicePaymentTable } from './invoice-payment-report/invoice-payment-table/invoice-payment-table.component';
 //import { InvoiceProductTable } from './invoice-product-report/invoice-product-table/invoice-product-table.component';
 @NgModule({
@@ -182,7 +186,11 @@ import { PatientVisit360ViewComponent } from './patient-visit360-view/patient-vi
     InvoiceProductReportComponent,
     InvoiceProductTable,
     PrevVistDetailsComponent,
-    PatientVisit360ViewComponent
+    PatientVisit360ViewComponent,
+    OpthalBasicComponent,
+    OpthalRefractionComponent,
+    OpthalSpectacleComponent,
+    SlitLampComponent
     
   ],
   imports: [
