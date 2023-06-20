@@ -1,63 +1,138 @@
 <app-header></app-header>
 
 <div #appointBooking class="container">
-    <div class="row">
-        <h1>Apointment Booking</h1>
-        <form #aptBookingForm="ngForm" novalidate>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class=" patient-apt-item">
-                        <label for="contact" class="form-label">Contact</label>
-                        <input type="number" pattern=".{10}" class="form-control" required name="contact" [(ngModel)]="aptObj.phone_no"
-                            id="contact" [readonly]="updateApt">
-                        <button (click)="fetchUser()" [disabled]="!aptObj.phone_no || updateApt"
-                            class="btn btn-success mar20t"><i class="fa-solid fa-magnifying-glass mar5r"></i>fetch contact details</button>
-                    </div>
-                    <div class=" patient-apt-item">
-                        <label for="patientID" class="form-label">Patient ID</label>
-                        <input type="text" class="form-control"  name="patientID" [(ngModel)]="aptObj.patient_id"
-                            id="patientID" [readonly]="updateApt">
-                    </div>
-                    <div class=" patient-apt-item">
-                        <label for="patientName" class="form-label">Patient Name</label>
-                        <input type="text" class="form-control"  name="patientName" [(ngModel)]="aptObj.patient_name"
-                            id="patientName" [readonly]="updateApt">
-                    </div>
+  <div class="row">
+    <h2>Apointment Booking</h2>
+    <app-patient-header
+      *ngIf="!updateApt"
+      (outputPatientHeader)="patientHeaderData($event)"
+    ></app-patient-header>
+    <form #aptBookingForm="ngForm" novalidate>
+      <div class="row mar20t">
+        <div class="col-lg-2 patient-apt-item">
+          <label for="contact" class="form-label">Contact</label>
+          <input
+            type="number"
+            pattern=".{10}"
+            class="form-control"
+            required
+            name="contact"
+            [(ngModel)]="aptObj.phone_no"
+            id="contact"
+            [readonly]="updateApt"
+          />
+        </div>
+        <div class="col-lg-2 patient-apt-item">
+          <label for="patientID" class="form-label">Patient ID</label>
+          <input
+            type="text"
+            class="form-control"
+            name="patientID"
+            [(ngModel)]="aptObj.patient_id"
+            id="patientID"
+            [readonly]="updateApt"
+          />
+        </div>
+        <div class="col-lg-2 patient-apt-item">
+          <label for="patientName" class="form-label">Patient Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="patientName"
+            [(ngModel)]="aptObj.patient_name"
+            id="patientName"
+            [readonly]="updateApt"
+          />
+        </div>
 
+        <div class="col-lg-2 patient-apt-item">
+          <label for="appoint_date" class="form-label">Appointment Date</label>
 
-                    <div class="patient-apt-item mar20t">
-                        <label for="appoint_date" class="form-label">Appointment Date</label>
-                        <!-- <input type="datetime-local" id="meeting-time" name="meeting-time" [(ngModel)]="aptObj.aptDate"
-                            [min]="currentDate"> -->
-                        <input type="date"  required min="{{currentDate|date:'yyyy-MM-dd'}}" class="form-control"
-                            name="appoint_date"  [(ngModel)]="aptObj.appoint_date" id="appoint_date" >
-                    </div>
-                    <div class="patient-apt-item mar20t">
-                        <label class="form-label">Doctor Name</label>
-                        <select class="form-control" name="patient_type" [(ngModel)]="aptObj.doctor_id" >
+          <input
+            type="date"
+            required
+            min="{{ currentDate | date : 'yyyy-MM-dd' }}"
+            class="form-control"
+            name="appoint_date"
+            [(ngModel)]="aptObj.appoint_date"
+            id="appoint_date"
+          />
+        </div>
+        <div class="col-lg-2 patient-apt-item">
+          <label class="form-label">Department</label>
+          <select
+            class="form-control"
+            name="dept_id"
+            [(ngModel)]="aptObj.dept_id"
+            (change)="fetchDoctorsByDept(true)"
+          >
+            <option *ngFor="let deptItem of dept" [value]="deptItem.dept_id">
+              {{ deptItem.dept_name }}
+            </option>
+          </select>
+        </div>
+        <div class="col-lg-2 patient-apt-item">
+          <label class="form-label">Doctor Name</label>
+          <select
+            class="form-control"
+            name="doctor_id"
+            [(ngModel)]="aptObj.doctor_id"
+          >
+            <option
+              *ngFor="let doctor of doctorList"
+              [value]="doctor.doctor_id"
+            >
+              {{ doctor.doctor_name }}
+            </option>
+          </select>
+        </div>
+        <div class="col-lg-2 patient-apt-item">
+          <label for="ailment" class="form-label">Ailment</label>
+          <input
+            type="text"
+            class="form-control"
+            name="ailment"
+            [(ngModel)]="aptObj.ailment"
+            id="ailment"
+          />
+        </div>
 
-                            <option *ngFor="let doctor of doctorList" [value]="doctor.doctor_id">{{doctor.doctor_name}}</option>
+        <div class="col-lg-2 patient-apt-item" *ngIf="updateApt">
+          <label class="form-label">Status</label>
+          <select
+            class="form-control"
+            name="patient_type"
+            [(ngModel)]="aptObj.appoint_status"
+          >
+            <option
+              *ngFor="let status of aptStatusList"
+              [value]="status.ref_code"
+            >
+              {{ status.ref_desc }}
+            </option>
+          </select>
+        </div>
+      </div>
 
-                        </select>
-                    </div>
-                    <div class=" patient-apt-item">
-                        <label for="ailment" class="form-label">Ailment</label>
-                        <input type="text" class="form-control" name="ailment" [(ngModel)]="aptObj.ailment" 
-                            id="patientName">
-                    </div>
-                    <!-- <div class="patient-reg-item">
-                        <label for="aptTime" class="form-label">Time</label>                        
-                        <input type="time" class="form-control" min='03:00' name="aptTime" [(ngModel)]="aptObj.aptTime"
-                            id="aptTime">
-                    </div> -->
-
-                </div>
-
-            </div>
-            <button class="btn btn-danger mar20t mar10lr" (click)="goBack()"><i class="fa-solid fa-arrow-left mar5r"></i>Back</button>
-            <button [disabled]="!aptBookingForm.valid" *ngIf="!updateApt" (click)="bookApt()"
-                class="btn btn-primary submit-btn mar20t mar10lr"><i class="fa-solid fa-paper-plane mar5r"></i>Book</button>
-            <button *ngIf="updateApt" [disabled]="!aptBookingForm.valid" (click)="updateAppointment()" class="btn btn-warning mar20t mar10lr"><i class="fa-solid fa-paper-plane mar5r"></i>Update</button>
-        </form>
-    </div>
+      <button class="btn btn-danger mar20t mar10lr" (click)="goBack()">
+        <i class="fa-solid fa-arrow-left mar5r"></i>Back
+      </button>
+      <button
+        [disabled]="!aptBookingForm.valid"
+        *ngIf="!updateApt"
+        (click)="bookApt()"
+        class="btn btn-primary submit-btn mar20t mar10lr"
+      >
+        <i class="fa-solid fa-paper-plane mar5r"></i>Book
+      </button>
+      <button
+        *ngIf="updateApt"
+        [disabled]="!aptBookingForm.valid"
+        (click)="updateAppointment()"
+        class="btn btn-warning mar20t mar10lr"
+      >
+        <i class="fa-solid fa-paper-plane mar5r"></i>Update
+      </button>
+    </form>
+  </div>
 </div>

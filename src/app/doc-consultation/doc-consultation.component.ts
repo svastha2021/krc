@@ -78,7 +78,7 @@ export class DocConsultationComponent implements OnInit {
         patient_id: this.headerDetail.patient_id,
         doctor_id: localStorage.getItem('user_id'),
         user_id: localStorage.getItem('user_id'),
-        business_id: '',
+        business_id: '',//dept id appoint_no
         visit_no: this.visit_no,
         visit_date: this.utility.convertTodayTostr(),
         prev_visit_date: '',

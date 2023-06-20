@@ -20,7 +20,7 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
   templateUrl: './patient-header.component.html',
   styleUrls: ['./patient-header.component.scss'],
 })
-export class PatientHeaderComponent implements OnInit {
+export class PatientHeaderComponent implements OnInit {  
   _header: any;
   @Input() set header(value: string) {
     console.log('input', value);
@@ -73,18 +73,21 @@ export class PatientHeaderComponent implements OnInit {
     this.patientHeaderService
       .fetchUserData(this.mobile_no)
       .subscribe((data) => {
+        this.mobile_no = '';
         this.patientDetail = true;
         //this.patientHeader = data.results;
         this.patientList = data.results;
         this.showPatientList(this.patientList);
+       // this.showSearch = false;
       });
   }
   fetchUserByName() {
     this.patientHeaderService
       .fetchUserDataByName(this.patient_name)
       .subscribe((data) => {
+        this.patient_name = '';
         this.patientDetail = true;
-
+        //this.showSearch = false;
         this.patientNameList = data.results;
         this.dataSource = data.results;
       });

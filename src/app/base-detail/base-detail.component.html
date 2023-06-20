@@ -1,4 +1,9 @@
-<div class="row" *ngIf="userData">    
-    <div class="col-lg-6">Welcome <strong>{{userData.user_name}}</strong>, {{userData.branch_name}}</div>
-    <div class="col-lg-6 text-end">Business Date: {{eod}}</div>
+<div class="container">
+  <div class="row" *ngIf="userData">
+    <div class="col-lg-6">
+      Welcome <strong>{{ userData.user_name }}</strong
+      >, {{ userData.branch_name }}
+    </div>
+    <div class="col-lg-6 text-end">Business Date: {{ eod }}</div>
+  </div>
 </div>

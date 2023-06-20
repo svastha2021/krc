@@ -36,7 +36,7 @@ export class AptBookingService {
   ) {}
 
   //fetch patient details from mobile number
-  fetchUserData(mobile_no: string): Observable<any> {    
+  fetchUserData(mobile_no: string): Observable<any> {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.get(
@@ -90,6 +90,39 @@ export class AptBookingService {
     });
   }
 
+  fetchDepartments(): Observable<any> {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(
+      environment.apiUrl +
+        'fetchbranchdept/' +
+        localStorage.getItem('org_id') +
+        '/' +
+        localStorage.getItem('branch_id'),
+      {
+        headers: headers,
+      }
+    );
+  }
+
+  // fetch doctot list from branch id
+  fetchDoctorsByDept(dept: string | undefined): Observable<any> {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(
+      environment.apiUrl +
+        'fetchdeptdoctor/' +
+        localStorage.getItem('org_id') +
+        '/' +
+        localStorage.getItem('branch_id') +
+        '/' +
+        dept,
+      {
+        headers: headers,
+      }
+    );
+  }
+
   getAppointments(payload: any): Observable<any> {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
@@ -106,5 +139,13 @@ export class AptBookingService {
         payload[payload.field],
       { headers: headers }
     );
+  }
+
+  getAppointmentStatus(): Observable<any> {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(environment.apiUrl + 'references/APTSTA', {
+      headers: headers,
+    });
   }
 }
