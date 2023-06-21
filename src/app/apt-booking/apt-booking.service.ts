@@ -23,6 +23,8 @@ export type aptModel = {
   created_by: string;
   created_on: string;
   doctor_name: string;
+  dept_id: string;
+  dept_name: string;
 };
 
 @Injectable({

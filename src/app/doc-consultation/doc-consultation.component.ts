@@ -6,6 +6,33 @@ import { UtilityService } from '../utilities/services/utility.service';
 import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ReferenceService } from '../utilities/services/reference.service';
+import { aptModel } from '../apt-booking/apt-booking.service';
+export type NotesPayload = {
+  org_id: string | null;
+  branch_id: string | null;
+  patient_id: string | null;
+  doctor_id: string | null;
+  user_id: string | null;
+  appoint_no: string;
+  business_id: string;
+  visit_no?: string;
+  visit_date: string;
+  prev_visit_date: string;
+  prev_history: string;
+  doctor_notes: string;
+};
+
+export type DialysisNotesPayload = {
+  org_id: string | null;
+  branch_id: string | null;
+  patient_id: string | null;
+  doctor_id: string | null;
+  user_id: string | null; 
+  business_id: string;
+  visit_no?: string;
+  prescription_date: string;
+  dialysis_notes: string;
+};
 @Component({
   selector: 'app-doc-consultation',
   templateUrl: './doc-consultation.component.html',
@@ -18,7 +45,7 @@ export class DocConsultationComponent implements OnInit {
   dialysisNotes: string = '';
   visit_no: any;
   headerDetail: any;
-  consultObj = {};
+  consultObj = {} as NotesPayload;
   patientHistory: any;
   patientDialysisHistory: any;
   currentPatientDetail = { doctor_notes: '', visit_no: '', visit_date: '' };
@@ -29,7 +56,7 @@ export class DocConsultationComponent implements OnInit {
   };
   vitalParam = { khi_code: '', khi_value: '', khi_notes: '' };
   vitalParametersList: any;
-  aptObj = {};
+  aptObj = {} as aptModel;
   visit_date: any;
   // [{khi_code:'bp',khi_desc:'Bloop pressure'}, {khi_code:'height',khi_desc:'Height'}];
   constructor(
@@ -42,11 +69,9 @@ export class DocConsultationComponent implements OnInit {
   ngOnInit(): void {
     if (history.state && history.state.patient_id) {
       this.aptObj = history.state;
-      let header = this.ref
-        .fetchHeader(history.state.patient_id)
-        .subscribe((data) => {
-          this.patientHeader(data);
-        });
+      this.ref.fetchHeader(history.state.patient_id).subscribe((data) => {
+        this.patientHeader(data);
+      });
     }
     this.docService.fetchVitalParams().subscribe((data) => {
       this.vitalParametersList = data;
@@ -78,7 +103,8 @@ export class DocConsultationComponent implements OnInit {
         patient_id: this.headerDetail.patient_id,
         doctor_id: localStorage.getItem('user_id'),
         user_id: localStorage.getItem('user_id'),
-        business_id: '',//dept id appoint_no
+        appoint_no: this.aptObj.appoint_no,
+        business_id: this.aptObj.dept_id, //dept id appoint_no
         visit_no: this.visit_no,
         visit_date: this.utility.convertTodayTostr(),
         prev_visit_date: '',
@@ -92,7 +118,8 @@ export class DocConsultationComponent implements OnInit {
         patient_id: this.headerDetail.patient_id,
         doctor_id: localStorage.getItem('user_id'),
         user_id: localStorage.getItem('user_id'),
-        business_id: '',
+        appoint_no: this.aptObj.appoint_no,
+        business_id: this.aptObj.dept_id, //dept id appoint_no,
         visit_date: this.utility.convertTodayTostr(),
         prev_visit_date: '',
         prev_history: '',
@@ -111,22 +138,22 @@ export class DocConsultationComponent implements OnInit {
       });
     });
   }
-
+  dialysisNotesPayload = {} as DialysisNotesPayload;
   saveDialysisNotes() {
     if (this.visit_no) {
-      this.consultObj = {
+      this.dialysisNotesPayload = {
         org_id: localStorage.getItem('org_id'),
         branch_id: localStorage.getItem('branch_id'),
         patient_id: this.headerDetail.patient_id,
         doctor_id: localStorage.getItem('user_id'),
-        user_id: localStorage.getItem('user_id'),
-        business_id: '',
+        user_id: localStorage.getItem('user_id'),    
+        business_id: '', 
         visit_no: this.visit_no,
         prescription_date: this.utility.convertTodayTostr(),
         dialysis_notes: this.dialysisNotes,
       };
       this.docService
-        .updatePatientConsult(this.consultObj)
+        .updatePatientConsult(this.dialysisNotesPayload)
         .subscribe((data) => {
           console.log(data);
           this.dialog.open(InfoDialogComponent, {
