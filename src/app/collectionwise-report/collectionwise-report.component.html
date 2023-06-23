@@ -23,7 +23,9 @@
 
   </div>
 
-
+  <div class="row mt-4" *ngIf="reportData?.length === 0">
+    <strong>No Data for given period.</strong>
+  </div>
   <div class="table-responsive-lg col-lg-12" style="margin-top:20px;padding-bottom:30px;"
     *ngIf="reportData?.length > 0">
     <table class="table table-bordered" id="collectionwise-table">

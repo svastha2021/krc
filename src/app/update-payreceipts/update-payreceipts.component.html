@@ -5,7 +5,7 @@
     <div class="row">
 
         <mat-radio-group class=" mar20lr" aria-label="Select an option" [ngModelOptions]="{standalone: true}"
-            [(ngModel)]="trans_type">
+            [(ngModel)]="trans_type" (change)="changeType()">
             <mat-label>Transaction Type</mat-label>
             <mat-radio-button class="p-4" value="R">Receipts</mat-radio-button>
             <mat-radio-button class="p-4" value="P">Payments</mat-radio-button>

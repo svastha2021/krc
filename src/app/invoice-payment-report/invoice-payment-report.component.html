@@ -31,7 +31,9 @@
   <!-- <div *ngIf="reportData && reportData.length>0">
     <inv-payment-list-table [patientList]="reportData"></inv-payment-list-table>
   </div> -->
-
+  <div class="row mt-4" *ngIf="dataSource.data?.length === 0">
+    <strong>No Data for given period.</strong>
+  </div>
   <div
     class="example-container mat-elevation-z8"
     *ngIf="dataSource.data.length > 0"
@@ -50,6 +52,7 @@
         />
       </mat-form-field>
     </div>
+    
     <div class="inv-report-table">
       <mat-table #table [dataSource]="dataSource" matSort>
         <!-- Position Column -->

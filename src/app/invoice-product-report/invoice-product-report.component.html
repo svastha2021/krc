@@ -27,4 +27,8 @@
     <inv-product-list-table [patientList]="reportData"></inv-product-list-table>
   </div>
 
+  <div class="row mt-4" *ngIf="reportData?.length === 0">
+    <strong>No Data for given period.</strong>
+  </div>
+
  

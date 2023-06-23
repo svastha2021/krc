@@ -16,13 +16,14 @@
     </mat-form-field>
   </div>
   <div class="row mt-4">
-    <button class="btn btn-success col-lg-2" (click)="getReports()"><i class="fa-solid fa-arrows-up-down mar5r"></i>Retrieve</button>
+    <button class="btn btn-success col-lg-2" [disabled]="this.from_date === undefined || this.to_date === undefined" (click)="getReports()"><i class="fa-solid fa-arrows-up-down mar5r"></i>Retrieve</button>
 
     <button class="btn btn-success col-lg-2 ms-2" [disabled]="reportData.length === 0"
       (click)="export2Excel()"><i class="fa-solid fa-file-excel mar5r"></i>Export</button>
 
   </div>
 
+  <div class="row mt-4" *ngIf="reportData?.length === 0"><strong>No Data for given period.</strong></div>
 
   <div class="table-responsive-lg col-lg-12" style="margin-top:20px;padding-bottom:30px;"
     *ngIf="reportData?.length > 0">

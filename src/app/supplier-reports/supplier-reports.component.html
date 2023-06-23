@@ -1,28 +1,42 @@
 <app-header></app-header>
 <div class="container">
-    <div class="row">
-        <h3>SUPPLIER PAYMENT REPORT</h3>
-    </div>
-    <div class="row">
-        <mat-form-field appearance="fill" class="col-lg-3">
-            <mat-label>Enter a date range</mat-label>
-            <mat-date-range-input [rangePicker]="picker">
-              <input matStartDate placeholder="Start date" [(ngModel)]="from_date">
-              <input matEndDate placeholder="End date" [max]="today" [(ngModel)]="to_date">
-            </mat-date-range-input>
-            <mat-hint>DD/MM/YYYY – DD/MM/YYYY</mat-hint>
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-date-range-picker #picker></mat-date-range-picker>
-          </mat-form-field>
-    </div>
-    <div class="row mt-4">
-        <button class="btn btn-success col-lg-2" (click)="getReports()"><i class="fa-solid fa-arrows-up-down mar5r"></i>Retrieve</button>
-        <button class="btn btn-success col-lg-2 ms-2" [disabled]="reportData.length === 0"
-        (click)="export2Excel()"><i class="fa-solid fa-file-excel mar5r"></i>Export</button>
-    </div>
-    <br>
-
-    <div *ngIf="reportData && reportData.length > 0" class="mar20t">
-      <app-sr-table [tableData]="reportData"></app-sr-table>
-    </div>
+  <div class="row">
+    <h3>SUPPLIER PAYMENT REPORT</h3>
+  </div>
+  <div class="row">
+    <mat-form-field appearance="fill" class="col-lg-3">
+      <mat-label>Enter a date range</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input matStartDate placeholder="Start date" [(ngModel)]="from_date" />
+        <input
+          matEndDate
+          placeholder="End date"
+          [max]="today"
+          [(ngModel)]="to_date"
+        />
+      </mat-date-range-input>
+      <mat-hint>DD/MM/YYYY – DD/MM/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+  </div>
+  <div class="row mt-4">
+    <button class="btn btn-success col-lg-2" (click)="getReports()" [disabled]="this.from_date === undefined || this.to_date === undefined">
+      <i class="fa-solid fa-arrows-up-down mar5r"></i>Retrieve
+    </button>
+    <button
+      class="btn btn-success col-lg-2 ms-2"
+      [disabled]="reportData.length === 0"
+      (click)="export2Excel()"
+    >
+      <i class="fa-solid fa-file-excel mar5r"></i>Export
+    </button>
+  </div>
+  <br />
+  <div class="row mt-4" *ngIf="reportData?.length === 0">
+    <strong>No Data for given period.</strong>
+  </div>
+  <div *ngIf="reportData && reportData.length > 0" class="mar20t">
+    <app-sr-table [tableData]="reportData"></app-sr-table>
+  </div>
 </div>

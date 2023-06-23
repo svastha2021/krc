@@ -93,6 +93,9 @@ export class UpdatePayreceiptsComponent implements OnInit {
 
     })
   }
+  changeType(){
+    this.reportData = [];
+  }
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace

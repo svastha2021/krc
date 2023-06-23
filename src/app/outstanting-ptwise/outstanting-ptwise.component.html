@@ -3,12 +3,16 @@
   <app-base-detail></app-base-detail>
   <h4>Outstanding Invoicewise Report</h4>
   <div class="row">
-
     <mat-form-field appearance="fill" class="col-lg-3">
       <mat-label>Enter a date range</mat-label>
       <mat-date-range-input [rangePicker]="picker">
-        <input matStartDate placeholder="Start date" [(ngModel)]="from_date">
-        <input matEndDate placeholder="End date" [max]="today" [(ngModel)]="to_date">
+        <input matStartDate placeholder="Start date" [(ngModel)]="from_date" />
+        <input
+          matEndDate
+          placeholder="End date"
+          [max]="today"
+          [(ngModel)]="to_date"
+        />
       </mat-date-range-input>
       <mat-hint>DD/MM/YYYY – DD/MM/YYYY</mat-hint>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -16,66 +20,77 @@
     </mat-form-field>
   </div>
   <div class="row mt-4">
-    <button class="btn btn-success col-lg-2" (click)="getReports()"><i class="fa-solid fa-arrows-up-down mar5r"></i>Retrieve</button>
+    <button class="btn btn-success col-lg-2" (click)="getReports()" [disabled]="this.from_date">
+      <i class="fa-solid fa-arrows-up-down mar5r"></i>Retrieve
+    </button>
 
-    <button class="btn btn-success col-lg-2 ms-2" [disabled]="reportData.length === 0"
-      (click)="export2Excel()"><i class="fa-solid fa-file-excel mar5r"></i>Export</button>
-
+    <button
+      class="btn btn-success col-lg-2 ms-2"
+      [disabled]="reportData.length === 0"
+      (click)="export2Excel()"
+    >
+      <i class="fa-solid fa-file-excel mar5r"></i>Export
+    </button>
   </div>
 
+  <div class="row mt-4" *ngIf="reportData?.length === 0">
+    <strong>No Data for given period.</strong>
+  </div>
 
-  <div class="table-responsive-lg col-lg-12" style="margin-top:20px;padding-bottom:30px;"
-    *ngIf="reportData?.length > 0">
+  <div
+    class="table-responsive-lg col-lg-12"
+    style="margin-top: 20px; padding-bottom: 30px"
+    *ngIf="reportData?.length > 0"
+  >
     <table class="table table-bordered" id="collectionwise-table">
       <thead class="thead-dark">
         <tr>
-          <th>Outstanding Report(Invoice wise) {{this.from_date | date:'dd-MMM-YYYY'}} to {{this.to_date |
-            date:'dd-MMM-YYYY'}}</th>
+          <th>
+            Outstanding Report(Invoice wise)
+            {{ this.from_date | date : "dd-MMM-YYYY" }} to
+            {{ this.to_date | date : "dd-MMM-YYYY" }}
+          </th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let item of reportData">
-          <td><table class="width-100">
-        <tr class="table-heading">
-          
-          <th>Pt Name</th>
-          <th>Inv No</th>
-          <th>Inv Date</th>
-          
-          <th>Pt Type</th>          
-          <th>Inv Amt</th>
-          <th>Amt Recvd</th>
-          <th>Outstanding</th>
+          <td>
+            <table class="width-100">
+              <tr class="table-heading">
+                <th>Pt Name</th>
+                <th>Inv No</th>
+                <th>Inv Date</th>
 
+                <th>Pt Type</th>
+                <th>Inv Amt</th>
+                <th>Amt Recvd</th>
+                <th>Outstanding</th>
+              </tr>
+              <tr *ngFor="let invoice of item?.details">
+                <td>{{ invoice.patient_name }}</td>
+                <td>{{ invoice.invoice_no }}</td>
+                <td>{{ invoice.inv_date | date : "dd-MM-YYYY" }}</td>
+
+                <td>{{ invoice.ref_desc }}</td>
+
+                <td>{{ invoice.net_inv_amount }}</td>
+                <td>{{ invoice.net_inv_paid }}</td>
+                <td>{{ invoice.net_inv_balance }}</td>
+              </tr>
+              <tr class="fw-bold">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{ item.inv_date | date : "dd-MM-YYYY" }}</td>
+                <td>{{ item.net_inv_amt }}</td>
+                <td>{{ item.net_inv_paid }}</td>
+                <td>{{ item.net_inv_bal }}</td>
+              </tr>
+            </table>
+          </td>
         </tr>
-        <tr *ngFor="let invoice of item?.details">
-          <td>{{invoice.patient_name}}</td>
-          <td>{{invoice.invoice_no}}</td>
-          <td>{{invoice.inv_date | date:'dd-MM-YYYY'}}</td>
-          
-          <td>{{invoice.ref_desc }}</td>
-         
-          <td>{{invoice.net_inv_amount }}</td>
-          <td>{{invoice.net_inv_paid }}</td>
-          <td>{{invoice.net_inv_balance }}</td>
-
-        </tr>
-        <tr class="fw-bold">
-          <td></td>
-          <td></td>
-          <td></td>          
-          <td>{{item.inv_date | date:'dd-MM-YYYY'}}</td>          
-          <td>{{item.net_inv_amt}}</td>
-          <td>{{item.net_inv_paid}}</td>
-          <td>{{item.net_inv_bal}}</td>
-
-        </tr>
-      </table>
-        </td>
-        </tr>
-
-
       </tbody>
     </table>
     <div *ngIf="reportData.length === 0">No Records to display</div>
   </div>
+</div>
