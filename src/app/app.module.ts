@@ -100,6 +100,8 @@ import { OpthalBasicComponent } from './opthal-basic/opthal-basic.component';
 import { OpthalRefractionComponent } from './opthal-refraction/opthal-refraction.component';
 import { OpthalSpectacleComponent } from './opthal-spectacle/opthal-spectacle.component';
 import { SlitLampComponent } from './slit-lamp/slit-lamp.component';
+import { AppointmentTableComponent } from './landing/appoinment-table/appointment-table.component';
+import { PatientScheduleTableComponent } from './landing/patient-schedule-table/patient-schedule-table.component';
 //import { InvoicePaymentTable } from './invoice-payment-report/invoice-payment-table/invoice-payment-table.component';
 //import { InvoiceProductTable } from './invoice-product-report/invoice-product-table/invoice-product-table.component';
 @NgModule({
@@ -190,7 +192,9 @@ import { SlitLampComponent } from './slit-lamp/slit-lamp.component';
     OpthalBasicComponent,
     OpthalRefractionComponent,
     OpthalSpectacleComponent,
-    SlitLampComponent
+    SlitLampComponent,
+    AppointmentTableComponent,
+    PatientScheduleTableComponent
     
   ],
   imports: [

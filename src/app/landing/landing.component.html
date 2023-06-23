@@ -13,7 +13,11 @@
       </button>
     </div>
 
-    <table class="table">
+    <div *ngIf="aptData && aptData.length > 0" class="mar20t">
+      <app-appointment-table [tableData]="aptData"></app-appointment-table>
+    </div>
+
+    <!-- <table class="table">
       <thead>
         <tr>
           <th scope="col">Patient ID</th>
@@ -43,7 +47,7 @@
               (click)="edit_apt(apt)"
               >edit</mat-icon
             >
-            <!-- <mat-icon title="delete" class="delete-icon" aria-hidden="false" aria-label="Example home icon" (click)="delete_apt(apt)">delete</mat-icon> -->
+            <mat-icon title="delete" class="delete-icon" aria-hidden="false" aria-label="Example home icon" (click)="delete_apt(apt)">delete</mat-icon>
           </td>
           <td>
             <mat-icon title="consult" (click)="goToConsult(apt)"
@@ -53,7 +57,7 @@
         </tr>
       </tbody>
       <span *ngIf="aptData.length === 0">No records</span>
-    </table>
+    </table> -->
   </div>
   <hr />
   <div class="row margin10t">
@@ -67,7 +71,11 @@
       </button>
     </div>
 
-    <table class="table">
+    <div *ngIf="patientScheduleData && patientScheduleData.length > 0" class="mar20t">
+      <app-patient-schedule-table [tableData]="patientScheduleData"></app-patient-schedule-table>
+    </div>
+
+    <!-- <table class="table">
       <thead>
         <tr>
           <th scope="col">Patient ID</th>
@@ -89,6 +97,6 @@
         </tr>
       </tbody>
       <span *ngIf="patientScheduleData?.length === 0">No records</span>
-    </table>
+    </table> -->
   </div>
 </div>
