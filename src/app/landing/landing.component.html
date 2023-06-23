@@ -14,7 +14,7 @@
     </div>
 
     <div *ngIf="aptData && aptData.length > 0" class="mar20t">
-      <app-appointment-table [tableData]="aptData"></app-appointment-table>
+      <app-appointment-table [appointmentTableData]="aptData"></app-appointment-table>
     </div>
 
     <!-- <table class="table">
@@ -72,7 +72,7 @@
     </div>
 
     <div *ngIf="patientScheduleData && patientScheduleData.length > 0" class="mar20t">
-      <app-patient-schedule-table [tableData]="patientScheduleData"></app-patient-schedule-table>
+      <app-patient-schedule-table [patientScheduleTableData]="patientScheduleData"></app-patient-schedule-table>
     </div>
 
     <!-- <table class="table">

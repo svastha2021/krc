@@ -9,12 +9,12 @@ import { Router } from '@angular/router';
 })
 export class PatientScheduleTableComponent implements OnInit {
 
-  @Input() tableData: any;
+  @Input() patientScheduleTableData: any;
   @Output() updateEmit = new EventEmitter();
   constructor(private router: Router) { }
   dataSource: any;
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource(this.tableData);
+    this.dataSource = new MatTableDataSource(this.patientScheduleTableData);
   }
 
   displayedColumns: string[] = ['patient_id', 'patient_name', 'schedule_purpose', 'schedule_date', 'planned_date'];

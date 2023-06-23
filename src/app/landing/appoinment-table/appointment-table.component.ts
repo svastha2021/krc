@@ -9,12 +9,18 @@ import { Router } from '@angular/router';
 })
 export class AppointmentTableComponent implements OnInit {
 
-  @Input() tableData: any;
+  @Input()
+  set appointmentTableData(value: any) {
+    console.log(value);
+    this.dataSource.data = value;   
+  }
   @Output() updateEmit = new EventEmitter();
+
+  dataSource = new MatTableDataSource(this.appointmentTableData);
+
   constructor(private router: Router) { }
-  dataSource: any;
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource(this.tableData);
+    // this.dataSource = new MatTableDataSource(this.appointmentTableData);
   }
 
   displayedColumns: string[] = ['patient_id', 'patient_name', 'phone_no', 'appoint_date', 'appoint_no', 'doctor_name', 'action', 'consult'];
