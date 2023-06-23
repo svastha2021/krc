@@ -47,6 +47,7 @@ export class LandingComponent implements OnInit, OnDestroy {
   patientScheduleData: PatientSchedule[] = [];
   eodDate: string = '';
   eodSubscrition: Subscription | undefined;
+  displayedColumns: string[] = ['patient_id', 'patient_name', 'phone_no', 'appoint_date', 'appoint_no', 'doctor_name', 'action', 'consult', 'schedule_purpose', 'schedule_date', 'planned_date'];
   constructor(
     private login: LoginService,
     private dialog: MatDialog,

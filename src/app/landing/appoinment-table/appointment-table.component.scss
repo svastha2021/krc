@@ -1,6 +1,7 @@
 .example-container {
-    height: 400px;
+    height: 470px;
     overflow: auto;
+    width: 110%;
   }
   
   table {
@@ -35,43 +36,3 @@
   .mat-header-row {
     display: table-row;
   }
-
-  //Patient visit 360
-  .mar20 {
-    margin: 20px;
-}
-
-.space-10 {
-    height: 10px;
-}
-
-.fs-medium {
-  font-size: medium;
-}
-
-@media print {
-  .fs-medium {
-    font-size: 10px;
-  }
-  .fs-small {
-    font-size: 7px;
-  }
-}
-
-.txt-left {
-  text-align: end;
-}
-
-.btn-clr {
-    color: white;
-    background-color: green;
-}
-
-.table-header-background {
-  color: #f2f2f2;
-  background-color: #008d45;
-}
-
-.margin-10l {
-  margin-left: 10px;
-}
