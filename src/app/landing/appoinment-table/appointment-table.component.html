@@ -1,58 +1,79 @@
-<section class="example-container mat-elevation-z8" tabindex="0">
-    <div class="example-header">
-      <mat-form-field class="mar20lr">
-        <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filter">
-      </mat-form-field>
-    </div>
+<section class="mat-elevation-z8" tabindex="0">
+  <div class="example-header">
+    <button class="btn btn-success mar20t" (click)="openAppointmentPopup()">
+      <i class="fa-solid fa-list-check mar5r"></i>Manage
+    </button>
+    <mat-form-field class="mar20lr">
+      <input
+        matInput
+        (keyup)="applyFilter($any($event.target).value)"
+        placeholder="Filter"
+      />
+    </mat-form-field>
+  </div>
+  <div class="example-container">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      class="mat-elevation-z8"
+      id="appoinment-table"
+    >
+      <ng-container matColumnDef="patient_id">
+        <th mat-header-cell *matHeaderCellDef>Patient Id</th>
+        <td mat-cell *matCellDef="let element">{{ element.patient_id }}</td>
+      </ng-container>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" id="appoinment-table">
+      <ng-container matColumnDef="patient_name">
+        <th mat-header-cell *matHeaderCellDef>Patient Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.patient_name }}</td>
+      </ng-container>
 
-  <ng-container matColumnDef="patient_id">
-    <th mat-header-cell *matHeaderCellDef> Patient Id </th>
-    <td mat-cell *matCellDef="let element"> {{element.patient_id}} </td>
-  </ng-container>
+      <ng-container matColumnDef="phone_no">
+        <th mat-header-cell *matHeaderCellDef>Phone No</th>
+        <td mat-cell *matCellDef="let element">{{ element.phone_no }}</td>
+      </ng-container>
 
-  <ng-container matColumnDef="patient_name">
-    <th mat-header-cell *matHeaderCellDef> Patient Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.patient_name}} </td>
-  </ng-container>
+      <ng-container matColumnDef="appoint_date">
+        <th mat-header-cell *matHeaderCellDef>Appoint Date</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.appoint_date | date : "dd-MM-yyyy" }}
+        </td>
+      </ng-container>
 
-  <ng-container matColumnDef="phone_no">
-    <th mat-header-cell *matHeaderCellDef> Phone No </th>
-    <td mat-cell *matCellDef="let element"> {{element.phone_no}} </td>
-  </ng-container>
+      <ng-container matColumnDef="appoint_no">
+        <th mat-header-cell *matHeaderCellDef>Appoint No</th>
+        <td mat-cell *matCellDef="let element">{{ element.appoint_no }}</td>
+      </ng-container>
 
-  <ng-container matColumnDef="appoint_date">
-    <th mat-header-cell *matHeaderCellDef> Appoint Date </th>
-    <td mat-cell *matCellDef="let element"> {{element.appoint_date | date: 'dd-MM-yyyy'}} </td>
-  </ng-container>
+      <ng-container matColumnDef="doctor_name">
+        <th mat-header-cell *matHeaderCellDef>Doctor Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.doctor_name }}</td>
+      </ng-container>
 
-  <ng-container matColumnDef="appoint_no">
-    <th mat-header-cell *matHeaderCellDef> Appoint No </th>
-    <td mat-cell *matCellDef="let element"> {{element.appoint_no}} </td>
-  </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <mat-icon
+            title="edit"
+            class="edit-icon"
+            aria-hidden="false"
+            aria-label="Example home icon"
+            (click)="edit_apt(element)"
+            >edit</mat-icon
+          >
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="consult">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <mat-icon title="consult" (click)="goToConsult(element)"
+            >supervisor_account</mat-icon
+          >
+        </td>
+      </ng-container>
 
-  <ng-container matColumnDef="doctor_name">
-    <th mat-header-cell *matHeaderCellDef> Doctor Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.doctor_name}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="action">
-    <th mat-header-cell *matHeaderCellDef>  </th>
-    <td mat-cell *matCellDef="let element"> <mat-icon
-      title="edit"
-      class="edit-icon"
-      aria-hidden="false"
-      aria-label="Example home icon"
-      (click)="edit_apt(element)"
-      >edit</mat-icon> </td>
-  </ng-container>
-  <ng-container matColumnDef="consult">
-    <th mat-header-cell *matHeaderCellDef>  </th>
-    <td mat-cell *matCellDef="let element"> <mat-icon title="consult" (click)="goToConsult(element)">supervisor_account</mat-icon> </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
 </section>

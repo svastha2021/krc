@@ -1,6 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { doctor } from 'src/app/apt-booking/apt-booking.component';
+import { AptBookingService } from 'src/app/apt-booking/apt-booking.service';
+import { ManageAppointmentComponent } from 'src/app/manage-appointment/manage-appointment.component';
 
 @Component({
   selector: 'app-appointment-table',
@@ -17,10 +21,28 @@ export class AppointmentTableComponent implements OnInit {
   @Output() updateEmit = new EventEmitter();
 
   dataSource = new MatTableDataSource(this.appointmentTableData);
-
-  constructor(private router: Router) { }
+  doctorList: doctor[] = [];
+  constructor(private router: Router, private dialog: MatDialog,
+    private aptService: AptBookingService,) { }
   ngOnInit(): void {
     // this.dataSource = new MatTableDataSource(this.appointmentTableData);
+  }
+
+  openAppointmentPopup() {
+    const dialogRef = this.dialog.open(ManageAppointmentComponent, {
+      data: this.doctorList,
+      width: '300px',
+    });
+
+    dialogRef.afterClosed().subscribe((data) => {
+      this.retrieveAppointments(data);
+    });
+  }
+
+  retrieveAppointments(data: any) {
+    this.aptService.getAppointments(data).subscribe((response) => {
+      this.dataSource.data = response.results;
+    });
   }
 
   displayedColumns: string[] = ['patient_id', 'patient_name', 'phone_no', 'appoint_date', 'appoint_no', 'doctor_name', 'action', 'consult'];

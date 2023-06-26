@@ -19,7 +19,9 @@ export class PatientScheduleTableComponent implements OnInit {
 
   displayedColumns: string[] = ['patient_id', 'patient_name', 'schedule_purpose', 'schedule_date', 'planned_date'];
 
-
+  managePatient() {
+    this.router.navigate(['manage-patient']);
+  }
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches

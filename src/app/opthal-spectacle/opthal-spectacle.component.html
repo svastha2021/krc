@@ -32,7 +32,7 @@
                     <h6>LE</h6>
                 </div>
                 <div class="col-md-4" *ngIf="!showPreviousTable">
-                    <button class="btn btn-primary ms-2 pointer" (click)="displayPrevious()">Show Previous</button>
+                    <button class="btn btn-success ms-2 pointer" (click)="displayPrevious()">Show Previous</button>
                 </div>
                 <div class="col-md-4" *ngIf="showPreviousTable">
                     <ul class="pagination pointer content-right">
@@ -116,10 +116,10 @@
 <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4 pointer text-center">
-        <button type="button" class="btn btn-primary margin-20t" (click)="saveSpectacleParams()" *ngIf="!showPreviousTable" [disabled]="!visit_no || specForm.invalid">
+        <button type="button" class="btn btn-success margin-20t" (click)="saveSpectacleParams()" *ngIf="!showPreviousTable" [disabled]="!visit_no || specForm.invalid">
             Save
         </button>
-        <button type="button" class="btn btn-primary margin-20t" (click)="back()" *ngIf="showPreviousTable">
+        <button type="button" class="btn btn-success margin-20t" (click)="back()" *ngIf="showPreviousTable">
             Back
         </button>
     </div>

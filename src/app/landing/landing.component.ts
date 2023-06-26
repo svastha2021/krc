@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { loginUserData, LoginService } from '../login/login.service';
 import {
   AptBookingService,
@@ -39,6 +39,7 @@ type PatientSchedule = {
   selector: 'app-landing',
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class LandingComponent implements OnInit, OnDestroy {
   doctorList: doctor[] = [];
@@ -90,21 +91,6 @@ export class LandingComponent implements OnInit, OnDestroy {
 
   edit_apt(value: any) {
     this.router.navigate(['/apt-booking'], { state: value });
-  }
-
-  managePatient() {
-    this.router.navigate(['manage-patient']);
-  }
-
-  openAppointmentPopup() {
-    const dialogRef = this.dialog.open(ManageAppointmentComponent, {
-      data: this.doctorList,
-      width: '300px',
-    });
-
-    dialogRef.afterClosed().subscribe((data) => {
-      this.retrieveAppointments(data);
-    });
   }
 
   retrieveAppointments(data: any) {

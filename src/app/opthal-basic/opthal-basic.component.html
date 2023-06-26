@@ -19,7 +19,7 @@
             </div>
             <div class="col-md-4" *ngIf="!showPreviousTable">
                 <!-- <button class="btn btn-primary" (click)="addRecord()">Add Record</button> -->
-                <button class="btn btn-primary ms-2" (click)="displayPrevious()">Show Previous</button>
+                <button class="btn btn-success ms-2" (click)="displayPrevious()">Show Previous</button>
             </div>
             <div class="col-md-4" *ngIf="showPreviousTable">
                 <ul class="pagination pointer">
@@ -87,10 +87,10 @@
 <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4 pointer">
-        <button type="button" class="btn btn-primary margin-20t" (click)="saveBasicParams()" *ngIf="!showPreviousTable" [disabled]="!visit_no || basicForm.invalid">
+        <button type="button" class="btn btn-success margin-20t" (click)="saveBasicParams()" *ngIf="!showPreviousTable" [disabled]="!visit_no || basicForm.invalid">
             Save
         </button>
-        <button type="button" class="btn btn-primary margin-20t" (click)="back()" *ngIf="showPreviousTable">
+        <button type="button" class="btn btn-success margin-20t" (click)="back()" *ngIf="showPreviousTable">
             Back
         </button>
     </div>
