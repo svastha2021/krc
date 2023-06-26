@@ -2,63 +2,71 @@
     <h5>Lab Prescription</h5>
     
     <div class="error-container" *ngIf="!visit_no">Please save doctor notes to save lab details</div>
-    <button type="button" class="btn btn-primary mar30" (click)="addRecord()">
-        Add Row
-    </button>
-    <mat-table #table [dataSource]="dataSource">
-        <!-- Test ID Column -->
-        <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef>Index</mat-header-cell>
-            <mat-cell *matCellDef="let element;let i = index;"> {{element.id}} </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="test_id">
-            <mat-header-cell *matHeaderCellDef> Lab Test Name </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-                <mat-form-field floatLabel="never">
-                    <mat-select [(value)]="element.test_id" placeholder="Product name">
-                        <mat-option *ngFor="let product of labTest" [value]="product.product_id">{{product.product_name}}
-                        </mat-option>
-                        <!-- <mat-option value="Yes">Yes</mat-option> -->
-                    </mat-select>
-                </mat-form-field>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="test_date">
-            <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-                <mat-form-field floatLabel="never">
-                    <input type="date"  required  matInput
-                            name="test_date"  [(ngModel)]="element.test_date" id="test_date" >                            
-                </mat-form-field>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="test_notes">
-            <mat-header-cell *matHeaderCellDef> Remarks </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-                <mat-form-field floatLabel="never">
-                    <input matInput placeholder="Remarks" [value]="element.test_notes" [(ngModel)]="element.test_notes">
-                </mat-form-field>
-            </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="action">
-            <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
-            <mat-cell *matCellDef="let element">
-                <mat-icon title="delete" class="delete-icon" aria-hidden="false" aria-label="Delete icon"
-                    (click)="delete_item(element)">delete</mat-icon>
-            </mat-cell>
-
-        </ng-container>
-
-
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
-
-    <button type="button" [disabled]="!visit_no || dataSource.data.length === 0" class="btn btn-primary mar20tb" (click)="updateLabDetails()">
-        Save
-    </button>
+    <div *ngIf="!showPreviousTable">
+        <button type="button" class="btn btn-primary mar30" (click)="addRecord()">
+            Add Row
+        </button>
+        <button class="btn btn-primary ms-2" (click)="displayPrevious()">Show Previous</button>
+        <mat-table #table [dataSource]="dataSource">
+            <!-- Test ID Column -->
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef>Index</mat-header-cell>
+                <mat-cell *matCellDef="let element;let i = index;"> {{element.id}} </mat-cell>
+            </ng-container>
+    
+            <ng-container matColumnDef="test_id">
+                <mat-header-cell *matHeaderCellDef> Lab Test Name </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <mat-form-field floatLabel="never">
+                        <mat-select [(value)]="element.test_id" placeholder="Product name">
+                            <mat-option *ngFor="let product of labTest" [value]="product.product_id">{{product.product_name}}
+                            </mat-option>
+                            <!-- <mat-option value="Yes">Yes</mat-option> -->
+                        </mat-select>
+                    </mat-form-field>
+                </mat-cell>
+            </ng-container>
+    
+            <ng-container matColumnDef="test_date">
+                <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <mat-form-field floatLabel="never">
+                        <input type="date"  required  matInput
+                                name="test_date"  [(ngModel)]="element.test_date" id="test_date" >                            
+                    </mat-form-field>
+                </mat-cell>
+            </ng-container>
+    
+            <ng-container matColumnDef="test_notes">
+                <mat-header-cell *matHeaderCellDef> Remarks </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <mat-form-field floatLabel="never">
+                        <input matInput placeholder="Remarks" [value]="element.test_notes" [(ngModel)]="element.test_notes">
+                    </mat-form-field>
+                </mat-cell>
+            </ng-container>
+    
+            <ng-container matColumnDef="action">
+                <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <mat-icon title="delete" class="delete-icon" aria-hidden="false" aria-label="Delete icon"
+                        (click)="delete_item(element)">delete</mat-icon>
+                </mat-cell>
+    
+            </ng-container>
+    
+    
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+    
+        <button type="button" [disabled]="!visit_no || dataSource.data.length === 0" class="btn btn-primary mar20tb" (click)="updateLabDetails()">
+            Save
+        </button>
+    </div>
 </div>
+
+<app-previous-lab [headerData]="headerDetail" *ngIf="showPreviousTable"></app-previous-lab>
+<button type="button" *ngIf="showPreviousTable" class="btn btn-primary mar20tb" (click)="showPreviousTable = false">
+  Back
+</button>

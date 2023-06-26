@@ -22,6 +22,7 @@ export class LabPrescriptionComponent implements OnInit {
   previousLabDetails: LabTestItem[] = [];
   eod: any;
   dataSource = new MatTableDataSource(ELEMENT_DATA);
+  showPreviousTable = false;
   @ViewChild(MatTable, { static: true }) table: MatTable<any> | undefined;
 
   constructor(private lpService: LabPreparationService,
@@ -102,6 +103,10 @@ export class LabPrescriptionComponent implements OnInit {
         data: 'Lab Details Saved Successfully'
       })
     })
+  }
+
+  displayPrevious() {
+    this.showPreviousTable = true;
   }
 
 
