@@ -22,8 +22,8 @@ export class LabPrescriptionComponent implements OnInit {
   previousLabDetails: LabTestItem[] = [];
   eod: any;
   dataSource = new MatTableDataSource(ELEMENT_DATA);
-  showPreviousTable = false;
   @ViewChild(MatTable, { static: true }) table: MatTable<any> | undefined;
+  showPreviousTable: boolean = false;
 
   constructor(private lpService: LabPreparationService,
     private utility: UtilityService, private dialog: MatDialog,
@@ -60,6 +60,7 @@ export class LabPrescriptionComponent implements OnInit {
     this.dataSource.data.push({
       id: this.dataSource.data.length, test_id: '', test_date: '', test_notes: ''
     });
+    this.dataSource = new MatTableDataSource(this.dataSource.data);
     this.table?.renderRows();
   }
 
@@ -69,6 +70,8 @@ export class LabPrescriptionComponent implements OnInit {
     dataArray.splice(item.id, 1);
 
     this.dataSource.data = dataArray;
+    this.dataSource = new MatTableDataSource(this.dataSource.data);
+
     this.table?.renderRows();
 
   }
