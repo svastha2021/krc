@@ -68,4 +68,14 @@ export class DocConsultationService {
       headers: headers,
     });
   }
+
+  getVitalData(patient_id: any) {
+    let org_id = localStorage.getItem('org_id');
+    let branch_id = localStorage.getItem('branch_id');
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(environment.apiUrl + 'allvisithealthparaminformation/' + org_id + '/' + branch_id + '/' +patient_id, {
+      headers: headers,
+    });
+  }
 }

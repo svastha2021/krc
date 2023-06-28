@@ -103,6 +103,7 @@ import { SlitLampComponent } from './slit-lamp/slit-lamp.component';
 import { AppointmentTableComponent } from './landing/appoinment-table/appointment-table.component';
 import { PatientScheduleTableComponent } from './landing/patient-schedule-table/patient-schedule-table.component';
 import { PreviousLabComponent } from './previous-lab/previous-lab.component';
+import { PreviousVitalComponent } from './previous-vital/previous-vital.component';
 //import { InvoicePaymentTable } from './invoice-payment-report/invoice-payment-table/invoice-payment-table.component';
 //import { InvoiceProductTable } from './invoice-product-report/invoice-product-table/invoice-product-table.component';
 @NgModule({
@@ -196,7 +197,8 @@ import { PreviousLabComponent } from './previous-lab/previous-lab.component';
     SlitLampComponent,
     AppointmentTableComponent,
     PatientScheduleTableComponent,
-    PreviousLabComponent
+    PreviousLabComponent,
+    PreviousVitalComponent
     
   ],
   imports: [

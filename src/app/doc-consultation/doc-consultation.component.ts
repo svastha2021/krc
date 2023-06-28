@@ -58,6 +58,7 @@ export class DocConsultationComponent implements OnInit {
   vitalParametersList: any;
   aptObj = {} as aptModel;
   visit_date: any;
+  showVitalPrevious: boolean = false;
   // [{khi_code:'bp',khi_desc:'Bloop pressure'}, {khi_code:'height',khi_desc:'Height'}];
   constructor(
     private docService: DocConsultationService,
@@ -76,6 +77,7 @@ export class DocConsultationComponent implements OnInit {
     this.docService.fetchVitalParams().subscribe((data) => {
       this.vitalParametersList = data;
     });
+    this.getVitalData();
   }
   patientHeader(data: any) {
     this.headerDetail = { ...data };
@@ -285,5 +287,15 @@ export class DocConsultationComponent implements OnInit {
         data: 'Vital Params updated Successfully',
       });
     });
+  }
+
+  getVitalData() {
+    this.docService.getVitalData(this.headerDetail.patient_id).subscribe((data) => {
+      console.log(data);
+    });
+  }
+
+  displayPrevious() {
+    this.showVitalPrevious = true;
   }
 }

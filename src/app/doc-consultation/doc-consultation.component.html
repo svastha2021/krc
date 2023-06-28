@@ -72,35 +72,45 @@
 
       <!-- vital paramaters tab -->
       <mat-tab label="Vital" class="overflow-hidden">
-        <div *ngFor="let param of vitalParametersList; let i = index">
-          <div class="row margin-20l">
-            <label [for]="param.khi_desc" class="form-label margin-20t">{{
-              param.khi_desc
-            }}</label>
-
-            <input
-              type="text"
-              class="form-control col-lg-6 contact-input"
-              [placeholder]="param.khi_desc"
-              [id]="param.khi_code"
-            />
-
-            <input
-              type="text"
-              class="form-control col-lg-6 contact-input margin-20l"
-              placeholder="Notes"
-              [id]="setNotesId(param.khi_code)"
-            />
+        <div *ngIf="!showVitalPrevious">
+          <button class="btn btn-primary ms-2" (click)="displayPrevious()">Show Previous</button>
+          <div *ngFor="let param of vitalParametersList; let i = index">
+            <div class="row margin-20l">
+              <label [for]="param.khi_desc" class="form-label margin-20t">{{
+                param.khi_desc
+              }}</label>
+  
+              <input
+                type="text"
+                class="form-control col-lg-6 contact-input"
+                [placeholder]="param.khi_desc"
+                [id]="param.khi_code"
+              />
+  
+              <input
+                type="text"
+                class="form-control col-lg-6 contact-input margin-20l"
+                placeholder="Notes"
+                [id]="setNotesId(param.khi_code)"
+              />
+            </div>
           </div>
+          <button
+            type="button"
+            [disabled]="!visit_no"
+            class="btn btn-primary margin-20t"
+            (click)="saveVitalParams()"
+          >
+            Save
+          </button>
         </div>
-        <button
-          type="button"
-          [disabled]="!visit_no"
-          class="btn btn-primary margin-20t"
-          (click)="saveVitalParams()"
-        >
-          Save
-        </button>
+        <div *ngIf="showVitalPrevious">
+          <app-previous-vital [visit_no]="visit_no"
+          [headerDetail]="headerDetail"></app-previous-vital>
+          <button type="button" *ngIf="showVitalPrevious" class="btn btn-primary mar20tb" (click)="showVitalPrevious = false">
+            Back
+          </button>
+        </div>
       </mat-tab>
 
       <!-- pharma -->
