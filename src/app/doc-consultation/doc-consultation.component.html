@@ -8,250 +8,319 @@
     (outputPatientHeader)="patientHeader($event)"
   ></app-patient-header>
   <div>
-    <label class="mar15"><strong>Department: {{aptObj?.dept_name}}</strong></label>
-    <label class="mar15"><strong>Doctor: {{aptObj?.doctor_name}}</strong></label>
+    <label class="mar15"
+      ><strong>Department: {{ aptObj?.dept_name }}</strong></label
+    >
+    <label class="mar15"
+      ><strong>Doctor: {{ aptObj?.doctor_name }}</strong></label
+    >
   </div>
   <div *ngIf="headerDetail" class="margin-20t">
-    <mat-tab-group>
-      <!-- Doc notes -->
-      <mat-tab label="Doc Notes">
-        <label class="d-block"
-          >Visit#: {{ currentPatientDetail.visit_no }}</label
-        >
+    <!-- Doc notes -->
+    <mat-expansion-panel hideToggle class="margin-20b doc-consult-expansion-container">
+      <mat-expansion-panel-header>
+        <mat-panel-title> Doctor Notes </mat-panel-title>
+        <mat-panel-description>
+          This is a summary of the doctor notes
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <label class="d-block">Visit#: {{ currentPatientDetail.visit_no }}</label>
 
-        <label class="d-block"
-          >Visit Date:
-          {{ currentPatientDetail.visit_date | date : "dd-MM-yyyy" }}</label
-        >
-        <label for="prevHistory" class="form-label margin-20t"
-          >Previous History</label
-        >
+      <label class="d-block"
+        >Visit Date:
+        {{ currentPatientDetail.visit_date | date : "dd-MM-yyyy" }}</label
+      >
+      <label for="prevHistory" class="form-label margin-20t"
+        >Previous History</label
+      >
 
-        <textarea
-          readonly
-          class="form-control"
-          id="prevHistory"
-          rows="10"
-          [(ngModel)]="currentPatientDetail.doctor_notes"
-        ></textarea>
+      <textarea
+        readonly
+        class="form-control"
+        id="prevHistory"
+        rows="10"
+        [(ngModel)]="currentPatientDetail.doctor_notes"
+      ></textarea>
 
-        <ul class="pagination">
-          <li class="page-item" [ngClass]="{ disabled: recordIndex === 0 }">
-            <a class="page-link" (click)="prevItem()">Previous</a>
-          </li>
-          <li
-            class="page-item"
-            [ngClass]="{
-              disabled:
-                recordIndex === undefined ||
-                recordIndex === getLastRecordIndex()
-            }"
-          >
-            <a class="page-link" (click)="nextItem()">Next</a>
-          </li>
-        </ul>
+      <ul class="pagination">
+        <li class="page-item" [ngClass]="{ disabled: recordIndex === 0 }">
+          <a class="page-link" (click)="prevItem()">Previous</a>
+        </li>
+        <li
+          class="page-item"
+          [ngClass]="{
+            disabled:
+              recordIndex === undefined || recordIndex === getLastRecordIndex()
+          }"
+        >
+          <a class="page-link" (click)="nextItem()">Next</a>
+        </li>
+      </ul>
 
-        <label for="exampleFormControlTextarea1" class="form-label margin-20t"
-          >Doctor Notes</label
-        >
-        <textarea
-          class="form-control"
-          [(ngModel)]="docNotes"
-          id="currentNotes"
-          rows="10"
-        ></textarea>
-        <button
-          type="button"
-          [disabled]="!docNotes"
-          class="btn btn-primary margin-20t"
-          (click)="saveNotes()"
-        >
-          Save
+      <label for="exampleFormControlTextarea1" class="form-label margin-20t"
+        >Doctor Notes</label
+      >
+      <textarea
+        class="form-control"
+        [(ngModel)]="docNotes"
+        id="currentNotes"
+        rows="10"
+      ></textarea>
+      <button
+        type="button"
+        [disabled]="!docNotes"
+        class="btn btn-warning margin-20t"
+        (click)="saveNotes()"
+      ><i class="fa-solid fa-paper-plane mar5r"></i>
+        Save
+      </button>
+    </mat-expansion-panel>
+
+    <!-- vital paramaters collapsible -->
+    <mat-expansion-panel hideToggle class="margin-20b doc-consult-expansion-container">
+      <mat-expansion-panel-header>
+        <mat-panel-title> Vital Parameters </mat-panel-title>
+        <mat-panel-description>
+          This is a summary of the vital parameters
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div *ngIf="!showVitalPrevious">
+        <button class="btn btn-success ms-2" (click)="displayPrevious()">
+          Show Previous
         </button>
-      </mat-tab>
+        <div *ngFor="let param of vitalParametersList; let i = index">
+          <div class="row margin-20l">
+            <label [for]="param.khi_desc" class="form-label margin-20t">{{
+              param.khi_desc
+            }}</label>
 
-      <!-- vital paramaters tab -->
-      <mat-tab label="Vital" class="overflow-hidden">
-        <div *ngIf="!showVitalPrevious">
-          <button class="btn btn-primary ms-2" (click)="displayPrevious()">Show Previous</button>
-          <div *ngFor="let param of vitalParametersList; let i = index">
-            <div class="row margin-20l">
-              <label [for]="param.khi_desc" class="form-label margin-20t">{{
-                param.khi_desc
-              }}</label>
-  
-              <input
-                type="text"
-                class="form-control col-lg-6 contact-input"
-                [placeholder]="param.khi_desc"
-                [id]="param.khi_code"
-              />
-  
-              <input
-                type="text"
-                class="form-control col-lg-6 contact-input margin-20l"
-                placeholder="Notes"
-                [id]="setNotesId(param.khi_code)"
-              />
-            </div>
+            <input
+              type="text"
+              class="form-control col-lg-6 contact-input"
+              [placeholder]="param.khi_desc"
+              [id]="param.khi_code"
+            />
+
+            <input
+              type="text"
+              class="form-control col-lg-6 contact-input margin-20l"
+              placeholder="Notes"
+              [id]="setNotesId(param.khi_code)"
+            />
           </div>
-          <button
-            type="button"
-            [disabled]="!visit_no"
-            class="btn btn-primary margin-20t"
-            (click)="saveVitalParams()"
-          >
-            Save
-          </button>
         </div>
-        <div *ngIf="showVitalPrevious">
-          <app-previous-vital [visit_no]="visit_no"
-          [headerDetail]="headerDetail"></app-previous-vital>
-          <button type="button" *ngIf="showVitalPrevious" class="btn btn-primary mar20tb" (click)="showVitalPrevious = false">
-            Back
-          </button>
-        </div>
-      </mat-tab>
-
-      <!-- pharma -->
-      <mat-tab label="Medicine">
-        <app-med-prescription
-          [visit_no]="visit_no"
-          [headerDetail]="headerDetail"
-        ></app-med-prescription>
-      </mat-tab>
-
-      <!-- lab -->
-      <mat-tab label="Lab">
-        <app-lab-prescription
-          [visit_no]="visit_no"
-          [headerDetail]="headerDetail"
-        ></app-lab-prescription>
-      </mat-tab>
-
-      <!-- dilaysis -->
-      <mat-tab label="Dialysis" *ngIf="aptObj.dept_id === 'D0001'">
-        <div class="error-container" *ngIf="!visit_no">
-          Please save doctor notes to save dialysis notes
-        </div>
-        <label class="d-block"
-          >Visit#: {{ currentPatientDialysisDetail.visit_no }}</label
-        >
-        <label class="d-block"
-          >Visit Date:
-          {{
-            currentPatientDialysisDetail.prescription_date | date : "dd-MM-yyyy"
-          }}</label
-        >
-        <label for="prevDialysisHistory" class="form-label margin-20t"
-          >Previous History</label
-        >
-
-        <textarea
-          readonly
-          class="form-control"
-          id="prevDialysisHistory"
-          rows="10"
-          [(ngModel)]="currentPatientDialysisDetail.dialysis_notes"
-        ></textarea>
-        <ul class="pagination">
-          <li
-            class="page-item"
-            [ngClass]="{ disabled: recordIndexDialysis === 0 }"
-          >
-            <a class="page-link" (click)="prevDialysisItem()">Previous</a>
-          </li>
-          <li
-            class="page-item"
-            [ngClass]="{
-              disabled:
-                recordIndexDialysis === undefined ||
-                recordIndexDialysis === getLastDialysisRecordIndex()
-            }"
-          >
-            <a class="page-link" (click)="nextDialysisItem()">Next</a>
-          </li>
-        </ul>
-
-        <label for="exampleFormControlTextarea1" class="form-label margin-20t"
-          >Dialysis Notes</label
-        >
-        <textarea
-          class="form-control"
-          [(ngModel)]="dialysisNotes"
-          id="dialysisNotes"
-          rows="10"
-        ></textarea>
         <button
           type="button"
           [disabled]="!visit_no"
-          class="btn btn-primary margin-20t"
-          (click)="saveDialysisNotes()"
-        >
+          class="btn btn-warning margin-20t"
+          (click)="saveVitalParams()"
+        ><i class="fa-solid fa-paper-plane mar5r"></i>
           Save
         </button>
-      </mat-tab>
-
-      <!-- Previous Visit Details -->
-      <mat-tab label="Previous Visit Details">
-        <div *ngIf="patientHistory">
-          <app-prev-vist-details
-            [tableData]="patientHistory"
-          ></app-prev-vist-details>
-        </div>
-      </mat-tab>
-
-      <!-- Opthal Basic paramaters tab -->
-      <mat-tab
-        label="Basic"
-        class="overflow-hidden"
-        *ngIf="aptObj.dept_id === 'D0002'"
-      >
-        <app-opthal-basic
+      </div>
+      <div *ngIf="showVitalPrevious">
+        <app-previous-vital
           [visit_no]="visit_no"
-          [visit_date]="visit_date"
           [headerDetail]="headerDetail"
-        ></app-opthal-basic>
-      </mat-tab>
+        ></app-previous-vital>
+        <button
+          type="button"
+          *ngIf="showVitalPrevious"
+          class="btn btn-danger mar20tb"
+          (click)="showVitalPrevious = false"
+        ><i class="fa-solid fa-arrow-left mar5r"></i>
+          Back
+        </button>
+      </div>
+    </mat-expansion-panel>
 
-      <!-- Opthal Refraction paramaters tab -->
-      <mat-tab
-        label="Refraction"
-        class="overflow-hidden"
-        *ngIf="aptObj.dept_id === 'D0002'"
-      >
-        <app-opthal-refraction
-          [visit_no]="visit_no"
-          [visit_date]="visit_date"
-          [headerDetail]="headerDetail"
-        ></app-opthal-refraction>
-      </mat-tab>
+    <!-- pharma -->
+    <mat-expansion-panel hideToggle class="margin-20b doc-consult-expansion-container">
+      <mat-expansion-panel-header>
+        <mat-panel-title> Medicine </mat-panel-title>
+        <mat-panel-description>
+          This is a summary of the medicines
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-med-prescription
+        [visit_no]="visit_no"
+        [headerDetail]="headerDetail"
+      ></app-med-prescription>
+    </mat-expansion-panel>
 
-      <!-- Opthal Spectacle paramaters tab -->
-      <mat-tab
-        label="Spectacle"
-        class="overflow-hidden"
-        *ngIf="aptObj.dept_id === 'D0002'"
-      >
-        <app-opthal-spectacle
-          [visit_no]="visit_no"
-          [visit_date]="visit_date"
-          [headerDetail]="headerDetail"
-        ></app-opthal-spectacle>
-      </mat-tab>
+    <!-- Lab -->
+    <mat-expansion-panel hideToggle class="margin-20b doc-consult-expansion-container">
+      <mat-expansion-panel-header>
+        <mat-panel-title> Lab </mat-panel-title>
+        <mat-panel-description>
+          This is a summary of the Laboratory items
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-lab-prescription
+        [visit_no]="visit_no"
+        [headerDetail]="headerDetail"
+      ></app-lab-prescription>
+    </mat-expansion-panel>
 
-      <!-- Opthal Slit-Lamp paramaters tab -->
-      <mat-tab
-        label="Slit-Lamp"
-        class="overflow-hidden"
-        *ngIf="aptObj.dept_id === 'D0002'"
+    <!-- Dialysis Notes -->
+    <mat-expansion-panel
+      hideToggle
+      class="margin-20b doc-consult-expansion-container"
+      *ngIf="aptObj.dept_id === 'D0001'"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title> Dialysis </mat-panel-title>
+        <mat-panel-description>
+          This is a summary of the Dialysis
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="error-container" *ngIf="!visit_no">
+        Please save doctor notes to save dialysis notes
+      </div>
+      <label class="d-block"
+        >Visit#: {{ currentPatientDialysisDetail.visit_no }}</label
       >
-        <app-slit-lamp
-          [visit_no]="visit_no"
-          [visit_date]="visit_date"
-          [headerDetail]="headerDetail"
-        ></app-slit-lamp>
-      </mat-tab>
-    </mat-tab-group>
+      <label class="d-block"
+        >Visit Date:
+        {{
+          currentPatientDialysisDetail.prescription_date | date : "dd-MM-yyyy"
+        }}</label
+      >
+      <label for="prevDialysisHistory" class="form-label margin-20t"
+        >Previous History</label
+      >
+
+      <textarea
+        readonly
+        class="form-control"
+        id="prevDialysisHistory"
+        rows="10"
+        [(ngModel)]="currentPatientDialysisDetail.dialysis_notes"
+      ></textarea>
+      <ul class="pagination">
+        <li
+          class="page-item"
+          [ngClass]="{ disabled: recordIndexDialysis === 0 }"
+        >
+          <a class="page-link" (click)="prevDialysisItem()">Previous</a>
+        </li>
+        <li
+          class="page-item"
+          [ngClass]="{
+            disabled:
+              recordIndexDialysis === undefined ||
+              recordIndexDialysis === getLastDialysisRecordIndex()
+          }"
+        >
+          <a class="page-link" (click)="nextDialysisItem()">Next</a>
+        </li>
+      </ul>
+
+      <label for="exampleFormControlTextarea1" class="form-label margin-20t"
+        >Dialysis Notes</label
+      >
+      <textarea
+        class="form-control"
+        [(ngModel)]="dialysisNotes"
+        id="dialysisNotes"
+        rows="10"
+      ></textarea>
+      <button
+        type="button"
+        [disabled]="!visit_no"
+        class="btn btn-primary margin-20t"
+        (click)="saveDialysisNotes()"
+      >
+        Save
+      </button>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel hideToggle class="margin-20b doc-consult-expansion-container">
+      <mat-expansion-panel-header>
+        <mat-panel-title> Previous Visit Details </mat-panel-title>
+        <mat-panel-description>
+          This is a summary of the content
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div *ngIf="patientHistory">
+        <app-prev-vist-details
+          [tableData]="patientHistory"
+        ></app-prev-vist-details>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel
+      hideToggle
+      class="margin-20b doc-consult-expansion-container"
+      *ngIf="aptObj.dept_id === 'D0002'"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title> Basic </mat-panel-title>
+        <mat-panel-description>
+          This is a summary of the content
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-opthal-basic
+        [visit_no]="visit_no"
+        [visit_date]="visit_date"
+        [headerDetail]="headerDetail"
+      ></app-opthal-basic>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel
+      hideToggle
+      class="margin-20b doc-consult-expansion-container"
+      *ngIf="aptObj.dept_id === 'D0002'"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title> Refraction </mat-panel-title>
+        <mat-panel-description>
+          This is a summary of the content
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-opthal-refraction
+        [visit_no]="visit_no"
+        [visit_date]="visit_date"
+        [headerDetail]="headerDetail"
+      ></app-opthal-refraction>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel
+      hideToggle
+      class="margin-20b doc-consult-expansion-container"
+      *ngIf="aptObj.dept_id === 'D0002'"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title> Spectacle </mat-panel-title>
+        <mat-panel-description>
+          This is a summary of the content
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-opthal-spectacle
+        [visit_no]="visit_no"
+        [visit_date]="visit_date"
+        [headerDetail]="headerDetail"
+      ></app-opthal-spectacle>
+    </mat-expansion-panel>
+
+    <!-- Opthal Slit-Lamp paramaters tab -->
+    <mat-expansion-panel
+      hideToggle
+      class="margin-20b doc-consult-expansion-container"
+      *ngIf="aptObj.dept_id === 'D0002'"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title> Slit-Lamp </mat-panel-title>
+        <mat-panel-description>
+          This is a summary of the content
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-slit-lamp
+        [visit_no]="visit_no"
+        [visit_date]="visit_date"
+        [headerDetail]="headerDetail"
+      ></app-slit-lamp>
+    </mat-expansion-panel>
   </div>
+  <div class="row"></div>
 </div>

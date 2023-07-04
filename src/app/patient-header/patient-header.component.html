@@ -74,7 +74,7 @@
   </div>
 </div>
 
-<div *ngIf="!headerDetail && patientNameList && patientNameList.length>0">  
+<div *ngIf="!headerDetail && patientNameList && patientNameList.length>0" class="mar20t">  
   <mat-table #table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="radio">
       <mat-header-cell *matHeaderCellDef ></mat-header-cell>

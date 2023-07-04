@@ -1,7 +1,7 @@
 
 <div class="container mar20t pad0" *ngIf="!showPreviousTable">
-    <button class="btn btn-primary" (click)="addRecord()">Add Record</button>
-    <button class="btn btn-primary ms-2" (click)="displayPrevious()">Show Previous</button>
+    <button class="btn btn-success" (click)="addRecord()">Add Record</button>
+    <button class="btn btn-success ms-2" (click)="displayPrevious()">Show Previous</button>
     <div class="table-responsive-lg col-lg-12" style="margin-top:20px" >
     <table class="table table-bordered">
         <thead class="thead-dark">
@@ -41,23 +41,23 @@
                   </select>
             </td>
 
-            <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.morning_bf"></td>            
-            <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.morning_af"></td> 
+            <td class="w-5 pt-2"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.morning_bf"></td>            
+            <td class="w-5 pt-2"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.morning_af"></td> 
             
-            <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.noon_bf"></td> 
-            <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.noon_af"></td> 
+            <td class="w-5 pt-2"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.noon_bf"></td> 
+            <td class="w-5 pt-2"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.noon_af"></td> 
             
-            <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.evening_bf"></td> 
-            <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.evening_af"></td> 
+            <td class="w-5 pt-2"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.evening_bf"></td> 
+            <td class="w-5 pt-2"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.evening_af"></td> 
 
-            <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.night_bf"></td> 
-            <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.night_af"></td> 
+            <td class="w-5 pt-2"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.night_bf"></td> 
+            <td class="w-5 pt-2"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.night_af"></td> 
 
-            <td class=""><input type="text" class="form-control no-border" [(ngModel)]="item.other_time_desc"></td> 
-            <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.other_time_bf"></td> 
-            <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.other_time_af"></td> 
+            <td class="pt-2"><input type="text" class="form-control no-border" [(ngModel)]="item.other_time_desc"></td> 
+            <td class="w-5 pt-2"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.other_time_bf"></td> 
+            <td class="w-5 pt-2"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.other_time_af"></td> 
             
-            <td class="w-5"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.no_of_days"></td> 
+            <td class="w-5 pt-2"><input type="number" class="form-control no-border" min="0" max="99" [(ngModel)]="item.no_of_days"></td> 
             <td><input type="text" class="form-control no-border" [(ngModel)]="item.remarks"></td> 
             
             <td><mat-icon title="delete" class="delete-icon" aria-hidden="false" aria-label="Example home icon" (click)="delete_item(item)">delete</mat-icon> </td>
@@ -66,13 +66,13 @@
         </tbody>
       </table>
 
-      <button type="button" [disabled]="!visit_no || tableData.length === 0" class="btn btn-primary mar20tb" (click)="updateLabDetails()">
+      <button type="button" [disabled]="!visit_no || tableData.length === 0" class="btn btn-warning mar20tb" (click)="updateLabDetails()">
         Save
     </button>
     </div>    
 </div>
 
 <app-previous-med [headerData]="headerDetail" *ngIf="showPreviousTable"></app-previous-med>
-<button type="button" *ngIf="showPreviousTable" class="btn btn-primary mar20tb" (click)="showPreviousTable = false">
+<button type="button" *ngIf="showPreviousTable" class="btn btn-danger mar20tb" (click)="showPreviousTable = false">
   Back
 </button>

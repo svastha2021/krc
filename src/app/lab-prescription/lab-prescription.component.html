@@ -3,10 +3,10 @@
     
     <div class="error-container" *ngIf="!visit_no">Please save doctor notes to save lab details</div>
     <div *ngIf="!showPreviousTable">
-        <button type="button" class="btn btn-primary mar30" (click)="addRecord()">
+        <button type="button" class="btn btn-success mar30" (click)="addRecord()">
             Add Row
         </button>
-        <button class="btn btn-primary ms-2" (click)="displayPrevious()">Show Previous</button>
+        <button class="btn btn-success ms-2" (click)="displayPrevious()">Show Previous</button>
         <mat-table #table [dataSource]="dataSource">
             <!-- Test ID Column -->
             <ng-container matColumnDef="id">
@@ -60,13 +60,13 @@
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
     
-        <button type="button" [disabled]="!visit_no || dataSource.data.length === 0" class="btn btn-primary mar20tb" (click)="updateLabDetails()">
+        <button type="button" [disabled]="!visit_no || dataSource.data.length === 0" class="btn btn-warning mar20tb" (click)="updateLabDetails()">
             Save
         </button>
     </div>
 </div>
 
 <app-previous-lab [headerData]="headerDetail" *ngIf="showPreviousTable"></app-previous-lab>
-<button type="button" *ngIf="showPreviousTable" class="btn btn-primary mar20tb" (click)="showPreviousTable = false">
+<button type="button" *ngIf="showPreviousTable" class="btn btn-danger mar20tb" (click)="showPreviousTable = false">
   Back
 </button>
