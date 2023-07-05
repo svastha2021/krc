@@ -4,8 +4,9 @@
     <h1>Doctor consulation</h1>
   </div>
   <app-patient-header
-    [(header)]="headerDetail"
+    
     (outputPatientHeader)="patientHeader($event)"
+    [header]="headerDetail"
   ></app-patient-header>
   <div>
     <label class="mar15"
