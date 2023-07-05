@@ -8,7 +8,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "postinstall": "ng build --aot --prod"
+    "postinstall": "ng build"
   },
   "engines": {
     "node": "14.17.1",
@@ -23,7 +23,7 @@
     "@angular/compiler-cli": "~14.3.0",
     "@angular/core": "~14.3.0",
     "@angular/fire": "^6.1.5",
-    "firebase": "^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0",
+    "firebase": "^7.0.0 || ^8.0.0",
     "@angular/forms": "~14.3.0",
     "@angular/material": "^12.1.1",
     "@angular/platform-browser": "~14.3.0",
