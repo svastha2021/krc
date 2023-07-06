@@ -19,10 +19,11 @@ export class PatientScheduleService {
 
   fetchPrevDeatils(patient_id: string, bu:string, month:string,year:string): Observable<any> {
     let branch_id = localStorage.getItem('branch_id');
+    let org_id = localStorage.getItem('org_id');
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
   
-    return this.http.get(environment.apiUrl + 'schedules/KRC/' + localStorage.getItem('branch_id') + '/' + 
+    return this.http.get(environment.apiUrl + 'schedules/' +org_id+'/' + localStorage.getItem('branch_id') + '/' + 
     patient_id+'?bu_id='+bu+'&sch_month='+month+'&sch_year='+year,
       { headers: headers })
   }

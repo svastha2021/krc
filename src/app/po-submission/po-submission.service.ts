@@ -22,9 +22,10 @@ export class PoSubmissionService {
   }
 
   getBranchList():Observable<any>{
+    let org_id = localStorage.getItem('org_id');
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.get(environment.apiUrl + 'branches/KRC',
+    return this.http.get(environment.apiUrl + 'branches/'+org_id,
     { headers: headers })
   }
 

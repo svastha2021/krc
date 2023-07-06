@@ -23,8 +23,9 @@ export class PoService {
 
   getBranchList():Observable<any>{
     let headers = new HttpHeaders();
+    let org_id = localStorage.getItem('org_id');
     headers.append('Content-Type', 'application/json');
-    return this.http.get(environment.apiUrl + 'branches/KRC',
+    return this.http.get(environment.apiUrl + 'branches/'+org_id,
     { headers: headers })
   }
 
