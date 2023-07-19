@@ -1,0 +1,103 @@
+<div class="row">
+    <div class="col-md-4" *ngIf="!showPreviousTable">
+        <button class="btn btn-success ms-2" (click)="displayPrevious()">Show Previous</button>
+    </div>
+    <div class="col-md-4" *ngIf="showPreviousTable">
+        <ul class="pagination pointer">
+            <li class="page-item" [ngClass]="{'disabled': recordIndex === 0 || recordIndex === undefined }">
+                <a class="page-link" (click)="prevItem()">Previous</a>
+            </li>
+            <li class="page-item" [ngClass]="{'disabled': recordIndex === undefined || recordIndex === getLastRecordIndex() }">
+                <a class="page-link" (click)="nextItem()">Next</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="error-container" *ngIf="!visit_no">Please save doctor notes to save Visual Acuity details</div>
+<form [formGroup]="visualAcuityForm">
+    <div class="row margin-20l">
+        <div class="col-md-3">
+            <label class="form-label margin-20t">Units ( Chart)</label>
+        </div>
+        <mat-radio-group aria-label="Select an option" formControlName="units">
+            <mat-radio-button value="Snellen (Meters)">Snellen (Meters)</mat-radio-button>
+            <mat-radio-button value="Snellen (Feet)">Snellen (Feet)</mat-radio-button>
+            <mat-radio-button value="Beiley Lovie (Log MMR)">Beiley Lovie (Log MMR)</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <br>
+    <div class="row margin-20l">
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                  <th colspan="1" rowspan="2" scope="colgroup" class="txt-center">Vision</th>
+                  <th colspan="2" scope="colgroup" class="txt-center">Right</th>
+                  <th colspan="2" scope="colgroup" class="txt-center">Left</th>
+                </tr>
+                <tr>
+                    <th scope="col">Distance</th>
+                    <th scope="col">Near
+                        <div>
+                            <mat-radio-group aria-label="Select an option">
+                                <div><mat-radio-button value="Reduced Snellen">Reduced Snellen</mat-radio-button></div>
+                                <div><mat-radio-button value="Word reading">Word reading</mat-radio-button></div>
+                            </mat-radio-group>
+                        </div>
+                    </th>
+                    <th scope="col">Distance</th>
+                    <th scope="col">Near
+                        <div>
+                            <mat-radio-group aria-label="Select an option">
+                                <div><mat-radio-button value="Reduced Snellen">Reduced Snellen</mat-radio-button></div>
+                                <div><mat-radio-button value="Word reading">Word reading</mat-radio-button></div>
+                            </mat-radio-group>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Un-Aided</th>
+                    <td><input type="text" class="form-control" formControlName="unaided_distance_re"></td>
+                    <td><input type="text" class="form-control" formControlName="unaided_distance_le"></td>
+                    <td><input type="text" class="form-control" formControlName="unaided_near_re"></td>
+                    <td><input type="text" class="form-control" formControlName="unaided_near_le"></td>
+                </tr>
+                <tr>
+                    <th>Aided</th>
+                    <td><input type="text" class="form-control" formControlName="aided_distance_re"></td>
+                    <td><input type="text" class="form-control" formControlName="aided_distance_le"></td>
+                    <td><input type="text" class="form-control" formControlName="aided_near_re"></td>
+                    <td><input type="text" class="form-control" formControlName="aided_near_le"></td>
+                </tr>
+                <tr>
+                    <th>Pinhole</th>
+                    <td><input type="text" class="form-control" formControlName="pinhole_distance_re"></td>
+                    <td></td>
+                    <td><input type="text" class="form-control" formControlName="pinhole_distance_le"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Color Vision</th>
+                    <td><input type="text" class="form-control" formControlName="color_vision_distance_re"></td>
+                    <td></td>
+                    <td><input type="text" class="form-control" formControlName="color_vision_distance_le"></td>
+                    <td></td>
+                </tr>
+            </tbody>
+          </table>
+    </div>
+</form>
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 pointer txt-center">
+        <button type="button" class="btn btn-success margin-10t" (click)="saveVisualAcuity()" *ngIf="!showPreviousTable" [disabled]="!visit_no">
+            Save
+        </button>
+        <button type="button" class="btn btn-success margin-20t" (click)="back()" *ngIf="showPreviousTable">
+            Back
+        </button>
+    </div>
+    <div class="col-md-4"></div>
+</div>

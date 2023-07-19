@@ -31,7 +31,129 @@
         >Visit Date:
         {{ currentPatientDetail.visit_date | date : "dd-MM-yyyy" }}</label
       >
-      <label for="prevHistory" class="form-label margin-20t"
+      <div class="row">
+        <div class="visit-tag">
+          <ul class="pagination">
+            <li class="page-item" [ngClass]="{ disabled: recordIndex === 0 }">
+              <a class="page-link" (click)="prevItem()">Previous</a>
+            </li>
+            <li
+              class="page-item"
+              [ngClass]="{
+                disabled:
+                  recordIndex === undefined || recordIndex === getLastRecordIndex()
+              }"
+            >
+              <a class="page-link" (click)="nextItem()">Next</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="error-container" *ngIf="!visit_no">Please save doctor notes to save basic details</div>
+            <div class="row margin-20l">
+                <div class="col-md-8">
+                    <label class="form-label margin-20t">Chief Complaint</label>
+                    <input type="text"  class="form-control margin-10t" [(ngModel)]="main_complaint" required/>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label margin-20t">Since When</label>
+                    <input type="date"  class="form-control margin-10t" [(ngModel)]="main_complaint_from" required/>
+                </div>
+            </div>
+
+            <div class="row margin-20l">
+                <div class="col-md-8">
+                    <label class="form-label margin-20t">History of Current Compliant</label>
+                    <input type="text"  class="form-control margin-10t" [(ngModel)]="curr_complaint" required/>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label margin-20t">Since When</label>
+                    <input type="date"  class="form-control margin-10t" [(ngModel)]="curr_complaint_from" required/>
+                </div>
+            </div>
+
+            <div class="row margin-20l">
+                <div class="col-md-10">
+                    <label class="form-label margin-20t">History of Past illness / systemic</label>
+                    <input type="text"  class="form-control margin-10t" [(ngModel)]="past_illness_systemic" required/>
+                </div>
+            </div>
+
+            <div class="row margin-20l">
+              <div class="col-md-4">
+                  <label class="form-label margin-20t">Any Family History</label>
+                  <div>
+                      <mat-radio-group aria-label="Select an option" [(ngModel)]="fam_history">
+                          <mat-radio-button class="mr-10" value="Y">Yes</mat-radio-button>
+                          <mat-radio-button value="N">No</mat-radio-button>
+                      </mat-radio-group>   
+                  </div>
+              </div>
+              <div class="col-md-8">
+                  <label class="form-label margin-20t">Family History</label>
+                  <input type="text"  class="form-control margin-10t" [(ngModel)]="fam_history_dtl" 
+                  [readonly]="fam_history == 'N'" required/>
+              </div>
+          </div>
+
+            <div class="row margin-20l">
+                <div class="col-md-8">
+                    <label class="form-label margin-20t">Surgeries / Lasers</label>
+                    <input type="text"  class="form-control margin-10t" [(ngModel)]="surg_laser" required/>
+                </div>
+            </div>
+
+            <div class="row margin-20l">
+                <div class="col-md-8">
+                    <label class="form-label margin-20t">Allergies</label>
+                    <input type="text"  class="form-control margin-10t" [(ngModel)]="allergies" required/>
+                </div>
+            </div>
+
+            <div class="row margin-20l">
+              <div class="col-md-4">
+                  <label class="form-label margin-20t">Are you under curent treatment</label>
+                  <div>
+                      <mat-radio-group aria-label="Select an option" [(ngModel)]="curr_treatment">
+                          <mat-radio-button class="mr-10" value="Y">Yes</mat-radio-button>
+                          <mat-radio-button value="N">No</mat-radio-button>
+                      </mat-radio-group>
+                  </div>
+              </div>
+              <div class="col-md-8">
+                  <label class="form-label margin-20t">Current Treatment Details</label>
+                  <input type="text"  class="form-control margin-10t" [(ngModel)]="curr_treatment_dtl" 
+                  [readonly]="curr_treatment == 'N'" required/>
+              </div>
+          </div>
+
+            <div class="row margin-20l">
+                <div class="col-md-4">
+                    <label class="form-label margin-20t">Are you under any medication</label>
+                    <div>
+                      <mat-radio-group aria-label="Select an option" [(ngModel)]="medication">
+                          <mat-radio-button class="mr-10" value="Y">Yes</mat-radio-button>
+                          <mat-radio-button value="N">No</mat-radio-button>
+                      </mat-radio-group>
+                  </div>
+                </div>
+                <div class="col-md-8">
+                    <label class="form-label margin-20t">Medication details</label>
+                    <input type="text"  class="form-control margin-10t" [(ngModel)]="medication_dtl" 
+                    [readonly]="medication == 'N'" required/>
+                </div>
+            </div>
+
+            <div class="row margin-20l">
+                <div class="col-md-12">
+                    <label class="form-label margin-20t">Remarks</label>
+                    <textarea class="form-control margin-10t" [(ngModel)]="docNotes"
+                    id="currentNotes" rows="2"></textarea>
+                </div>
+            </div>
+      </div>
+      <!-- <label for="prevHistory" class="form-label margin-20t"
         >Previous History</label
       >
 
@@ -41,24 +163,9 @@
         id="prevHistory"
         rows="10"
         [(ngModel)]="currentPatientDetail.doctor_notes"
-      ></textarea>
+      ></textarea> -->
 
-      <ul class="pagination">
-        <li class="page-item" [ngClass]="{ disabled: recordIndex === 0 }">
-          <a class="page-link" (click)="prevItem()">Previous</a>
-        </li>
-        <li
-          class="page-item"
-          [ngClass]="{
-            disabled:
-              recordIndex === undefined || recordIndex === getLastRecordIndex()
-          }"
-        >
-          <a class="page-link" (click)="nextItem()">Next</a>
-        </li>
-      </ul>
-
-      <label for="exampleFormControlTextarea1" class="form-label margin-20t"
+      <!-- <label for="exampleFormControlTextarea1" class="form-label margin-20t"
         >Doctor Notes</label
       >
       <textarea
@@ -66,7 +173,7 @@
         [(ngModel)]="docNotes"
         id="currentNotes"
         rows="10"
-      ></textarea>
+      ></textarea> -->
       <button
         type="button"
         [disabled]="!docNotes"
@@ -321,6 +428,92 @@
         [visit_date]="visit_date"
         [headerDetail]="headerDetail"
       ></app-slit-lamp>
+    </mat-expansion-panel>
+
+  <!-- Opthal Medical paramaters tab -->
+  <!-- <mat-expansion-panel
+    hideToggle
+    class="margin-20b doc-consult-expansion-container"
+    *ngIf="aptObj.dept_id === 'D0002'">
+    <mat-expansion-panel-header>
+      <mat-panel-title> Medical Examination </mat-panel-title>
+      <mat-panel-description>
+        This is a summary of the content
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <app-medical-examination
+      [visit_no]="visit_no"
+      [visit_date]="visit_date"
+      [headerDetail]="headerDetail"
+    ></app-medical-examination>
+  </mat-expansion-panel> -->
+
+  <!-- Opthal Visual paramaters tab -->
+  <mat-expansion-panel hideToggle
+    class="margin-20b doc-consult-expansion-container"
+    *ngIf="aptObj.dept_id === 'D0002'">
+  <mat-expansion-panel-header>
+    <mat-panel-title> Visual Acuity </mat-panel-title>
+    <mat-panel-description>
+      This is a summary of the content
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <app-visual-acuity
+    [visit_no]="visit_no"
+    [visit_date]="visit_date"
+    [headerDetail]="headerDetail"
+  ></app-visual-acuity>
+  </mat-expansion-panel>
+
+    <!-- Opthal Objective Refraction tab -->
+    <mat-expansion-panel hideToggle
+    class="margin-20b doc-consult-expansion-container"
+    *ngIf="aptObj.dept_id === 'D0002'">
+  <mat-expansion-panel-header>
+    <mat-panel-title> Objective Rafraction </mat-panel-title>
+    <mat-panel-description>
+      This is a summary of the content
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <app-objective-refraction
+    [visit_no]="visit_no"
+    [visit_date]="visit_date"
+    [headerDetail]="headerDetail"
+  ></app-objective-refraction>
+  </mat-expansion-panel>
+
+  <!-- Opthal Objective Refraction tab -->
+  <mat-expansion-panel hideToggle
+  class="margin-20b doc-consult-expansion-container"
+  *ngIf="aptObj.dept_id === 'D0002'">
+  <mat-expansion-panel-header>
+    <mat-panel-title> Present Glass Power </mat-panel-title>
+    <mat-panel-description>
+      This is a summary of the content
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <app-present-glass-power
+    [visit_no]="visit_no"
+    [visit_date]="visit_date"
+    [headerDetail]="headerDetail">
+  </app-present-glass-power>
+  </mat-expansion-panel>
+  
+    <!-- Opthal Objective Refraction tab -->
+    <mat-expansion-panel hideToggle
+    class="margin-20b doc-consult-expansion-container"
+    *ngIf="aptObj.dept_id === 'D0002'">
+    <mat-expansion-panel-header>
+      <mat-panel-title> Subjective Acceptance </mat-panel-title>
+      <mat-panel-description>
+        This is a summary of the content
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <app-subject-acceptance
+      [visit_no]="visit_no"
+      [visit_date]="visit_date"
+      [headerDetail]="headerDetail">
+    </app-subject-acceptance>
     </mat-expansion-panel>
   </div>
   <div class="row"></div>

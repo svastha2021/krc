@@ -1,0 +1,113 @@
+<div class="row">
+    <div class="col-md-4" *ngIf="!showPreviousTable">
+        <button class="btn btn-success ms-2" (click)="displayPrevious()">Show Previous</button>
+    </div>
+    <div class="col-md-4" *ngIf="showPreviousTable">
+        <ul class="pagination pointer">
+            <li class="page-item" [ngClass]="{'disabled': recordIndex === 0 || recordIndex === undefined }">
+                <a class="page-link" (click)="prevItem()">Previous</a>
+            </li>
+            <li class="page-item" [ngClass]="{'disabled': recordIndex === undefined || recordIndex === getLastRecordIndex() }">
+                <a class="page-link" (click)="nextItem()">Next</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="error-container" *ngIf="!visit_no">Please save doctor notes to save Objective Refraction details</div>
+<form [formGroup]="objectiveRefractionForm">
+    <div class="row margin-20l">
+        <div class="col-md-6">
+            <table class="table table-bordered">
+                <thead class="">
+                    <tr>
+                      <th scope="colgroup" class="txt-center">Right eye</th>
+                    </tr>
+                    <tr>
+                        <th scope="col">
+                            <mat-radio-group aria-label="Select an option" formControlName="obj_ref_type_re">
+                                <mat-radio-button value="retinoscopy">Retinoscopy</mat-radio-button>
+                                <mat-radio-button value="auto refractometer">Auto Refractometer</mat-radio-button>
+                            </mat-radio-group>
+                        </th>
+                    </tr>
+                </thead>
+                    <tr>
+                        <table class="table table-bordered">
+                            <thead class="">
+                                <tr>
+                                    <th scope="colgroup" class="txt-center">SPL</th>
+                                    <th scope="colgroup" class="txt-center">CYL</th>
+                                    <th scope="colgroup" class="txt-center">AXIS</th>
+                                  </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" class="form-control" formControlName="sph_re"></td>
+                                    <td><input type="text" class="form-control" formControlName="cyl_re"></td>
+                                    <td><input type="text" class="form-control" formControlName="axis_re"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </tr>
+            </table>
+        </div>
+
+        <div class="col-md-6">
+            <table class="table table-bordered">
+                <thead class="">
+                    <tr>
+                      <th scope="colgroup" class="txt-center">Left eye</th>
+                    </tr>
+                    <tr>
+                        <th scope="col">
+                            <mat-radio-group aria-label="Select an option" formControlName="obj_ref_type_le">
+                                <mat-radio-button value="retinoscopy">Retinoscopy</mat-radio-button>
+                                <mat-radio-button value="auto refractometer">Auto Refractometer</mat-radio-button>
+                            </mat-radio-group>
+                        </th>
+                    </tr>
+                </thead>
+                    <tr>
+                        <table class="table table-bordered">
+                            <thead class="">
+                                <tr>
+                                    <th scope="colgroup" class="txt-center">SPL</th>
+                                    <th scope="colgroup" class="txt-center">CYL</th>
+                                    <th scope="colgroup" class="txt-center">AXIS</th>
+                                  </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" class="form-control" formControlName="sph_le"></td>
+                                    <td><input type="text" class="form-control" formControlName="cyl_le"></td>
+                                    <td><input type="text" class="form-control" formControlName="axis_le"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </tr>
+            </table>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label margin-20t">Type of Refraction</label>
+        </div>
+        <div class="col-md-6">
+            <select type="text"  class="form-control margin-10t" formControlName="refr_type" required>
+                <option value="" selected disabled>-Select-</option>
+                <option *ngFor="let refraction of refractionTypes" value="{{refraction.ref_code}}">{{refraction.ref_desc}}</option>
+            </select>
+        </div>
+    </div>
+</form>
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 pointer txt-center">
+        <button type="button" class="btn btn-success margin-10t" (click)="saveObjectiveRefraction()" *ngIf="!showPreviousTable" [disabled]="!visit_no">
+            Save
+        </button>
+        <button type="button" class="btn btn-success margin-20t" (click)="back()" *ngIf="showPreviousTable">
+            Back
+        </button>
+    </div>
+    <div class="col-md-4"></div>
+</div>

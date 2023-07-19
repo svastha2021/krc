@@ -7,6 +7,7 @@ import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.compon
 import { MatDialog } from '@angular/material/dialog';
 import { ReferenceService } from '../utilities/services/reference.service';
 import { aptModel } from '../apt-booking/apt-booking.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 export type NotesPayload = {
   org_id: string | null;
   branch_id: string | null;
@@ -20,6 +21,19 @@ export type NotesPayload = {
   prev_visit_date: string;
   prev_history: string;
   doctor_notes: string;
+  main_complaint: string;
+  main_complaint_from: string;
+  curr_complaint: string;
+  curr_complaint_from: string;
+  past_illness_systemic: string;
+  fam_history: string;
+  fam_history_dtl: string;
+  surg_laser: string;
+  allergies: string;
+  curr_treatment: string;
+  curr_treatment_dtl: string;
+  medication: string;
+  medication_dtl: string;
 };
 
 export type DialysisNotesPayload = {
@@ -48,7 +62,22 @@ export class DocConsultationComponent implements OnInit {
   consultObj = {} as NotesPayload;
   patientHistory: any;
   patientDialysisHistory: any;
-  currentPatientDetail = { doctor_notes: '', visit_no: '', visit_date: '' };
+  currentPatientDetail = { doctor_notes: '', visit_no: '', visit_date: '',  
+    main_complaint: '',
+    main_complaint_from: '',
+    curr_complaint: '',
+    curr_complaint_from: '',
+    past_illness_systemic: '',
+    fam_history: '',
+    fam_history_dtl: '',
+    surg_laser: '',
+    allergies: '',
+    curr_treatment: '',
+    curr_treatment_dtl: '',
+    medication: '',
+    medication_dtl: '',
+    docNotes: ''
+  };
   currentPatientDialysisDetail = {
     dialysis_notes: '',
     visit_no: '',
@@ -59,13 +88,33 @@ export class DocConsultationComponent implements OnInit {
   aptObj = {} as aptModel;
   visit_date: any;
   showVitalPrevious: boolean = false;
+  docNoteForm!: FormGroup;
+  main_complaint: string = '';
+  main_complaint_from: string = '';
+  curr_complaint: string = '';
+  curr_complaint_from: string = '';
+  past_illness_systemic: string = '';
+  fam_history: string = '';
+  fam_history_dtl: string = '';
+  surg_laser: string = '';
+  allergies: string = '';
+  curr_treatment: string = '';
+  curr_treatment_dtl: string = '';
+  medication: string = '';
+  medication_dtl: string = '';
+
   // [{khi_code:'bp',khi_desc:'Bloop pressure'}, {khi_code:'height',khi_desc:'Height'}];
   constructor(
     private docService: DocConsultationService,
     private ref: ReferenceService,
     private utility: UtilityService,
-    private dialog: MatDialog
-  ) {}
+    private dialog: MatDialog,
+    private formBuilder: FormBuilder
+  ) {
+    this.fam_history = 'N';
+    this.curr_treatment = 'N';
+    this.medication = 'N';
+  }
 
   ngOnInit(): void {
     if (history.state && history.state.patient_id) {
@@ -78,6 +127,32 @@ export class DocConsultationComponent implements OnInit {
       this.vitalParametersList = data;
     });
     this.getVitalData();
+
+    this.doctorNotes();
+
+  }
+
+  doctorNotes() {
+    // this.docNoteForm = this.formBuilder.group({
+    //   main_complaint: [null],
+    //   main_complaint_from: [null],
+    //   curr_complaint: [null],
+    //   curr_complaint_from: [null],
+    //   past_illness_systemic: [null],
+    //   fam_history: [null],
+    //   fam_history_dtl: [null],
+    //   surg_laser: [null],
+    //   allergies: [null],
+    //   curr_treatment: [null],
+    //   curr_treatment_dtl: [null],
+    //   medication: [null],
+    //   medication_dtl: [null],
+    //   remarks: [null]
+    // })
+  }
+
+  history() {
+
   }
   patientHeader(data: any) {
     this.headerDetail = { ...data };
@@ -111,7 +186,20 @@ export class DocConsultationComponent implements OnInit {
         visit_date: this.utility.convertTodayTostr(),
         prev_visit_date: '',
         prev_history: '',
-        doctor_notes: this.docNotes,
+        main_complaint: this.main_complaint,
+        main_complaint_from: this.main_complaint_from,
+        curr_complaint: this.curr_complaint,
+        curr_complaint_from: this.curr_complaint_from,
+        past_illness_systemic: this.past_illness_systemic,
+        fam_history: this.fam_history,
+        fam_history_dtl: this.fam_history_dtl,
+        surg_laser: this.surg_laser,
+        allergies: this.allergies,
+        curr_treatment: this.curr_treatment,
+        curr_treatment_dtl: this.curr_treatment_dtl,
+        medication: this.medication,
+        medication_dtl: this.medication_dtl,
+        doctor_notes: this.docNotes
       };
     } else {
       this.consultObj = {
@@ -125,7 +213,20 @@ export class DocConsultationComponent implements OnInit {
         visit_date: this.utility.convertTodayTostr(),
         prev_visit_date: '',
         prev_history: '',
-        doctor_notes: this.docNotes,
+        main_complaint: this.main_complaint,
+        main_complaint_from: this.main_complaint_from,
+        curr_complaint: this.curr_complaint,
+        curr_complaint_from: this.curr_complaint_from,
+        past_illness_systemic: this.past_illness_systemic,
+        fam_history: this.fam_history,
+        fam_history_dtl: this.fam_history_dtl,
+        surg_laser: this.surg_laser,
+        allergies: this.allergies,
+        curr_treatment: this.curr_treatment,
+        curr_treatment_dtl: this.curr_treatment_dtl,
+        medication: this.medication,
+        medication_dtl: this.medication_dtl,
+        doctor_notes: this.docNotes
       };
     }
     this.docService.submitNotes(this.consultObj).subscribe((data) => {
@@ -199,6 +300,20 @@ export class DocConsultationComponent implements OnInit {
     this.currentPatientDetail.visit_date = this.utility.convertDate(
       this.currentPatientDetail.visit_date
     );
+    this.main_complaint = this.currentPatientDetail.main_complaint,
+    this.main_complaint_from = this.utility.convertDate(this.currentPatientDetail.main_complaint_from),
+    this.curr_complaint = this.currentPatientDetail.curr_complaint,
+    this.curr_complaint_from = this.utility.convertDate(this.currentPatientDetail.curr_complaint_from),
+    this.past_illness_systemic = this.currentPatientDetail.past_illness_systemic,
+    this.fam_history = this.currentPatientDetail.fam_history,
+    this.fam_history_dtl = this.currentPatientDetail.fam_history_dtl,
+    this.surg_laser = this.currentPatientDetail.surg_laser,
+    this.allergies = this.currentPatientDetail.allergies,
+    this.curr_treatment = this.currentPatientDetail.curr_treatment,
+    this.curr_treatment_dtl = this.currentPatientDetail.curr_treatment_dtl,
+    this.medication = this.currentPatientDetail.medication,
+    this.medication_dtl = this.currentPatientDetail.medication_dtl,
+    this.docNotes = this.currentPatientDetail.doctor_notes
   }
   //dialysis notes pagination
 

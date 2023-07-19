@@ -104,6 +104,11 @@ import { AppointmentTableComponent } from './landing/appoinment-table/appointmen
 import { PatientScheduleTableComponent } from './landing/patient-schedule-table/patient-schedule-table.component';
 import { PreviousLabComponent } from './previous-lab/previous-lab.component';
 import { PreviousVitalComponent } from './previous-vital/previous-vital.component';
+import { VisualAcuityComponent } from './visual-acuity/visual-acuity.component';
+import { ObjectiveRefractionComponent } from './objective-refraction/objective-refraction.component';
+import { PresentGlassPowerComponent } from './present-glass-power/present-glass-power.component';
+import { SubjectAcceptanceComponent } from './subject-acceptance/subject-acceptance.component';
+import { GlassPrescriptionComponent } from './glass-prescription/glass-prescription.component';
 //import { InvoicePaymentTable } from './invoice-payment-report/invoice-payment-table/invoice-payment-table.component';
 //import { InvoiceProductTable } from './invoice-product-report/invoice-product-table/invoice-product-table.component';
 @NgModule({
@@ -198,7 +203,12 @@ import { PreviousVitalComponent } from './previous-vital/previous-vital.componen
     AppointmentTableComponent,
     PatientScheduleTableComponent,
     PreviousLabComponent,
-    PreviousVitalComponent
+    PreviousVitalComponent,
+    VisualAcuityComponent,
+    ObjectiveRefractionComponent,
+    PresentGlassPowerComponent,
+    SubjectAcceptanceComponent,
+    GlassPrescriptionComponent
     
   ],
   imports: [
