@@ -1,0 +1,106 @@
+<div class="row">
+    <div class="col-md-4" *ngIf="!showPreviousTable">
+        <button class="btn btn-success ms-2" (click)="displayPrevious()">Show Previous</button>
+    </div>
+    <div class="col-md-4" *ngIf="showPreviousTable">
+        <ul class="pagination pointer">
+            <li class="page-item" [ngClass]="{'disabled': recordIndex === 0 || recordIndex === undefined }">
+                <a class="page-link" (click)="prevItem()">Previous</a>
+            </li>
+            <li class="page-item" [ngClass]="{'disabled': recordIndex === undefined || recordIndex === getLastRecordIndex() }">
+                <a class="page-link" (click)="nextItem()">Next</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="error-container" *ngIf="!visit_no">Please save doctor notes to save Intra Ocular Pressure details</div>
+<form [formGroup]="intraOcularPressureForm">
+    <div class="row margin-20l">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-3">
+                    <label class="form-label margin-20t">IOP Type</label>
+                </div>
+                <div class="col-md-9">
+                    <mat-radio-group aria-label="Select an option" formControlName="iop_type">
+                        <mat-radio-button value="Non-contact tonometer" class="margin-l">Non-contact tonometer</mat-radio-button>
+                        <mat-radio-button value="AT" class="margin-l">AT</mat-radio-button>
+                        <mat-radio-button value="Schiotz" class="margin-l">Schiotz</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </div>
+            <div class="row margin-bottom">
+                <div class="col-md-3"></div>
+                <div class="col-md-4">
+                    <label class="form-label margin-20t">Right Eye</label>
+                    <div class="display-flex">
+                        <input type="text" class="form-control" formControlName="pressure_re"><label class="form-label">mmHg</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label margin-20t">Left Eye</label>
+                    <div class="display-flex">
+                        <input type="text" class="form-control" formControlName="pressure_le">mmHg
+                    </div>
+                </div>
+            </div>
+            <div class="row margin-bottom">
+                <div class="col-md-3">
+                    <label class="form-label margin-20t">Time</label>
+                </div>
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" formControlName="timer">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="checkbox"><label class="form-label margin-20t">Automatic</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <label class="form-label margin-20t">Remarks</label>
+                </div>
+                <div class="col-md-9">
+                    <textarea type="text" class="form-control" formControlName="remarks"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label margin-20t">List of IOP values</label>
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>IOP Type</th>
+                        <th>Right Eye</th>
+                        <th>Left Eye</th>
+                        <th>Time</th>
+                        <th>Remarks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   <tr>
+                      <td rowspan="2">
+
+                      </td>
+                   </tr> 
+                </tbody>
+            </table>
+        </div>
+    </div>
+</form>
+<br>
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 pointer txt-center">
+        <button type="button" class="btn btn-success margin-10t" (click)="saveintraOcularPressure()" *ngIf="!showPreviousTable" [disabled]="!visit_no">
+            Save
+        </button>
+        <button type="button" class="btn btn-success margin-20t" (click)="back()" *ngIf="showPreviousTable">
+            Back
+        </button>
+    </div>
+    <div class="col-md-4"></div>
+</div>

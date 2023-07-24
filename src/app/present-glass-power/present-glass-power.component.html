@@ -53,91 +53,7 @@
                         </table>
                     </tr>
             </table>
-
-            <!-- <div class="row">
-                <div class="col-1">
-                    <button class="btn btn-primary margin-20t">Add</button>
-                </div>
-                <div class="col-2">
-                    <input type="text" class="form-control" formControlName="sph_add_re">
-                </div>
-            </div>
-
-            <table class="table table-bordered">
-                    <tr>
-                        <table class="table table-bordered">
-                            <thead class="">
-                                <tr>
-                                    <th rowspan="2">Near</th>
-                                    <th class="txt-center">SPH</th>
-                                    <th class="txt-center">CYL</th>
-                                    <th class="txt-center">AXIS</th>
-                                  </tr>
-                                    <tr>
-                                        <td><input type="text" class="form-control" formControlName="sph_near_re"></td>
-                                        <td><input type="text" class="form-control" formControlName="cyl_near_re"></td>
-                                        <td><input type="text" class="form-control" formControlName="axis_near_re"></td>
-                                    </tr>
-                            </thead>
-                        </table>
-                    </tr>
-            </table> -->
         </div>
-        <!-- <div class="col-md-6">
-            <table class="table table-bordered">
-                <thead class="">
-                    <tr>
-                      <th scope="colgroup" class="txt-center">Right eye</th>
-                    </tr>
-                </thead>
-                    <tr>
-                        <table class="table table-bordered">
-                            <thead class="">
-                                <tr>
-                                    <th rowspan="2">Distance</th>
-                                    <th class="txt-center">SPH</th>
-                                      <th class="txt-center">CYL</th>
-                                      <th class="txt-center">AXIS</th>
-                                  </tr>
-                                    <tr>
-                                        <td><input type="text" class="form-control" formControlName="sph_distance_re"></td>
-                                        <td><input type="text" class="form-control" formControlName="cyl_distance_re"></td>
-                                        <td><input type="text" class="form-control" formControlName="axis_distance_re"></td>
-                                    </tr>
-                            </thead>
-                        </table>
-                    </tr>
-            </table>
-
-            <div class="row">
-                <div class="col-1">
-                    <button class="btn btn-primary margin-20t">Add</button>
-                </div>
-                <div class="col-2">
-                    <input type="text" class="form-control" formControlName="sph_add_re">
-                </div>
-            </div>
-
-            <table class="table table-bordered">
-                    <tr>
-                        <table class="table table-bordered">
-                            <thead class="">
-                                <tr>
-                                    <th rowspan="2">Near</th>
-                                    <th class="txt-center">SPH</th>
-                                      <th class="txt-center">CYL</th>
-                                      <th class="txt-center">AXIS</th>
-                                  </tr>
-                                    <tr>
-                                        <td><input type="text" class="form-control" formControlName="sph_near_re"></td>
-                                        <td><input type="text" class="form-control" formControlName="cyl_near_re"></td>
-                                        <td><input type="text" class="form-control" formControlName="axis_near_re"></td>
-                                    </tr>
-                            </thead>
-                        </table>
-                    </tr>
-            </table>
-        </div> -->
 
         <div class="col-md-6">
             <table class="table table-bordered">
@@ -176,33 +92,6 @@
                     </table>
                 </tr>
             </table>
-
-            <!-- <div class="row">
-                <div class="col-md-2">
-                    <button class="btn btn-primary margin-20t">Add</button>
-                </div>
-                <div class="col-md-4">
-                    <input type="text" class="form-control" formControlName="sph_add_le">
-                </div>
-            </div>
-
-            <table class="table table-bordered">
-                <table class="table table-bordered">
-                    <thead class="">
-                        <tr>
-                            <th rowspan="2">Near</th>
-                            <th class="txt-center">SPH</th>
-                                <th class="txt-center">CYL</th>
-                                <th class="txt-center">AXIS</th>
-                            </tr>
-                            <tr>
-                                <td><input type="text" class="form-control" formControlName="sph_near_re"></td>
-                                <td><input type="text" class="form-control" formControlName="cyl_near_re"></td>
-                                <td><input type="text" class="form-control" formControlName="axis_near_re"></td>
-                            </tr>
-                    </thead>
-                </table>
-            </table> -->
         </div>
 
         <div class="row pg-1">
@@ -211,7 +100,7 @@
             </div>
             <div class="col-md-6">
                 <select type="text"  class="form-control margin-10t" formControlName="lens_material" required>
-                    <option value="" selected [disabled]="presentGlassPowerForm.controls.lens_material.value">-Select-</option>
+                    <option value="" selected disabled>-Select-</option>
                     <option *ngFor="let lens of lensMaterialList" value="{{lens.ref_code}}">{{lens.ref_desc}}</option>
                 </select>
             </div>
@@ -222,7 +111,7 @@
             </div>
             <div class="col-md-6">
                 <select type="text"  class="form-control margin-10t" formControlName="lens_type" required>
-                    <option value="" selected [disabled]="presentGlassPowerForm.controls.lens_type.value">-Select-</option>
+                    <option value="" selected disabled>-Select-</option>
                     <option *ngFor="let lensType of typeOfLensList" value="{{lensType.ref_code}}">{{lensType.ref_desc}}</option>
                 </select>
             </div>
@@ -233,7 +122,7 @@
             </div>
             <div class="col-md-6">
                 <select type="text"  class="form-control margin-10t" formControlName="lens_coating" required>
-                    <option value="" selected [disabled]="presentGlassPowerForm.controls.lens_coating.value">-Select-</option>
+                    <option value="" selected disabled>-Select-</option>
                     <option *ngFor="let coating of coatingList" value="{{coating.ref_code}}">{{coating.ref_desc}}</option>
                 </select>
             </div>

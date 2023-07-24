@@ -1,0 +1,205 @@
+<div class="row">
+    <div class="col-md-4" *ngIf="!showPreviousTable">
+        <button class="btn btn-success ms-2" (click)="displayPrevious()">Show Previous</button>
+    </div>
+    <div class="col-md-4" *ngIf="showPreviousTable">
+        <ul class="pagination pointer">
+            <li class="page-item" [ngClass]="{'disabled': recordIndex === 0 || recordIndex === undefined }">
+                <a class="page-link" (click)="prevItem()">Previous</a>
+            </li>
+            <li class="page-item" [ngClass]="{'disabled': recordIndex === undefined || recordIndex === getLastRecordIndex() }">
+                <a class="page-link" (click)="nextItem()">Next</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="error-container" *ngIf="!visit_no">Please save doctor notes to save Diagnosis and Advice details</div>
+<form [formGroup]="diagnosisForm">
+    <div class="row margin-20l">
+            <table class="table table-bordered">
+                <thead class="">
+                    <tr>
+                        <th scope="colgroup" class="txt-center">Diagnosis</th>
+                    </tr>
+                    <tr>
+                      <th scope="colgroup" class="txt-center">Right eye</th>
+                      <th scope="colgroup" class="txt-center">Left eye</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <select type="dropdown" class="form-control" formControlName="diagnosis_re">
+                                <option value="" selected disabled>-Select-</option>
+                                <option *ngFor="let vaValue of diagnosisList" value="{{vaValue}}">{{vaValue}}</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select type="dropdown" class="form-control" formControlName="diagnosis_le">
+                                <option value="" selected disabled>-Select-</option>
+                                <option *ngFor="let vaValue of diagnosisList" value="{{vaValue}}">{{vaValue}}</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <!-- <tr>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" class="form-control">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control">
+                        </td>
+                    </tr> -->
+                </tbody>
+            </table>
+        <div class="row">
+            <div class="col-md-3">
+                <label>Others</label>
+            </div>
+            <div class="col-md-9 margin-t">
+                <input type="text" class="form-control" formControlName="others">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <label>Systemic Diagnosis</label>
+            </div>
+            <div class="col-md-9 margin-t">
+                <select type="dropdown" class="form-control" formControlName="syst_diag">
+                    <option value="" selected disabled>-Select-</option>
+                    <option *ngFor="let vaValue of systemicDiagnosisList" value="{{vaValue}}">{{vaValue}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <label>Advice</label>
+            </div>
+            <div class="col-md-9 margin-t">
+                <select type="dropdown" class="form-control" formControlName="advise">
+                    <option value="" selected disabled>-Select-</option>
+                    <option *ngFor="let vaValue of adviceList" value="{{vaValue}}">{{vaValue}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <label>Follow-up</label>
+            </div>
+            <div class="col-md-9 margin-t display-flex">
+                <div class="col-md-3">
+                    <input type="date" class="form-control" formControlName="followup_date">
+                </div>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" formControlName="followup_reason">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <label class="form-label margin-t">Refer? (Please select the reason)</label>
+            </div>
+            <div class="col-md-9 margin-t">
+                <mat-radio-group aria-label="Select an option">
+                    <mat-radio-button value="To Hospital">To Hospital</mat-radio-button>
+                    <mat-radio-button value="To Next Camp">To Next Camp</mat-radio-button>
+                    <mat-radio-button value="None">None</mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <label class="form-label margin-t">Reason for Refer</label>
+            </div>
+            <div class="col-md-9">
+                <table class="table table-bordered">
+                    <thead class="">
+                        <tr>
+                            <th scope="colgroup" class="txt-center">Reason</th>
+                        </tr>
+                        <tr>
+                          <th scope="colgroup" class="txt-center">Right eye</th>
+                          <th scope="colgroup" class="txt-center">Left eye</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <select type="dropdown" class="form-control">
+                                    <option value="" selected disabled>-Select-</option>
+                                    <option *ngFor="let vaValue of reasonList" value="{{vaValue}}">{{vaValue}}</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select type="dropdown" class="form-control">
+                                    <option value="" selected disabled>-Select-</option>
+                                    <option *ngFor="let vaValue of reasonList" value="{{vaValue}}">{{vaValue}}</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <!-- <tr>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <textarea rows="2" cols="10" class="form-control"></textarea>
+                            </td>
+                            <td>
+                                <textarea rows="2" cols="10" class="form-control"></textarea>
+                            </td>
+                        </tr> -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <input type="checkbox"><label class="form-label margin-t">Underwent Surgery</label>
+            </div>
+            <div class="col-md-9">
+                <input type="checkbox"><label class="form-label margin-t margin-r">Right Eye</label>
+                <input type="checkbox"><label class="form-label margin-t margin-r">Left Eye</label>
+                <input type="checkbox"><label class="form-label margin-t">Both</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-2">
+                        <label class="form-label margin-t">Hospital</label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label margin-t">Same Hospital</label>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label class="form-label margin-t">Both</label>
+                            </div>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<br>
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 pointer txt-center">
+        <button type="button" class="btn btn-success margin-10t" (click)="saveDiagnosisPrescription()" *ngIf="!showPreviousTable" [disabled]="!visit_no">
+            Save
+        </button>
+        <button type="button" class="btn btn-success margin-t" (click)="back()" *ngIf="showPreviousTable">
+            Back
+        </button>
+    </div>
+    <div class="col-md-4"></div>
+</div>

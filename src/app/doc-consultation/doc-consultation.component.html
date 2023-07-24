@@ -499,7 +499,7 @@
   </app-present-glass-power>
   </mat-expansion-panel>
   
-    <!-- Opthal Objective Refraction tab -->
+    <!-- Opthal Subjective Acceptance tab -->
     <mat-expansion-panel hideToggle
     class="margin-20b doc-consult-expansion-container"
     *ngIf="aptObj.dept_id === 'D0002'">
@@ -515,6 +515,57 @@
       [headerDetail]="headerDetail">
     </app-subject-acceptance>
     </mat-expansion-panel>
+    
+    <!-- Opthal Glass Prescription tab -->
+    <mat-expansion-panel hideToggle
+    class="margin-20b doc-consult-expansion-container"
+    *ngIf="aptObj.dept_id === 'D0002'">
+    <mat-expansion-panel-header>
+      <mat-panel-title> Glass Prescription </mat-panel-title>
+      <mat-panel-description>
+        This is a summary of the content
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <app-glass-prescription
+      [visit_no]="visit_no"
+      [visit_date]="visit_date"
+      [headerDetail]="headerDetail">
+    </app-glass-prescription>
+    </mat-expansion-panel>
+    
+    <!-- Opthal Intra Ocular Pressure tab -->
+    <mat-expansion-panel hideToggle
+    class="margin-20b doc-consult-expansion-container"
+    *ngIf="aptObj.dept_id === 'D0002'">
+    <mat-expansion-panel-header>
+      <mat-panel-title> Intra Ocular Pressure </mat-panel-title>
+      <mat-panel-description>
+        This is a summary of the content
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <app-intra-ocular-pressure
+      [visit_no]="visit_no"
+      [visit_date]="visit_date"
+      [headerDetail]="headerDetail">
+    </app-intra-ocular-pressure>
+    </mat-expansion-panel>
+    
+        <!-- Opthal Diagnosis and Advice tab -->
+        <mat-expansion-panel hideToggle
+        class="margin-20b doc-consult-expansion-container"
+        *ngIf="aptObj.dept_id === 'D0002'">
+        <mat-expansion-panel-header>
+          <mat-panel-title> Diagnosis and Advice </mat-panel-title>
+          <mat-panel-description>
+            This is a summary of the content
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-diagnosis-and-advice
+          [visit_no]="visit_no"
+          [visit_date]="visit_date"
+          [headerDetail]="headerDetail">
+        </app-diagnosis-and-advice>
+        </mat-expansion-panel>
   </div>
   <div class="row"></div>
 </div>
