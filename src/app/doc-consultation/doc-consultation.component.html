@@ -54,7 +54,11 @@
             <div class="row margin-20l">
                 <div class="col-md-8">
                     <label class="form-label margin-20t">Chief Complaint</label>
-                    <input type="text"  class="form-control margin-10t" [(ngModel)]="main_complaint" required/>
+                    <!-- <input type="text"  class="form-control margin-10t" [(ngModel)]="main_complaint" required/> -->
+                    <select type="dropdown" class="form-control" [(ngModel)]="main_complaint" required>
+                      <option value="" selected disabled>-Select-</option>
+                      <option *ngFor="let vaValue of chiefComplaintList" value="{{vaValue.ref_code}}">{{vaValue.ref_desc}}</option>
+                  </select>
                 </div>
                 <div class="col-md-4">
                     <label class="form-label margin-20t">Since When</label>
@@ -65,7 +69,11 @@
             <div class="row margin-20l">
                 <div class="col-md-8">
                     <label class="form-label margin-20t">History of Current Compliant</label>
-                    <input type="text"  class="form-control margin-10t" [(ngModel)]="curr_complaint" required/>
+                    <!-- <input type="text"  class="form-control margin-10t" [(ngModel)]="curr_complaint" required/> -->
+                    <select type="dropdown" class="form-control" [(ngModel)]="curr_complaint" required>
+                      <option value="" selected disabled>-Select-</option>
+                      <option *ngFor="let vaValue of HistoryOfCurrentCompliantList" value="{{vaValue.ref_code}}">{{vaValue.ref_desc}}</option>
+                  </select>
                 </div>
                 <div class="col-md-4">
                     <label class="form-label margin-20t">Since When</label>
@@ -76,7 +84,11 @@
             <div class="row margin-20l">
                 <div class="col-md-10">
                     <label class="form-label margin-20t">History of Past illness / systemic</label>
-                    <input type="text"  class="form-control margin-10t" [(ngModel)]="past_illness_systemic" required/>
+                    <!-- <input type="text"  class="form-control margin-10t" [(ngModel)]="past_illness_systemic" required/> -->
+                    <select type="dropdown" class="form-control" [(ngModel)]="past_illness_systemic" required>
+                      <option value="" selected disabled>-Select-</option>
+                      <option *ngFor="let vaValue of illnessList" value="{{vaValue.ref_code}}">{{vaValue.ref_desc}}</option>
+                  </select>
                 </div>
             </div>
 
@@ -499,7 +511,7 @@
   </app-present-glass-power>
   </mat-expansion-panel>
   
-    <!-- Opthal Objective Refraction tab -->
+    <!-- Opthal Subjective Acceptance tab -->
     <mat-expansion-panel hideToggle
     class="margin-20b doc-consult-expansion-container"
     *ngIf="aptObj.dept_id === 'D0002'">
@@ -514,6 +526,74 @@
       [visit_date]="visit_date"
       [headerDetail]="headerDetail">
     </app-subject-acceptance>
+    </mat-expansion-panel>
+    
+    <!-- Opthal Glass Prescription tab -->
+    <mat-expansion-panel hideToggle
+    class="margin-20b doc-consult-expansion-container"
+    *ngIf="aptObj.dept_id === 'D0002'">
+    <mat-expansion-panel-header>
+      <mat-panel-title> Glass Prescription </mat-panel-title>
+      <mat-panel-description>
+        This is a summary of the content
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <app-glass-prescription
+      [visit_no]="visit_no"
+      [visit_date]="visit_date"
+      [headerDetail]="headerDetail">
+    </app-glass-prescription>
+    </mat-expansion-panel>
+    
+    <!-- Opthal Intra Ocular Pressure tab -->
+    <mat-expansion-panel hideToggle
+    class="margin-20b doc-consult-expansion-container"
+    *ngIf="aptObj.dept_id === 'D0002'">
+    <mat-expansion-panel-header>
+      <mat-panel-title> Intra Ocular Pressure </mat-panel-title>
+      <mat-panel-description>
+        This is a summary of the content
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <app-intra-ocular-pressure
+      [visit_no]="visit_no"
+      [visit_date]="visit_date"
+      [headerDetail]="headerDetail">
+    </app-intra-ocular-pressure>
+    </mat-expansion-panel>
+    
+    <!-- Opthal Diagnosis and Advice tab -->
+    <mat-expansion-panel hideToggle
+    class="margin-20b doc-consult-expansion-container"
+    *ngIf="aptObj.dept_id === 'D0002'">
+    <mat-expansion-panel-header>
+      <mat-panel-title> Diagnosis and Advice </mat-panel-title>
+      <mat-panel-description>
+        This is a summary of the content
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <app-diagnosis-and-advice
+      [visit_no]="visit_no"
+      [visit_date]="visit_date"
+      [headerDetail]="headerDetail">
+    </app-diagnosis-and-advice>
+    </mat-expansion-panel>
+    
+    <!-- Opthal Examination tab -->
+    <mat-expansion-panel hideToggle
+    class="margin-20b doc-consult-expansion-container"
+    *ngIf="aptObj.dept_id === 'D0002'">
+    <mat-expansion-panel-header>
+      <mat-panel-title> Examination </mat-panel-title>
+      <mat-panel-description>
+        This is a summary of the content
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <app-examination
+      [visit_no]="visit_no"
+      [visit_date]="visit_date"
+      [headerDetail]="headerDetail">
+    </app-examination>
     </mat-expansion-panel>
   </div>
   <div class="row"></div>

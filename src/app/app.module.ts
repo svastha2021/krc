@@ -108,6 +108,10 @@ import { VisualAcuityComponent } from './visual-acuity/visual-acuity.component';
 import { ObjectiveRefractionComponent } from './objective-refraction/objective-refraction.component';
 import { PresentGlassPowerComponent } from './present-glass-power/present-glass-power.component';
 import { SubjectAcceptanceComponent } from './subject-acceptance/subject-acceptance.component';
+import { GlassPrescriptionComponent } from './glass-prescription/glass-prescription.component';
+import { IntraOcularPressureComponent } from './intra-ocular-pressure/intra-ocular-pressure.component';
+import { DiagnosisAndAdviceComponent } from './diagnosis-and-advice/diagnosis-and-advice.component';
+import { ExaminationComponent } from './examination/examination.component';
 //import { InvoicePaymentTable } from './invoice-payment-report/invoice-payment-table/invoice-payment-table.component';
 //import { InvoiceProductTable } from './invoice-product-report/invoice-product-table/invoice-product-table.component';
 @NgModule({
@@ -206,7 +210,11 @@ import { SubjectAcceptanceComponent } from './subject-acceptance/subject-accepta
     VisualAcuityComponent,
     ObjectiveRefractionComponent,
     PresentGlassPowerComponent,
-    SubjectAcceptanceComponent    
+    SubjectAcceptanceComponent,
+    GlassPrescriptionComponent,
+    IntraOcularPressureComponent,
+    DiagnosisAndAdviceComponent,
+    ExaminationComponent    
   ],
   imports: [
     BrowserModule,

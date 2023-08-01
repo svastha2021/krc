@@ -103,6 +103,10 @@ export class DocConsultationComponent implements OnInit {
   medication: string = '';
   medication_dtl: string = '';
 
+  chiefComplaintList: any = [];
+  HistoryOfCurrentCompliantList: any = [];
+  illnessList: any = [];
+
   // [{khi_code:'bp',khi_desc:'Bloop pressure'}, {khi_code:'height',khi_desc:'Height'}];
   constructor(
     private docService: DocConsultationService,
@@ -126,6 +130,18 @@ export class DocConsultationComponent implements OnInit {
     this.docService.fetchVitalParams().subscribe((data) => {
       this.vitalParametersList = data;
     });
+
+    //get Doc Notes List
+    this.ref.getPaymentModes('HIst1').subscribe(data => {
+      this.chiefComplaintList = data.results;
+    })
+    this.ref.getPaymentModes('Hist2').subscribe(data => {
+      this.HistoryOfCurrentCompliantList = data.results;
+    })
+    this.ref.getPaymentModes('ILLSYS').subscribe(data => {
+      this.illnessList = data.results;
+    })
+
     this.getVitalData();
 
     this.doctorNotes();

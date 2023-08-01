@@ -88,7 +88,7 @@ export class SubjectAcceptanceComponent {
       console.log(data);
       this.dialog.open(InfoDialogComponent, {
         width: '400px',
-        data: 'Present Glass Power Saved Successfully!!!'
+        data: 'Subjective acceptance Saved Successfully!!!'
       })
     })
   }

@@ -13,17 +13,9 @@
         </ul>
     </div>
 </div>
-<div class="error-container" *ngIf="!visit_no">Please save doctor notes to save Subject Acceptance details</div>
-<form [formGroup]="subjectAcceptanceForm">
+<div class="error-container" *ngIf="!visit_no">Please save doctor notes to save Glass Prescription details</div>
+<form [formGroup]="glassPrescriptionForm">
     <div class="row margin-20l">
-        <div class="col-md-3">
-            <label class="form-label margin-20t">Units ( Chart)</label>
-        </div>
-        <mat-radio-group aria-label="Select an option" formControlName="units">
-            <mat-radio-button value="Snellen (Meters)">Snellen (Meters)</mat-radio-button>
-            <mat-radio-button value="Snellen (Feet)">Snellen (Feet)</mat-radio-button>
-            <mat-radio-button value="Beiley Lovie (Log MMR)">Beiley Lovie (Log MMR)</mat-radio-button>
-        </mat-radio-group>
         <div class="col-md-6">
             <table class="table table-bordered">
                 <thead class="">
@@ -88,44 +80,73 @@
                                     <th class="txt-center">CYL</th>
                                     <th class="txt-center">AXIS</th>
                                     <th class="txt-center">VA</th>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" class="form-control" formControlName="sph_distance_le"></td>
-                                    <td><input type="text" class="form-control" formControlName="cyl_distance_le"></td>
-                                    <td><input type="text" class="form-control" formControlName="axis_distance_le"></td>
-                                    <td><select type="dropdown" class="form-control" formControlName="va_distance_le">
-                                        <option value="" selected disabled>-Select-</option>
-                                        <option *ngFor="let vaValue of vaList" value="{{vaValue}}">{{vaValue}}</option>
-                                    </select></td>
-                                </tr>
-                                <tr>
-                                    <td><button class="btn btn-primary margin-20t">Add</button></td>
-                                    <td>
-                                        <input type="text" class="form-control" formControlName="sph_add_le">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th rowspan="2">NV</th>
-                                    <td><input type="text" class="form-control" formControlName="sph_near_le"></td>
-                                    <td><input type="text" class="form-control" formControlName="cyl_near_le"></td>
-                                    <td><input type="text" class="form-control" formControlName="axis_near_le"></td>
-                                    <td><select type="dropdown" class="form-control" formControlName="va_near_le">
-                                        <option value="" selected disabled>-Select-</option>
-                                        <option *ngFor="let vaValue of vaList" value="{{vaValue}}">{{vaValue}}</option>
-                                    </select></td>
-                                </tr>
+                            </tr>
+                            <tr>
+                                <td><input type="text" class="form-control" formControlName="sph_distance_le"></td>
+                                <td><input type="text" class="form-control" formControlName="cyl_distance_le"></td>
+                                <td><input type="text" class="form-control" formControlName="axis_distance_le"></td>
+                                <td><select type="dropdown" class="form-control" formControlName="va_distance_le">
+                                    <option value="" selected disabled>-Select-</option>
+                                    <option *ngFor="let vaValue of vaList" value="{{vaValue}}">{{vaValue}}</option>
+                                </select></td>
+                            </tr>
+                            <tr>
+                                <td><button class="btn btn-primary margin-20t">Add</button></td>
+                                <td>
+                                    <input type="text" class="form-control" formControlName="sph_add_le">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th rowspan="2">NV</th>
+                                <td><input type="text" class="form-control" formControlName="sph_near_le"></td>
+                                <td><input type="text" class="form-control" formControlName="cyl_near_le"></td>
+                                <td><input type="text" class="form-control" formControlName="axis_near_le"></td>
+                                <td><select type="dropdown" class="form-control" formControlName="va_near_le">
+                                    <option value="" selected disabled>-Select-</option>
+                                    <option *ngFor="let vaValue of vaList" value="{{vaValue}}">{{vaValue}}</option>
+                                </select></td>
+                            </tr>
                         </thead>
                     </table>
                 </tr>
             </table>
         </div>
+        <div class="row">
+            <div class="col-md-4">
+                <label>Lens Materials</label>
+                <select type="dropdown" class="form-control" formControlName="lens_material">
+                    <option value="" selected disabled>-Select-</option>
+                    <option *ngFor="let vaValue of vaList" value="{{vaValue}}">{{vaValue}}</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label>Lens Type</label>
+                <select type="dropdown" class="form-control" formControlName="typeof_lens">
+                    <option value="" selected disabled>-Select-</option>
+                    <option *ngFor="let vaValue of vaList" value="{{vaValue}}">{{vaValue}}</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label>Contact Lens</label>
+                <select type="dropdown" class="form-control" formControlName="contact_lens">
+                    <option value="" selected disabled>-Select-</option>
+                    <option *ngFor="let vaValue of vaList" value="{{vaValue}}">{{vaValue}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <label>Remarks</label>
+                <textarea rows="2" cols="10" class="form-control" formControlName="remarks"></textarea>
+            </div>
+        </div>
     </div>
 </form>
-
+<br>
 <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4 pointer txt-center">
-        <button type="button" class="btn btn-success margin-10t" (click)="saveSubjectAcceptance()" *ngIf="!showPreviousTable" [disabled]="!visit_no">
+        <button type="button" class="btn btn-success margin-10t" (click)="saveGlassPrescription()" *ngIf="!showPreviousTable" [disabled]="!visit_no">
             Save
         </button>
         <button type="button" class="btn btn-success margin-20t" (click)="back()" *ngIf="showPreviousTable">
