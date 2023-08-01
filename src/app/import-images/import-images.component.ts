@@ -1,0 +1,130 @@
+import { Component, Input } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ImportImagesService } from './import-images.service';
+import { ReferenceService } from '../utilities/services/reference.service';
+import { MatDialog } from '@angular/material/dialog';
+import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.component';
+
+@Component({
+  selector: 'app-import-images',
+  templateUrl: './import-images.component.html',
+  styleUrls: ['./import-images.component.scss'],
+})
+export class ImportImagesComponent {
+  @Input() headerDetail: any;
+  @Input() visit_no: string = '';
+  @Input() visit_date: any;
+  importImagesForm!: FormGroup;
+  showPreviousTable: boolean = false;
+  vaList = ['6/6', '6/9', '6/12', '6/18', '6/24', '6/36', '6/60', '5/60'];
+  subjectDetailData: any = [];
+  prevCounter = 0;
+  recordIndex: number | undefined;
+
+  constructor(
+    private dialog: MatDialog,
+    private formBuilder: FormBuilder,
+    private saService: ImportImagesService
+  ) {}
+
+  ngOnInit(): void {
+   
+  }
+
+  subjectAcceptance() {
+    this.importImagesForm = this.formBuilder.group({
+      left_image: '',
+      right_image: '',
+    });
+  }
+
+  saveSubjectAcceptance() {
+    const subForm = this.importImagesForm.controls;
+    let params = {
+      org_id: localStorage.getItem('org_id'),
+      branch_id: localStorage.getItem('branch_id'),
+      user_id: localStorage.getItem('user_id'),
+      patient_id: this.headerDetail.patient_id,
+      visit_no: this.visit_no,
+      visit_date: this.visit_date,
+      units: subForm.units.value,
+      sph_distance_re: subForm.sph_distance_re.value,
+      cyl_distance_re: subForm.cyl_distance_re.value,
+      axis_distance_re: subForm.axis_distance_re.value,
+      va_distance_re: subForm.va_distance_re.value,
+      sph_distance_le: subForm.sph_distance_le.value,
+      cyl_distance_le: subForm.cyl_distance_le.value,
+      axis_distance_le: subForm.axis_distance_le.value,
+      va_distance_le: subForm.va_distance_le.value,
+      sph_add_re: subForm.sph_add_re.value,
+      sph_add_le: subForm.sph_add_le.value,
+      sph_near_re: subForm.sph_near_re.value,
+      cyl_near_re: subForm.cyl_near_re.value,
+      axis_near_re: subForm.axis_near_re.value,
+      va_near_re: subForm.va_near_re.value,
+      sph_near_le: subForm.sph_near_le.value,
+      cyl_near_le: subForm.cyl_near_le.value,
+      axis_near_le: subForm.axis_near_le.value,
+      va_near_le: subForm.va_near_le.value,
+    };
+    this.saService.createSubject(params).subscribe((data) => {
+      console.log(data);
+      this.dialog.open(InfoDialogComponent, {
+        width: '400px',
+        data: 'Present Glass Power Saved Successfully!!!',
+      });
+    });
+  }
+
+  getSubjectDetail() {
+    const patient_id = this.headerDetail.patient_id;
+    this.saService.getSubject(patient_id).subscribe((data) => {
+      console.log('getPgp Data', data);
+      this.subjectDetailData = data.results;
+      this.subjectDetailData = this.subjectDetailData.reverse();
+      this.setCurrentObjectData();
+    });
+  }
+
+  setCurrentObjectData() {
+    this.importImagesForm.patchValue(
+      this.subjectDetailData[this.getLastRecordIndex()]
+    );
+    if (this.getLastRecordIndex() <= 0) {
+      this.recordIndex = 0;
+    }
+  }
+
+  getLastRecordIndex() {
+    return this.subjectDetailData.length - 1;
+  }
+
+  prevItem() {
+    this.prevCounter++;
+    this.setCurrentNotesAfterChange();
+  }
+
+  nextItem() {
+    this.prevCounter--;
+    this.setCurrentNotesAfterChange();
+  }
+
+  setCurrentNotesAfterChange() {
+    this.recordIndex = this.getLastRecordIndex() - this.prevCounter;
+    this.importImagesForm.patchValue(this.subjectDetailData[this.recordIndex]);
+  }
+
+  displayPrevious() {
+    this.showPreviousTable = true;
+    this.getSubjectDetail();
+  }
+
+  back() {
+    this.showPreviousTable = false;
+    this.addRecord();
+  }
+
+  addRecord() {
+    this.importImagesForm.reset();
+  }
+}

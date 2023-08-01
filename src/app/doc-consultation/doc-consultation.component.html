@@ -515,6 +515,23 @@
       [headerDetail]="headerDetail">
     </app-subject-acceptance>
     </mat-expansion-panel>
+
+<!-- Import Images-->
+    <mat-expansion-panel hideToggle
+    class="margin-20b doc-consult-expansion-container"
+    *ngIf="aptObj.dept_id === 'D0002'">
+    <mat-expansion-panel-header>
+      <mat-panel-title>Import Images</mat-panel-title>
+      <mat-panel-description>
+        This is a summary of the content
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <app-import-images
+      [visit_no]="visit_no"
+      [visit_date]="visit_date"
+      [headerDetail]="headerDetail">
+    </app-import-images>
+    </mat-expansion-panel>
   </div>
   <div class="row"></div>
 </div>

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule,  } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -49,7 +49,7 @@ import { SupplierMasterComponent } from './supplier/supplier-master/supplier-mas
 import { SupplierProductComponent } from './supplier-product/supplier-product.component';
 import { FilterPipe } from './supplier/supplier-master/filter';
 import { EodComponent } from './eod/eod.component';
-import { CancelInvoiceDialogComponent } from './utilities/cancel-invoice-dialog/cancel-invoice-dialog.component'
+import { CancelInvoiceDialogComponent } from './utilities/cancel-invoice-dialog/cancel-invoice-dialog.component';
 import { ViewProductDialogComponent } from './utilities/view-product-dialog/view-product-dialog.component';
 import { CollectionPaymentwiseReportComponent } from './collection-payment-report/collection-payment-report.component';
 import { PoComponent } from './po/po.component';
@@ -64,11 +64,11 @@ import { PaymentReceiptsComponent } from './payment-receipts/payment-receipts.co
 import { UpdatePayreceiptsComponent } from './update-payreceipts/update-payreceipts.component';
 import { PrTableComponent } from './update-payreceipts/pr-table/pr-table.component';
 import { ProductMasterComponent } from './product-master/product-master.component';
-import { ProductMasterListingComponent } from './product-master-listing/product-master-listing.component'
+import { ProductMasterListingComponent } from './product-master-listing/product-master-listing.component';
 import { PMTableComponent } from './product-master-listing/pr-table/pr-table.component';
 import { NormalPricingComponent } from './product-master-listing/normal-pricing/normal-pricing.component';
-import { InsurancePricingComponent } from './product-master-listing/insurance-pricing/insurance-pricing.component'
-import { PoReportsComponent } from './po-reports/po-reports.component'
+import { InsurancePricingComponent } from './product-master-listing/insurance-pricing/insurance-pricing.component';
+import { PoReportsComponent } from './po-reports/po-reports.component';
 import { DatePipe } from '@angular/common';
 import { GoodsReportsComponent } from './goods-reports/goods-reports.component';
 import { SupplierReportsComponent } from './supplier-reports/supplier-reports.component';
@@ -108,6 +108,8 @@ import { VisualAcuityComponent } from './visual-acuity/visual-acuity.component';
 import { ObjectiveRefractionComponent } from './objective-refraction/objective-refraction.component';
 import { PresentGlassPowerComponent } from './present-glass-power/present-glass-power.component';
 import { SubjectAcceptanceComponent } from './subject-acceptance/subject-acceptance.component';
+import { ImportImagesComponent } from './import-images/import-images.component';
+import { ImageFileUploadComponent } from './utilities/file-upload/file-upload.component';
 //import { InvoicePaymentTable } from './invoice-payment-report/invoice-payment-table/invoice-payment-table.component';
 //import { InvoiceProductTable } from './invoice-product-report/invoice-product-table/invoice-product-table.component';
 @NgModule({
@@ -206,7 +208,9 @@ import { SubjectAcceptanceComponent } from './subject-acceptance/subject-accepta
     VisualAcuityComponent,
     ObjectiveRefractionComponent,
     PresentGlassPowerComponent,
-    SubjectAcceptanceComponent    
+    SubjectAcceptanceComponent,
+    ImportImagesComponent,
+    ImageFileUploadComponent,
   ],
   imports: [
     BrowserModule,
@@ -218,9 +222,9 @@ import { SubjectAcceptanceComponent } from './subject-acceptance/subject-accepta
     MaterialModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
   ],
   providers: [AuthService, DatePipe],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
