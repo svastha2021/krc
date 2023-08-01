@@ -23,6 +23,7 @@ export class PresentGlassPowerComponent {
   pgpDetailData: any = [];
   prevCounter = 0;
   recordIndex: number | undefined;
+  distanceList: any = [];
 
   constructor(private dialog: MatDialog,
               private formBuilder: FormBuilder, 
@@ -31,6 +32,9 @@ export class PresentGlassPowerComponent {
 
   ngOnInit(): void {
     this.presentGlassPower();
+    this.ref.getPaymentModes('SPH').subscribe(data => {
+      this.distanceList = data.results;
+    })
     this.ref.getPaymentModes('PGP1').subscribe(data => {
       this.lensMaterialList = data.results;
     })

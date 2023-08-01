@@ -1,0 +1,710 @@
+<div class="error-container" *ngIf="!visit_no">Please save doctor notes to save Examination</div>
+<div class="row">
+    <div class="col-md-12 align-end" *ngIf="!showPreviousTable">
+        <button class="btn btn-success ms-2" (click)="displayPrevious()">Show Previous</button>
+    </div>
+    <div class="col-md-12 align-end" *ngIf="showPreviousTable">
+        <ul class="pagination pointer">
+            <li class="page-item" [ngClass]="{'disabled': recordIndex === 0 }">
+                <a class="page-link" (click)="prevItem()">Previous</a>
+            </li>
+            <li class="page-item" [ngClass]="{'disabled': recordIndex === undefined || recordIndex === getLastRecordIndex() }">
+                <a class="page-link" (click)="nextItem()">Next</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<form [formGroup]="examForm">
+    <div class="row margin-20l custom-card">
+            <div class="col-md-4 pg-10">
+                <label class="form-label txt-b">Anterior Eye Examination</label>
+            </div>
+            <div class="col-md-4 pg-10">
+                <label class="form-label ">Right Eye</label>
+            </div>
+            <div class="col-md-4 pg-10">
+                <label class="form-label ">Left Eye</label>
+            </div>
+            <div class="col-md-2 pg">
+                <label class="form-label pg-t">Eye Lids</label>
+            </div>
+            <div class="col-md-5 flex-align">
+                <div class="col-1">
+                    <mat-form-field>
+                        <mat-icon>add
+                            <mat-select multiple (selectionChange)="convertToStr($event, 'ant_eyelids_re')">
+                                <mat-select-trigger></mat-select-trigger>
+                                <mat-option *ngFor="let value of eyeLidsList" [value]="value.ref_desc">{{value.ref_desc}}</mat-option>
+                            </mat-select>
+                        </mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="col-5">
+                    <input  type="text" class="form-control" formControlName="ant_eyelids_re">
+                </div>
+                <div class="col-6">
+                    <textarea type="text" rows="1" class="form-control" formControlName="ant_eyelids_remarks_re"></textarea>
+                </div>
+            </div>
+            <div class="col-md-5 flex-align">
+                <div class="col-1">
+                    <mat-form-field>
+                        <mat-icon>add
+                            <mat-select multiple (selectionChange)="convertToStr($event, 'ant_eyelids_le')">
+                                <mat-select-trigger></mat-select-trigger>
+                                <mat-option *ngFor="let value of eyeLidsList" [value]="value.ref_desc">{{value.ref_desc}}</mat-option>
+                            </mat-select>
+                        </mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="col-5">
+                    <input  type="text" class="form-control" formControlName="ant_eyelids_le">
+                </div>
+                <div class="col-6">
+                    <textarea type="text" rows="1" class="form-control" formControlName="ant_eyelids_remarks_le"></textarea>
+                </div>
+            </div>
+            <div class="col-md-2 pg">
+                <label class="form-label pg-t">Eyelashes</label>
+            </div>
+            <div class="col-md-5 flex-align">
+                <div class="col-1"></div>
+                <div class="col-5">
+                    <input type="text" class="form-control" formControlName="ant_eyelashes_re">
+                </div>
+                <div class="col-6">
+                    <textarea type="text" rows="1" class="form-control" formControlName="ant_eyelashes_remarks_re"></textarea>
+                </div>
+            </div>
+            <div class="col-md-5 flex-align">
+                <div class="col-1"></div>
+                <div class="col-5">
+                <input type="text" class="form-control" formControlName="ant_eyelashes_le">
+                </div>
+                <div class="col-md-6">
+                    <textarea type="text" rows="1" class="form-control" formControlName="ant_eyelashes_remarks_le"></textarea>
+                </div>
+            </div>
+            <div class="col-md-2 pg">
+                <label class="form-label pg-t">Conjuctiva</label>
+            </div>
+            <div class="col-md-5 flex-align">
+                <div class="col-1">
+                    <mat-form-field>
+                        <mat-icon>add
+                            <mat-select multiple (selectionChange)="convertToStr($event, 'ant_conjuctiva_re')">
+                                <mat-select-trigger></mat-select-trigger>
+                                <mat-option *ngFor="let value of conjuctivaList" [value]="value">{{value}}</mat-option>
+                            </mat-select>
+                        </mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="col-5">
+                    <input  type="text" class="form-control" formControlName="ant_conjuctiva_re">
+                </div>
+                <div class="col-6">
+                    <textarea type="text" rows="1" class="form-control" formControlName="ant_conjuctiva_remarks_re"></textarea>
+                </div>
+            </div>
+            <div class="col-md-5 flex-align">
+                <div class="col-1">
+                    <mat-form-field>
+                        <mat-icon>add
+                            <mat-select multiple (selectionChange)="convertToStr($event, 'ant_conjuctiva_le')">
+                                <mat-select-trigger></mat-select-trigger>
+                                <mat-option *ngFor="let value of conjuctivaList" [value]="value">{{value}}</mat-option>
+                            </mat-select>
+                        </mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="col-5">
+                    <input  type="text" class="form-control" formControlName="ant_conjuctiva_le">
+                </div>
+                <div class="col-6">
+                    <textarea type="text" rows="1" class="form-control" formControlName="ant_conjuctiva_remarks_le"></textarea>
+                </div>
+            </div>
+            <div class="col-md-2 pg">
+                <label class="form-label pg-t">Cornea</label>
+            </div>
+            <div class="col-md-5 flex-align">
+                <div class="col-1">
+                    <mat-form-field>
+                        <mat-icon>add
+                            <mat-select multiple (selectionChange)="convertToStr($event, 'ant_cornea_re')">
+                                <mat-select-trigger></mat-select-trigger>
+                                <mat-option *ngFor="let value of corneaList" [value]="value">{{value}}</mat-option>
+                            </mat-select>
+                        </mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="col-5">
+                    <input  type="text" class="form-control" formControlName="ant_cornea_re">
+                </div>
+                <div class="col-6">
+                    <textarea type="text" rows="1" class="form-control" formControlName="ant_cornea_remarks_re"></textarea>
+                </div>
+            </div>
+            <div class="col-md-5 flex-align">
+                <div class="col-1">
+                    <mat-form-field>
+                        <mat-icon>add
+                            <mat-select multiple (selectionChange)="convertToStr($event, 'ant_cornea_le')">
+                                <mat-select-trigger></mat-select-trigger>
+                                <mat-option *ngFor="let value of corneaList" [value]="value">{{value}}</mat-option>
+                            </mat-select>
+                        </mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="col-5">
+                    <input  type="text" class="form-control" formControlName="ant_cornea_le">
+                </div>
+                <div class="col-6">
+                    <textarea type="text" rows="1" class="form-control" formControlName="ant_cornea_remarks_le"></textarea>
+                </div>
+            </div>
+            <div class="col-md-2 pg-10">
+                <label class="form-label pg-t">Anterior Chamber depth</label>
+            </div>
+            <div class="col-md-5 flex-align">
+                <div class="col-1">
+                    <mat-form-field>
+                        <mat-icon>add
+                            <mat-select multiple (selectionChange)="convertToStr($event, 'ant_champer_depth_re')">
+                                <mat-select-trigger></mat-select-trigger>
+                                <mat-option *ngFor="let value of depthList" [value]="value.ref_desc">{{value.ref_desc}}</mat-option>
+                            </mat-select>
+                        </mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="col-5">
+                    <input type="text" class="form-control" formControlName="ant_champer_depth_re">
+                </div>
+                <div class="col-md-6">
+                    <textarea type="text" rows="1" class="form-control" formControlName="ant_champer_depth_remarks_re"></textarea>
+                </div>
+            </div>
+            <div class="col-md-5 flex-align">
+                <div class="col-1">
+                    <mat-form-field>
+                        <mat-icon>add
+                            <mat-select multiple (selectionChange)="convertToStr($event, 'ant_champer_depth_le')">
+                                <mat-select-trigger></mat-select-trigger>
+                                <mat-option *ngFor="let value of depthList" [value]="value.ref_desc">{{value.ref_desc}}</mat-option>
+                            </mat-select>
+                        </mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="col-5">
+                    <input type="text" class="form-control" formControlName="ant_champer_depth_le">
+                </div>
+                <div class="col-md-6">
+                    <textarea type="text" rows="1" class="form-control" formControlName="ant_champer_depth_remarks_le"></textarea>
+                </div>
+            </div>
+            <div class="col-md-2 pg">
+                <label class="form-label pg-t">Iris</label>
+            </div>
+            <div class="col-md-5 flex-align">
+                <div class="col-1">
+                    <mat-form-field>
+                        <mat-icon>add
+                            <mat-select multiple (selectionChange)="convertToStr($event, 'ant_iris_re')">
+                                <mat-select-trigger></mat-select-trigger>
+                                <mat-option *ngFor="let value of irisList" [value]="value">{{value}}</mat-option>
+                            </mat-select>
+                        </mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="col-5">
+                    <input  type="text" class="form-control" formControlName="ant_iris_re">
+                </div>
+                <div class="col-6">
+                    <textarea type="text" rows="1" class="form-control" formControlName="ant_iris_remarks_re"></textarea>
+                </div>
+            </div>
+            <div class="col-md-5 flex-align">
+                <div class="col-1">
+                    <mat-form-field>
+                        <mat-icon>add
+                            <mat-select multiple (selectionChange)="convertToStr($event, 'ant_iris_le')">
+                                <mat-select-trigger></mat-select-trigger>
+                                <mat-option *ngFor="let value of irisList" [value]="value">{{value}}</mat-option>
+                            </mat-select>
+                        </mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="col-5">
+                    <input  type="text" class="form-control" formControlName="ant_iris_le">
+                </div>
+                <div class="col-6">
+                    <textarea type="text" rows="1" class="form-control" formControlName="ant_iris_remarks_le"></textarea>
+                </div>
+            </div>
+            <div class="col-md-2 pg">
+                <label class="form-label pg-t">Pupil</label>
+            </div>
+            <div class="col-md-5 flex-align">
+                <div class="col-1">
+                    <mat-form-field>
+                        <mat-icon>add
+                            <mat-select multiple (selectionChange)="convertToStr($event, 'ant_pupil_re')">
+                                <mat-select-trigger></mat-select-trigger>
+                                <mat-option *ngFor="let value of pupilList" [value]="value">{{value}}</mat-option>
+                            </mat-select>
+                        </mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="col-5">
+                    <input  type="text" class="form-control" formControlName="ant_pupil_re">
+                </div>
+                <div class="col-6">
+                    <textarea type="text" rows="1" class="form-control" formControlName="ant_pupil_remarks_re"></textarea>
+                </div>
+            </div>
+            <div class="col-md-5 flex-align">
+                <div class="col-1">
+                    <mat-form-field>
+                        <mat-icon>add
+                            <mat-select multiple (selectionChange)="convertToStr($event, 'ant_pupil_le')">
+                                <mat-select-trigger></mat-select-trigger>
+                                <mat-option *ngFor="let value of pupilList" [value]="value">{{value}}</mat-option>
+                            </mat-select>
+                        </mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="col-5">
+                    <input  type="text" class="form-control" formControlName="ant_pupil_le">
+                </div>
+                <div class="col-6">
+                    <textarea type="text" rows="1" class="form-control" formControlName="ant_pupil_remarks_le"></textarea>
+                </div>
+            </div>
+            <div class="col-md-2 pg">
+                <label class="form-label">Lens</label>
+            </div>
+            <div class="col-md-5 flex-align">
+                <div class="col-1">
+                    <mat-form-field>
+                        <mat-icon>add
+                            <mat-select multiple (selectionChange)="convertToStr($event, 'ant_lens_re')">
+                                <mat-select-trigger></mat-select-trigger>
+                                <mat-option *ngFor="let value of lensList" [value]="value.ref_desc">{{value.ref_desc}}</mat-option>
+                            </mat-select>
+                        </mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="col-5">
+                    <input  type="text" class="form-control" formControlName="ant_lens_re">
+                </div>
+                <div class="col-6">
+                    <textarea type="text" rows="1" class="form-control" formControlName="ant_lens_remarks_re"></textarea>
+                </div>
+            </div>
+            <div class="col-md-5 flex-align">
+                <div class="col-1">
+                    <mat-form-field>
+                        <mat-icon>add
+                            <mat-select multiple (selectionChange)="convertToStr($event, 'ant_lens_le')">
+                                <mat-select-trigger></mat-select-trigger>
+                                <mat-option *ngFor="let value of lensList" [value]="value.ref_desc">{{value.ref_desc}}</mat-option>
+                            </mat-select>
+                        </mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="col-5">
+                    <input  type="text" class="form-control" formControlName="ant_lens_le">
+                </div>
+                <div class="col-6">
+                    <textarea type="text" rows="1" class="form-control" formControlName="ant_lens_remarks_le"></textarea>
+                </div>
+            </div>
+            <div class="col-md-2 pg">
+                <label class="form-label pg-t">Sclera</label>
+            </div>
+            <div class="col-md-5 flex-align">
+                <div class="col-1"></div>
+                <div class="col-5">
+                    <input type="text" class="form-control" formControlName="ant_sclera_re">
+                </div>
+                <div class="col-6">
+                    <textarea type="text" rows="1" class="form-control" formControlName="ant_sclera_remarks_re"></textarea>
+                </div>
+            </div>
+            <div class="col-md-5 flex-align">
+                <div class="col-1"></div>
+                <div class="col-5">
+                    <input type="text" class="form-control" formControlName="ant_sclera_le">
+                </div>
+                <div class="col-md-6">
+                    <textarea type="text" rows="1" class="form-control" formControlName="ant_sclera_remarks_le"></textarea>
+                </div>
+            </div>
+    </div>
+
+    <div class="row margin-20l custom-card">
+        <div class="col-md-4 pg-10">
+            <label class="form-label pg-t txt-b">Posterior Eye Examination</label>
+        </div>
+        <div class="col-md-4 pg-10">
+        </div>
+        <div class="col-md-4 pg-10">
+        </div>
+        <div class="col-md-2 pg">
+            <label class="form-label pg-t">Vitreous</label>
+        </div>
+        <div class="col-md-5 flex-align">
+            <div class="col-1">
+                <mat-form-field>
+                    <mat-icon>add
+                        <mat-select multiple (selectionChange)="convertToStr($event, 'post_vitreous_re')">
+                            <mat-select-trigger></mat-select-trigger>
+                            <mat-option *ngFor="let value of vitreousList" [value]="value.ref_desc">{{value.ref_desc}}</mat-option>
+                        </mat-select>
+                    </mat-icon>
+                </mat-form-field>
+            </div>
+            <div class="col-5">
+                <input  type="text" class="form-control" formControlName="post_vitreous_re">
+            </div>
+            <div class="col-6">
+                <textarea type="text" rows="1" class="form-control" formControlName="post_vitreous_remarks_re"></textarea>
+            </div>
+        </div>
+        <div class="col-md-5 flex-align">
+            <div class="col-1">
+                <mat-form-field>
+                    <mat-icon>add
+                        <mat-select multiple (selectionChange)="convertToStr($event, 'post_vitreous_le')">
+                            <mat-select-trigger></mat-select-trigger>
+                            <mat-option *ngFor="let value of vitreousList" [value]="value.ref_desc">{{value.ref_desc}}</mat-option>
+                        </mat-select>
+                    </mat-icon>
+                </mat-form-field>
+            </div>
+            <div class="col-5">
+                <input  type="text" class="form-control" formControlName="post_vitreous_le">
+            </div>
+            <div class="col-6">
+                <textarea type="text" rows="1" class="form-control" formControlName="post_vitreous_remarks_le"></textarea>
+            </div>
+        </div>
+        <div class="col-md-2 pg">
+            <label class="form-label pg-t">Media</label>
+        </div>
+        <div class="col-md-5 flex-align">
+            <div class="col-1">
+                <mat-form-field>
+                    <mat-icon>add
+                        <mat-select multiple (selectionChange)="convertToStr($event, 'post_media_re')">
+                            <mat-select-trigger></mat-select-trigger>
+                            <mat-option *ngFor="let value of mediaList" [value]="value.ref_desc">{{value.ref_desc}}</mat-option>
+                        </mat-select>
+                    </mat-icon>
+                </mat-form-field>
+            </div>
+            <div class="col-5">
+                <input type="text" class="form-control" formControlName="post_media_re">
+            </div>
+            <div class="col-md-6 flex-align">
+                <textarea type="text" rows="1" class="form-control" formControlName="post_media_remarks_re"></textarea>
+            </div>
+        </div>
+        <div class="col-md-5 flex-align">
+            <div class="col-1">
+                <mat-form-field>
+                    <mat-icon>add
+                        <mat-select multiple (selectionChange)="convertToStr($event, 'post_media_le')">
+                            <mat-select-trigger></mat-select-trigger>
+                            <mat-option *ngFor="let value of mediaList" [value]="value.ref_desc">{{value.ref_desc}}</mat-option>
+                        </mat-select>
+                    </mat-icon>
+                </mat-form-field>
+            </div>
+            <div class="col-5">
+                <input type="text" class="form-control" formControlName="post_media_le">
+            </div>
+            <div class="col-md-6 flex-align">
+                <textarea type="text" rows="1" class="form-control" formControlName="post_media_remarks_le"></textarea>
+            </div>
+        </div>
+        <div class="col-md-2 pg">
+            <label class="form-label pg-t">Optic Disc</label>
+        </div>
+        <div class="col-md-5 flex-align">
+            <div class="col-1">
+                <mat-form-field>
+                    <mat-icon>add
+                        <mat-select multiple (selectionChange)="convertToStr($event, 'post_opticdisc_re')">
+                            <mat-select-trigger></mat-select-trigger>
+                            <mat-option *ngFor="let value of eyeLidsList" [value]="value.ref_desc">{{value.ref_desc}}</mat-option>
+                        </mat-select>
+                    </mat-icon>
+                </mat-form-field>
+            </div>
+            <div class="col-5">
+                <input  type="text" class="form-control" formControlName="post_opticdisc_re">
+            </div>
+            <div class="col-6">
+                <textarea type="text" rows="1" class="form-control" formControlName="post_opticdisc_remarks_re"></textarea>
+            </div>
+        </div>
+        <div class="col-md-5 flex-align">
+            <div class="col-1">
+                <mat-form-field>
+                    <mat-icon>add
+                        <mat-select multiple (selectionChange)="convertToStr($event, 'post_opticdisc_le')">
+                            <mat-select-trigger></mat-select-trigger>
+                            <mat-option *ngFor="let value of eyeLidsList" [value]="value.ref_desc">{{value.ref_desc}}</mat-option>
+                        </mat-select>
+                    </mat-icon>
+                </mat-form-field>
+            </div>
+            <div class="col-5">
+                <input  type="text" class="form-control" formControlName="post_opticdisc_le">
+            </div>
+            <div class="col-6">
+                <textarea type="text" rows="1" class="form-control" formControlName="post_opticdisc_remarks_le"></textarea>
+            </div>
+        </div>
+        <div class="col-md-2 pg">
+            <label class="form-label pg-t">Blood Vessels</label>
+        </div>
+        <div class="col-md-5 flex-align">
+            <div class="col-1">
+                <mat-form-field>
+                    <mat-icon>add
+                        <mat-select multiple (selectionChange)="convertToStr($event, 'post_bloodvessels_re')">
+                            <mat-select-trigger></mat-select-trigger>
+                            <mat-option *ngFor="let value of bloodVesselsList" [value]="value.ref_desc">{{value.ref_desc}}</mat-option>
+                        </mat-select>
+                    </mat-icon>
+                </mat-form-field>
+            </div>
+            <div class="col-5">
+                <input  type="text" class="form-control" formControlName="post_bloodvessels_re">
+            </div>
+            <div class="col-6">
+                <textarea type="text" rows="1" class="form-control" formControlName="post_bloodvessels_remarks_re"></textarea>
+            </div>
+        </div>
+        <div class="col-md-5 flex-align">
+            <div class="col-1">
+                <mat-form-field>
+                    <mat-icon>add
+                        <mat-select multiple (selectionChange)="convertToStr($event, 'post_bloodvessels_le')">
+                            <mat-select-trigger></mat-select-trigger>
+                            <mat-option *ngFor="let value of bloodVesselsList" [value]="value.ref_desc">{{value.ref_desc}}</mat-option>
+                        </mat-select>
+                    </mat-icon>
+                </mat-form-field>
+            </div>
+            <div class="col-5">
+                <input  type="text" class="form-control" formControlName="post_bloodvessels_le">
+            </div>
+            <div class="col-6">
+                <textarea type="text" rows="1" class="form-control" formControlName="post_bloodvessels_remarks_le"></textarea>
+            </div>
+        </div>
+        <div class="col-md-2 pg">
+            <label class="form-label pg-t">Macula</label>
+        </div>
+        <div class="col-md-5 flex-align">
+            <div class="col-1">
+                <mat-form-field>
+                    <mat-icon>add
+                        <mat-select multiple (selectionChange)="convertToStr($event, 'post_macula_re')">
+                            <mat-select-trigger></mat-select-trigger>
+                            <mat-option *ngFor="let value of maculaList" [value]="value.ref_desc">{{value.ref_desc}}</mat-option>
+                        </mat-select>
+                    </mat-icon>
+                </mat-form-field>
+            </div>
+            <div class="col-5">
+                <input  type="text" class="form-control" formControlName="post_macula_re">
+            </div>
+            <div class="col-6">
+                <textarea type="text" rows="1" class="form-control" formControlName="post_macula_remarks_re"></textarea>
+            </div>
+        </div>
+        <div class="col-md-5 flex-align">
+            <div class="col-1">
+                <mat-form-field>
+                    <mat-icon>add
+                        <mat-select multiple (selectionChange)="convertToStr($event, 'post_macula_le')">
+                            <mat-select-trigger></mat-select-trigger>
+                            <mat-option *ngFor="let value of maculaList" [value]="value.ref_desc">{{value.ref_desc}}</mat-option>
+                        </mat-select>
+                    </mat-icon>
+                </mat-form-field>
+            </div>
+            <div class="col-5">
+                <input  type="text" class="form-control" formControlName="post_macula_le">
+            </div>
+            <div class="col-6">
+                <textarea type="text" rows="1" class="form-control" formControlName="post_macula_remarks_le"></textarea>
+            </div>
+        </div>
+        <div class="col-md-2 pg">
+            <label class="form-label pg-t">Fundus</label>
+        </div>
+        <div class="col-md-5 flex-align">
+            <div class="col-1">
+                <mat-form-field>
+                    <mat-icon>add
+                        <mat-select multiple (selectionChange)="convertToStr($event, 'post_fundus_re')">
+                            <mat-select-trigger></mat-select-trigger>
+                            <mat-option *ngFor="let value of fundusList" [value]="value.ref_desc">{{value.ref_desc}}</mat-option>
+                        </mat-select>
+                    </mat-icon>
+                </mat-form-field>
+            </div>
+            <div class="col-5">
+                <input  type="text" class="form-control" formControlName="post_fundus_re">
+            </div>
+            <div class="col-6">
+                <textarea type="text" rows="1" class="form-control" formControlName="post_fundus_remarks_re"></textarea>
+            </div>
+        </div>
+        <div class="col-md-5 flex-align">
+            <div class="col-1">
+                <mat-form-field>
+                    <mat-icon>add
+                        <mat-select multiple (selectionChange)="convertToStr($event, 'post_fundus_le')">
+                            <mat-select-trigger></mat-select-trigger>
+                            <mat-option *ngFor="let value of fundusList" [value]="value.ref_desc">{{value.ref_desc}}</mat-option>
+                        </mat-select>
+                    </mat-icon>
+                </mat-form-field>
+            </div>
+            <div class="col-5">
+                <input  type="text" class="form-control" formControlName="post_fundus_le">
+            </div>
+            <div class="col-6">
+                <textarea type="text" rows="1" class="form-control" formControlName="post_fundus_remarks_le"></textarea>
+            </div>
+        </div>
+        <div class="col-md-2 pg">
+            <label class="form-label pg-t">CDR (Cup Disc Ratio)</label>
+        </div>
+        <div class="col-md-5 flex-align">
+            <div class="col-1"></div>
+            <div class="col-5">
+                <input type="text" class="form-control" formControlName="post_cdr_re">
+            </div>
+            <div class="col-md-6 flex-align">
+                <textarea type="text" rows="1" class="form-control" formControlName="post_cdr_remarks_re"></textarea>
+            </div>
+        </div>
+        <div class="col-md-5 flex-align">
+            <div class="col-1"></div>
+            <div class="col-5">
+                <input type="text" class="form-control" formControlName="post_cdr_le">
+            </div>
+            <div class="col-md-6">
+                <textarea type="text" rows="1" class="form-control" formControlName="post_cdr_remarks_le"></textarea>
+            </div>
+        </div>
+        <div class="col-md-2 pg">
+            <label class="form-label pg-t">Others</label>
+        </div>
+        <div class="col-md-5 flex-align">
+            <div class="col-1"></div>
+            <div class="col-5">
+                <textarea type="text" class="form-control" formControlName="post_others_re"></textarea>
+            </div>
+            <div class="col-md-6 flex-align">
+                <textarea type="text" rows="2" class="form-control" formControlName="post_others_remarks_re"></textarea>
+            </div>
+        </div>
+        <div class="col-md-5 flex-align">
+            <div class="col-1"></div>
+            <div class="col-5">
+                <textarea type="text" class="form-control" formControlName="post_others_le"></textarea>
+            </div>
+            <div class="col-md-6 flex-align">
+                <textarea type="text" rows="2" class="form-control" formControlName="post_others_remarks_le"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="row margin-20l custom-card">
+        <div class="col-md-4 pg-10">
+            <label class="form-label pg-t txt-b">External Exmination</label>
+        </div>
+        <div class="col-md-4 pg-10">
+        </div>
+        <div class="col-md-4 pg-10">
+        </div>
+        <div class="col-md-2 pg">
+            <label class="form-label pg-t">External Face</label>
+        </div>
+        <div class="col-md-10">
+            <textarea type="text" class="form-control" formControlName="external_face"></textarea>
+        </div>
+        <div class="col-md-2 pg">
+            <label class="form-label pg-t">Ocular Alignment</label>
+        </div>
+        <div class="col-md-10">
+            <textarea type="text" class="form-control" formControlName="ocular_alignment"></textarea>
+        </div>
+        <div class="col-md-2 pg">
+            <label class="form-label pg-t">Ocular Mobility</label>
+        </div>
+        <div class="col-md-10">
+            <textarea type="text" class="form-control" formControlName="ocular_mobility"></textarea>
+        </div>
+        <div class="col-md-2 pg">
+            <label class="form-label pg-t">Schirmerf Test</label>
+        </div>
+        <div class="col-md-10">
+            <textarea type="text" class="form-control" formControlName="schirmerf_test"></textarea>
+        </div>
+        <div class="col-md-2 pg">
+            <label class="form-label pg-t">Contract Sensitivity</label>
+        </div>
+        <div class="col-md-10">
+            <textarea type="text" class="form-control" formControlName="contract_sensitivity "></textarea>
+        </div>
+        <div class="col-md-2 pg">
+            <label class="form-label pg-t">Field of vision</label>
+        </div>
+        <div class="col-md-10">
+            <textarea type="text" class="form-control" formControlName="field_of_vision"></textarea>
+        </div>
+        <div class="col-md-2 pg">
+            <label class="form-label pg-t">Syringing</label>
+        </div>
+        <div class="col-md-10">
+            <!-- <textarea type="text" class="form-control" formControlName="syringing"></textarea> -->
+            <mat-select class="form-control" formControlName="syringing">
+                <mat-select-trigger></mat-select-trigger>
+                <mat-option *ngFor="let value of syringingList" [value]="value.ref_desc">{{value.ref_desc}}</mat-option>
+            </mat-select>
+        </div>
+        <div class="col-md-2 pg">
+            <label class="form-label pg-t">Cover Test</label>
+        </div>
+        <div class="col-md-10">
+            <textarea type="text" class="form-control" formControlName="cover_test"></textarea>
+        </div>
+        <div class="col-md-2 pg">
+            <label class="form-label pg-t">Addl Remarks</label>
+        </div>
+        <div class="col-md-10">
+            <textarea type="text" class="form-control" formControlName="addl_remarks"></textarea>
+        </div>
+    </div>
+</form>
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 pointer">
+        <button type="button" class="btn btn-success " (click)="saveExam()" *ngIf="!showPreviousTable" [disabled]="!visit_no || examForm.invalid">
+            Save
+        </button>
+        <button type="button" class="btn btn-success " (click)="back()" *ngIf="showPreviousTable">
+            Back
+        </button>
+    </div>
+    <div class="col-md-4"></div>
+</div>
