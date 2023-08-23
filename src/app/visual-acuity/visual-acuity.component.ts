@@ -77,7 +77,7 @@ export class VisualAcuityComponent {
       console.log(data);
       this.dialog.open(InfoDialogComponent, {
         width: '400px',
-        data: 'Present Glass Power Saved Successfully!!!'
+        data: 'Visual Acuity Saved Successfully!!!'
       })
     })
   }

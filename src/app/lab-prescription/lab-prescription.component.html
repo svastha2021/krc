@@ -17,13 +17,16 @@
             <ng-container matColumnDef="test_id">
                 <mat-header-cell *matHeaderCellDef> Lab Test Name </mat-header-cell>
                 <mat-cell *matCellDef="let element">
-                    <mat-form-field floatLabel="never">
-                        <mat-select [(value)]="element.test_id" placeholder="Product name">
+                    <select [(ngModel)]="element.test_id" placeholder="Product name" class="form-control">
+                        <option *ngFor="let product of labTest" [value]="product.product_id">{{product.product_name}}</option>
+                    </select>
+                    <!-- <mat-form-field floatLabel="never">
+                        <mat-select [(ngModel)]="element.test_id" placeholder="Product name" (selectionChange)="testName($event.value)">
                             <mat-option *ngFor="let product of labTest" [value]="product.product_id">{{product.product_name}}
                             </mat-option>
-                            <!-- <mat-option value="Yes">Yes</mat-option> -->
+                            <mat-option value="Yes">Yes</mat-option>
                         </mat-select>
-                    </mat-form-field>
+                    </mat-form-field> -->
                 </mat-cell>
             </ng-container>
     

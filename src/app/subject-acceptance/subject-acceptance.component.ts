@@ -21,13 +21,19 @@ export class SubjectAcceptanceComponent {
   subjectDetailData: any = [];
   prevCounter = 0;
   recordIndex: number | undefined;
+  distanceList: any;
 
   constructor(private dialog: MatDialog,
-              private formBuilder: FormBuilder, 
+              private formBuilder: FormBuilder,
+              private ref: ReferenceService,
               private saService: SubjectAcceptanceService) { }
 
   ngOnInit(): void {
     this.subjectAcceptance();
+
+    this.ref.getPaymentModes('SPH').subscribe(data => {
+      this.distanceList = data.results;
+    })
   }
 
   subjectAcceptance() {

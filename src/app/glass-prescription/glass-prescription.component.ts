@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { GlassPrescriptionService } from './glass-prescription.service';
 import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.component';
+import { ReferenceService } from '../utilities/services/reference.service';
 
 @Component({
   selector: 'app-glass-prescription',
@@ -20,13 +21,32 @@ export class GlassPrescriptionComponent {
   subjectDetailData: any = [];
   prevCounter = 0;
   recordIndex: number | undefined;
+  lensMaterialList: any;
+  lensTypeList: any;
+  contactLensList: any;
+  distanceList: any;
 
   constructor(private dialog: MatDialog,
               private formBuilder: FormBuilder, 
+              private ref: ReferenceService,
               private gpService: GlassPrescriptionService) { }
   
     ngOnInit(): void {
       this.glassPrescription();
+
+      this.ref.getPaymentModes('SPH').subscribe(data => {
+        this.distanceList = data.results;
+      })
+      
+      this.ref.getPaymentModes('LENSMAT').subscribe(data => {
+        this.lensMaterialList = data.results;
+      })
+      this.ref.getPaymentModes('LENSTYPE').subscribe(data => {
+        this.lensTypeList = data.results;
+      })
+      this.ref.getPaymentModes('LENSCOAT').subscribe(data => {
+        this.contactLensList = data.results;
+      })
     }
   
     glassPrescription() {

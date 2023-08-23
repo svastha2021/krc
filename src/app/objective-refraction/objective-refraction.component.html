@@ -88,10 +88,10 @@
             </table>
         </div>
         <div class="col-md-4">
-            <label class="form-label margin-20t">Type of Refraction</label>
+            <label class="form-label margin-10t">Type of Refraction</label>
         </div>
         <div class="col-md-6">
-            <select type="text"  class="form-control margin-10t" formControlName="refr_type" required>
+            <select type="text"  class="form-control" formControlName="refr_type" required>
                 <option value="" selected disabled>-Select-</option>
                 <option *ngFor="let refraction of refractionTypes" value="{{refraction.ref_code}}">{{refraction.ref_desc}}</option>
             </select>
@@ -102,7 +102,7 @@
 <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4 pointer txt-center">
-        <button type="button" class="btn btn-success margin-10t" (click)="saveObjectiveRefraction()" *ngIf="!showPreviousTable" [disabled]="!visit_no">
+        <button type="button" class="btn btn-success" (click)="saveObjectiveRefraction()" *ngIf="!showPreviousTable" [disabled]="!visit_no">
             Save
         </button>
         <button type="button" class="btn btn-success margin-20t" (click)="back()" *ngIf="showPreviousTable">

@@ -112,6 +112,11 @@ export class LabPrescriptionComponent implements OnInit {
     this.showPreviousTable = true;
   }
 
+  testName(value: any) {
+    console.log(value);
+    this.dataSource
+  }
+
 
 }
 

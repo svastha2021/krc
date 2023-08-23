@@ -54,7 +54,12 @@
                             <input type="text" class="form-control" formControlName="timer">
                         </div>
                         <div class="col-md-6">
-                            <input type="checkbox"><label class="form-label margin-20t">Automatic</label>
+                            <mat-checkbox class="example-margin"
+                            formControlName="checkbox"
+                            (change)="setCurrentTime($event.checked)">
+                                Automatic
+                            </mat-checkbox>
+                            <!-- <input type="checkbox" formControlName="checkbox" (click)="setCurrentTime()"><label class="form-label margin-20t">Automatic</label> -->
                         </div>
                     </div>
                 </div>
@@ -69,25 +74,36 @@
             </div>
         </div>
         <div class="col-md-6">
-            <label class="form-label margin-20t">List of IOP values</label>
-            <table class="table table-bordered">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>IOP Type</th>
-                        <th>Right Eye</th>
-                        <th>Left Eye</th>
-                        <th>Time</th>
-                        <th>Remarks</th>
-                    </tr>
-                </thead>
-                <tbody>
-                   <tr>
-                      <td rowspan="2">
-
-                      </td>
-                   </tr> 
-                </tbody>
-            </table>
+            <div class="row">
+                <div class="col-md-2">
+                    <button mat-mini-fab extended (click)="addIopDataToArr()">
+                        <mat-icon>add</mat-icon>
+                    </button> 
+                </div>
+                <div class="col-md-10">
+                    <label class="form-label margin-20t">List of IOP values</label>
+                    <table class="table table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>IOP Type</th>
+                                <th>Right Eye</th>
+                                <th>Left Eye</th>
+                                <th>Time</th>
+                                <th>Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let iop of iopList">
+                            <td>{{iop.iop_type}}</td>
+                            <td>{{iop.pressure_re}}</td>
+                            <td>{{iop.pressure_le}}</td>
+                            <td>{{iop.timer}}</td>
+                            <td>{{iop.remarks}}</td>
+                        </tr> 
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </form>

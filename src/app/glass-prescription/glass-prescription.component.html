@@ -34,7 +34,12 @@
                                       <th class="txt-center">VA</th>
                                   </tr>
                                     <tr>
-                                        <td><input type="text" class="form-control" formControlName="sph_distance_re"></td>
+                                        <td>
+                                            <select type="dropdown" class="form-control" formControlName="sph_distance_re" required>
+                                                <option value="" selected disabled>-Select-</option>
+                                                <option *ngFor="let vaValue of distanceList" value="{{vaValue.ref_code}}">{{vaValue.ref_desc}}</option>
+                                            </select>
+                                        </td>
                                         <td><input type="text" class="form-control" formControlName="cyl_distance_re"></td>
                                         <td><input type="text" class="form-control" formControlName="axis_distance_re"></td>
                                         <td><select type="dropdown" class="form-control" formControlName="va_distance_re">
@@ -82,7 +87,12 @@
                                     <th class="txt-center">VA</th>
                             </tr>
                             <tr>
-                                <td><input type="text" class="form-control" formControlName="sph_distance_le"></td>
+                                <td>
+                                    <select type="dropdown" class="form-control" formControlName="sph_distance_le" required>
+                                        <option value="" selected disabled>-Select-</option>
+                                        <option *ngFor="let vaValue of distanceList" value="{{vaValue.ref_code}}">{{vaValue.ref_desc}}</option>
+                                    </select>
+                                </td>
                                 <td><input type="text" class="form-control" formControlName="cyl_distance_le"></td>
                                 <td><input type="text" class="form-control" formControlName="axis_distance_le"></td>
                                 <td><select type="dropdown" class="form-control" formControlName="va_distance_le">
@@ -116,21 +126,21 @@
                 <label>Lens Materials</label>
                 <select type="dropdown" class="form-control" formControlName="lens_material">
                     <option value="" selected disabled>-Select-</option>
-                    <option *ngFor="let vaValue of vaList" value="{{vaValue}}">{{vaValue}}</option>
+                    <option *ngFor="let vaValue of lensMaterialList" value="{{vaValue.ref_code}}">{{vaValue.ref_desc}}</option>
                 </select>
             </div>
             <div class="col-md-4">
                 <label>Lens Type</label>
                 <select type="dropdown" class="form-control" formControlName="typeof_lens">
                     <option value="" selected disabled>-Select-</option>
-                    <option *ngFor="let vaValue of vaList" value="{{vaValue}}">{{vaValue}}</option>
+                    <option *ngFor="let vaValue of lensTypeList" value="{{vaValue.ref_code}}">{{vaValue.ref_desc}}</option>
                 </select>
             </div>
             <div class="col-md-4">
                 <label>Contact Lens</label>
                 <select type="dropdown" class="form-control" formControlName="contact_lens">
                     <option value="" selected disabled>-Select-</option>
-                    <option *ngFor="let vaValue of vaList" value="{{vaValue}}">{{vaValue}}</option>
+                    <option *ngFor="let vaValue of contactLensList" value="{{vaValue.ref_code}}">{{vaValue.ref_desc}}</option>
                 </select>
             </div>
         </div>
