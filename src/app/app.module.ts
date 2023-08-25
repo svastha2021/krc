@@ -110,6 +110,7 @@ import { PresentGlassPowerComponent } from './present-glass-power/present-glass-
 import { SubjectAcceptanceComponent } from './subject-acceptance/subject-acceptance.component';
 import { ImportImagesComponent } from './import-images/import-images.component';
 import { ImageFileUploadComponent } from './utilities/file-upload/file-upload.component';
+import { RecordInputComponent } from './utilities/record-input/record-input.component';
 //import { InvoicePaymentTable } from './invoice-payment-report/invoice-payment-table/invoice-payment-table.component';
 //import { InvoiceProductTable } from './invoice-product-report/invoice-product-table/invoice-product-table.component';
 @NgModule({
@@ -211,6 +212,7 @@ import { ImageFileUploadComponent } from './utilities/file-upload/file-upload.co
     SubjectAcceptanceComponent,
     ImportImagesComponent,
     ImageFileUploadComponent,
+    RecordInputComponent,
   ],
   imports: [
     BrowserModule,

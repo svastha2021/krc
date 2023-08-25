@@ -71,8 +71,9 @@ export class FileUploadService {
   }
   private files = new BehaviorSubject<any>(null);
   public files$ = this.files.asObservable();
-
+public fielsarray = [];
   setFiles(filesArray: any) {
+    this.fielsarray = filesArray;
     this.files.next(filesArray);
   }
 
@@ -104,7 +105,7 @@ export class FileUploadService {
             let newref = this.storage.ref(
               foldername + '/' + obj + '/' + data.items[i].name
             );
-            this.fileObservables.push(newref);
+           // this.fileObservables.push(newref);
             var that = this;
             newref.getDownloadURL().subscribe((data) => {
               that.fileList.push({

@@ -2,16 +2,33 @@
   <!-- <div [innerHtml]="msg" *ngIf="msg" style="color: red"></div>
    -->
   <div>
-    <button class="btn btn-success mt-2" (click)="getFIles()">
+    <button class="btn btn-success mt-2" (click)="getFIles()" *ngIf="!hideUpload" >
       Show Previous
     </button>
   </div>
   <div *ngIf="previousFiles && previousFiles[0]">
-    {{previousFiles[0].link}}
+    <ul class="pagination">
+      <li
+        class="page-item"
+        [ngClass]="{ disabled: recordIndexFiles === 0 }"
+      >
+        <a class="page-link" (click)="prevFilesItem()">Previous</a>
+      </li>
+      <li
+        class="page-item"
+        [ngClass]="{
+          disabled:
+          recordIndexFiles === undefined ||
+          recordIndexFiles === getLastFilesRecordIndex()
+        }"
+      >
+        <a class="page-link" (click)="nextFilesItem()">Next</a>
+      </li>
+    </ul>
   </div>
 
   <div class="col-lg-6 mt-2">
-    <input type="file" id="left_eye" (change)="selectRightFile($event, true)" />
+    <input type="file" id="left_eye" *ngIf="!hideUpload" (change)="selectRightFile($event, true)" />
     <div class="left-eye-container">
       <h4>Left Eye</h4>
       <img [src]="left_url" style="width: 100%" *ngIf="left_url" />
@@ -21,6 +38,7 @@
     <input
       type="file"
       id="left_eye"
+      *ngIf="!hideUpload" 
       (change)="selectRightFile($event, false)"
     />
     <div class="left-eye-container">
@@ -29,7 +47,9 @@
     </div>
   </div>
   <div>
-    <button class="btn btn-success mt-2" (click)="upload()">Save</button>
+    <button class="btn btn-success mt-2" (click)="upload()" *ngIf="!hideUpload" >Save</button>
+
+    <button class="btn btn-success mt-2" (click)="goBack()" *ngIf="hideUpload" >Back</button>
   </div>
 
   <div *ngIf="currentFileUpload" class="progress mt-2">

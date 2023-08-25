@@ -19,6 +19,7 @@ export class ImageFileUploadComponent implements OnInit {
     private ref: ReferenceService
   ) {
     this.uploadService.files$.subscribe((data) => {
+      console.log('data from service', this.uploadService.fielsarray);
       //this.uploadService.spliceIntoChunks(data, 2)
       if (data) {
         console.log(data);
@@ -27,13 +28,15 @@ export class ImageFileUploadComponent implements OnInit {
         // this.left_url = data[0].link;
         // this.right_url = data[1]?.link;
         setTimeout(() => {
-          if (data && data.length>0) {
-            this.previousFiles = this.uploadService.spliceIntoChunks(
-              data,
-              2
-            );
+          if (data && data.length > 0) {
+            this.previousFiles = this.uploadService.spliceIntoChunks(data, 2);
+            console.log('prev files', this.previousFiles);
+            this.prevFilesItem();
+            //let lastItem = this.previousFiles[0];
+           // this.left_url = lastItem[0].link;
+           // this.right_url = lastItem[1].link;
           }
-        }, 2000);
+        }, 3000);
       }
     });
   }
@@ -47,6 +50,32 @@ export class ImageFileUploadComponent implements OnInit {
 
   selectedFiles?: FileList;
   ngOnInit(): void {}
+
+  prevUploadsCounter = 0;
+  recordIndexFiles: number | undefined;
+  currentFilesDetail = undefined;
+  getLastFilesRecordIndex() {
+    return this.previousFiles.length - 1;
+  }
+  prevFilesItem() {
+    this.prevUploadsCounter++;
+    this.setCurrentDialysisAfterChange();
+  }
+
+  nextFilesItem() {
+    this.prevUploadsCounter--;
+    this.setCurrentDialysisAfterChange();
+  }
+
+  setCurrentDialysisAfterChange() {
+    this.recordIndexFiles =
+      this.getLastFilesRecordIndex() - this.prevUploadsCounter;
+    this.currentFilesDetail =
+      this.previousFiles[this.recordIndexFiles]; // give us back the item of where we are now
+      this.left_url = this.previousFiles[this.recordIndexFiles][0].link;
+      this.right_url = this.previousFiles[this.recordIndexFiles][1].link;
+   
+  }
 
   selectRightFile(event: any, left: boolean) {
     let leftEye = left;
@@ -104,13 +133,19 @@ export class ImageFileUploadComponent implements OnInit {
       }
     }
   }
+  hideUpload = false;
 
   getFIles() {
+    this.hideUpload = true;
     this.uploads = [];
     let getList = this.uploadService.getFileList(this.headerDetail.patient_id);
 
     // setTimeout(() => {
     //  this.uploadService.fetchMetaData();
     // }, 1000);
+  }
+
+  goBack(){
+    this.hideUpload = false;
   }
 }
