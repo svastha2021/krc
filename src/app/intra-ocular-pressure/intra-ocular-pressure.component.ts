@@ -32,6 +32,12 @@ export class IntraOcularPressureComponent {
   
     intraOcularPressure() {
       this.intraOcularPressureForm = this.formBuilder.group({
+        org_id: [],
+        branch_id: [],
+        user_id: [],
+        patient_id: [],
+        visit_no: [],
+        visit_date: [],
         iop_type: [],
         pressure_re: [],
         pressure_le: [],
@@ -42,22 +48,9 @@ export class IntraOcularPressureComponent {
     }
   
     saveintraOcularPressure() {
-      // const intraForm = this.intraOcularPressureForm.controls;
-      // let params = {
-      //   "org_id": localStorage.getItem('org_id'),
-      //   "branch_id": localStorage.getItem('branch_id'),
-      //   "user_id": localStorage.getItem('user_id'),
-      //   "patient_id": this.headerDetail.patient_id,
-      //   "visit_no": this.visit_no,
-      //   "visit_date": this.visit_date,
-      //   "seq_no": null,
-      //   "iop_type": intraForm.iop_type.value,
-      //   "pressure_re": intraForm.pressure_re.value,
-      //   "pressure_le": intraForm.pressure_le.value,
-      //   "timer": intraForm.timer.value,
-      //   "remarks": intraForm.remarks.value,
-      // }
-      let params = this.iopList;
+      let params = {
+        "iop_data": this.iopList
+      }
       this.iopService.createIop(params).subscribe(data => {
         console.log(data);
         this.dialog.open(InfoDialogComponent, {
@@ -65,14 +58,16 @@ export class IntraOcularPressureComponent {
           data: 'Intra Ocular Pressure Saved Successfully!!!'
         })
       })
+      this.iopList.length = 0
     }
   
     getIopDetail() {
       const patient_id = this.headerDetail.patient_id;
       this.iopService.getIop(patient_id).subscribe(data => {
-        console.log('getPgp Data',data);
-        this.subjectDetailData = data.results;
-        this.subjectDetailData = this.subjectDetailData.reverse();
+        this.iopList = data.results;
+        this.iopList = this.iopList.reverse();
+        // this.subjectDetailData = data.results;
+        // this.subjectDetailData = this.subjectDetailData.reverse();
         this.setCurrentObjectData();
       })
     }
@@ -85,7 +80,7 @@ export class IntraOcularPressureComponent {
     }
   
     getLastRecordIndex() {
-      return this.subjectDetailData.length - 1;
+      return this.iopList.length - 1;
     }
   
     prevItem() {
@@ -110,6 +105,7 @@ export class IntraOcularPressureComponent {
   
     back() {
       this.showPreviousTable = false;
+      this.iopList.length = 0;
       this.addRecord();
     }
   
@@ -118,10 +114,17 @@ export class IntraOcularPressureComponent {
     }
 
     addIopDataToArr() {
-      if(!this.intraOcularPressureForm.value.iop_type && !this.intraOcularPressureForm.value.pressure_re && !this.intraOcularPressureForm.value.pressure_le
-        && !this.intraOcularPressureForm.value.timer){
+      if(!this.intraOcularPressureForm.value.iop_type || !this.intraOcularPressureForm.value.pressure_re || !this.intraOcularPressureForm.value.pressure_le
+        || !this.intraOcularPressureForm.value.timer){
           return;
       }
+      this.intraOcularPressureForm.controls.org_id.setValue(localStorage.getItem('org_id'));
+      this.intraOcularPressureForm.controls.branch_id.setValue(localStorage.getItem('branch_id'));
+      this.intraOcularPressureForm.controls.user_id.setValue(localStorage.getItem('user_id'));
+      this.intraOcularPressureForm.controls.patient_id.setValue(this.headerDetail.patient_id);
+      this.intraOcularPressureForm.controls.visit_no.setValue(this.visit_no);
+      this.intraOcularPressureForm.controls.visit_date.setValue(this.visit_date);
+
       this.iopList.push(this.intraOcularPressureForm.value);
       this.intraOcularPressureForm.reset();
       this.intraOcularPressureForm.controls.checkbox.setValue(false);

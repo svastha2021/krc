@@ -2,7 +2,7 @@
     <div class="col-md-4" *ngIf="!showPreviousTable">
         <button class="btn btn-success ms-2" (click)="displayPrevious()">Show Previous</button>
     </div>
-    <div class="col-md-4" *ngIf="showPreviousTable">
+    <!-- <div class="col-md-4" *ngIf="showPreviousTable">
         <ul class="pagination pointer">
             <li class="page-item" [ngClass]="{'disabled': recordIndex === 0 || recordIndex === undefined }">
                 <a class="page-link" (click)="prevItem()">Previous</a>
@@ -11,7 +11,7 @@
                 <a class="page-link" (click)="nextItem()">Next</a>
             </li>
         </ul>
-    </div>
+    </div> -->
 </div>
 <div class="error-container" *ngIf="!visit_no">Please save doctor notes to save Intra Ocular Pressure details</div>
 <form [formGroup]="intraOcularPressureForm">
@@ -111,7 +111,7 @@
 <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4 pointer txt-center">
-        <button type="button" class="btn btn-success margin-10t" (click)="saveintraOcularPressure()" *ngIf="!showPreviousTable" [disabled]="!visit_no">
+        <button type="button" class="btn btn-success margin-10t" (click)="saveintraOcularPressure()" *ngIf="!showPreviousTable" [disabled]="!visit_no || iopList.length == 0">
             Save
         </button>
         <button type="button" class="btn btn-success margin-20t" (click)="back()" *ngIf="showPreviousTable">
