@@ -16,7 +16,7 @@ export class RecordInputComponent implements OnInit {
   }
   ngOnInit(): void {}
 
-  start() {
+  startService() {
     this.mic = true;
     this.vservice.start();
   }
@@ -24,7 +24,9 @@ export class RecordInputComponent implements OnInit {
     this.mic = false;
     this.vservice.stop();
     this.text = this.vservice.text;
-    this.voiceText.emit(this.text);
+    this.text.replace('.','')
+    this.voiceText.emit(this.text.trim());
     this.text = ''
+    this.vservice.text = ''
   }
 }

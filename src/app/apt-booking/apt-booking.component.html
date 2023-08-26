@@ -32,6 +32,7 @@
             id="patientID"
             [readonly]="updateApt"
           />
+          <app-record-input (voiceText)="receiveText($event,'patient_id')"></app-record-input>
         </div>
         <div class="col-lg-2 patient-apt-item">
           <label for="patientName" class="form-label">Patient Name</label>

@@ -41,6 +41,7 @@ export type AptStatus = {
   ref_desc: string;
 };
 
+
 @Component({
   selector: 'app-apt-booking',
   templateUrl: './apt-booking.component.html',
@@ -60,11 +61,13 @@ export class AptBookingComponent implements OnInit {
     phone_no: '',
     ailment: '',
   };
+  
   updateAppointObj: Appointment = {
     patient_id: '',
     appoint_date: new Date(),
     phone_no: '',
   };
+  
   fetchData = { patient_id: '', patient_name: '' };
   currentDate = new Date();
   dept: Dept[] = [];
@@ -81,6 +84,11 @@ export class AptBookingComponent implements OnInit {
     this.aptObj.appoint_date = this.us.convertTodayTostr();
     this.fetchDepartments();
     //this.fetchDoctorsByBranchId();
+  }
+  receiveText(value: any, field: any) {
+    type ObjectKey = keyof typeof this.aptObj; 
+    const myVar = field as ObjectKey;    
+    this.aptObj[myVar] = value;
   }
 
   patientHeaderData(data: any) {
@@ -108,8 +116,6 @@ export class AptBookingComponent implements OnInit {
     });
   }
   fetchDoctorsByDept(dept?: any) {
-    
-
     this.aptService
       .fetchDoctorsByDept(this.aptObj.dept_id)
       .subscribe((data) => {
