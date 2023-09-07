@@ -4,6 +4,7 @@ import { PresentGlassPowerService } from './present-glass-power.service';
 import { ReferenceService } from '../utilities/services/reference.service';
 import { MatDialog } from '@angular/material/dialog';
 import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.component';
+import { UtilityService } from '../utilities/services/utility.service';
 
 @Component({
   selector: 'app-present-glass-power',
@@ -24,9 +25,12 @@ export class PresentGlassPowerComponent {
   prevCounter = 0;
   recordIndex: number | undefined;
   distanceList: any = [];
+  showVisitDate: any;
+  showVisitNo: any;
 
   constructor(private dialog: MatDialog,
               private formBuilder: FormBuilder, 
+              private utility: UtilityService,
               private pgpService: PresentGlassPowerService, 
               private ref: ReferenceService) { }
 
@@ -116,6 +120,10 @@ export class PresentGlassPowerComponent {
 
   setCurrentObjectData() {
     this.presentGlassPowerForm.patchValue(this.pgpDetailData[this.getLastRecordIndex()]);
+    this.showVisitNo = this.pgpDetailData[this.getLastRecordIndex()].visit_no;
+    this.showVisitDate = this.utility.convertDate(
+      this.pgpDetailData[this.getLastRecordIndex()].visit_date
+    );
     if (this.getLastRecordIndex() <= 0) {
       this.recordIndex = 0;
     }
@@ -152,5 +160,43 @@ export class PresentGlassPowerComponent {
 
   addRecord() {
     this.presentGlassPowerForm.reset();
+  }
+
+  addRight() {
+    //@ts-ignore
+    let getDetials = this.distanceList.filter(val => val.ref_code == this.presentGlassPowerForm.controls.sph_distance_re.value);
+
+    const getValue = +getDetials[0].ref_desc + +this.presentGlassPowerForm.controls.sph_add_re.value;
+    this.presentGlassPowerForm.controls.sph_near_re.setValue(getValue);
+    this.presentGlassPowerForm.controls.cyl_near_re.setValue(this.presentGlassPowerForm.controls.cyl_distance_re.value);
+    this.presentGlassPowerForm.controls.axis_near_re.setValue(this.presentGlassPowerForm.controls.axis_distance_re.value);
+  }
+
+  addLeft() {
+    //@ts-ignore
+    let getDetials = this.distanceList.filter(val => val.ref_code == this.presentGlassPowerForm.controls.sph_distance_le.value);
+
+    const getValue = +getDetials[0].ref_desc + +this.presentGlassPowerForm.controls.sph_add_le.value;
+    this.presentGlassPowerForm.controls.sph_near_le.setValue(getValue);
+    this.presentGlassPowerForm.controls.cyl_near_le.setValue(this.presentGlassPowerForm.controls.cyl_distance_le.value);
+    this.presentGlassPowerForm.controls.axis_near_le.setValue(this.presentGlassPowerForm.controls.axis_distance_le.value);
+  }
+
+  rightToLeft() {
+    this.presentGlassPowerForm.controls.sph_distance_le.setValue(this.presentGlassPowerForm.controls.sph_distance_re.value);
+    this.presentGlassPowerForm.controls.cyl_distance_le.setValue(this.presentGlassPowerForm.controls.cyl_distance_re.value);
+    this.presentGlassPowerForm.controls.axis_distance_le.setValue(this.presentGlassPowerForm.controls.axis_distance_re.value);
+    this.presentGlassPowerForm.controls.sph_near_le.setValue(this.presentGlassPowerForm.controls.sph_near_re.value);
+    this.presentGlassPowerForm.controls.cyl_near_le.setValue(this.presentGlassPowerForm.controls.cyl_near_re.value);
+    this.presentGlassPowerForm.controls.axis_near_le.setValue(this.presentGlassPowerForm.controls.axis_near_re.value);
+  }
+
+  leftToRight() {
+    this.presentGlassPowerForm.controls.sph_distance_re.setValue(this.presentGlassPowerForm.controls.sph_distance_le.value);
+    this.presentGlassPowerForm.controls.cyl_distance_re.setValue(this.presentGlassPowerForm.controls.cyl_distance_le.value);
+    this.presentGlassPowerForm.controls.axis_distance_re.setValue(this.presentGlassPowerForm.controls.axis_distance_le.value);
+    this.presentGlassPowerForm.controls.sph_near_re.setValue(this.presentGlassPowerForm.controls.sph_near_le.value);
+    this.presentGlassPowerForm.controls.cyl_near_re.setValue(this.presentGlassPowerForm.controls.cyl_near_le.value);
+    this.presentGlassPowerForm.controls.axis_near_re.setValue(this.presentGlassPowerForm.controls.axis_near_le.value);
   }
 }

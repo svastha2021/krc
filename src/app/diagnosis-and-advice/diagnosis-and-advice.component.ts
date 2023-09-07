@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DiagnosisAndAdviceService } from './diagnosis-and-advice.service';
 import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.component';
+import { UtilityService } from '../utilities/services/utility.service';
 
 @Component({
   selector: 'app-diagnosis-and-advice',
@@ -26,10 +27,13 @@ export class DiagnosisAndAdviceComponent {
   subjectDetailData: any = [];
   prevCounter = 0;
   recordIndex: number | undefined;
+  showVisitDate: any;
+  showVisitNo: any;
 
   constructor(private dialog: MatDialog,
               private formBuilder: FormBuilder, 
-              private daService: DiagnosisAndAdviceService) { }
+              private daService: DiagnosisAndAdviceService,
+              private utils: UtilityService) { }
   
     ngOnInit(): void {
       this.diagnosis();
@@ -85,6 +89,11 @@ export class DiagnosisAndAdviceComponent {
   
     setCurrentObjectData() {
       this.diagnosisForm.patchValue(this.subjectDetailData[this.getLastRecordIndex()]);
+      this.showVisitNo = this.subjectDetailData[this.getLastRecordIndex()].visit_no;
+      this.showVisitDate = this.utils.convertDate(
+        this.subjectDetailData[this.getLastRecordIndex()].visit_date
+      );
+      // this.diagnosisForm.controls.followup_date.setValue(this.utils.convertTodayTostrDDMMYYYY(this.diagnosisForm.controls.followup_date.value));
       if (this.getLastRecordIndex() <= 0) {
         this.recordIndex = 0;
       }
@@ -121,5 +130,13 @@ export class DiagnosisAndAdviceComponent {
   
     addRecord() {
       this.diagnosisForm.reset();
+    }
+
+    rightToLeft() {
+      this.diagnosisForm.controls.diagnosis_le.setValue(this.diagnosisForm.controls.diagnosis_re.value);
+    }
+
+    leftToRight() {
+      this.diagnosisForm.controls.diagnosis_re.setValue(this.diagnosisForm.controls.diagnosis_le.value);
     }
 }

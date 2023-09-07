@@ -254,34 +254,6 @@
       </div>
     </mat-expansion-panel>
 
-    <!-- pharma -->
-    <mat-expansion-panel hideToggle class="margin-20b doc-consult-expansion-container">
-      <mat-expansion-panel-header>
-        <mat-panel-title> Medicine </mat-panel-title>
-        <mat-panel-description>
-          
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <app-med-prescription
-        [visit_no]="visit_no"
-        [headerDetail]="headerDetail"
-      ></app-med-prescription>
-    </mat-expansion-panel>
-
-    <!-- Lab -->
-    <mat-expansion-panel hideToggle class="margin-20b doc-consult-expansion-container">
-      <mat-expansion-panel-header>
-        <mat-panel-title> Lab </mat-panel-title>
-        <mat-panel-description>
-          
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <app-lab-prescription
-        [visit_no]="visit_no"
-        [headerDetail]="headerDetail"
-      ></app-lab-prescription>
-    </mat-expansion-panel>
-
     <!-- Dialysis Notes -->
     <mat-expansion-panel
       hideToggle
@@ -369,7 +341,7 @@
       </div>
     </mat-expansion-panel>
 
-    <mat-expansion-panel
+    <!-- <mat-expansion-panel
       hideToggle
       class="margin-20b doc-consult-expansion-container"
       *ngIf="aptObj.dept_id === 'D0002'"
@@ -421,10 +393,10 @@
         [visit_date]="visit_date"
         [headerDetail]="headerDetail"
       ></app-opthal-spectacle>
-    </mat-expansion-panel>
+    </mat-expansion-panel> -->
 
     <!-- Opthal Slit-Lamp paramaters tab -->
-    <mat-expansion-panel
+    <!-- <mat-expansion-panel
       hideToggle
       class="margin-20b doc-consult-expansion-container"
       *ngIf="aptObj.dept_id === 'D0002'"
@@ -440,7 +412,7 @@
         [visit_date]="visit_date"
         [headerDetail]="headerDetail"
       ></app-slit-lamp>
-    </mat-expansion-panel>
+    </mat-expansion-panel> -->
 
   <!-- Opthal Medical paramaters tab -->
   <!-- <mat-expansion-panel
@@ -477,23 +449,6 @@
   ></app-visual-acuity>
   </mat-expansion-panel>
 
-    <!-- Opthal Objective Refraction tab -->
-    <mat-expansion-panel hideToggle
-    class="margin-20b doc-consult-expansion-container"
-    *ngIf="aptObj.dept_id === 'D0002'">
-  <mat-expansion-panel-header>
-    <mat-panel-title> Objective Rafraction </mat-panel-title>
-    <mat-panel-description>
-      
-    </mat-panel-description>
-  </mat-expansion-panel-header>
-  <app-objective-refraction
-    [visit_no]="visit_no"
-    [visit_date]="visit_date"
-    [headerDetail]="headerDetail"
-  ></app-objective-refraction>
-  </mat-expansion-panel>
-
   <!-- Opthal Objective Refraction tab -->
   <mat-expansion-panel hideToggle
   class="margin-20b doc-consult-expansion-container"
@@ -509,6 +464,23 @@
     [visit_date]="visit_date"
     [headerDetail]="headerDetail">
   </app-present-glass-power>
+  </mat-expansion-panel>
+
+  <!-- Opthal Objective Refraction tab -->
+  <mat-expansion-panel hideToggle
+    class="margin-20b doc-consult-expansion-container"
+    *ngIf="aptObj.dept_id === 'D0002'">
+  <mat-expansion-panel-header>
+    <mat-panel-title> Objective Refraction </mat-panel-title>
+    <mat-panel-description>
+      
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <app-objective-refraction
+    [visit_no]="visit_no"
+    [visit_date]="visit_date"
+    [headerDetail]="headerDetail"
+  ></app-objective-refraction>
   </mat-expansion-panel>
   
     <!-- Opthal Subjective Acceptance tab -->
@@ -527,22 +499,22 @@
       [headerDetail]="headerDetail">
     </app-subject-acceptance>
     </mat-expansion-panel>
-    
-    <!-- Opthal Glass Prescription tab -->
+
+    <!-- Opthal Examination tab -->
     <mat-expansion-panel hideToggle
     class="margin-20b doc-consult-expansion-container"
     *ngIf="aptObj.dept_id === 'D0002'">
     <mat-expansion-panel-header>
-      <mat-panel-title> Glass Prescription </mat-panel-title>
+      <mat-panel-title> Examination </mat-panel-title>
       <mat-panel-description>
         
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <app-glass-prescription
+    <app-examination
       [visit_no]="visit_no"
       [visit_date]="visit_date"
       [headerDetail]="headerDetail">
-    </app-glass-prescription>
+    </app-examination>
     </mat-expansion-panel>
     
     <!-- Opthal Intra Ocular Pressure tab -->
@@ -578,22 +550,50 @@
       [headerDetail]="headerDetail">
     </app-diagnosis-and-advice>
     </mat-expansion-panel>
-    
-    <!-- Opthal Examination tab -->
+
+    <!-- Opthal Glass Prescription tab -->
     <mat-expansion-panel hideToggle
     class="margin-20b doc-consult-expansion-container"
     *ngIf="aptObj.dept_id === 'D0002'">
     <mat-expansion-panel-header>
-      <mat-panel-title> Examination </mat-panel-title>
+      <mat-panel-title> Glass Prescription </mat-panel-title>
       <mat-panel-description>
         
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <app-examination
+    <app-glass-prescription
       [visit_no]="visit_no"
       [visit_date]="visit_date"
       [headerDetail]="headerDetail">
-    </app-examination>
+    </app-glass-prescription>
+    </mat-expansion-panel>
+
+    <!-- pharma -->
+    <mat-expansion-panel hideToggle class="margin-20b doc-consult-expansion-container">
+      <mat-expansion-panel-header>
+        <mat-panel-title> Medicine </mat-panel-title>
+        <mat-panel-description>
+          
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-med-prescription
+        [visit_no]="visit_no"
+        [headerDetail]="headerDetail"
+      ></app-med-prescription>
+    </mat-expansion-panel>
+
+    <!-- Lab -->
+    <mat-expansion-panel hideToggle class="margin-20b doc-consult-expansion-container">
+      <mat-expansion-panel-header>
+        <mat-panel-title> Lab </mat-panel-title>
+        <mat-panel-description>
+          
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-lab-prescription
+        [visit_no]="visit_no"
+        [headerDetail]="headerDetail"
+      ></app-lab-prescription>
     </mat-expansion-panel>
   </div>
   <div class="row"></div>

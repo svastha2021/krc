@@ -4,6 +4,7 @@ import { ExaminationService } from './examination.service';
 import { ReferenceService } from '../utilities/services/reference.service';
 import { MatDialog } from '@angular/material/dialog';
 import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.component';
+import { UtilityService } from '../utilities/services/utility.service';
 
 @Component({
   selector: 'app-examination',
@@ -34,12 +35,15 @@ export class ExaminationComponent {
   fundusList: any = [];
   depthList: any = [];
   syringingList: any = [];
+  showVisitDate: any;
+  showVisitNo: any;
   
   constructor(
     private examService: ExaminationService,
     private ref: ReferenceService,
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
+    private utility: UtilityService
   ) { }
 
   ngOnInit(): void {
@@ -174,6 +178,10 @@ export class ExaminationComponent {
 
   setCurrentExamData() {
     this.examForm.patchValue(this.examDetailData[this.getLastRecordIndex()]);
+    this.showVisitNo = this.examDetailData[this.getLastRecordIndex()].visit_no;
+    this.showVisitDate = this.utility.convertDate(
+      this.examDetailData[this.getLastRecordIndex()].visit_date
+    );
     if (this.getLastRecordIndex() <= 0) {
       this.recordIndex = 0;
     }
@@ -282,6 +290,11 @@ export class ExaminationComponent {
       external_face: this.examForm.controls.external_face.value,
       ocular_alignment: this.examForm.controls.ocular_alignment.value,
       ocular_mobility: this.examForm.controls.ocular_mobility.value,
+      schirmerf_test: this.examForm.controls.schirmerf_test.value,
+      contract_sensitivity: this.examForm.controls.contract_sensitivity.value,
+      field_of_vision: this.examForm.controls.field_of_vision.value,
+      syringing: this.examForm.controls.syringing.value,
+      cover_test: this.examForm.controls.cover_test.value,
       addl_remarks: this.examForm.controls.addl_remarks.value
     }
     this.examService.createExam(params).subscribe(data => {

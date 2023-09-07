@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { GlassPrescriptionService } from './glass-prescription.service';
 import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.component';
 import { ReferenceService } from '../utilities/services/reference.service';
+import { UtilityService } from '../utilities/services/utility.service';
 
 @Component({
   selector: 'app-glass-prescription',
@@ -25,10 +26,13 @@ export class GlassPrescriptionComponent {
   lensTypeList: any;
   contactLensList: any;
   distanceList: any;
+  showVisitDate: any;
+  showVisitNo: any;
 
   constructor(private dialog: MatDialog,
               private formBuilder: FormBuilder, 
               private ref: ReferenceService,
+              private utility: UtilityService,
               private gpService: GlassPrescriptionService) { }
   
     ngOnInit(): void {
@@ -131,6 +135,10 @@ export class GlassPrescriptionComponent {
   
     setCurrentObjectData() {
       this.glassPrescriptionForm.patchValue(this.subjectDetailData[this.getLastRecordIndex()]);
+      this.showVisitNo = this.subjectDetailData[this.getLastRecordIndex()].visit_no;
+      this.showVisitDate = this.utility.convertDate(
+        this.subjectDetailData[this.getLastRecordIndex()].visit_date
+      );
       if (this.getLastRecordIndex() <= 0) {
         this.recordIndex = 0;
       }
@@ -167,5 +175,49 @@ export class GlassPrescriptionComponent {
   
     addRecord() {
       this.glassPrescriptionForm.reset();
+    }
+
+    addRight() {
+      //@ts-ignore
+      let getDetials = this.distanceList.filter(val => val.ref_code == this.glassPrescriptionForm.controls.sph_distance_re.value);
+  
+      const getValue = +getDetials[0].ref_desc + +this.glassPrescriptionForm.controls.sph_add_re.value;
+      this.glassPrescriptionForm.controls.sph_near_re.setValue(getValue);
+      this.glassPrescriptionForm.controls.cyl_near_re.setValue(this.glassPrescriptionForm.controls.cyl_distance_re.value);
+      this.glassPrescriptionForm.controls.axis_near_re.setValue(this.glassPrescriptionForm.controls.axis_distance_re.value);
+      this.glassPrescriptionForm.controls.va_near_re.setValue(this.glassPrescriptionForm.controls.va_distance_re.value);
+    }
+  
+    addLeft() {
+      //@ts-ignore
+      let getDetials = this.distanceList.filter(val => val.ref_code == this.glassPrescriptionForm.controls.sph_distance_le.value);
+  
+      const getValue = +getDetials[0].ref_desc + +this.glassPrescriptionForm.controls.sph_add_le.value;
+      this.glassPrescriptionForm.controls.sph_near_le.setValue(getValue);
+      this.glassPrescriptionForm.controls.cyl_near_le.setValue(this.glassPrescriptionForm.controls.cyl_distance_le.value);
+      this.glassPrescriptionForm.controls.axis_near_le.setValue(this.glassPrescriptionForm.controls.axis_distance_le.value);
+      this.glassPrescriptionForm.controls.va_near_le.setValue(this.glassPrescriptionForm.controls.va_distance_le.value);
+    }
+
+    rightToLeft() {
+      this.glassPrescriptionForm.controls.sph_distance_le.setValue(this.glassPrescriptionForm.controls.sph_distance_re.value);
+      this.glassPrescriptionForm.controls.cyl_distance_le.setValue(this.glassPrescriptionForm.controls.cyl_distance_re.value);
+      this.glassPrescriptionForm.controls.axis_distance_le.setValue(this.glassPrescriptionForm.controls.axis_distance_re.value);
+      this.glassPrescriptionForm.controls.va_distance_le.setValue(this.glassPrescriptionForm.controls.va_distance_re.value);
+      this.glassPrescriptionForm.controls.sph_near_le.setValue(this.glassPrescriptionForm.controls.sph_near_re.value);
+      this.glassPrescriptionForm.controls.cyl_near_le.setValue(this.glassPrescriptionForm.controls.cyl_near_re.value);
+      this.glassPrescriptionForm.controls.axis_near_le.setValue(this.glassPrescriptionForm.controls.axis_near_re.value);
+      this.glassPrescriptionForm.controls.va_near_le.setValue(this.glassPrescriptionForm.controls.va_near_re.value);
+    }
+
+    leftToRight() {
+      this.glassPrescriptionForm.controls.sph_distance_re.setValue(this.glassPrescriptionForm.controls.sph_distance_le.value);
+      this.glassPrescriptionForm.controls.cyl_distance_re.setValue(this.glassPrescriptionForm.controls.cyl_distance_le.value);
+      this.glassPrescriptionForm.controls.axis_distance_re.setValue(this.glassPrescriptionForm.controls.axis_distance_le.value);
+      this.glassPrescriptionForm.controls.va_distance_re.setValue(this.glassPrescriptionForm.controls.va_distance_le.value);
+      this.glassPrescriptionForm.controls.sph_near_re.setValue(this.glassPrescriptionForm.controls.sph_near_le.value);
+      this.glassPrescriptionForm.controls.cyl_near_re.setValue(this.glassPrescriptionForm.controls.cyl_near_le.value);
+      this.glassPrescriptionForm.controls.axis_near_re.setValue(this.glassPrescriptionForm.controls.axis_near_le.value);
+      this.glassPrescriptionForm.controls.va_near_re.setValue(this.glassPrescriptionForm.controls.va_near_le.value);
     }
 }

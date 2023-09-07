@@ -3,6 +3,10 @@
         <button class="btn btn-success ms-2" (click)="displayPrevious()">Show Previous</button>
     </div>
     <div class="col-md-4" *ngIf="showPreviousTable">
+        <div>
+            <li class="mx-2">Visit#: <strong>{{showVisitNo}}</strong></li>
+            <li class="mx-2">Visit Date: <strong>{{showVisitDate | date : "dd-MM-yyyy"}}</strong></li>
+        </div>
         <ul class="pagination pointer">
             <li class="page-item" [ngClass]="{'disabled': recordIndex === 0 || recordIndex === undefined }">
                 <a class="page-link" (click)="prevItem()">Previous</a>
@@ -11,6 +15,10 @@
                 <a class="page-link" (click)="nextItem()">Next</a>
             </li>
         </ul>
+    </div>
+    <div class="col-md-8 txt-align">
+        <button mat-raised-button color="primary" class="mar-right" (click)="rightToLeft()" [disabled]="showPreviousTable">Right to Left</button>
+        <button mat-raised-button color="accent" (click)="leftToRight()" [disabled]="showPreviousTable">Left to Right</button>
     </div>
 </div>
 <div class="error-container" *ngIf="!visit_no">Please save doctor notes to save Objective Refraction details</div>

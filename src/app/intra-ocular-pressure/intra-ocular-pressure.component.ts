@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.component';
 import { IntraOcularPressureService } from './intra-ocular-pressure.service';
+import { UtilityService } from '../utilities/services/utility.service';
 
 @Component({
   selector: 'app-intra-ocular-pressure',
@@ -21,9 +22,12 @@ export class IntraOcularPressureComponent {
   prevCounter = 0;
   recordIndex: number | undefined;
   iopList: any = [];
+  showVisitDate: any;
+  showVisitNo: any;
 
   constructor(private dialog: MatDialog,
               private formBuilder: FormBuilder, 
+              private utility: UtilityService,
               private iopService: IntraOcularPressureService) { }
   
     ngOnInit(): void {
@@ -66,14 +70,18 @@ export class IntraOcularPressureComponent {
       this.iopService.getIop(patient_id).subscribe(data => {
         this.iopList = data.results;
         this.iopList = this.iopList.reverse();
-        // this.subjectDetailData = data.results;
-        // this.subjectDetailData = this.subjectDetailData.reverse();
+        this.subjectDetailData = data.results;
+        this.subjectDetailData = this.subjectDetailData.reverse();
         this.setCurrentObjectData();
       })
     }
   
     setCurrentObjectData() {
       this.intraOcularPressureForm.patchValue(this.subjectDetailData[this.getLastRecordIndex()]);
+      this.showVisitNo = this.subjectDetailData[this.getLastRecordIndex()].visit_no;
+      this.showVisitDate = this.utility.convertDate(
+        this.subjectDetailData[this.getLastRecordIndex()].visit_date
+      );
       if (this.getLastRecordIndex() <= 0) {
         this.recordIndex = 0;
       }

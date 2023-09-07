@@ -4,6 +4,7 @@ import { SubjectAcceptanceService } from './subject-acceptance.service';
 import { ReferenceService } from '../utilities/services/reference.service';
 import { MatDialog } from '@angular/material/dialog';
 import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.component';
+import { UtilityService } from '../utilities/services/utility.service';
 
 @Component({
   selector: 'app-subject-acceptance',
@@ -22,10 +23,13 @@ export class SubjectAcceptanceComponent {
   prevCounter = 0;
   recordIndex: number | undefined;
   distanceList: any;
+  showVisitDate: any;
+  showVisitNo: any;
 
   constructor(private dialog: MatDialog,
               private formBuilder: FormBuilder,
               private ref: ReferenceService,
+              private utility: UtilityService,
               private saService: SubjectAcceptanceService) { }
 
   ngOnInit(): void {
@@ -111,6 +115,10 @@ export class SubjectAcceptanceComponent {
 
   setCurrentObjectData() {
     this.subjectAcceptanceForm.patchValue(this.subjectDetailData[this.getLastRecordIndex()]);
+    this.showVisitNo = this.subjectDetailData[this.getLastRecordIndex()].visit_no;
+    this.showVisitDate = this.utility.convertDate(
+      this.subjectDetailData[this.getLastRecordIndex()].visit_date
+    );
     if (this.getLastRecordIndex() <= 0) {
       this.recordIndex = 0;
     }
@@ -147,5 +155,49 @@ export class SubjectAcceptanceComponent {
 
   addRecord() {
     this.subjectAcceptanceForm.reset();
+  }
+
+  addRight() {
+    //@ts-ignore
+    let getDetials = this.distanceList.filter(val => val.ref_code == this.subjectAcceptanceForm.controls.sph_distance_re.value);
+
+    const getValue = +getDetials[0].ref_desc + +this.subjectAcceptanceForm.controls.sph_add_re.value;
+    this.subjectAcceptanceForm.controls.sph_near_re.setValue(getValue);
+    this.subjectAcceptanceForm.controls.cyl_near_re.setValue(this.subjectAcceptanceForm.controls.cyl_distance_re.value);
+    this.subjectAcceptanceForm.controls.axis_near_re.setValue(this.subjectAcceptanceForm.controls.axis_distance_re.value);
+    this.subjectAcceptanceForm.controls.va_near_re.setValue(this.subjectAcceptanceForm.controls.va_distance_re.value);
+  }
+
+  addLeft() {
+    //@ts-ignore
+    let getDetials = this.distanceList.filter(val => val.ref_code == this.subjectAcceptanceForm.controls.sph_distance_le.value);
+
+    const getValue = +getDetials[0].ref_desc + +this.subjectAcceptanceForm.controls.sph_add_le.value;
+    this.subjectAcceptanceForm.controls.sph_near_le.setValue(getValue);
+    this.subjectAcceptanceForm.controls.cyl_near_le.setValue(this.subjectAcceptanceForm.controls.cyl_distance_le.value);
+    this.subjectAcceptanceForm.controls.axis_near_le.setValue(this.subjectAcceptanceForm.controls.axis_distance_le.value);
+    this.subjectAcceptanceForm.controls.va_near_le.setValue(this.subjectAcceptanceForm.controls.va_distance_le.value);
+  }
+
+  rightToLeft() {
+    this.subjectAcceptanceForm.controls.sph_distance_le.setValue(this.subjectAcceptanceForm.controls.sph_distance_re.value);
+    this.subjectAcceptanceForm.controls.cyl_distance_le.setValue(this.subjectAcceptanceForm.controls.cyl_distance_re.value);
+    this.subjectAcceptanceForm.controls.axis_distance_le.setValue(this.subjectAcceptanceForm.controls.axis_distance_re.value);
+    this.subjectAcceptanceForm.controls.va_distance_le.setValue(this.subjectAcceptanceForm.controls.va_distance_re.value);
+    this.subjectAcceptanceForm.controls.sph_near_le.setValue(this.subjectAcceptanceForm.controls.sph_near_re.value);
+    this.subjectAcceptanceForm.controls.cyl_near_le.setValue(this.subjectAcceptanceForm.controls.cyl_near_re.value);
+    this.subjectAcceptanceForm.controls.axis_near_le.setValue(this.subjectAcceptanceForm.controls.axis_near_re.value);
+    this.subjectAcceptanceForm.controls.va_near_le.setValue(this.subjectAcceptanceForm.controls.va_near_re.value);
+  }
+
+  leftToRight() {
+    this.subjectAcceptanceForm.controls.sph_distance_re.setValue(this.subjectAcceptanceForm.controls.sph_distance_le.value);
+    this.subjectAcceptanceForm.controls.cyl_distance_re.setValue(this.subjectAcceptanceForm.controls.cyl_distance_le.value);
+    this.subjectAcceptanceForm.controls.axis_distance_re.setValue(this.subjectAcceptanceForm.controls.axis_distance_le.value);
+    this.subjectAcceptanceForm.controls.va_distance_re.setValue(this.subjectAcceptanceForm.controls.va_distance_le.value);
+    this.subjectAcceptanceForm.controls.sph_near_re.setValue(this.subjectAcceptanceForm.controls.sph_near_le.value);
+    this.subjectAcceptanceForm.controls.cyl_near_re.setValue(this.subjectAcceptanceForm.controls.cyl_near_le.value);
+    this.subjectAcceptanceForm.controls.axis_near_re.setValue(this.subjectAcceptanceForm.controls.axis_near_le.value);
+    this.subjectAcceptanceForm.controls.va_near_re.setValue(this.subjectAcceptanceForm.controls.va_near_le.value);
   }
 }

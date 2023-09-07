@@ -4,6 +4,7 @@ import { ObjectiveRefractionService } from './objective-refraction.service';
 import { ReferenceService } from '../utilities/services/reference.service';
 import { MatDialog } from '@angular/material/dialog';
 import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.component';
+import { UtilityService } from '../utilities/services/utility.service';
 
 @Component({
   selector: 'app-objective-refraction',
@@ -21,8 +22,11 @@ export class ObjectiveRefractionComponent {
   objectDetailData: any = [];
   prevCounter = 0;
   recordIndex: number | undefined;
+  showVisitDate: any;
+  showVisitNo: any;
 
   constructor(private dialog: MatDialog,
+              private utility: UtilityService,
               private formBuilder: FormBuilder,
               private orService: ObjectiveRefractionService, 
               private ref: ReferenceService) { }
@@ -88,6 +92,10 @@ export class ObjectiveRefractionComponent {
 
   setCurrentObjectData() {
     this.objectiveRefractionForm.patchValue(this.objectDetailData[this.getLastRecordIndex()]);
+    this.showVisitNo = this.objectDetailData[this.getLastRecordIndex()].visit_no;
+    this.showVisitDate = this.utility.convertDate(
+      this.objectDetailData[this.getLastRecordIndex()].visit_date
+    );
     if (this.getLastRecordIndex() <= 0) {
       this.recordIndex = 0;
     }
@@ -125,5 +133,18 @@ export class ObjectiveRefractionComponent {
   addRecord() {
     this.objectiveRefractionForm.reset();
   }
-  
+
+  rightToLeft() {
+    this.objectiveRefractionForm.controls.obj_ref_type_le.setValue(this.objectiveRefractionForm.controls.obj_ref_type_re.value);
+    this.objectiveRefractionForm.controls.sph_le.setValue(this.objectiveRefractionForm.controls.sph_re.value);
+    this.objectiveRefractionForm.controls.cyl_le.setValue(this.objectiveRefractionForm.controls.cyl_re.value);
+    this.objectiveRefractionForm.controls.axis_le.setValue(this.objectiveRefractionForm.controls.axis_re.value);
+  }
+
+  leftToRight() {
+    this.objectiveRefractionForm.controls.obj_ref_type_re.setValue(this.objectiveRefractionForm.controls.obj_ref_type_le.value);
+    this.objectiveRefractionForm.controls.sph_re.setValue(this.objectiveRefractionForm.controls.sph_le.value);
+    this.objectiveRefractionForm.controls.cyl_re.setValue(this.objectiveRefractionForm.controls.cyl_le.value);
+    this.objectiveRefractionForm.controls.axis_re.setValue(this.objectiveRefractionForm.controls.axis_le.value);
+  }
 }
