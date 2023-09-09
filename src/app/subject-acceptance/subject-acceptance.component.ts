@@ -180,17 +180,6 @@ export class SubjectAcceptanceComponent {
   }
 
   rightToLeft() {
-    this.subjectAcceptanceForm.controls.sph_distance_le.setValue(this.subjectAcceptanceForm.controls.sph_distance_re.value);
-    this.subjectAcceptanceForm.controls.cyl_distance_le.setValue(this.subjectAcceptanceForm.controls.cyl_distance_re.value);
-    this.subjectAcceptanceForm.controls.axis_distance_le.setValue(this.subjectAcceptanceForm.controls.axis_distance_re.value);
-    this.subjectAcceptanceForm.controls.va_distance_le.setValue(this.subjectAcceptanceForm.controls.va_distance_re.value);
-    this.subjectAcceptanceForm.controls.sph_near_le.setValue(this.subjectAcceptanceForm.controls.sph_near_re.value);
-    this.subjectAcceptanceForm.controls.cyl_near_le.setValue(this.subjectAcceptanceForm.controls.cyl_near_re.value);
-    this.subjectAcceptanceForm.controls.axis_near_le.setValue(this.subjectAcceptanceForm.controls.axis_near_re.value);
-    this.subjectAcceptanceForm.controls.va_near_le.setValue(this.subjectAcceptanceForm.controls.va_near_re.value);
-  }
-
-  leftToRight() {
     this.subjectAcceptanceForm.controls.sph_distance_re.setValue(this.subjectAcceptanceForm.controls.sph_distance_le.value);
     this.subjectAcceptanceForm.controls.cyl_distance_re.setValue(this.subjectAcceptanceForm.controls.cyl_distance_le.value);
     this.subjectAcceptanceForm.controls.axis_distance_re.setValue(this.subjectAcceptanceForm.controls.axis_distance_le.value);
@@ -199,5 +188,16 @@ export class SubjectAcceptanceComponent {
     this.subjectAcceptanceForm.controls.cyl_near_re.setValue(this.subjectAcceptanceForm.controls.cyl_near_le.value);
     this.subjectAcceptanceForm.controls.axis_near_re.setValue(this.subjectAcceptanceForm.controls.axis_near_le.value);
     this.subjectAcceptanceForm.controls.va_near_re.setValue(this.subjectAcceptanceForm.controls.va_near_le.value);
+  }
+
+  leftToRight() {
+    this.subjectAcceptanceForm.controls.sph_distance_le.setValue(this.subjectAcceptanceForm.controls.sph_distance_re.value);
+    this.subjectAcceptanceForm.controls.cyl_distance_le.setValue(this.subjectAcceptanceForm.controls.cyl_distance_re.value);
+    this.subjectAcceptanceForm.controls.axis_distance_le.setValue(this.subjectAcceptanceForm.controls.axis_distance_re.value);
+    this.subjectAcceptanceForm.controls.va_distance_le.setValue(this.subjectAcceptanceForm.controls.va_distance_re.value);
+    this.subjectAcceptanceForm.controls.sph_near_le.setValue(this.subjectAcceptanceForm.controls.sph_near_re.value);
+    this.subjectAcceptanceForm.controls.cyl_near_le.setValue(this.subjectAcceptanceForm.controls.cyl_near_re.value);
+    this.subjectAcceptanceForm.controls.axis_near_le.setValue(this.subjectAcceptanceForm.controls.axis_near_re.value);
+    this.subjectAcceptanceForm.controls.va_near_le.setValue(this.subjectAcceptanceForm.controls.va_near_re.value);
   }
 }

@@ -183,20 +183,20 @@ export class PresentGlassPowerComponent {
   }
 
   rightToLeft() {
-    this.presentGlassPowerForm.controls.sph_distance_le.setValue(this.presentGlassPowerForm.controls.sph_distance_re.value);
-    this.presentGlassPowerForm.controls.cyl_distance_le.setValue(this.presentGlassPowerForm.controls.cyl_distance_re.value);
-    this.presentGlassPowerForm.controls.axis_distance_le.setValue(this.presentGlassPowerForm.controls.axis_distance_re.value);
-    this.presentGlassPowerForm.controls.sph_near_le.setValue(this.presentGlassPowerForm.controls.sph_near_re.value);
-    this.presentGlassPowerForm.controls.cyl_near_le.setValue(this.presentGlassPowerForm.controls.cyl_near_re.value);
-    this.presentGlassPowerForm.controls.axis_near_le.setValue(this.presentGlassPowerForm.controls.axis_near_re.value);
-  }
-
-  leftToRight() {
     this.presentGlassPowerForm.controls.sph_distance_re.setValue(this.presentGlassPowerForm.controls.sph_distance_le.value);
     this.presentGlassPowerForm.controls.cyl_distance_re.setValue(this.presentGlassPowerForm.controls.cyl_distance_le.value);
     this.presentGlassPowerForm.controls.axis_distance_re.setValue(this.presentGlassPowerForm.controls.axis_distance_le.value);
     this.presentGlassPowerForm.controls.sph_near_re.setValue(this.presentGlassPowerForm.controls.sph_near_le.value);
     this.presentGlassPowerForm.controls.cyl_near_re.setValue(this.presentGlassPowerForm.controls.cyl_near_le.value);
     this.presentGlassPowerForm.controls.axis_near_re.setValue(this.presentGlassPowerForm.controls.axis_near_le.value);
+  }
+
+  leftToRight() {
+    this.presentGlassPowerForm.controls.sph_distance_le.setValue(this.presentGlassPowerForm.controls.sph_distance_re.value);
+    this.presentGlassPowerForm.controls.cyl_distance_le.setValue(this.presentGlassPowerForm.controls.cyl_distance_re.value);
+    this.presentGlassPowerForm.controls.axis_distance_le.setValue(this.presentGlassPowerForm.controls.axis_distance_re.value);
+    this.presentGlassPowerForm.controls.sph_near_le.setValue(this.presentGlassPowerForm.controls.sph_near_re.value);
+    this.presentGlassPowerForm.controls.cyl_near_le.setValue(this.presentGlassPowerForm.controls.cyl_near_re.value);
+    this.presentGlassPowerForm.controls.axis_near_le.setValue(this.presentGlassPowerForm.controls.axis_near_re.value);
   }
 }
