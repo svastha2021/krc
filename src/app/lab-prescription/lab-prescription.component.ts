@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { LabPreparationService } from './lab-preparation.service';
 import { UtilityService } from '../utilities/services/utility.service';
@@ -16,6 +16,7 @@ export class LabPrescriptionComponent implements OnInit {
   headerDetail: any;
   @Input()
   visit_no: string = '';
+  @Output() isActiveLab = new EventEmitter();
   labTest: LabItem[] = [];
   displayedColumns = ['id', 'test_id', 'test_date', 'test_notes', 'action'];
   labPayload = {};
@@ -24,6 +25,7 @@ export class LabPrescriptionComponent implements OnInit {
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   @ViewChild(MatTable, { static: true }) table: MatTable<any> | undefined;
   showPreviousTable: boolean = false;
+  labBoolean:boolean = false;
 
   constructor(private lpService: LabPreparationService,
     private utility: UtilityService, private dialog: MatDialog,
@@ -100,6 +102,8 @@ export class LabPrescriptionComponent implements OnInit {
     }
 
     this.lpService.updateLabDetails(this.labPayload).subscribe(data => {
+      this.labBoolean = true;
+      this.emitLab();
       this.resetScreen();
       this.dialog.open(InfoDialogComponent, {
         width: '500px',
@@ -117,7 +121,11 @@ export class LabPrescriptionComponent implements OnInit {
     this.dataSource
   }
 
-
+  emitLab() {
+    this.isActiveLab.emit(
+      this.labBoolean
+    );
+  }
 }
 
 

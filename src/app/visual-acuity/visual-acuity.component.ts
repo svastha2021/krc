@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { VisualAcuityService } from './visual-acuity.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -15,6 +15,7 @@ export class VisualAcuityComponent {
   @Input() headerDetail: any;
   @Input() visit_no: string = '';
   @Input() visit_date: any;
+  @Output() isActiveVisual = new EventEmitter();
   visualAcuityForm!: FormGroup;
   showPreviousTable:boolean = false;
   visualDetailData: any = [];
@@ -22,6 +23,7 @@ export class VisualAcuityComponent {
   recordIndex: number | undefined;
   showVisitDate: any;
   showVisitNo: any;
+  visualAcuityBoolean: boolean = false;
 
   constructor(private dialog: MatDialog,
               private utility: UtilityService,
@@ -79,6 +81,8 @@ export class VisualAcuityComponent {
     }
     this.vaService.createVisual(params).subscribe(data => {
       console.log(data);
+      this.visualAcuityBoolean = true;
+      this.emitVisual();
       this.dialog.open(InfoDialogComponent, {
         width: '400px',
         data: 'Visual Acuity Saved Successfully!!!'
@@ -159,5 +163,11 @@ export class VisualAcuityComponent {
     this.visualAcuityForm.controls.aided_near_le.setValue(this.visualAcuityForm.controls.aided_near_re.value);
     this.visualAcuityForm.controls.pinhole_distance_le.setValue(this.visualAcuityForm.controls.pinhole_distance_re.value);
     this.visualAcuityForm.controls.color_vision_distance_le.setValue(this.visualAcuityForm.controls.color_vision_distance_re.value);
+  }
+
+  emitVisual() {
+    this.isActiveVisual.emit(
+      this.visualAcuityBoolean
+    );
   }
 }

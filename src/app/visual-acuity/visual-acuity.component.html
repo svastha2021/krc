@@ -8,7 +8,7 @@
             <li class="mx-2">Visit Date: <strong>{{showVisitDate | date : "dd-MM-yyyy"}}</strong></li>
         </div>
         <ul class="pagination pointer">
-            <li class="page-item" [ngClass]="{'disabled': recordIndex === 0 || recordIndex === undefined }">
+            <li class="page-item" [ngClass]="{'disabled': recordIndex === 0 || visualDetailData.length == 0 }">
                 <a class="page-link" (click)="prevItem()">Previous</a>
             </li>
             <li class="page-item" [ngClass]="{'disabled': recordIndex === undefined || recordIndex === getLastRecordIndex() }">

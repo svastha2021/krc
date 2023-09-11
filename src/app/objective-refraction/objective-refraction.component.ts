@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ObjectiveRefractionService } from './objective-refraction.service';
 import { ReferenceService } from '../utilities/services/reference.service';
@@ -16,6 +16,7 @@ export class ObjectiveRefractionComponent {
   @Input() headerDetail: any;
   @Input() visit_no: string = '';
   @Input() visit_date: any;
+  @Output() isActiveObjective = new EventEmitter();
   objectiveRefractionForm!: FormGroup;
   refractionTypes: any = [];
   showPreviousTable:boolean = false;
@@ -24,6 +25,7 @@ export class ObjectiveRefractionComponent {
   recordIndex: number | undefined;
   showVisitDate: any;
   showVisitNo: any;
+  objectiveBoolean:boolean = false;
 
   constructor(private dialog: MatDialog,
               private utility: UtilityService,
@@ -73,6 +75,8 @@ export class ObjectiveRefractionComponent {
     }
     this.orService.createObject(params).subscribe(data => {
       console.log(data);
+      this.objectiveBoolean = true;
+      this.emitObjective();
       this.dialog.open(InfoDialogComponent, {
         width: '400px',
         data: 'Objective Refraction Saved Successfully!!!'
@@ -146,5 +150,11 @@ export class ObjectiveRefractionComponent {
     this.objectiveRefractionForm.controls.sph_le.setValue(this.objectiveRefractionForm.controls.sph_re.value);
     this.objectiveRefractionForm.controls.cyl_le.setValue(this.objectiveRefractionForm.controls.cyl_re.value);
     this.objectiveRefractionForm.controls.axis_le.setValue(this.objectiveRefractionForm.controls.axis_re.value);
+  }
+
+  emitObjective() {
+    this.isActiveObjective.emit(
+      this.objectiveBoolean
+    );
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ExaminationService } from './examination.service';
 import { ReferenceService } from '../utilities/services/reference.service';
@@ -16,6 +16,7 @@ export class ExaminationComponent {
   @Input() headerDetail: any;
   @Input() visit_no: any;
   @Input() visit_date: any;
+  @Output() isActiveExamination = new EventEmitter();
   examForm!: FormGroup;
   showPreviousTable = false;
   examDetailData: any;
@@ -37,6 +38,7 @@ export class ExaminationComponent {
   syringingList: any = [];
   showVisitDate: any;
   showVisitNo: any;
+  examinationBoolean:boolean = false;
   
   constructor(
     private examService: ExaminationService,
@@ -298,6 +300,8 @@ export class ExaminationComponent {
       addl_remarks: this.examForm.controls.addl_remarks.value
     }
     this.examService.createExam(params).subscribe(data => {
+      this.examinationBoolean = true;
+      this.emitExamination();
       this.dialog.open(InfoDialogComponent, {
         width: '500px',
         data: 'Examination Saved Successfully'
@@ -318,5 +322,11 @@ export class ExaminationComponent {
     console.log(event);
     let value = event.value.toString();
     this.examForm.controls[formName].setValue(value);
+  }
+
+  emitExamination() {
+    this.isActiveExamination.emit(
+      this.examinationBoolean
+    );
   }
 }
