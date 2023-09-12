@@ -66,30 +66,42 @@
             <tbody>
                 <tr>
                     <th>Un-Aided</th>
-                    <td><input type="text" class="form-control" formControlName="unaided_distance_re"></td>
-                    <td><input type="text" class="form-control" formControlName="unaided_near_re"></td>
-                    <td><input type="text" class="form-control" formControlName="unaided_distance_le"></td>
-                    <td><input type="text" class="form-control" formControlName="unaided_near_le"></td>
+                    <td><input type="text" class="form-control" formControlName="unaided_distance_re">
+                    <app-record-input (voiceText)="receiveText($event, 'unaided_distance_re')"></app-record-input></td>
+                    <td><input type="text" class="form-control" formControlName="unaided_near_re">
+                        <app-record-input (voiceText)="receiveText($event, 'unaided_near_re')"></app-record-input></td>
+                    <td><input type="text" class="form-control" formControlName="unaided_distance_le">
+                        <app-record-input (voiceText)="receiveText($event, 'unaided_distance_le')"></app-record-input></td>
+                    <td><input type="text" class="form-control" formControlName="unaided_near_le">
+                        <app-record-input (voiceText)="receiveText($event, 'unaided_near_le')"></app-record-input></td>
                 </tr>
                 <tr>
                     <th>Aided</th>
-                    <td><input type="text" class="form-control" formControlName="aided_distance_re"></td>
-                    <td><input type="text" class="form-control" formControlName="aided_near_re"></td>
-                    <td><input type="text" class="form-control" formControlName="aided_distance_le"></td>
-                    <td><input type="text" class="form-control" formControlName="aided_near_le"></td>
+                    <td><input type="text" class="form-control" formControlName="aided_distance_re">
+                        <app-record-input (voiceText)="receiveText($event, 'aided_distance_re')"></app-record-input></td>
+                    <td><input type="text" class="form-control" formControlName="aided_near_re">
+                        <app-record-input (voiceText)="receiveText($event, 'aided_near_re')"></app-record-input></td>
+                    <td><input type="text" class="form-control" formControlName="aided_distance_le">
+                        <app-record-input (voiceText)="receiveText($event, 'aided_distance_le')"></app-record-input></td>
+                    <td><input type="text" class="form-control" formControlName="aided_near_le">
+                        <app-record-input (voiceText)="receiveText($event, 'aided_near_le')"></app-record-input></td>
                 </tr>
                 <tr>
                     <th>Pinhole</th>
-                    <td><input type="text" class="form-control" formControlName="pinhole_distance_re"></td>
+                    <td><input type="text" class="form-control" formControlName="pinhole_distance_re">
+                        <app-record-input (voiceText)="receiveText($event, 'pinhole_distance_re')"></app-record-input></td>
                     <td></td>
-                    <td><input type="text" class="form-control" formControlName="pinhole_distance_le"></td>
+                    <td><input type="text" class="form-control" formControlName="pinhole_distance_le">
+                        <app-record-input (voiceText)="receiveText($event, 'pinhole_distance_le')"></app-record-input></td>
                     <td></td>
                 </tr>
                 <tr>
                     <th>Color Vision</th>
-                    <td><input type="text" class="form-control" formControlName="color_vision_distance_re"></td>
+                    <td><input type="text" class="form-control" formControlName="color_vision_distance_re">
+                        <app-record-input (voiceText)="receiveText($event, 'color_vision_distance_re')"></app-record-input></td>
                     <td></td>
-                    <td><input type="text" class="form-control" formControlName="color_vision_distance_le"></td>
+                    <td><input type="text" class="form-control" formControlName="color_vision_distance_le">
+                    <app-record-input (voiceText)="receiveText($event, 'color_vision_distance_le')"></app-record-input></td>
                     <td></td>
                 </tr>
             </tbody>

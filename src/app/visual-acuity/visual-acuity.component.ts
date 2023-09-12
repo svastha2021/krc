@@ -51,7 +51,13 @@ export class VisualAcuityComponent {
       aided_near_le: []
     })
   }
-
+  receiveText(value:string, field:string){
+    console.log(value)
+    this.visualAcuityForm.controls[field].setValue(value);
+    // if(field === 'unaided_distance_re'){
+    //   this.visualAcuityForm.controls['unaided_distance_re'].setValue(value);
+    // }
+  }
   saveVisualAcuity() {
     const visualForm = this.visualAcuityForm.controls;
     let params = {
