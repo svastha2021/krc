@@ -33,7 +33,10 @@
         {{ currentPatientDetail.visit_date | date : "dd-MM-yyyy" }}</label
       >
       <div class="row">
-        <div class="visit-tag">
+        <div class="col-md-4" *ngIf="!showPreviousDocNotes">
+          <button class="btn btn-success ms-2" (click)="displayPreviousDocNotes()">Show Previous</button>
+      </div>
+        <div class="visit-tag" *ngIf="showPreviousDocNotes">
           <ul class="pagination">
             <li class="page-item" [ngClass]="{ disabled: recordIndex === 0 }">
               <a class="page-link" (click)="prevItem()">Previous</a>
@@ -192,9 +195,13 @@
         [disabled]="!docNotes"
         class="btn btn-warning margin-20t"
         (click)="saveNotes()"
+        *ngIf="!showPreviousDocNotes"
       ><i class="fa-solid fa-paper-plane mar5r"></i>
         Save
       </button>
+      <button type="button" class="btn btn-success margin-t" (click)="back()" *ngIf="showPreviousDocNotes">
+        Back
+    </button>
     </mat-expansion-panel>
 
     <!-- vital paramaters collapsible -->

@@ -137,11 +137,11 @@ export class DiagnosisAndAdviceComponent {
     }
 
     rightToLeft() {
-      this.diagnosisForm.controls.diagnosis_re.setValue(this.diagnosisForm.controls.diagnosis_le.value);
+      this.diagnosisForm.controls.diagnosis_le.setValue(this.diagnosisForm.controls.diagnosis_re.value);
     }
 
     leftToRight() {
-      this.diagnosisForm.controls.diagnosis_le.setValue(this.diagnosisForm.controls.diagnosis_re.value);
+      this.diagnosisForm.controls.diagnosis_re.setValue(this.diagnosisForm.controls.diagnosis_le.value);
     }
 
     emitDiagonsis() {

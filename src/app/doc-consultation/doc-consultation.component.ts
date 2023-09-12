@@ -118,6 +118,7 @@ export class DocConsultationComponent implements OnInit {
   isActiveGP:boolean = false;
   isActiveMedicine:boolean = false;
   isActiveLab:boolean = false;
+  showPreviousDocNotes:boolean = false;
 
 
   // [{khi_code:'bp',khi_desc:'Bloop pressure'}, {khi_code:'height',khi_desc:'Height'}];
@@ -264,6 +265,7 @@ export class DocConsultationComponent implements OnInit {
       this.visit_no = data.visit_no;
       this.visit_date = data.visit_date;
       this.isActive = true;
+      this.patientHeader(this.headerDetail);
       this.dialog.open(InfoDialogComponent, {
         width: '500px',
         data: 'Notes Saved Successfully',
@@ -381,6 +383,33 @@ export class DocConsultationComponent implements OnInit {
       this.utility.convertDate(
         this.currentPatientDialysisDetail.prescription_date
       );
+  }
+
+  displayPreviousDocNotes() {
+    this.showPreviousDocNotes = true;
+    this.setCurrentNotesAfterChange();
+  }
+
+  back() {
+    this.showPreviousDocNotes = false;
+    this.resestDocNotes();
+  }
+
+  resestDocNotes() {  
+      this.main_complaint= '',
+      this.main_complaint_from= '',
+      this.curr_complaint= '',
+      this.curr_complaint_from= '',
+      this.past_illness_systemic= '',
+      this.fam_history= '',
+      this.fam_history_dtl= '',
+      this.surg_laser= '',
+      this.allergies= '',
+      this.curr_treatment= '',
+      this.curr_treatment_dtl= '',
+      this.medication= '',
+      this.medication_dtl= '',
+      this.docNotes= ''
   }
 
   // vital params
