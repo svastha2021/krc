@@ -139,17 +139,17 @@ export class ObjectiveRefractionComponent {
   }
 
   rightToLeft() {
-    this.objectiveRefractionForm.controls.obj_ref_type_re.setValue(this.objectiveRefractionForm.controls.obj_ref_type_le.value);
-    this.objectiveRefractionForm.controls.sph_re.setValue(this.objectiveRefractionForm.controls.sph_le.value);
-    this.objectiveRefractionForm.controls.cyl_re.setValue(this.objectiveRefractionForm.controls.cyl_le.value);
-    this.objectiveRefractionForm.controls.axis_re.setValue(this.objectiveRefractionForm.controls.axis_le.value);
-  }
-
-  leftToRight() {
     this.objectiveRefractionForm.controls.obj_ref_type_le.setValue(this.objectiveRefractionForm.controls.obj_ref_type_re.value);
     this.objectiveRefractionForm.controls.sph_le.setValue(this.objectiveRefractionForm.controls.sph_re.value);
     this.objectiveRefractionForm.controls.cyl_le.setValue(this.objectiveRefractionForm.controls.cyl_re.value);
     this.objectiveRefractionForm.controls.axis_le.setValue(this.objectiveRefractionForm.controls.axis_re.value);
+  }
+
+  leftToRight() {
+    this.objectiveRefractionForm.controls.obj_ref_type_re.setValue(this.objectiveRefractionForm.controls.obj_ref_type_le.value);
+    this.objectiveRefractionForm.controls.sph_re.setValue(this.objectiveRefractionForm.controls.sph_le.value);
+    this.objectiveRefractionForm.controls.cyl_re.setValue(this.objectiveRefractionForm.controls.cyl_le.value);
+    this.objectiveRefractionForm.controls.axis_re.setValue(this.objectiveRefractionForm.controls.axis_le.value);
   }
 
   emitObjective() {

@@ -146,16 +146,6 @@ export class VisualAcuityComponent {
   }
 
   rightToLeft() {
-    this.visualAcuityForm.controls.neartype_re.setValue(this.visualAcuityForm.controls.neartype_le.value);
-    this.visualAcuityForm.controls.unaided_distance_re.setValue(this.visualAcuityForm.controls.unaided_distance_le.value);
-    this.visualAcuityForm.controls.unaided_near_re.setValue(this.visualAcuityForm.controls.unaided_near_le.value);
-    this.visualAcuityForm.controls.aided_distance_re.setValue(this.visualAcuityForm.controls.aided_distance_le.value);
-    this.visualAcuityForm.controls.aided_near_re.setValue(this.visualAcuityForm.controls.aided_near_le.value);
-    this.visualAcuityForm.controls.pinhole_distance_re.setValue(this.visualAcuityForm.controls.pinhole_distance_le.value);
-    this.visualAcuityForm.controls.color_vision_distance_re.setValue(this.visualAcuityForm.controls.color_vision_distance_le.value);
-  }
-
-  leftToRight() {
     this.visualAcuityForm.controls.neartype_le.setValue(this.visualAcuityForm.controls.neartype_re.value);
     this.visualAcuityForm.controls.unaided_distance_le.setValue(this.visualAcuityForm.controls.unaided_distance_re.value);
     this.visualAcuityForm.controls.unaided_near_le.setValue(this.visualAcuityForm.controls.unaided_near_re.value);
@@ -163,6 +153,16 @@ export class VisualAcuityComponent {
     this.visualAcuityForm.controls.aided_near_le.setValue(this.visualAcuityForm.controls.aided_near_re.value);
     this.visualAcuityForm.controls.pinhole_distance_le.setValue(this.visualAcuityForm.controls.pinhole_distance_re.value);
     this.visualAcuityForm.controls.color_vision_distance_le.setValue(this.visualAcuityForm.controls.color_vision_distance_re.value);
+  }
+
+  leftToRight() {
+    this.visualAcuityForm.controls.neartype_re.setValue(this.visualAcuityForm.controls.neartype_le.value);
+    this.visualAcuityForm.controls.unaided_distance_re.setValue(this.visualAcuityForm.controls.unaided_distance_le.value);
+    this.visualAcuityForm.controls.unaided_near_re.setValue(this.visualAcuityForm.controls.unaided_near_le.value);
+    this.visualAcuityForm.controls.aided_distance_re.setValue(this.visualAcuityForm.controls.aided_distance_le.value);
+    this.visualAcuityForm.controls.aided_near_re.setValue(this.visualAcuityForm.controls.aided_near_le.value);
+    this.visualAcuityForm.controls.pinhole_distance_re.setValue(this.visualAcuityForm.controls.pinhole_distance_le.value);
+    this.visualAcuityForm.controls.color_vision_distance_re.setValue(this.visualAcuityForm.controls.color_vision_distance_le.value);
   }
 
   emitVisual() {
