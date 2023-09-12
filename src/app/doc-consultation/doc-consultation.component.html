@@ -21,6 +21,7 @@
     <mat-expansion-panel hideToggle class="margin-20b doc-consult-expansion-container">
       <mat-expansion-panel-header>
         <mat-panel-title> Doctor Notes </mat-panel-title>
+        <mat-slide-toggle [checked]="isActive" disabled></mat-slide-toggle>
         <mat-panel-description>
           
         </mat-panel-description>
@@ -200,6 +201,7 @@
     <mat-expansion-panel hideToggle class="margin-20b doc-consult-expansion-container">
       <mat-expansion-panel-header>
         <mat-panel-title> Vital Parameters </mat-panel-title>
+        <mat-slide-toggle [checked]="isActiveVital" disabled></mat-slide-toggle>
         <mat-panel-description>
           
         </mat-panel-description>
@@ -438,6 +440,7 @@
     *ngIf="aptObj.dept_id === 'D0002'">
   <mat-expansion-panel-header>
     <mat-panel-title> Visual Acuity </mat-panel-title>
+    <mat-slide-toggle [checked]="isActiveVisual" disabled></mat-slide-toggle>
     <mat-panel-description>
       
     </mat-panel-description>
@@ -446,6 +449,7 @@
     [visit_no]="visit_no"
     [visit_date]="visit_date"
     [headerDetail]="headerDetail"
+    (isActiveVisual)='isEmitActiveVisual($event)'
   ></app-visual-acuity>
   </mat-expansion-panel>
 
@@ -455,6 +459,7 @@
   *ngIf="aptObj.dept_id === 'D0002'">
   <mat-expansion-panel-header>
     <mat-panel-title> Present Glass Power </mat-panel-title>
+    <mat-slide-toggle [checked]="isActivePGP" disabled></mat-slide-toggle>
     <mat-panel-description>
       
     </mat-panel-description>
@@ -462,7 +467,8 @@
   <app-present-glass-power
     [visit_no]="visit_no"
     [visit_date]="visit_date"
-    [headerDetail]="headerDetail">
+    [headerDetail]="headerDetail"
+    (isActivePGP)='isEmitActivePGP($event)'>
   </app-present-glass-power>
   </mat-expansion-panel>
 
@@ -472,6 +478,7 @@
     *ngIf="aptObj.dept_id === 'D0002'">
   <mat-expansion-panel-header>
     <mat-panel-title> Objective Refraction </mat-panel-title>
+    <mat-slide-toggle [checked]="isActiveObjective" disabled></mat-slide-toggle>
     <mat-panel-description>
       
     </mat-panel-description>
@@ -480,6 +487,7 @@
     [visit_no]="visit_no"
     [visit_date]="visit_date"
     [headerDetail]="headerDetail"
+    (isActiveObjective)='isEmitActiveObjective($event)'
   ></app-objective-refraction>
   </mat-expansion-panel>
   
@@ -489,6 +497,7 @@
     *ngIf="aptObj.dept_id === 'D0002'">
     <mat-expansion-panel-header>
       <mat-panel-title> Subjective Acceptance </mat-panel-title>
+      <mat-slide-toggle [checked]="isActiveSubjective" disabled></mat-slide-toggle>
       <mat-panel-description>
         
       </mat-panel-description>
@@ -496,7 +505,8 @@
     <app-subject-acceptance
       [visit_no]="visit_no"
       [visit_date]="visit_date"
-      [headerDetail]="headerDetail">
+      [headerDetail]="headerDetail"
+      (isActiveSubjective)='isEmitActiveSubjective($event)'>
     </app-subject-acceptance>
     </mat-expansion-panel>
 
@@ -506,6 +516,7 @@
     *ngIf="aptObj.dept_id === 'D0002'">
     <mat-expansion-panel-header>
       <mat-panel-title> Examination </mat-panel-title>
+      <mat-slide-toggle [checked]="isActiveExamination" disabled></mat-slide-toggle>
       <mat-panel-description>
         
       </mat-panel-description>
@@ -513,7 +524,8 @@
     <app-examination
       [visit_no]="visit_no"
       [visit_date]="visit_date"
-      [headerDetail]="headerDetail">
+      [headerDetail]="headerDetail"
+      (isActiveExamination)='isEmitActiveExamination($event)'>
     </app-examination>
     </mat-expansion-panel>
     
@@ -523,6 +535,7 @@
     *ngIf="aptObj.dept_id === 'D0002'">
     <mat-expansion-panel-header>
       <mat-panel-title> Intra Ocular Pressure </mat-panel-title>
+      <mat-slide-toggle [checked]="isActiveIOP" disabled></mat-slide-toggle>
       <mat-panel-description>
         
       </mat-panel-description>
@@ -530,7 +543,8 @@
     <app-intra-ocular-pressure
       [visit_no]="visit_no"
       [visit_date]="visit_date"
-      [headerDetail]="headerDetail">
+      [headerDetail]="headerDetail"
+      (isActiveIOP)='isEmitActiveIOP($event)'>
     </app-intra-ocular-pressure>
     </mat-expansion-panel>
     
@@ -540,6 +554,7 @@
     *ngIf="aptObj.dept_id === 'D0002'">
     <mat-expansion-panel-header>
       <mat-panel-title> Diagnosis and Advice </mat-panel-title>
+      <mat-slide-toggle [checked]="isActiveDiagonsis" disabled></mat-slide-toggle>
       <mat-panel-description>
         
       </mat-panel-description>
@@ -547,7 +562,8 @@
     <app-diagnosis-and-advice
       [visit_no]="visit_no"
       [visit_date]="visit_date"
-      [headerDetail]="headerDetail">
+      [headerDetail]="headerDetail"
+      (isActiveDiagonsis)='isEmitActiveDiagonsis($event)'>
     </app-diagnosis-and-advice>
     </mat-expansion-panel>
 
@@ -557,6 +573,7 @@
     *ngIf="aptObj.dept_id === 'D0002'">
     <mat-expansion-panel-header>
       <mat-panel-title> Glass Prescription </mat-panel-title>
+      <mat-slide-toggle [checked]="isActiveGP" disabled></mat-slide-toggle>
       <mat-panel-description>
         
       </mat-panel-description>
@@ -564,7 +581,8 @@
     <app-glass-prescription
       [visit_no]="visit_no"
       [visit_date]="visit_date"
-      [headerDetail]="headerDetail">
+      [headerDetail]="headerDetail"
+      (isActiveGP)='isEmitActiveGP($event)'>
     </app-glass-prescription>
     </mat-expansion-panel>
 
@@ -572,6 +590,7 @@
     <mat-expansion-panel hideToggle class="margin-20b doc-consult-expansion-container">
       <mat-expansion-panel-header>
         <mat-panel-title> Medicine </mat-panel-title>
+        <mat-slide-toggle [checked]="isActiveMedicine" disabled></mat-slide-toggle>
         <mat-panel-description>
           
         </mat-panel-description>
@@ -579,6 +598,7 @@
       <app-med-prescription
         [visit_no]="visit_no"
         [headerDetail]="headerDetail"
+        (isActiveMedicine)='isEmitActiveMedicine($event)'
       ></app-med-prescription>
     </mat-expansion-panel>
 
@@ -586,6 +606,7 @@
     <mat-expansion-panel hideToggle class="margin-20b doc-consult-expansion-container">
       <mat-expansion-panel-header>
         <mat-panel-title> Lab </mat-panel-title>
+        <mat-slide-toggle [checked]="isActiveLab" disabled></mat-slide-toggle>
         <mat-panel-description>
           
         </mat-panel-description>
@@ -593,6 +614,7 @@
       <app-lab-prescription
         [visit_no]="visit_no"
         [headerDetail]="headerDetail"
+        (isActiveLab)='isEmitActiveLab($event)'
       ></app-lab-prescription>
     </mat-expansion-panel>
   </div>

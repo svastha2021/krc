@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MedPreparationService } from './med-prescription.service';
 import { UtilityService } from '../utilities/services/utility.service';
@@ -37,12 +37,15 @@ export class MedPrescriptionComponent implements OnInit {
   headerDetail: any;
   @Input()
   visit_no: any;
+  @Output() isActiveMedicine = new EventEmitter();
   pharmaList: any = [];
   tableData: LabItem[] = [];
 
   previousData: LabItem[] = [];
   labPayload = {};
   eod: any;
+  medicineBoolean:boolean = false;
+
   constructor(private mpService: MedPreparationService,
     private utility: UtilityService, private dialog: MatDialog,
     private fb: FormBuilder, private ref: ReferenceService) { }
@@ -106,6 +109,8 @@ export class MedPrescriptionComponent implements OnInit {
     }
 
     this.mpService.updatePharmaDetails(this.labPayload).subscribe(data => {
+      this.medicineBoolean = true;
+      this.emitMedicine();
       this.dialog.open(InfoDialogComponent, {
         width: '500px',
         data: 'Pharma Details Saved Successfully'
@@ -117,7 +122,11 @@ export class MedPrescriptionComponent implements OnInit {
     this.showPreviousTable = true;
   }
 
-
+  emitMedicine() {
+    this.isActiveMedicine.emit(
+      this.medicineBoolean
+    );
+  }
 }
 
 

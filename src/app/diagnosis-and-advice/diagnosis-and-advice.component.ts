@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DiagnosisAndAdviceService } from './diagnosis-and-advice.service';
@@ -15,6 +15,7 @@ export class DiagnosisAndAdviceComponent {
   @Input() headerDetail: any;
   @Input() visit_no: string = '';
   @Input() visit_date: any;
+  @Output() isActiveDiagonsis = new EventEmitter();
   diagnosisForm!: FormGroup;
   showPreviousTable:boolean = false;
   diagnosisList = [
@@ -29,6 +30,7 @@ export class DiagnosisAndAdviceComponent {
   recordIndex: number | undefined;
   showVisitDate: any;
   showVisitNo: any;
+  diagonsisBoolean:boolean = false;
 
   constructor(private dialog: MatDialog,
               private formBuilder: FormBuilder, 
@@ -70,6 +72,8 @@ export class DiagnosisAndAdviceComponent {
       }
       this.daService.createDiagnosis(params).subscribe(data => {
         console.log(data);
+        this.diagonsisBoolean = true;
+        this.emitDiagonsis();
         this.dialog.open(InfoDialogComponent, {
           width: '400px',
           data: 'Diagnosis and Advice Saved Successfully!!!'
@@ -133,10 +137,16 @@ export class DiagnosisAndAdviceComponent {
     }
 
     rightToLeft() {
-      this.diagnosisForm.controls.diagnosis_le.setValue(this.diagnosisForm.controls.diagnosis_re.value);
+      this.diagnosisForm.controls.diagnosis_re.setValue(this.diagnosisForm.controls.diagnosis_le.value);
     }
 
     leftToRight() {
-      this.diagnosisForm.controls.diagnosis_re.setValue(this.diagnosisForm.controls.diagnosis_le.value);
+      this.diagnosisForm.controls.diagnosis_le.setValue(this.diagnosisForm.controls.diagnosis_re.value);
+    }
+
+    emitDiagonsis() {
+      this.isActiveDiagonsis.emit(
+        this.diagonsisBoolean
+      );
     }
 }

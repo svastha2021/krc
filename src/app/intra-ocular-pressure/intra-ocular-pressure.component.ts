@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.component';
@@ -15,6 +15,7 @@ export class IntraOcularPressureComponent {
   @Input() headerDetail: any;
   @Input() visit_no: string = '';
   @Input() visit_date: any;
+  @Output() isActiveIOP = new EventEmitter();
   intraOcularPressureForm!: FormGroup;
   showPreviousTable:boolean = false;
   vaList = ['6/6', '6/9', '6/12', '6/18', '6/24', '6/36', '6/60', '5/60'];
@@ -24,6 +25,7 @@ export class IntraOcularPressureComponent {
   iopList: any = [];
   showVisitDate: any;
   showVisitNo: any;
+  iopBoolean:boolean = false;
 
   constructor(private dialog: MatDialog,
               private formBuilder: FormBuilder, 
@@ -57,6 +59,8 @@ export class IntraOcularPressureComponent {
       }
       this.iopService.createIop(params).subscribe(data => {
         console.log(data);
+        this.iopBoolean = true;
+        this.emitIOP();
         this.dialog.open(InfoDialogComponent, {
           width: '400px',
           data: 'Intra Ocular Pressure Saved Successfully!!!'
@@ -145,5 +149,11 @@ export class IntraOcularPressureComponent {
         const timestamp = currentDate.toLocaleTimeString();
         this.intraOcularPressureForm.controls.timer.setValue(timestamp);
       }
+    }
+
+    emitIOP() {
+      this.isActiveIOP.emit(
+        this.iopBoolean
+      );
     }
 }

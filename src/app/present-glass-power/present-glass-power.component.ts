@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PresentGlassPowerService } from './present-glass-power.service';
 import { ReferenceService } from '../utilities/services/reference.service';
@@ -16,6 +16,7 @@ export class PresentGlassPowerComponent {
   @Input() headerDetail: any;
   @Input() visit_no: string = '';
   @Input() visit_date: any;
+  @Output() isActivePGP = new EventEmitter();
   presentGlassPowerForm!: FormGroup;
   lensMaterialList: any = [];
   typeOfLensList: any = [];
@@ -27,6 +28,7 @@ export class PresentGlassPowerComponent {
   distanceList: any = [];
   showVisitDate: any;
   showVisitNo: any;
+  pgpBoolean: boolean = false;
 
   constructor(private dialog: MatDialog,
               private formBuilder: FormBuilder, 
@@ -101,6 +103,8 @@ export class PresentGlassPowerComponent {
     }
     this.pgpService.createPgp(params).subscribe(data => {
       console.log(data);
+      this.pgpBoolean = true;
+      this.emitPGP();
       this.dialog.open(InfoDialogComponent, {
         width: '400px',
         data: 'Present Glass Power Saved Successfully!!!'
@@ -183,6 +187,15 @@ export class PresentGlassPowerComponent {
   }
 
   rightToLeft() {
+    this.presentGlassPowerForm.controls.sph_distance_re.setValue(this.presentGlassPowerForm.controls.sph_distance_le.value);
+    this.presentGlassPowerForm.controls.cyl_distance_re.setValue(this.presentGlassPowerForm.controls.cyl_distance_le.value);
+    this.presentGlassPowerForm.controls.axis_distance_re.setValue(this.presentGlassPowerForm.controls.axis_distance_le.value);
+    this.presentGlassPowerForm.controls.sph_near_re.setValue(this.presentGlassPowerForm.controls.sph_near_le.value);
+    this.presentGlassPowerForm.controls.cyl_near_re.setValue(this.presentGlassPowerForm.controls.cyl_near_le.value);
+    this.presentGlassPowerForm.controls.axis_near_re.setValue(this.presentGlassPowerForm.controls.axis_near_le.value);
+  }
+
+  leftToRight() {
     this.presentGlassPowerForm.controls.sph_distance_le.setValue(this.presentGlassPowerForm.controls.sph_distance_re.value);
     this.presentGlassPowerForm.controls.cyl_distance_le.setValue(this.presentGlassPowerForm.controls.cyl_distance_re.value);
     this.presentGlassPowerForm.controls.axis_distance_le.setValue(this.presentGlassPowerForm.controls.axis_distance_re.value);
@@ -191,12 +204,9 @@ export class PresentGlassPowerComponent {
     this.presentGlassPowerForm.controls.axis_near_le.setValue(this.presentGlassPowerForm.controls.axis_near_re.value);
   }
 
-  leftToRight() {
-    this.presentGlassPowerForm.controls.sph_distance_re.setValue(this.presentGlassPowerForm.controls.sph_distance_le.value);
-    this.presentGlassPowerForm.controls.cyl_distance_re.setValue(this.presentGlassPowerForm.controls.cyl_distance_le.value);
-    this.presentGlassPowerForm.controls.axis_distance_re.setValue(this.presentGlassPowerForm.controls.axis_distance_le.value);
-    this.presentGlassPowerForm.controls.sph_near_re.setValue(this.presentGlassPowerForm.controls.sph_near_le.value);
-    this.presentGlassPowerForm.controls.cyl_near_re.setValue(this.presentGlassPowerForm.controls.cyl_near_le.value);
-    this.presentGlassPowerForm.controls.axis_near_re.setValue(this.presentGlassPowerForm.controls.axis_near_le.value);
+  emitPGP() {
+    this.isActivePGP.emit(
+      this.pgpBoolean
+    );
   }
 }

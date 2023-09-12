@@ -106,6 +106,19 @@ export class DocConsultationComponent implements OnInit {
   chiefComplaintList: any = [];
   HistoryOfCurrentCompliantList: any = [];
   illnessList: any = [];
+  isActive:boolean = false;
+  isActiveVital:boolean = false;
+  isActiveVisual:boolean = false;
+  isActivePGP:boolean = false;
+  isActiveObjective:boolean = false;
+  isActiveSubjective:boolean = false;
+  isActiveExamination:boolean = false;
+  isActiveIOP:boolean = false;
+  isActiveDiagonsis:boolean = false;
+  isActiveGP:boolean = false;
+  isActiveMedicine:boolean = false;
+  isActiveLab:boolean = false;
+
 
   // [{khi_code:'bp',khi_desc:'Bloop pressure'}, {khi_code:'height',khi_desc:'Height'}];
   constructor(
@@ -250,7 +263,7 @@ export class DocConsultationComponent implements OnInit {
 
       this.visit_no = data.visit_no;
       this.visit_date = data.visit_date;
-
+      this.isActive = true;
       this.dialog.open(InfoDialogComponent, {
         width: '500px',
         data: 'Notes Saved Successfully',
@@ -413,6 +426,7 @@ export class DocConsultationComponent implements OnInit {
     };
     this.docService.updateVital(vitalPram).subscribe((data) => {
       console.log(data);
+      this.isActiveVital = true;
       this.dialog.open(InfoDialogComponent, {
         width: '500px',
         data: 'Vital Params updated Successfully',
@@ -428,5 +442,45 @@ export class DocConsultationComponent implements OnInit {
 
   displayPrevious() {
     this.showVitalPrevious = true;
+  }
+
+  isEmitActiveVisual(element: any) {
+    this.isActiveVisual =  element;
+  }
+
+  isEmitActivePGP(element: any) {
+    this.isActivePGP =  element;
+  }
+
+  isEmitActiveObjective(element: any) {
+    this.isActiveObjective =  element;
+  }
+
+  isEmitActiveSubjective(element: any) {
+    this.isActiveSubjective =  element;
+  }
+
+  isEmitActiveExamination(element: any) {
+    this.isActiveExamination =  element;
+  }
+
+  isEmitActiveIOP(element: any) {
+    this.isActiveIOP =  element;
+  }
+
+  isEmitActiveDiagonsis(element: any) {
+    this.isActiveDiagonsis =  element;
+  }
+
+  isEmitActiveGP(element: any) {
+    this.isActiveGP =  element;
+  }
+
+  isEmitActiveMedicine(element: any) {
+    this.isActiveMedicine =  element;
+  }
+
+  isEmitActiveLab(element: any) {
+    this.isActiveLab =  element;
   }
 }
