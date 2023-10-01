@@ -624,6 +624,34 @@
         (isActiveLab)='isEmitActiveLab($event)'
       ></app-lab-prescription>
     </mat-expansion-panel>
+
+
+<div *ngFor="let section of VetSections">
+    <mat-expansion-panel hideToggle
+    class="margin-20b doc-consult-expansion-container"
+    *ngIf="aptObj.dept_id === 'D0004'">
+    <mat-expansion-panel-header>
+      <mat-panel-title> {{section}} </mat-panel-title>
+      <mat-slide-toggle [checked]="isActiveExamination" disabled></mat-slide-toggle>
+      <mat-panel-description>
+        
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <!-- <app-examination
+      [visit_no]="visit_no"
+      [visit_date]="visit_date"
+      [headerDetail]="headerDetail"
+      (isActiveExamination)='isEmitActiveExamination($event)'>
+    </app-examination> -->
+
+    <app-vet-consult-section
+    [visit_no]="visit_no"
+    [visit_date]="visit_date"
+    [headerDetail]="headerDetail"
+    (isActiveExamination)='isEmitActiveExamination($event)'>
+  </app-vet-consult-section>
+    </mat-expansion-panel>
+  </div>
   </div>
   <div class="row"></div>
 </div>

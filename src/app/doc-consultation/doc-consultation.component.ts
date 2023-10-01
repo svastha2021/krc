@@ -133,7 +133,7 @@ export class DocConsultationComponent implements OnInit {
     this.curr_treatment = 'N';
     this.medication = 'N';
   }
-
+  VetSections = ['Cornea  & Sclera'];
   ngOnInit(): void {
     if (history.state && history.state.patient_id) {
       this.aptObj = history.state;

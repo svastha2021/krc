@@ -1,0 +1,45 @@
+.margin-5t {
+    margin-top: 5px;
+}
+.txt-b {
+    font-weight: 500;
+}
+::ng-deep .mat-form-field-underline {
+    display: none;
+}
+.mat-form-field {
+    display: block;
+}
+.custom-card {
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+}
+::ng-deep .mat-select-panel-wrap {
+    flex-basis: 89% !important;
+    transform: translate(28px, 44px) !important;
+}
+.d-flex {
+    display: flex;
+}
+.flex-align {
+    // padding-bottom: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.pg-t {
+    padding-top: 10px;
+}
+.pg {
+    padding: 15px;
+}
+
+::ng-deep .mat-select-arrow {
+    display: none;
+}
+
+::ng-deep .mat-select-panel {
+    font-size: 15px !important;
+}
