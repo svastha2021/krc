@@ -1,5 +1,5 @@
 <div class="error-container" *ngIf="!visit_no">
-  Please save doctor notes to save Examination
+  Please save doctor notes to save Details
 </div>
 <div class="row">
   <div class="col-md-12 align-end" *ngIf="!showPreviousTable">
@@ -32,11 +32,11 @@
     </ul>
   </div>
 </div>
-<form [formGroup]="dynamicForm">
-  <div class="margin-20l custom-card" *ngFor="let section of dynamicExamData">
+<form>
+  <div class="margin-20l custom-card vet-dynamic-section-form" *ngFor="let section of sectionParamData">
     <div class="row">
       <div class="col-md-4 pg-10">
-        <label class="form-label txt-b">{{ section.sectionName }}</label>
+        <label class="form-label txt-b">{{ section.sub_heading }}</label>
       </div>
       <div class="col-md-4 pg-10">
         <label class="form-label">Right Eye</label>
@@ -49,17 +49,20 @@
       <div
         class="col-md-12 pg"
         style="display: flex"
-        *ngFor="let property of section.properties"
+        *ngFor="let property of section.details"
       >
         <div class="col-md-2">
-          <label class="form-label pg-t">{{ property.name }}</label>
+          <label class="form-label pg-t">{{ property.column_name_text }}</label>
         </div>
         <div class="col-md-5 flex-align">
+          <div class="col-1" >
+            <app-multiselect *ngIf="property.column_name_type === 'LOV'" [rowData]="property" [left]="'_RE'"></app-multiselect>
+          </div>
           <div class="col-5">
             <input
               type="text"
               class="form-control"
-              [formControlName]="property.fieldValueLe"
+              [id]="setIDs(property.column_name_prefix, '_RE')"
             />
           </div>
           <div class="col-6">
@@ -67,7 +70,7 @@
               type="text"
               rows="1"
               class="form-control"
-              [formControlName]="property.fieldRemarkLe"
+              [id]="setIDs(property.column_name_prefix, '_Remark_RE')"
             ></textarea>
           </div>
         </div>
@@ -77,7 +80,7 @@
             <input
               type="text"
               class="form-control"
-              [formControlName]="property.fieldValueLe"
+              [id]="setIDs(property.column_name_prefix, '_LE')"
             />
           </div>
           <div class="col-6">
@@ -85,7 +88,7 @@
               type="text"
               rows="1"
               class="form-control"
-              [formControlName]="property.fieldRemarkLe"
+              [id]="setIDs(property.column_name_prefix, '_Remark_LE')"
             ></textarea>
           </div>
         </div>
@@ -96,14 +99,24 @@
   </div>
 </form>
 <div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4 pointer">
-        <button type="button" class="btn btn-success " (click)="saveExam()" *ngIf="!showPreviousTable" [disabled]="dynamicForm.invalid">
-            Save
-        </button>
-        <button type="button" class="btn btn-success " (click)="back()" *ngIf="showPreviousTable">
-            Back
-        </button>
-    </div>
-    <div class="col-md-4"></div>
+  <div class="col-md-4"></div>
+  <div class="col-md-4 pointer">
+    <button
+      type="button"
+      class="btn btn-success"
+      (click)="saveValues()"
+      *ngIf="!showPreviousTable"
+    >
+      Save
+    </button>
+    <button
+      type="button"
+      class="btn btn-success"
+      (click)="back()"
+      *ngIf="showPreviousTable"
+    >
+      Back
+    </button>
+  </div>
+  <div class="col-md-4"></div>
 </div>

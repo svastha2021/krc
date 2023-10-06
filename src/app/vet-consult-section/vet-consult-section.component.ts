@@ -1,91 +1,64 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { VetServiceService } from './vet-service.service';
 import { ReferenceService } from '../utilities/services/reference.service';
 import { MatDialog } from '@angular/material/dialog';
 import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.component';
 import { UtilityService } from '../utilities/services/utility.service';
+import { MatSelect } from '@angular/material/select';
 @Component({
-  selector: 'app-vet-consult-section',
+  selector: 'app-vet-dynamic-section',
   templateUrl: './vet-consult-section.component.html',
-  styleUrls: ['./vet-consult-section.component.scss']
+  styleUrls: ['./vet-consult-section.component.scss'],
 })
-export class VetConsultSectionComponent {
-
+export class VetConsultSectionComponent  {
+  @ViewChild(MatSelect) matSelect: MatSelect | undefined;
   @Input() headerDetail: any;
   @Input() visit_no: any;
   @Input() visit_date: any;
-  @Output() isActiveExamination = new EventEmitter();
-  
+  _metaData: any;
+  @Input() set metaData(value: any) {
+    console.log('input', value);
+    if (value) {
+     this.sectionParamData = value;
+    }
+  }
+  @Output() isActive= new EventEmitter();
+
   dynamicForm!: FormGroup;
   showPreviousTable = false;
   examDetailData: any;
   prevCounter = 0;
   recordIndex: number | undefined;
-  eyeLidsList: any = [];
-  
+  reList: any = [];
+
   showVisitDate: any;
   showVisitNo: any;
-  examinationBoolean:boolean = false;
-  
+  examinationBoolean: boolean = false;
+  sectionParamData: any[] = [];
   constructor(
     private vetService: VetServiceService,
     private ref: ReferenceService,
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
     private utility: UtilityService
-  ) { }
-
-  ngOnInit(): void {
-    
-this.renderDynamic();
-    
-  }
- 
-  dynamicExamData:any = [];
-  renderDynamic() {
-    this.dynamicExamData = [
-      {
-        sectionName: 'Lacrimal System',
-        properties: [
-          {
-            name: 'STT',   
-            fieldType: 'Text',         
-            fieldValueRe:'STT_re',
-            fieldValueLe:'STT_le',
-            fieldRemarkRe:'STT_remark_re',
-            fieldRemarkLe:'STT_remark_le'            
-          },
-          {
-            name: 'Epiphoea',   
-            fieldType: 'Text',         
-            fieldValueRe:'Epiphoea_re',
-            fieldValueLe:'Epiphoea_le',
-            fieldRemarkRe:'Epiphoea_remark_le',
-            fieldRemarkLe:'Epiphoea_remark_le'            
-          },
-          
-        ],
-      },
-    ];
-    type Org = { [key: string]: FormControl };
-    const organization: Org = {};
-    this.dynamicExamData.forEach((section:any) => {
-      const formField: Org = {};
-      section.properties.forEach((prop:any) => {
-        formField[prop.fieldValueRe] = new FormControl('');
-        formField[prop.fieldValueLe] = new FormControl('');
-        formField[prop.fieldRemarkRe] = new FormControl('');
-        formField[prop.fieldRemarkLe] = new FormControl('');
-      });
-      this.dynamicForm = this.formBuilder.group(formField);
-    });
-    Object.keys(this.dynamicForm.controls).forEach(key => {
-      console.log(key + ': ' + this.dynamicForm.controls[key].value);
-   });
-  }
-
+  ) {}
   
+  ngOnInit(): void {
+    console.log(this.metaData)
+   // this.vetService.getPetMetaData(this.headerDetail.patient_id, this.headerDetail.visit_no, )
+  }
+
+  dynamicExamData: any = [];
 
   get() {
     return this.dynamicForm.controls;
@@ -138,38 +111,92 @@ this.renderDynamic();
     this.getExamDetail();
   }
 
-  saveExam() {
-    let x = this.dynamicForm.controls;
-    let params:any = {
+  setIDs(code: any, id: string) {
+    return code + id;
+  }
+  petPayloadList: any = [];
+  updatePayloadList() {
+    // let petParam = { khi_code: '', khi_value: '', khi_notes: '' };
+
+    this.sectionParamData.forEach((element: any) => {
+      element.details.forEach((prop: any) => {
+        let petParam = {
+          heading: '',
+          sub_heading: '',
+          column_name_seq_no: 0,
+          column_name_prefix: '',
+          column_name_text: '',
+          column_name_le: '',
+          column_name_re: '',
+          column_name_rem_re: '',
+          column_name_rem_le: '',
+        };
+        petParam.column_name_prefix = prop.column_name_prefix;
+        petParam.column_name_text = prop.column_name_text;
+        petParam.sub_heading = prop.sub_heading;
+        petParam.heading = prop.heading;
+        petParam.column_name_seq_no = prop.column_name_seq_no;
+        const inputLE = document.getElementById(
+          this.setIDs(prop.column_name_prefix, '_LE')
+        ) as HTMLInputElement | null;
+        if (inputLE != null) {
+          petParam.column_name_le = inputLE.value;
+        }
+
+        const inputRemLe = document.getElementById(
+          this.setIDs(prop.column_name_prefix, '_Remark_LE')
+        ) as HTMLInputElement | null;
+        if (inputRemLe != null) {
+          petParam.column_name_rem_le = inputRemLe.value;
+        }
+
+        const inputRE = document.getElementById(
+          this.setIDs(prop.column_name_prefix, '_RE')
+        ) as HTMLInputElement | null;
+        if (inputRE != null) {
+          petParam.column_name_re = inputRE.value;
+        }
+
+        const inputRemRe = document.getElementById(
+          this.setIDs(prop.column_name_prefix, '_Remark_RE')
+        ) as HTMLInputElement | null;
+        if (inputRemRe != null) {
+          petParam.column_name_rem_re = inputRemRe.value;
+        }
+        this.petPayloadList.push(petParam);
+      });
+    });
+  }
+
+  saveValues() {
+    this.updatePayloadList();
+    let params: any = {
       org_id: localStorage.getItem('org_id'),
       branch_id: localStorage.getItem('branch_id'),
       user_id: localStorage.getItem('user_id'),
+      dept_id: 'D004',
       patient_id: this.headerDetail.patient_id,
       visit_no: this.visit_no,
-      visit_date: this.visit_date,
-      //ant_eyelids_re: this.examForm.controls.ant_eyelids_re.value,
-      
-    }
-    let keys = Object.keys(x);
-    keys.forEach(field=>{
-      let val = this.dynamicForm.controls[field].value;
-      params[field]=val;
-    })
-    console.log(params);
-    //need to have api with section name for get detail
+      payloadList: this.petPayloadList      
+    };
+    this.isActive.emit(true);
+      this.dialog.open(InfoDialogComponent, {
+        width: '500px',
+        data: 'Data Saved Successfully'
+      })
+    
 
-    // this.examService.createExam(params).subscribe(data => {
-    //   this.examinationBoolean = true;
-    //   this.emitExamination();
+    // this.vetService.saveVetData(params).subscribe(data => {
+    //   this.isActive.emit(true);
     //   this.dialog.open(InfoDialogComponent, {
     //     width: '500px',
-    //     data: 'Examination Saved Successfully'
+    //     data: 'Data Saved Successfully'
     //   })
     // })
   }
 
   addRecord() {
-   // this.examForm.reset();
+    // this.examForm.reset();
   }
 
   back() {
@@ -177,15 +204,18 @@ this.renderDynamic();
     this.addRecord();
   }
 
-  convertToStr(event: any, formName: any) {
+
+  convertToStr(event: any, _formName: any) {
     console.log(event);
     let value = event.value.toString();
-   // this.examForm.controls[formName].setValue(value);
+    const inputRE = document.getElementById(
+      this.setIDs(_formName, '_RE')
+    ) as HTMLInputElement | null;
+    console.log(inputRE);
+    // this.examForm.controls[formName].setValue(value);
   }
 
   emitExamination() {
-    this.isActiveExamination.emit(
-      this.examinationBoolean
-    );
+    this.isActive.emit(this.examinationBoolean);
   }
 }

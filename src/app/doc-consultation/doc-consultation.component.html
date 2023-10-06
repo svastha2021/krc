@@ -4,7 +4,6 @@
     <h1>Doctor consulation</h1>
   </div>
   <app-patient-header
-    
     (outputPatientHeader)="patientHeader($event)"
     [header]="headerDetail"
   ></app-patient-header>
@@ -18,13 +17,14 @@
   </div>
   <div *ngIf="headerDetail" class="margin-20t">
     <!-- Doc notes -->
-    <mat-expansion-panel hideToggle class="margin-20b doc-consult-expansion-container">
+    <mat-expansion-panel
+      hideToggle
+      class="margin-20b doc-consult-expansion-container"
+    >
       <mat-expansion-panel-header>
         <mat-panel-title> Doctor Notes </mat-panel-title>
         <mat-slide-toggle [checked]="isActive" disabled></mat-slide-toggle>
-        <mat-panel-description>
-          
-        </mat-panel-description>
+        <mat-panel-description> </mat-panel-description>
       </mat-expansion-panel-header>
       <label class="d-block">Visit#: {{ currentPatientDetail.visit_no }}</label>
 
@@ -34,8 +34,13 @@
       >
       <div class="row">
         <div class="col-md-4" *ngIf="!showPreviousDocNotes">
-          <button class="btn btn-success ms-2" (click)="displayPreviousDocNotes()">Show Previous</button>
-      </div>
+          <button
+            class="btn btn-success ms-2"
+            (click)="displayPreviousDocNotes()"
+          >
+            Show Previous
+          </button>
+        </div>
         <div class="visit-tag" *ngIf="showPreviousDocNotes">
           <ul class="pagination">
             <li class="page-item" [ngClass]="{ disabled: recordIndex === 0 }">
@@ -45,7 +50,8 @@
               class="page-item"
               [ngClass]="{
                 disabled:
-                  recordIndex === undefined || recordIndex === getLastRecordIndex()
+                  recordIndex === undefined ||
+                  recordIndex === getLastRecordIndex()
               }"
             >
               <a class="page-link" (click)="nextItem()">Next</a>
@@ -54,120 +60,210 @@
         </div>
       </div>
       <div>
-        <div class="error-container" *ngIf="!visit_no">Please save doctor notes to save basic details</div>
-            <div class="row margin-20l">
-                <div class="col-md-8">
-                    <label class="form-label margin-20t">Chief Complaint</label>
-                    <!-- <input type="text"  class="form-control margin-10t" [(ngModel)]="main_complaint" required/> -->
-                    <select type="dropdown" class="form-control" [(ngModel)]="main_complaint" required>
-                      <option value="" selected disabled>-Select-</option>
-                      <option *ngFor="let vaValue of chiefComplaintList" value="{{vaValue.ref_code}}">{{vaValue.ref_desc}}</option>
-                  </select>
-                </div>
-                <div class="col-md-4">
-                    <label class="form-label margin-20t">Since When</label>
-                    <input type="date"  class="form-control margin-10t" [(ngModel)]="main_complaint_from" required/>
-                </div>
-            </div>
-
-            <div class="row margin-20l">
-                <div class="col-md-8">
-                    <label class="form-label margin-20t">History of Current Compliant</label>
-                    <!-- <input type="text"  class="form-control margin-10t" [(ngModel)]="curr_complaint" required/> -->
-                    <select type="dropdown" class="form-control" [(ngModel)]="curr_complaint" required>
-                      <option value="" selected disabled>-Select-</option>
-                      <option *ngFor="let vaValue of HistoryOfCurrentCompliantList" value="{{vaValue.ref_code}}">{{vaValue.ref_desc}}</option>
-                  </select>
-                </div>
-                <div class="col-md-4">
-                    <label class="form-label margin-20t">Since When</label>
-                    <input type="date"  class="form-control margin-10t" [(ngModel)]="curr_complaint_from" required/>
-                </div>
-            </div>
-
-            <div class="row margin-20l">
-                <div class="col-md-10">
-                    <label class="form-label margin-20t">History of Past illness / systemic</label>
-                    <!-- <input type="text"  class="form-control margin-10t" [(ngModel)]="past_illness_systemic" required/> -->
-                    <select type="dropdown" class="form-control" [(ngModel)]="past_illness_systemic" required>
-                      <option value="" selected disabled>-Select-</option>
-                      <option *ngFor="let vaValue of illnessList" value="{{vaValue.ref_code}}">{{vaValue.ref_desc}}</option>
-                  </select>
-                </div>
-            </div>
-
-            <div class="row margin-20l">
-              <div class="col-md-4">
-                  <label class="form-label margin-20t">Any Family History</label>
-                  <div>
-                      <mat-radio-group aria-label="Select an option" [(ngModel)]="fam_history">
-                          <mat-radio-button class="mr-10" value="Y">Yes</mat-radio-button>
-                          <mat-radio-button value="N">No</mat-radio-button>
-                      </mat-radio-group>   
-                  </div>
-              </div>
-              <div class="col-md-8">
-                  <label class="form-label margin-20t">Family History</label>
-                  <input type="text"  class="form-control margin-10t" [(ngModel)]="fam_history_dtl" 
-                  [readonly]="fam_history == 'N'" required/>
-              </div>
+        <div class="error-container" *ngIf="!visit_no">
+          Please save doctor notes to save basic details
+        </div>
+        <div class="row margin-20l">
+          <div class="col-md-8">
+            <label class="form-label margin-20t">Chief Complaint</label>
+            <!-- <input type="text"  class="form-control margin-10t" [(ngModel)]="main_complaint" required/> -->
+            <select
+              type="dropdown"
+              class="form-control"
+              [(ngModel)]="main_complaint"
+              required
+            >
+              <option value="" selected disabled>-Select-</option>
+              <option
+                *ngFor="let vaValue of chiefComplaintList"
+                value="{{ vaValue.ref_code }}"
+              >
+                {{ vaValue.ref_desc }}
+              </option>
+            </select>
           </div>
-
-            <div class="row margin-20l">
-                <div class="col-md-8">
-                    <label class="form-label margin-20t">Surgeries / Lasers</label>
-                    <input type="text"  class="form-control margin-10t" [(ngModel)]="surg_laser" required/>
-                </div>
-            </div>
-
-            <div class="row margin-20l">
-                <div class="col-md-8">
-                    <label class="form-label margin-20t">Allergies</label>
-                    <input type="text"  class="form-control margin-10t" [(ngModel)]="allergies" required/>
-                </div>
-            </div>
-
-            <div class="row margin-20l">
-              <div class="col-md-4">
-                  <label class="form-label margin-20t">Are you under curent treatment</label>
-                  <div>
-                      <mat-radio-group aria-label="Select an option" [(ngModel)]="curr_treatment">
-                          <mat-radio-button class="mr-10" value="Y">Yes</mat-radio-button>
-                          <mat-radio-button value="N">No</mat-radio-button>
-                      </mat-radio-group>
-                  </div>
-              </div>
-              <div class="col-md-8">
-                  <label class="form-label margin-20t">Current Treatment Details</label>
-                  <input type="text"  class="form-control margin-10t" [(ngModel)]="curr_treatment_dtl" 
-                  [readonly]="curr_treatment == 'N'" required/>
-              </div>
+          <div class="col-md-4">
+            <label class="form-label margin-20t">Since When</label>
+            <input
+              type="date"
+              class="form-control margin-10t"
+              [(ngModel)]="main_complaint_from"
+              required
+            />
           </div>
+        </div>
 
-            <div class="row margin-20l">
-                <div class="col-md-4">
-                    <label class="form-label margin-20t">Are you under any medication</label>
-                    <div>
-                      <mat-radio-group aria-label="Select an option" [(ngModel)]="medication">
-                          <mat-radio-button class="mr-10" value="Y">Yes</mat-radio-button>
-                          <mat-radio-button value="N">No</mat-radio-button>
-                      </mat-radio-group>
-                  </div>
-                </div>
-                <div class="col-md-8">
-                    <label class="form-label margin-20t">Medication details</label>
-                    <input type="text"  class="form-control margin-10t" [(ngModel)]="medication_dtl" 
-                    [readonly]="medication == 'N'" required/>
-                </div>
-            </div>
+        <div class="row margin-20l">
+          <div class="col-md-8">
+            <label class="form-label margin-20t"
+              >History of Current Compliant</label
+            >
+            <!-- <input type="text"  class="form-control margin-10t" [(ngModel)]="curr_complaint" required/> -->
+            <select
+              type="dropdown"
+              class="form-control"
+              [(ngModel)]="curr_complaint"
+              required
+            >
+              <option value="" selected disabled>-Select-</option>
+              <option
+                *ngFor="let vaValue of HistoryOfCurrentCompliantList"
+                value="{{ vaValue.ref_code }}"
+              >
+                {{ vaValue.ref_desc }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label margin-20t">Since When</label>
+            <input
+              type="date"
+              class="form-control margin-10t"
+              [(ngModel)]="curr_complaint_from"
+              required
+            />
+          </div>
+        </div>
 
-            <div class="row margin-20l">
-                <div class="col-md-12">
-                    <label class="form-label margin-20t">Remarks</label>
-                    <textarea class="form-control margin-10t" [(ngModel)]="docNotes"
-                    id="currentNotes" rows="2"></textarea>
-                </div>
+        <div class="row margin-20l">
+          <div class="col-md-10">
+            <label class="form-label margin-20t"
+              >History of Past illness / systemic</label
+            >
+            <!-- <input type="text"  class="form-control margin-10t" [(ngModel)]="past_illness_systemic" required/> -->
+            <select
+              type="dropdown"
+              class="form-control"
+              [(ngModel)]="past_illness_systemic"
+              required
+            >
+              <option value="" selected disabled>-Select-</option>
+              <option
+                *ngFor="let vaValue of illnessList"
+                value="{{ vaValue.ref_code }}"
+              >
+                {{ vaValue.ref_desc }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row margin-20l">
+          <div class="col-md-4">
+            <label class="form-label margin-20t">Any Family History</label>
+            <div>
+              <mat-radio-group
+                aria-label="Select an option"
+                [(ngModel)]="fam_history"
+              >
+                <mat-radio-button class="mr-10" value="Y">Yes</mat-radio-button>
+                <mat-radio-button value="N">No</mat-radio-button>
+              </mat-radio-group>
             </div>
+          </div>
+          <div class="col-md-8">
+            <label class="form-label margin-20t">Family History</label>
+            <input
+              type="text"
+              class="form-control margin-10t"
+              [(ngModel)]="fam_history_dtl"
+              [readonly]="fam_history == 'N'"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="row margin-20l">
+          <div class="col-md-8">
+            <label class="form-label margin-20t">Surgeries / Lasers</label>
+            <input
+              type="text"
+              class="form-control margin-10t"
+              [(ngModel)]="surg_laser"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="row margin-20l">
+          <div class="col-md-8">
+            <label class="form-label margin-20t">Allergies</label>
+            <input
+              type="text"
+              class="form-control margin-10t"
+              [(ngModel)]="allergies"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="row margin-20l">
+          <div class="col-md-4">
+            <label class="form-label margin-20t"
+              >Are you under curent treatment</label
+            >
+            <div>
+              <mat-radio-group
+                aria-label="Select an option"
+                [(ngModel)]="curr_treatment"
+              >
+                <mat-radio-button class="mr-10" value="Y">Yes</mat-radio-button>
+                <mat-radio-button value="N">No</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <label class="form-label margin-20t"
+              >Current Treatment Details</label
+            >
+            <input
+              type="text"
+              class="form-control margin-10t"
+              [(ngModel)]="curr_treatment_dtl"
+              [readonly]="curr_treatment == 'N'"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="row margin-20l">
+          <div class="col-md-4">
+            <label class="form-label margin-20t"
+              >Are you under any medication</label
+            >
+            <div>
+              <mat-radio-group
+                aria-label="Select an option"
+                [(ngModel)]="medication"
+              >
+                <mat-radio-button class="mr-10" value="Y">Yes</mat-radio-button>
+                <mat-radio-button value="N">No</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <label class="form-label margin-20t">Medication details</label>
+            <input
+              type="text"
+              class="form-control margin-10t"
+              [(ngModel)]="medication_dtl"
+              [readonly]="medication == 'N'"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="row margin-20l">
+          <div class="col-md-12">
+            <label class="form-label margin-20t">Remarks</label>
+            <textarea
+              class="form-control margin-10t"
+              [(ngModel)]="docNotes"
+              id="currentNotes"
+              rows="2"
+            ></textarea>
+          </div>
+        </div>
       </div>
       <!-- <label for="prevHistory" class="form-label margin-20t"
         >Previous History</label
@@ -196,22 +292,29 @@
         class="btn btn-warning margin-20t"
         (click)="saveNotes()"
         *ngIf="!showPreviousDocNotes"
-      ><i class="fa-solid fa-paper-plane mar5r"></i>
+      >
+        <i class="fa-solid fa-paper-plane mar5r"></i>
         Save
       </button>
-      <button type="button" class="btn btn-success margin-t" (click)="back()" *ngIf="showPreviousDocNotes">
+      <button
+        type="button"
+        class="btn btn-success margin-t"
+        (click)="back()"
+        *ngIf="showPreviousDocNotes"
+      >
         Back
-    </button>
+      </button>
     </mat-expansion-panel>
 
     <!-- vital paramaters collapsible -->
-    <mat-expansion-panel hideToggle class="margin-20b doc-consult-expansion-container">
+    <mat-expansion-panel
+      hideToggle
+      class="margin-20b doc-consult-expansion-container"
+    >
       <mat-expansion-panel-header>
         <mat-panel-title> Vital Parameters </mat-panel-title>
         <mat-slide-toggle [checked]="isActiveVital" disabled></mat-slide-toggle>
-        <mat-panel-description>
-          
-        </mat-panel-description>
+        <mat-panel-description> </mat-panel-description>
       </mat-expansion-panel-header>
       <div *ngIf="!showVitalPrevious">
         <button class="btn btn-success ms-2" (click)="displayPrevious()">
@@ -243,7 +346,8 @@
           [disabled]="!visit_no"
           class="btn btn-warning margin-20t"
           (click)="saveVitalParams()"
-        ><i class="fa-solid fa-paper-plane mar5r"></i>
+        >
+          <i class="fa-solid fa-paper-plane mar5r"></i>
           Save
         </button>
       </div>
@@ -257,7 +361,8 @@
           *ngIf="showVitalPrevious"
           class="btn btn-danger mar20tb"
           (click)="showVitalPrevious = false"
-        ><i class="fa-solid fa-arrow-left mar5r"></i>
+        >
+          <i class="fa-solid fa-arrow-left mar5r"></i>
           Back
         </button>
       </div>
@@ -271,9 +376,7 @@
     >
       <mat-expansion-panel-header>
         <mat-panel-title> Dialysis </mat-panel-title>
-        <mat-panel-description>
-          
-        </mat-panel-description>
+        <mat-panel-description> </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="error-container" *ngIf="!visit_no">
         Please save doctor notes to save dialysis notes
@@ -336,12 +439,13 @@
       </button>
     </mat-expansion-panel>
 
-    <mat-expansion-panel hideToggle class="margin-20b doc-consult-expansion-container">
+    <mat-expansion-panel
+      hideToggle
+      class="margin-20b doc-consult-expansion-container"
+    >
       <mat-expansion-panel-header>
         <mat-panel-title> Previous Visit Details </mat-panel-title>
-        <mat-panel-description>
-          
-        </mat-panel-description>
+        <mat-panel-description> </mat-panel-description>
       </mat-expansion-panel-header>
       <div *ngIf="patientHistory">
         <app-prev-vist-details
@@ -423,8 +527,8 @@
       ></app-slit-lamp>
     </mat-expansion-panel> -->
 
-  <!-- Opthal Medical paramaters tab -->
-  <!-- <mat-expansion-panel
+    <!-- Opthal Medical paramaters tab -->
+    <!-- <mat-expansion-panel
     hideToggle
     class="margin-20b doc-consult-expansion-container"
     *ngIf="aptObj.dept_id === 'D0002'">
@@ -441,217 +545,248 @@
     ></app-medical-examination>
   </mat-expansion-panel> -->
 
-  <!-- Opthal Visual paramaters tab -->
-  <mat-expansion-panel hideToggle
-    class="margin-20b doc-consult-expansion-container"
-    *ngIf="aptObj.dept_id === 'D0002'">
-  <mat-expansion-panel-header>
-    <mat-panel-title> Visual Acuity </mat-panel-title>
-    <mat-slide-toggle [checked]="isActiveVisual" disabled></mat-slide-toggle>
-    <mat-panel-description>
-      
-    </mat-panel-description>
-  </mat-expansion-panel-header>
-  <app-visual-acuity
-    [visit_no]="visit_no"
-    [visit_date]="visit_date"
-    [headerDetail]="headerDetail"
-    (isActiveVisual)='isEmitActiveVisual($event)'
-  ></app-visual-acuity>
-  </mat-expansion-panel>
+    <!-- Opthal Visual paramaters tab -->
+    <mat-expansion-panel
+      hideToggle
+      class="margin-20b doc-consult-expansion-container"
+      *ngIf="aptObj.dept_id === 'D0002'"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title> Visual Acuity </mat-panel-title>
+        <mat-slide-toggle
+          [checked]="isActiveVisual"
+          disabled
+        ></mat-slide-toggle>
+        <mat-panel-description> </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-visual-acuity
+        [visit_no]="visit_no"
+        [visit_date]="visit_date"
+        [headerDetail]="headerDetail"
+        (isActiveVisual)="isEmitActiveVisual($event)"
+      ></app-visual-acuity>
+    </mat-expansion-panel>
 
-  <!-- Opthal Objective Refraction tab -->
-  <mat-expansion-panel hideToggle
-  class="margin-20b doc-consult-expansion-container"
-  *ngIf="aptObj.dept_id === 'D0002'">
-  <mat-expansion-panel-header>
-    <mat-panel-title> Present Glass Power </mat-panel-title>
-    <mat-slide-toggle [checked]="isActivePGP" disabled></mat-slide-toggle>
-    <mat-panel-description>
-      
-    </mat-panel-description>
-  </mat-expansion-panel-header>
-  <app-present-glass-power
-    [visit_no]="visit_no"
-    [visit_date]="visit_date"
-    [headerDetail]="headerDetail"
-    (isActivePGP)='isEmitActivePGP($event)'>
-  </app-present-glass-power>
-  </mat-expansion-panel>
+    <!-- Opthal Objective Refraction tab -->
+    <mat-expansion-panel
+      hideToggle
+      class="margin-20b doc-consult-expansion-container"
+      *ngIf="aptObj.dept_id === 'D0002'"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title> Present Glass Power </mat-panel-title>
+        <mat-slide-toggle [checked]="isActivePGP" disabled></mat-slide-toggle>
+        <mat-panel-description> </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-present-glass-power
+        [visit_no]="visit_no"
+        [visit_date]="visit_date"
+        [headerDetail]="headerDetail"
+        (isActivePGP)="isEmitActivePGP($event)"
+      >
+      </app-present-glass-power>
+    </mat-expansion-panel>
 
-  <!-- Opthal Objective Refraction tab -->
-  <mat-expansion-panel hideToggle
-    class="margin-20b doc-consult-expansion-container"
-    *ngIf="aptObj.dept_id === 'D0002'">
-  <mat-expansion-panel-header>
-    <mat-panel-title> Objective Refraction </mat-panel-title>
-    <mat-slide-toggle [checked]="isActiveObjective" disabled></mat-slide-toggle>
-    <mat-panel-description>
-      
-    </mat-panel-description>
-  </mat-expansion-panel-header>
-  <app-objective-refraction
-    [visit_no]="visit_no"
-    [visit_date]="visit_date"
-    [headerDetail]="headerDetail"
-    (isActiveObjective)='isEmitActiveObjective($event)'
-  ></app-objective-refraction>
-  </mat-expansion-panel>
-  
+    <!-- Opthal Objective Refraction tab -->
+    <mat-expansion-panel
+      hideToggle
+      class="margin-20b doc-consult-expansion-container"
+      *ngIf="aptObj.dept_id === 'D0002'"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title> Objective Refraction </mat-panel-title>
+        <mat-slide-toggle
+          [checked]="isActiveObjective"
+          disabled
+        ></mat-slide-toggle>
+        <mat-panel-description> </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-objective-refraction
+        [visit_no]="visit_no"
+        [visit_date]="visit_date"
+        [headerDetail]="headerDetail"
+        (isActiveObjective)="isEmitActiveObjective($event)"
+      ></app-objective-refraction>
+    </mat-expansion-panel>
+
     <!-- Opthal Subjective Acceptance tab -->
-    <mat-expansion-panel hideToggle
-    class="margin-20b doc-consult-expansion-container"
-    *ngIf="aptObj.dept_id === 'D0002'">
-    <mat-expansion-panel-header>
-      <mat-panel-title> Subjective Acceptance </mat-panel-title>
-      <mat-slide-toggle [checked]="isActiveSubjective" disabled></mat-slide-toggle>
-      <mat-panel-description>
-        
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <app-subject-acceptance
-      [visit_no]="visit_no"
-      [visit_date]="visit_date"
-      [headerDetail]="headerDetail"
-      (isActiveSubjective)='isEmitActiveSubjective($event)'>
-    </app-subject-acceptance>
+    <mat-expansion-panel
+      hideToggle
+      class="margin-20b doc-consult-expansion-container"
+      *ngIf="aptObj.dept_id === 'D0002'"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title> Subjective Acceptance </mat-panel-title>
+        <mat-slide-toggle
+          [checked]="isActiveSubjective"
+          disabled
+        ></mat-slide-toggle>
+        <mat-panel-description> </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-subject-acceptance
+        [visit_no]="visit_no"
+        [visit_date]="visit_date"
+        [headerDetail]="headerDetail"
+        (isActiveSubjective)="isEmitActiveSubjective($event)"
+      >
+      </app-subject-acceptance>
     </mat-expansion-panel>
 
     <!-- Opthal Examination tab -->
-    <mat-expansion-panel hideToggle
-    class="margin-20b doc-consult-expansion-container"
-    *ngIf="aptObj.dept_id === 'D0002'">
-    <mat-expansion-panel-header>
-      <mat-panel-title> Examination </mat-panel-title>
-      <mat-slide-toggle [checked]="isActiveExamination" disabled></mat-slide-toggle>
-      <mat-panel-description>
-        
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <app-examination
-      [visit_no]="visit_no"
-      [visit_date]="visit_date"
-      [headerDetail]="headerDetail"
-      (isActiveExamination)='isEmitActiveExamination($event)'>
-    </app-examination>
+    <mat-expansion-panel
+      hideToggle
+      class="margin-20b doc-consult-expansion-container"
+      *ngIf="aptObj.dept_id === 'D0002'"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title> Examination </mat-panel-title>
+        <mat-slide-toggle
+          [checked]="isActiveExamination"
+          disabled
+        ></mat-slide-toggle>
+        <mat-panel-description> </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-examination
+        [visit_no]="visit_no"
+        [visit_date]="visit_date"
+        [headerDetail]="headerDetail"
+        (isActiveExamination)="isEmitActiveExamination($event)"
+      >
+      </app-examination>
     </mat-expansion-panel>
-    
+
     <!-- Opthal Intra Ocular Pressure tab -->
-    <mat-expansion-panel hideToggle
-    class="margin-20b doc-consult-expansion-container"
-    *ngIf="aptObj.dept_id === 'D0002'">
-    <mat-expansion-panel-header>
-      <mat-panel-title> Intra Ocular Pressure </mat-panel-title>
-      <mat-slide-toggle [checked]="isActiveIOP" disabled></mat-slide-toggle>
-      <mat-panel-description>
-        
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <app-intra-ocular-pressure
-      [visit_no]="visit_no"
-      [visit_date]="visit_date"
-      [headerDetail]="headerDetail"
-      (isActiveIOP)='isEmitActiveIOP($event)'>
-    </app-intra-ocular-pressure>
+    <mat-expansion-panel
+      hideToggle
+      class="margin-20b doc-consult-expansion-container"
+      *ngIf="aptObj.dept_id === 'D0002'"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title> Intra Ocular Pressure </mat-panel-title>
+        <mat-slide-toggle [checked]="isActiveIOP" disabled></mat-slide-toggle>
+        <mat-panel-description> </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-intra-ocular-pressure
+        [visit_no]="visit_no"
+        [visit_date]="visit_date"
+        [headerDetail]="headerDetail"
+        (isActiveIOP)="isEmitActiveIOP($event)"
+      >
+      </app-intra-ocular-pressure>
     </mat-expansion-panel>
-    
+
     <!-- Opthal Diagnosis and Advice tab -->
-    <mat-expansion-panel hideToggle
-    class="margin-20b doc-consult-expansion-container"
-    *ngIf="aptObj.dept_id === 'D0002'">
-    <mat-expansion-panel-header>
-      <mat-panel-title> Diagnosis and Advice </mat-panel-title>
-      <mat-slide-toggle [checked]="isActiveDiagonsis" disabled></mat-slide-toggle>
-      <mat-panel-description>
-        
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <app-diagnosis-and-advice
-      [visit_no]="visit_no"
-      [visit_date]="visit_date"
-      [headerDetail]="headerDetail"
-      (isActiveDiagonsis)='isEmitActiveDiagonsis($event)'>
-    </app-diagnosis-and-advice>
+    <mat-expansion-panel
+      hideToggle
+      class="margin-20b doc-consult-expansion-container"
+      *ngIf="aptObj.dept_id === 'D0002'"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title> Diagnosis and Advice </mat-panel-title>
+        <mat-slide-toggle
+          [checked]="isActiveDiagonsis"
+          disabled
+        ></mat-slide-toggle>
+        <mat-panel-description> </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-diagnosis-and-advice
+        [visit_no]="visit_no"
+        [visit_date]="visit_date"
+        [headerDetail]="headerDetail"
+        (isActiveDiagonsis)="isEmitActiveDiagonsis($event)"
+      >
+      </app-diagnosis-and-advice>
     </mat-expansion-panel>
 
     <!-- Opthal Glass Prescription tab -->
-    <mat-expansion-panel hideToggle
-    class="margin-20b doc-consult-expansion-container"
-    *ngIf="aptObj.dept_id === 'D0002'">
-    <mat-expansion-panel-header>
-      <mat-panel-title> Glass Prescription </mat-panel-title>
-      <mat-slide-toggle [checked]="isActiveGP" disabled></mat-slide-toggle>
-      <mat-panel-description>
-        
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <app-glass-prescription
-      [visit_no]="visit_no"
-      [visit_date]="visit_date"
-      [headerDetail]="headerDetail"
-      (isActiveGP)='isEmitActiveGP($event)'>
-    </app-glass-prescription>
+    <mat-expansion-panel
+      hideToggle
+      class="margin-20b doc-consult-expansion-container"
+      *ngIf="aptObj.dept_id === 'D0002'"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title> Glass Prescription </mat-panel-title>
+        <mat-slide-toggle [checked]="isActiveGP" disabled></mat-slide-toggle>
+        <mat-panel-description> </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-glass-prescription
+        [visit_no]="visit_no"
+        [visit_date]="visit_date"
+        [headerDetail]="headerDetail"
+        (isActiveGP)="isEmitActiveGP($event)"
+      >
+      </app-glass-prescription>
     </mat-expansion-panel>
 
     <!-- pharma -->
-    <mat-expansion-panel hideToggle class="margin-20b doc-consult-expansion-container">
+    <mat-expansion-panel
+      hideToggle
+      class="margin-20b doc-consult-expansion-container"
+    >
       <mat-expansion-panel-header>
         <mat-panel-title> Medicine </mat-panel-title>
-        <mat-slide-toggle [checked]="isActiveMedicine" disabled></mat-slide-toggle>
-        <mat-panel-description>
-          
-        </mat-panel-description>
+        <mat-slide-toggle
+          [checked]="isActiveMedicine"
+          disabled
+        ></mat-slide-toggle>
+        <mat-panel-description> </mat-panel-description>
       </mat-expansion-panel-header>
       <app-med-prescription
         [visit_no]="visit_no"
         [headerDetail]="headerDetail"
-        (isActiveMedicine)='isEmitActiveMedicine($event)'
+        (isActiveMedicine)="isEmitActiveMedicine($event)"
       ></app-med-prescription>
     </mat-expansion-panel>
 
     <!-- Lab -->
-    <mat-expansion-panel hideToggle class="margin-20b doc-consult-expansion-container">
+    <mat-expansion-panel
+      hideToggle
+      class="margin-20b doc-consult-expansion-container"
+    >
       <mat-expansion-panel-header>
         <mat-panel-title> Lab </mat-panel-title>
         <mat-slide-toggle [checked]="isActiveLab" disabled></mat-slide-toggle>
-        <mat-panel-description>
-          
-        </mat-panel-description>
+        <mat-panel-description> </mat-panel-description>
       </mat-expansion-panel-header>
       <app-lab-prescription
         [visit_no]="visit_no"
         [headerDetail]="headerDetail"
-        (isActiveLab)='isEmitActiveLab($event)'
+        (isActiveLab)="isEmitActiveLab($event)"
       ></app-lab-prescription>
     </mat-expansion-panel>
 
-
-<div *ngFor="let section of VetSections">
-    <mat-expansion-panel hideToggle
-    class="margin-20b doc-consult-expansion-container"
-    *ngIf="aptObj.dept_id === 'D0004'">
-    <mat-expansion-panel-header>
-      <mat-panel-title> {{section}} </mat-panel-title>
-      <mat-slide-toggle [checked]="isActiveExamination" disabled></mat-slide-toggle>
-      <mat-panel-description>
-        
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <!-- <app-examination
+    <div *ngFor="let section of VetSections">
+      <mat-expansion-panel
+        hideToggle
+        class="margin-20b doc-consult-expansion-container"
+        *ngIf="aptObj.dept_id === 'D0004'"
+      >
+        <mat-expansion-panel-header (click)="getPetMetaData(section)">
+          <mat-panel-title> {{ section }} </mat-panel-title>
+          <mat-slide-toggle [checked]="isSectionActive" disabled></mat-slide-toggle>
+          <mat-panel-description> </mat-panel-description>
+        </mat-expansion-panel-header>
+        <!-- <app-examination
       [visit_no]="visit_no"
       [visit_date]="visit_date"
       [headerDetail]="headerDetail"
       (isActiveExamination)='isEmitActiveExamination($event)'>
     </app-examination> -->
-
-    <app-vet-consult-section
+        <app-vet-dynamic-section
+          [visit_no]="visit_no"
+          [visit_date]="visit_date"
+          [headerDetail]="headerDetail"
+          [metaData]="vetMetaData"
+          (isActive)="isSectionActive = $event"
+        ></app-vet-dynamic-section>
+        <!-- <app-vet-consult-section
     [visit_no]="visit_no"
     [visit_date]="visit_date"
     [headerDetail]="headerDetail"
     (isActiveExamination)='isEmitActiveExamination($event)'>
-  </app-vet-consult-section>
-    </mat-expansion-panel>
-  </div>
+  </app-vet-consult-section> -->
+      </mat-expansion-panel>
+    </div>
   </div>
   <div class="row"></div>
 </div>

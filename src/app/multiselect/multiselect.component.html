@@ -1,0 +1,9 @@
+
+<mat-form-field>    
+    <mat-icon  (click)="loadData()">add    
+    </mat-icon>
+    <mat-select multiple (selectionChange)="convertToStr($event, rowData.column_name_prefix)">
+        <mat-select-trigger></mat-select-trigger>
+        <mat-option *ngFor="let value of reList" [value]="value.ref_desc">{{value.ref_desc}}</mat-option>
+    </mat-select>
+</mat-form-field>

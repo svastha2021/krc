@@ -113,6 +113,7 @@ import { IntraOcularPressureComponent } from './intra-ocular-pressure/intra-ocul
 import { DiagnosisAndAdviceComponent } from './diagnosis-and-advice/diagnosis-and-advice.component';
 import { ExaminationComponent } from './examination/examination.component';
 import { VetConsultSectionComponent } from './vet-consult-section/vet-consult-section.component';
+import { MultiselectComponent } from './multiselect/multiselect.component';
 //import { InvoicePaymentTable } from './invoice-payment-report/invoice-payment-table/invoice-payment-table.component';
 //import { InvoiceProductTable } from './invoice-product-report/invoice-product-table/invoice-product-table.component';
 @NgModule({
@@ -216,7 +217,8 @@ import { VetConsultSectionComponent } from './vet-consult-section/vet-consult-se
     IntraOcularPressureComponent,
     DiagnosisAndAdviceComponent,
     ExaminationComponent,
-    VetConsultSectionComponent    
+    VetConsultSectionComponent,    
+    MultiselectComponent    
   ],
   imports: [
     BrowserModule,

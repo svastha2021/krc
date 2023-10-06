@@ -41,7 +41,7 @@ export type DialysisNotesPayload = {
   branch_id: string | null;
   patient_id: string | null;
   doctor_id: string | null;
-  user_id: string | null; 
+  user_id: string | null;
   business_id: string;
   visit_no?: string;
   prescription_date: string;
@@ -62,7 +62,10 @@ export class DocConsultationComponent implements OnInit {
   consultObj = {} as NotesPayload;
   patientHistory: any;
   patientDialysisHistory: any;
-  currentPatientDetail = { doctor_notes: '', visit_no: '', visit_date: '',  
+  currentPatientDetail = {
+    doctor_notes: '',
+    visit_no: '',
+    visit_date: '',
     main_complaint: '',
     main_complaint_from: '',
     curr_complaint: '',
@@ -76,7 +79,7 @@ export class DocConsultationComponent implements OnInit {
     curr_treatment_dtl: '',
     medication: '',
     medication_dtl: '',
-    docNotes: ''
+    docNotes: '',
   };
   currentPatientDialysisDetail = {
     dialysis_notes: '',
@@ -106,20 +109,20 @@ export class DocConsultationComponent implements OnInit {
   chiefComplaintList: any = [];
   HistoryOfCurrentCompliantList: any = [];
   illnessList: any = [];
-  isActive:boolean = false;
-  isActiveVital:boolean = false;
-  isActiveVisual:boolean = false;
-  isActivePGP:boolean = false;
-  isActiveObjective:boolean = false;
-  isActiveSubjective:boolean = false;
-  isActiveExamination:boolean = false;
-  isActiveIOP:boolean = false;
-  isActiveDiagonsis:boolean = false;
-  isActiveGP:boolean = false;
-  isActiveMedicine:boolean = false;
-  isActiveLab:boolean = false;
-  showPreviousDocNotes:boolean = false;
-
+  isActive: boolean = false;
+  isSectionActive:boolean = false;
+  isActiveVital: boolean = false;
+  isActiveVisual: boolean = false;
+  isActivePGP: boolean = false;
+  isActiveObjective: boolean = false;
+  isActiveSubjective: boolean = false;
+  isActiveExamination: boolean = false;
+  isActiveIOP: boolean = false;
+  isActiveDiagonsis: boolean = false;
+  isActiveGP: boolean = false;
+  isActiveMedicine: boolean = false;
+  isActiveLab: boolean = false;
+  showPreviousDocNotes: boolean = false;
 
   // [{khi_code:'bp',khi_desc:'Bloop pressure'}, {khi_code:'height',khi_desc:'Height'}];
   constructor(
@@ -133,7 +136,7 @@ export class DocConsultationComponent implements OnInit {
     this.curr_treatment = 'N';
     this.medication = 'N';
   }
-  VetSections = ['Cornea  & Sclera'];
+  VetSections = ['Cornea and Sclera'];
   ngOnInit(): void {
     if (history.state && history.state.patient_id) {
       this.aptObj = history.state;
@@ -146,20 +149,19 @@ export class DocConsultationComponent implements OnInit {
     });
 
     //get Doc Notes List
-    this.ref.getPaymentModes('HIst1').subscribe(data => {
+    this.ref.getPaymentModes('HIst1').subscribe((data) => {
       this.chiefComplaintList = data.results;
-    })
-    this.ref.getPaymentModes('Hist2').subscribe(data => {
+    });
+    this.ref.getPaymentModes('Hist2').subscribe((data) => {
       this.HistoryOfCurrentCompliantList = data.results;
-    })
-    this.ref.getPaymentModes('ILLSYS').subscribe(data => {
+    });
+    this.ref.getPaymentModes('ILLSYS').subscribe((data) => {
       this.illnessList = data.results;
-    })
+    });
 
     this.getVitalData();
 
     this.doctorNotes();
-
   }
 
   doctorNotes() {
@@ -181,9 +183,7 @@ export class DocConsultationComponent implements OnInit {
     // })
   }
 
-  history() {
-
-  }
+  history() {}
   patientHeader(data: any) {
     this.headerDetail = { ...data };
     localStorage.setItem('header', JSON.stringify(this.headerDetail));
@@ -229,7 +229,7 @@ export class DocConsultationComponent implements OnInit {
         curr_treatment_dtl: this.curr_treatment_dtl,
         medication: this.medication,
         medication_dtl: this.medication_dtl,
-        doctor_notes: this.docNotes
+        doctor_notes: this.docNotes,
       };
     } else {
       this.consultObj = {
@@ -256,7 +256,7 @@ export class DocConsultationComponent implements OnInit {
         curr_treatment_dtl: this.curr_treatment_dtl,
         medication: this.medication,
         medication_dtl: this.medication_dtl,
-        doctor_notes: this.docNotes
+        doctor_notes: this.docNotes,
       };
     }
     this.docService.submitNotes(this.consultObj).subscribe((data) => {
@@ -280,8 +280,8 @@ export class DocConsultationComponent implements OnInit {
         branch_id: localStorage.getItem('branch_id'),
         patient_id: this.headerDetail.patient_id,
         doctor_id: localStorage.getItem('user_id'),
-        user_id: localStorage.getItem('user_id'),    
-        business_id: '', 
+        user_id: localStorage.getItem('user_id'),
+        business_id: '',
         visit_no: this.visit_no,
         prescription_date: this.utility.convertTodayTostr(),
         dialysis_notes: this.dialysisNotes,
@@ -331,20 +331,25 @@ export class DocConsultationComponent implements OnInit {
     this.currentPatientDetail.visit_date = this.utility.convertDate(
       this.currentPatientDetail.visit_date
     );
-    this.main_complaint = this.currentPatientDetail.main_complaint,
-    this.main_complaint_from = this.utility.convertDate(this.currentPatientDetail.main_complaint_from),
-    this.curr_complaint = this.currentPatientDetail.curr_complaint,
-    this.curr_complaint_from = this.utility.convertDate(this.currentPatientDetail.curr_complaint_from),
-    this.past_illness_systemic = this.currentPatientDetail.past_illness_systemic,
-    this.fam_history = this.currentPatientDetail.fam_history,
-    this.fam_history_dtl = this.currentPatientDetail.fam_history_dtl,
-    this.surg_laser = this.currentPatientDetail.surg_laser,
-    this.allergies = this.currentPatientDetail.allergies,
-    this.curr_treatment = this.currentPatientDetail.curr_treatment,
-    this.curr_treatment_dtl = this.currentPatientDetail.curr_treatment_dtl,
-    this.medication = this.currentPatientDetail.medication,
-    this.medication_dtl = this.currentPatientDetail.medication_dtl,
-    this.docNotes = this.currentPatientDetail.doctor_notes
+    (this.main_complaint = this.currentPatientDetail.main_complaint),
+      (this.main_complaint_from = this.utility.convertDate(
+        this.currentPatientDetail.main_complaint_from
+      )),
+      (this.curr_complaint = this.currentPatientDetail.curr_complaint),
+      (this.curr_complaint_from = this.utility.convertDate(
+        this.currentPatientDetail.curr_complaint_from
+      )),
+      (this.past_illness_systemic =
+        this.currentPatientDetail.past_illness_systemic),
+      (this.fam_history = this.currentPatientDetail.fam_history),
+      (this.fam_history_dtl = this.currentPatientDetail.fam_history_dtl),
+      (this.surg_laser = this.currentPatientDetail.surg_laser),
+      (this.allergies = this.currentPatientDetail.allergies),
+      (this.curr_treatment = this.currentPatientDetail.curr_treatment),
+      (this.curr_treatment_dtl = this.currentPatientDetail.curr_treatment_dtl),
+      (this.medication = this.currentPatientDetail.medication),
+      (this.medication_dtl = this.currentPatientDetail.medication_dtl),
+      (this.docNotes = this.currentPatientDetail.doctor_notes);
   }
   //dialysis notes pagination
 
@@ -395,21 +400,21 @@ export class DocConsultationComponent implements OnInit {
     this.resestDocNotes();
   }
 
-  resestDocNotes() {  
-      this.main_complaint= '',
-      this.main_complaint_from= '',
-      this.curr_complaint= '',
-      this.curr_complaint_from= '',
-      this.past_illness_systemic= '',
-      this.fam_history= '',
-      this.fam_history_dtl= '',
-      this.surg_laser= '',
-      this.allergies= '',
-      this.curr_treatment= '',
-      this.curr_treatment_dtl= '',
-      this.medication= '',
-      this.medication_dtl= '',
-      this.docNotes= ''
+  resestDocNotes() {
+    (this.main_complaint = ''),
+      (this.main_complaint_from = ''),
+      (this.curr_complaint = ''),
+      (this.curr_complaint_from = ''),
+      (this.past_illness_systemic = ''),
+      (this.fam_history = ''),
+      (this.fam_history_dtl = ''),
+      (this.surg_laser = ''),
+      (this.allergies = ''),
+      (this.curr_treatment = ''),
+      (this.curr_treatment_dtl = ''),
+      (this.medication = ''),
+      (this.medication_dtl = ''),
+      (this.docNotes = '');
   }
 
   // vital params
@@ -453,20 +458,22 @@ export class DocConsultationComponent implements OnInit {
       visit_no: this.visit_no,
       health_lists: this.vitalList,
     };
-    this.docService.updateVital(vitalPram).subscribe((data) => {
-      console.log(data);
-      this.isActiveVital = true;
-      this.dialog.open(InfoDialogComponent, {
-        width: '500px',
-        data: 'Vital Params updated Successfully',
-      });
-    });
+    // this.docService.updateVital(vitalPram).subscribe((data) => {
+    //   console.log(data);
+    //   this.isActiveVital = true;
+    //   this.dialog.open(InfoDialogComponent, {
+    //     width: '500px',
+    //     data: 'Vital Params updated Successfully',
+    //   });
+    // });
   }
 
   getVitalData() {
-    this.docService.getVitalData(this.headerDetail.patient_id).subscribe((data) => {
-      console.log(data);
-    });
+    this.docService
+      .getVitalData(this.headerDetail.patient_id)
+      .subscribe((data) => {
+        console.log(data);
+      });
   }
 
   displayPrevious() {
@@ -474,42 +481,63 @@ export class DocConsultationComponent implements OnInit {
   }
 
   isEmitActiveVisual(element: any) {
-    this.isActiveVisual =  element;
+    this.isActiveVisual = element;
   }
 
   isEmitActivePGP(element: any) {
-    this.isActivePGP =  element;
+    this.isActivePGP = element;
   }
 
   isEmitActiveObjective(element: any) {
-    this.isActiveObjective =  element;
+    this.isActiveObjective = element;
   }
 
   isEmitActiveSubjective(element: any) {
-    this.isActiveSubjective =  element;
+    this.isActiveSubjective = element;
   }
 
   isEmitActiveExamination(element: any) {
-    this.isActiveExamination =  element;
+    this.isActiveExamination = element;
   }
 
   isEmitActiveIOP(element: any) {
-    this.isActiveIOP =  element;
+    this.isActiveIOP = element;
   }
 
   isEmitActiveDiagonsis(element: any) {
-    this.isActiveDiagonsis =  element;
+    this.isActiveDiagonsis = element;
   }
 
   isEmitActiveGP(element: any) {
-    this.isActiveGP =  element;
+    this.isActiveGP = element;
   }
 
   isEmitActiveMedicine(element: any) {
-    this.isActiveMedicine =  element;
+    this.isActiveMedicine = element;
   }
 
   isEmitActiveLab(element: any) {
-    this.isActiveLab =  element;
+    this.isActiveLab = element;
+  }
+
+  receiveActive(element:boolean){
+    this.isActive = element;
+  }
+
+  vetMetaData = [];
+  getPetMetaData(sectionHeading: string) {
+    this.visit_no = 26
+    if(this.visit_no){
+      this.docService
+      .getPetMetaData(
+        this.headerDetail.patient_id,
+        this.visit_no,
+        sectionHeading
+      )
+      .subscribe((data) => {
+        this.vetMetaData = data.results;
+      });
+    }
+   
   }
 }

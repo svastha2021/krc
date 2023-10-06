@@ -78,4 +78,46 @@ export class DocConsultationService {
       headers: headers,
     });
   }
+
+
+// get section headers
+  getSections(patient_id: any) {
+    let org_id = localStorage.getItem('org_id');
+    let branch_id = localStorage.getItem('branch_id');
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(environment.apiUrl + 'allvisithealthparaminformation/' + org_id + '/' + branch_id + '/' +patient_id, {
+      headers: headers,
+    });
+  }
+
+
+
+  getPetMetaData(
+    pid: string,
+    visit_no: string,
+    heading: string
+  ): Observable<any> {
+    let org_id = localStorage.getItem('org_id');
+    let branch_id = localStorage.getItem('branch_id');
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    
+    let url =
+      environment.apiUrl +
+      'petconsultdetail/' +
+      org_id +
+      '/' +
+      branch_id +
+      '/' +
+      pid +
+      '?visit_no=' +
+      visit_no +
+      '&heading=' +
+      heading;
+    
+    https: return this.http.get(url, {
+      headers: headers,
+    });
+  }
 }

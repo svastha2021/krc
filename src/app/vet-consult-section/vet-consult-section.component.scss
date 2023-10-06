@@ -43,3 +43,8 @@
 ::ng-deep .mat-select-panel {
     font-size: 15px !important;
 }
+.vet-dynamic-section-form{
+    ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper{
+        width:0
+    }
+}
