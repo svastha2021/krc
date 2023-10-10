@@ -33,7 +33,7 @@
   </div>
 </div>
 <form>
-  <div class="margin-20l custom-card vet-dynamic-section-form" *ngFor="let section of sectionParamData">
+  <div class="custom-card vet-dynamic-section-form" *ngFor="let section of sectionParamData">
     <div class="row">
       <div class="col-md-4 pg-10">
         <label class="form-label txt-b">{{ section.sub_heading }}</label>
@@ -47,48 +47,113 @@
     </div>
     <div class="row">
       <div
-        class="col-md-12 pg"
-        style="display: flex"
+        class="col-md-12 pg section-row-flex"
+        
         *ngFor="let property of section.details"
       >
-        <div class="col-md-2">
+        <div class="col-md-1">
           <label class="form-label pg-t">{{ property.column_name_text }}</label>
         </div>
-        <div class="col-md-5 flex-align">
-          <div class="col-1" >
+        <div class="col-md-5 flex-align" *ngIf="!showPreviousTable"> 
+          <div class="col-4" >
+            <img *ngIf="property.column_name_text === 'Cornial Thickness Peripheral'" src="../../assets/consult-images/sreniaLeft.png" alt="image"/>
+            
+          </div>
+          <div class="col-1">
             <app-multiselect *ngIf="property.column_name_type === 'LOV'" [rowData]="property" [left]="'_RE'"></app-multiselect>
           </div>
-          <div class="col-5">
+          <div class="col-3">            
             <input
               type="text"
               class="form-control"
-              [id]="setIDs(property.column_name_prefix, '_RE')"
+              [id]="setIDs(property.column_name_prefix, '_RE')"              
+              
             />
           </div>
-          <div class="col-6">
+          <div class="col-5">
             <textarea
               type="text"
               rows="1"
               class="form-control"
               [id]="setIDs(property.column_name_prefix, '_Remark_RE')"
+              
+            ></textarea>
+          </div>
+        </div>
+        <div class="col-md-5 flex-align" *ngIf="showPreviousTable">
+          <div class="col-3" >
+            <img *ngIf="property.column_name_text === 'Cornial Thickness Peripheral'" src="../../assets/consult-images/sreniaLeft.png" alt="image"/>
+            
+          </div>
+          <!-- <div class="col-1">
+            <app-multiselect *ngIf="property.column_name_type === 'LOV'" [rowData]="property" [left]="'_RE'"></app-multiselect>
+          </div> -->
+          <div class="col-3">            
+            <input
+              type="text"
+              class="form-control"
+              [id]="setIDs(property.column_name_prefix, '_RE')"              
+              [value]="property.column_name_re"
+            />
+          </div>
+          <div class="col-5">
+            <textarea
+              type="text"
+              rows="1"
+              class="form-control"
+              [id]="setIDs(property.column_name_prefix, '_Remark_RE')"
+              [value]="property.column_name_rem_re"
             ></textarea>
           </div>
         </div>
 
-        <div class="col-md-5 flex-align">
+        <div class="col-md-5 flex-align" *ngIf="!showPreviousTable">
+          <div class="col-3">
+            <img *ngIf="property.column_name_text === 'Cornial Thickness Peripheral'" src="../../assets/consult-images/sreniaLeft.png" alt="image"/>
+            
+          </div>
+          <div class="col-1">
+            <app-multiselect *ngIf="property.column_name_type === 'LOV'" [rowData]="property" [left]="'_LE'"></app-multiselect>
+          </div>
+          <div class="col-3">
+            <input
+              type="text"
+              class="form-control"
+              [id]="setIDs(property.column_name_prefix, '_LE')"              
+            />
+          </div>
           <div class="col-5">
+            <textarea
+              type="text"
+              rows="1"
+              class="form-control"
+              [id]="setIDs(property.column_name_prefix, '_Remark_LE')"              
+            ></textarea>
+          </div>
+        </div>
+
+
+        <div class="col-md-5 flex-align" *ngIf="showPreviousTable">
+          <div class="col-4">
+            <img *ngIf="property.column_name_text === 'Cornial Thickness Peripheral'" src="../../assets/consult-images/sreniaLeft.png" alt="image"/>
+            
+          </div>
+          
+          <div class="col-3">
             <input
               type="text"
               class="form-control"
               [id]="setIDs(property.column_name_prefix, '_LE')"
+              [value]="property.column_name_le"
             />
           </div>
-          <div class="col-6">
+          <div class="col-5">
             <textarea
               type="text"
               rows="1"
               class="form-control"
               [id]="setIDs(property.column_name_prefix, '_Remark_LE')"
+              [value]="property.column_name_rem_le"
             ></textarea>
           </div>
         </div>
@@ -98,7 +163,7 @@
     <div></div>
   </div>
 </form>
-<div class="row">
+<div class="row mar20tb ">
   <div class="col-md-4"></div>
   <div class="col-md-4 pointer">
     <button
@@ -106,6 +171,7 @@
       class="btn btn-success"
       (click)="saveValues()"
       *ngIf="!showPreviousTable"
+      [disabled]="!visit_no" 
     >
       Save
     </button>

@@ -51,3 +51,7 @@
 ::ng-deep .mat-slide-toggle.mat-disabled {
     opacity: 1 !important;
 }
+
+::ng-deep .mat-expansion-panel-body{
+    padding:0!important;
+}

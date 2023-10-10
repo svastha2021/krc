@@ -526,7 +526,7 @@ export class DocConsultationComponent implements OnInit {
 
   vetMetaData = [];
   getPetMetaData(sectionHeading: string) {
-    this.visit_no = 26
+    //this.visit_no = 27
     if(this.visit_no){
       this.docService
       .getPetMetaData(

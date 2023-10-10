@@ -54,8 +54,7 @@ export class VetConsultSectionComponent  {
   ) {}
   
   ngOnInit(): void {
-    console.log(this.metaData)
-   // this.vetService.getPetMetaData(this.headerDetail.patient_id, this.headerDetail.visit_no, )
+   
   }
 
   dynamicExamData: any = [];
@@ -63,32 +62,31 @@ export class VetConsultSectionComponent  {
   get() {
     return this.dynamicForm.controls;
   }
-
-  getExamDetail() {
-    const org_id = localStorage.getItem('org_id');
-    const branch_id = localStorage.getItem('branch_id');
+entireData:any[] = [];
+  getExamDetail() {    
     const patient_id = this.headerDetail.patient_id;
-    // this.examService.getExam(patient_id).subscribe(data => {
-    //   console.log('getRefraction Data',data);
-    //   this.examDetailData = data.results;
-    //   this.examDetailData = this.examDetailData.reverse();
-    //   this.setCurrentExamData();
-    // })
+    this.vetService.previousVetData(patient_id, 'Cornea and Sclera').subscribe(data => {
+      this.entireData = data.results;
+      // this.examDetailData = data.results;
+       this.entireData = this.entireData.reverse();
+       this.setCurrentExamData();
+    })
   }
 
   setCurrentExamData() {
     //this.examForm.patchValue(this.examDetailData[this.getLastRecordIndex()]);
-    this.showVisitNo = this.examDetailData[this.getLastRecordIndex()].visit_no;
-    this.showVisitDate = this.utility.convertDate(
-      this.examDetailData[this.getLastRecordIndex()].visit_date
-    );
+    this.showVisitNo = this.entireData[this.getLastRecordIndex()].visit_no;
+  // this.showVisitDate = this.utility.convertDate(
+  //     this.examDetailData[this.getLastRecordIndex()].visit_date
+  //   );
+  this.sectionParamData = this.entireData[this.getLastRecordIndex()].sub_headings;
     if (this.getLastRecordIndex() <= 0) {
       this.recordIndex = 0;
     }
   }
 
   getLastRecordIndex() {
-    return this.examDetailData.length - 1;
+    return this.entireData.length - 1;
   }
 
   prevItem() {
@@ -103,6 +101,9 @@ export class VetConsultSectionComponent  {
 
   setCurrentNotesAfterChange() {
     this.recordIndex = this.getLastRecordIndex() - this.prevCounter;
+    this.sectionParamData =
+      this.entireData[this.recordIndex];
+      this.visit_no = this.entireData[this.recordIndex].visit_no;
     //this.examForm.patchValue(this.examDetailData[this.recordIndex]); // give us back the item of where we are now
   }
 
@@ -178,21 +179,16 @@ export class VetConsultSectionComponent  {
       patient_id: this.headerDetail.patient_id,
       visit_no: this.visit_no,
       payloadList: this.petPayloadList      
-    };
-    this.isActive.emit(true);
+    };  
+    
+
+    this.vetService.saveVetData(params).subscribe(data => {
+      this.isActive.emit(true);
       this.dialog.open(InfoDialogComponent, {
         width: '500px',
         data: 'Data Saved Successfully'
       })
-    
-
-    // this.vetService.saveVetData(params).subscribe(data => {
-    //   this.isActive.emit(true);
-    //   this.dialog.open(InfoDialogComponent, {
-    //     width: '500px',
-    //     data: 'Data Saved Successfully'
-    //   })
-    // })
+    })
   }
 
   addRecord() {

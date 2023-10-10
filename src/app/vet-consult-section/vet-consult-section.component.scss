@@ -47,4 +47,10 @@
     ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper{
         width:0
     }
+
+    .section-row-flex {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+    }
 }

@@ -18,7 +18,7 @@ export class VetServiceService {
     let branch_id = localStorage.getItem('branch_id');
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    
+
     let url =
       environment.apiUrl +
       'petconsultdetail/' +
@@ -31,18 +31,41 @@ export class VetServiceService {
       visit_no +
       '&heading=' +
       heading;
-    
+
     https: return this.http.get(url, {
       headers: headers,
     });
   }
 
-  public saveVetData(vetPayload:any): Observable<any> {
+  public saveVetData(vetPayload: any): Observable<any> {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(environment.apiUrl + 'petconsulting', vetPayload,
-      { headers: headers })
+    return this.http.post(environment.apiUrl + 'petconsulting', vetPayload, {
+      headers: headers,
+    });
   }
 
- // https://node-dev.vibhavatech.com/v1/petconsulting
+  public previousVetData(pid: string, heading: string): Observable<any> {
+    let org_id = localStorage.getItem('org_id');
+    let branch_id = localStorage.getItem('branch_id');
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+
+    let url =
+      environment.apiUrl +
+      'petlist/' +
+      org_id +
+      '/' +
+      branch_id +
+      '/' +
+      pid +
+      '?heading=' +
+      heading;
+
+    https: return this.http.get(url, {
+      headers: headers,
+    });
+  }
+
+  // https://node-dev.vibhavatech.com/v1/petlist/KRC/KRC0001/PATKRC000100023?heading=Cornea%20and%20Sclera
 }
