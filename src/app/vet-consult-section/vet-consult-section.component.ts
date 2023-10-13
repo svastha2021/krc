@@ -24,6 +24,11 @@ export class VetConsultSectionComponent  {
   @ViewChild(MatSelect) matSelect: MatSelect | undefined;
   @Input() headerDetail: any;
   @Input() visit_no: any;
+  _heading: any;
+  @Input() set heading(value: string){
+    console.log('input', value);
+    this._heading = value;
+  } 
   @Input() visit_date: any;
   _metaData: any;
   @Input() set metaData(value: any) {
@@ -50,22 +55,22 @@ export class VetConsultSectionComponent  {
     private ref: ReferenceService,
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
-    private utility: UtilityService
+    private utility: UtilityService,
+    private cdRef: ChangeDetectorRef
   ) {}
   
   ngOnInit(): void {
    
   }
-
   dynamicExamData: any = [];
 
   get() {
     return this.dynamicForm.controls;
   }
 entireData:any[] = [];
-  getExamDetail() {    
+  getDetail() {    
     const patient_id = this.headerDetail.patient_id;
-    this.vetService.previousVetData(patient_id, 'Cornea and Sclera').subscribe(data => {
+    this.vetService.previousVetData(patient_id, this._heading).subscribe(data => {
       this.entireData = data.results;
       // this.examDetailData = data.results;
        this.entireData = this.entireData.reverse();
@@ -91,7 +96,7 @@ entireData:any[] = [];
 
   prevItem() {
     this.prevCounter++;
-    this.setCurrentNotesAfterChange();
+    this.setCurrentNotesAfterChange();   
   }
 
   nextItem() {
@@ -100,16 +105,19 @@ entireData:any[] = [];
   }
 
   setCurrentNotesAfterChange() {
+    this.sectionParamData = [];
     this.recordIndex = this.getLastRecordIndex() - this.prevCounter;
     this.sectionParamData =
-      this.entireData[this.recordIndex];
+      this.entireData[this.recordIndex].sub_headings;
       this.visit_no = this.entireData[this.recordIndex].visit_no;
+      this.showVisitNo = this.visit_no;
+      
     //this.examForm.patchValue(this.examDetailData[this.recordIndex]); // give us back the item of where we are now
   }
 
   displayPrevious() {
     this.showPreviousTable = true;
-    this.getExamDetail();
+    this.getDetail();
   }
 
   setIDs(code: any, id: string) {
@@ -191,13 +199,11 @@ entireData:any[] = [];
     })
   }
 
-  addRecord() {
-    // this.examForm.reset();
-  }
+  
 
   back() {
     this.showPreviousTable = false;
-    this.addRecord();
+    //this.showVisitNo = this.visit_no;
   }
 
 

@@ -755,38 +755,130 @@
       ></app-lab-prescription>
     </mat-expansion-panel>
 
-    <div *ngFor="let section of VetSections">
+    
       <mat-expansion-panel
         hideToggle
         class="margin-20b doc-consult-expansion-container"
         *ngIf="aptObj.dept_id === 'D0004'"
       >
-        <mat-expansion-panel-header (click)="getPetMetaData(section)">
-          <mat-panel-title> {{ section }} </mat-panel-title>
+        <mat-expansion-panel-header (click)="getPetMetaData('Cornea and Sclera')" hideToggle>
+          <mat-panel-title>Cornea and Sclera</mat-panel-title>
           <mat-slide-toggle [checked]="isSectionActive" disabled></mat-slide-toggle>
           <mat-panel-description> </mat-panel-description>
         </mat-expansion-panel-header>
-        <!-- <app-examination
-      [visit_no]="visit_no"
-      [visit_date]="visit_date"
-      [headerDetail]="headerDetail"
-      (isActiveExamination)='isEmitActiveExamination($event)'>
-    </app-examination> -->
-        <app-vet-dynamic-section
+        <ng-template [ngIf]="currentHeading === 'Cornea and Sclera' ">
+          <app-vet-dynamic-section
           [visit_no]="visit_no"
           [visit_date]="visit_date"
           [headerDetail]="headerDetail"
+          [heading]="currentHeading"
           [metaData]="vetMetaData"
           (isActive)="isSectionActive = $event"
         ></app-vet-dynamic-section>
-        <!-- <app-vet-consult-section
-    [visit_no]="visit_no"
-    [visit_date]="visit_date"
-    [headerDetail]="headerDetail"
-    (isActiveExamination)='isEmitActiveExamination($event)'>
-  </app-vet-consult-section> -->
+        </ng-template>
       </mat-expansion-panel>
-    </div>
+           
+      <mat-expansion-panel
+        hideToggle
+        class="margin-20b doc-consult-expansion-container"
+        *ngIf="aptObj.dept_id === 'D0004'"
+      >
+        <mat-expansion-panel-header (click)="getPetMetaData('Vision Assesment')" hideToggle>
+          <mat-panel-title>Vision Assesment</mat-panel-title>
+          <mat-slide-toggle [checked]="isSectionActive" disabled></mat-slide-toggle>
+          <mat-panel-description> </mat-panel-description>
+        </mat-expansion-panel-header>
+        
+        <ng-template [ngIf]="currentHeading === 'Vision Assesment' ">
+          <app-vet-dynamic-section
+          [visit_no]="visit_no"
+          [visit_date]="visit_date"
+          [headerDetail]="headerDetail"
+          [heading]="currentHeading"
+          [metaData]="vetMetaData"
+          (isActive)="isSectionActive = $event"
+        ></app-vet-dynamic-section>
+        </ng-template>
+        
+      </mat-expansion-panel>
+   
+      <mat-expansion-panel
+      hideToggle
+      class="margin-20b doc-consult-expansion-container"
+      *ngIf="aptObj.dept_id === 'D0004'"
+    >
+      <mat-expansion-panel-header  (click)="getPetMetaData('Examination of Adnexa')" hideToggle>
+        <mat-panel-title>Examination of Adnexa</mat-panel-title>
+        <mat-slide-toggle [checked]="isSectionActive" disabled></mat-slide-toggle>
+        <mat-panel-description> </mat-panel-description>
+      </mat-expansion-panel-header>
+      
+      <ng-template [ngIf]="currentHeading === 'Examination of Adnexa' ">
+        <app-vet-dynamic-section
+        [visit_no]="visit_no"
+        [visit_date]="visit_date"
+        [headerDetail]="headerDetail"
+        [heading]="currentHeading"
+        [metaData]="vetMetaData"
+        (isActive)="isSectionActive = $event"
+      ></app-vet-dynamic-section>
+      </ng-template>
+      
+    </mat-expansion-panel>
+    <mat-expansion-panel
+    hideToggle
+    class="margin-20b doc-consult-expansion-container"
+    *ngIf="aptObj.dept_id === 'D0004'"
+  >
+    <mat-expansion-panel-header  (click)="getPetMetaData('Posterior Segment After pupillary Dilation')" hideToggle>
+      <mat-panel-title>Posterior  Segment After pupillary Dilation</mat-panel-title>
+      <mat-slide-toggle [checked]="isSectionActive" disabled></mat-slide-toggle>
+      <mat-panel-description> </mat-panel-description>
+    </mat-expansion-panel-header>
+    
+    <ng-template [ngIf]="currentHeading === 'Posterior Segment After pupillary Dilation' ">
+      <app-vet-dynamic-section
+      [visit_no]="visit_no"
+      [visit_date]="visit_date"
+      [headerDetail]="headerDetail"
+      [heading]="currentHeading"
+      [metaData]="vetMetaData"
+      (isActive)="isSectionActive = $event"
+    ></app-vet-dynamic-section>
+    </ng-template>
+    
+  </mat-expansion-panel>
+    
+
+
+    <mat-expansion-panel
+      hideToggle
+      class="margin-20b doc-consult-expansion-container"
+      *ngIf="aptObj.dept_id === 'D0004'"
+    >
+      <mat-expansion-panel-header  (click)="getPetMetaData('IOP and AC')" hideToggle>
+        <mat-panel-title>IOP and AC</mat-panel-title>
+        <mat-slide-toggle [checked]="isSectionActive" disabled></mat-slide-toggle>
+        <mat-panel-description> </mat-panel-description>
+      </mat-expansion-panel-header>
+      
+      <ng-template [ngIf]="currentHeading === 'IOP and AC' ">
+        <app-vet-dynamic-section
+        [visit_no]="visit_no"
+        [visit_date]="visit_date"
+        [headerDetail]="headerDetail"
+        [heading]="currentHeading"
+        [metaData]="vetMetaData"
+        (isActive)="isSectionActive = $event"
+      ></app-vet-dynamic-section>
+      </ng-template>
+      
+    </mat-expansion-panel>
+    
+    
+    
+
+
   </div>
   <div class="row"></div>
 </div>

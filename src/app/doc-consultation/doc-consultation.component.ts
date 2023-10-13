@@ -110,7 +110,7 @@ export class DocConsultationComponent implements OnInit {
   HistoryOfCurrentCompliantList: any = [];
   illnessList: any = [];
   isActive: boolean = false;
-  isSectionActive:boolean = false;
+  isSectionActive: boolean = false;
   isActiveVital: boolean = false;
   isActiveVisual: boolean = false;
   isActivePGP: boolean = false;
@@ -520,24 +520,25 @@ export class DocConsultationComponent implements OnInit {
     this.isActiveLab = element;
   }
 
-  receiveActive(element:boolean){
+  receiveActive(element: boolean) {
     this.isActive = element;
   }
 
   vetMetaData = [];
+  currentHeading = '';
   getPetMetaData(sectionHeading: string) {
-    //this.visit_no = 27
-    if(this.visit_no){
+    this.currentHeading = sectionHeading;
+this.visit_no = 2
+    if (this.visit_no) {
       this.docService
-      .getPetMetaData(
-        this.headerDetail.patient_id,
-        this.visit_no,
-        sectionHeading
-      )
-      .subscribe((data) => {
-        this.vetMetaData = data.results;
-      });
+        .getPetMetaData(
+          this.headerDetail.patient_id,
+          this.visit_no,
+          sectionHeading
+        )
+        .subscribe((data) => {
+          this.vetMetaData = data.results;
+        });
     }
-   
   }
 }
