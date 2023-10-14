@@ -49,6 +49,7 @@ import { ExportReportComponent } from './export-report/export-report.component';
 import { InvoicePaymentReportComponent } from './invoice-payment-report/invoice-payment-report.component';
 import { InvoiceProductReportComponent } from './invoice-product-report/invoice-product-report.component';
 import { PatientVisit360ViewComponent } from './patient-visit360-view/patient-visit360-view.component';
+import { PetRegistrationComponent } from './pet-registration/pet-registration.component';
 
 const routes: Routes = [
   {
@@ -249,6 +250,10 @@ const routes: Routes = [
   {
     path: 'patient-visit360-view',
     component: PatientVisit360ViewComponent
+  },
+  {
+    path: 'pet-reg',
+    component: PetRegistrationComponent
   }
 
 
