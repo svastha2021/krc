@@ -49,213 +49,224 @@ import { ExportReportComponent } from './export-report/export-report.component';
 import { InvoicePaymentReportComponent } from './invoice-payment-report/invoice-payment-report.component';
 import { InvoiceProductReportComponent } from './invoice-product-report/invoice-product-report.component';
 import { PatientVisit360ViewComponent } from './patient-visit360-view/patient-visit360-view.component';
+import { PetConsulationComponent } from './pet-consulation/pet-consulation.component';
+import { PetDynamicHomeComponent } from './pet-dynamic-home/pet-dynamic-home.component';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'login',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'landing',
-    component: LandingComponent
+    component: LandingComponent,
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
     path: 'patient-reg',
-    component: PatientRegistrationComponent
+    component: PatientRegistrationComponent,
   },
   {
     path: 'apt-booking',
-    component: AptBookingComponent
+    component: AptBookingComponent,
   },
   {
     path: 'doc-consult',
-    component: DocConsultationComponent
+    component: DocConsultationComponent,
   },
   {
     path: 'billing',
-    component: BillingComponent
+    component: BillingComponent,
   },
   {
     path: 'invoice',
-    component: InvoiceComponent
+    component: InvoiceComponent,
   },
   {
     path: 'invoice/:item',
-    component: PaymentComponent
+    component: PaymentComponent,
   },
   {
     path: 'adv-payment',
-    component: AdvancePaymentComponent
+    component: AdvancePaymentComponent,
   },
   {
     path: 'print',
-    component: InvoicePrintComponent
+    component: InvoicePrintComponent,
   },
   {
     path: 'manage-patient',
-    component: ManagePatientComponent
+    component: ManagePatientComponent,
   },
   {
     path: 'insurance',
-    component: InsuranceComponent
+    component: InsuranceComponent,
   },
   {
     path: 'patientwise-report',
-    component: PatientwiseReportComponent
+    component: PatientwiseReportComponent,
   },
   {
     path: 'collectionwise-report',
-    component: CollectionwiseReportComponent
+    component: CollectionwiseReportComponent,
   },
   {
     path: 'outstanding-invwise-report',
-    component: OutstantingInvwiseComponent
+    component: OutstantingInvwiseComponent,
   },
   {
     path: 'outstanding-ptwise-report',
-    component: OutstantingPtwiseComponent
+    component: OutstantingPtwiseComponent,
   },
   {
     path: 'collection-payment-wise',
-    component: CollectionPaymentwiseReportComponent
+    component: CollectionPaymentwiseReportComponent,
   },
   {
     path: 'supplier-master',
-    component: SupplierMasterComponent
+    component: SupplierMasterComponent,
   },
   {
     path: 'supplier-product',
-    component: SupplierProductComponent
+    component: SupplierProductComponent,
   },
   {
     path: 'eod',
-    component: EodComponent
+    component: EodComponent,
   },
   {
     path: 'po',
-    component: PoComponent
+    component: PoComponent,
   },
   {
     path: 'collection-paymentwise-report',
-    component: CollectionPaymentwiseReportComponent
+    component: CollectionPaymentwiseReportComponent,
   },
   {
     path: 'insurance-summary',
-    component: InsuranceSummaryComponent
+    component: InsuranceSummaryComponent,
   },
   {
     path: 'patient-schedule',
-    component: PatientScheduleComponent
+    component: PatientScheduleComponent,
   },
   {
     path: 'patient-listing',
-    component: PatientListingReportComponent
+    component: PatientListingReportComponent,
   },
   {
     path: 'po-submission',
-    component: PoSubmissionComponent
+    component: PoSubmissionComponent,
   },
   {
     path: 'goods-receipt',
-    component: GoodsReceiptComponent
+    component: GoodsReceiptComponent,
   },
   {
     path: 'supplier-payment',
-    component: SupplierPaymentComponent
-  }, {
+    component: SupplierPaymentComponent,
+  },
+  {
     path: 'payment-receipts',
-    component: PaymentReceiptsComponent
+    component: PaymentReceiptsComponent,
   },
   {
     path: 'update-payreceipts',
-    component: UpdatePayreceiptsComponent
+    component: UpdatePayreceiptsComponent,
   },
   {
     path: 'product-master',
-    component: ProductMasterComponent
+    component: ProductMasterComponent,
   },
   {
     path: 'product-master-listing',
-    component: ProductMasterListingComponent
-  }, {
+    component: ProductMasterListingComponent,
+  },
+  {
     path: 'po-reports',
-    component: PoReportsComponent
+    component: PoReportsComponent,
   },
   {
     path: 'goods-reports',
-    component: GoodsReportsComponent
+    component: GoodsReportsComponent,
   },
   {
     path: 'supplier-reports',
-    component: SupplierReportsComponent
+    component: SupplierReportsComponent,
   },
   {
     path: 'payment-reports',
-    component: ReceiptPaymentReportComponent
+    component: ReceiptPaymentReportComponent,
   },
   {
     path: 'stock-reports',
-    component: StockRegisterReportComponent
+    component: StockRegisterReportComponent,
   },
   {
     path: 'upload',
-    component: FileUploadComponent
+    component: FileUploadComponent,
   },
   {
     path: 'account-master',
-    component: AccountMasterComponent
+    component: AccountMasterComponent,
   },
   {
     path: 'doctor-master',
-    component: DoctorMasterComponent
+    component: DoctorMasterComponent,
   },
   {
     path: 'inventory',
-    component: InventoryConfigComponent
+    component: InventoryConfigComponent,
   },
   {
     path: 'main-supp',
-    component: SuppProdMapComponent
+    component: SuppProdMapComponent,
   },
   {
     path: 'user-master',
-    component: UserMasterComponent
+    component: UserMasterComponent,
   },
   {
     path: 'pwd',
-    component: LoginUserComponent
+    component: LoginUserComponent,
   },
   {
     path: 'patient-health',
-    component: PatientHealthComponent
+    component: PatientHealthComponent,
   },
   {
     path: 'doc-report',
-    component: DoctorReportComponent
+    component: DoctorReportComponent,
   },
   {
     path: 'invoice-payment-report',
-    component: InvoicePaymentReportComponent
+    component: InvoicePaymentReportComponent,
   },
   {
     path: 'invoice-product-report',
-    component: InvoiceProductReportComponent
+    component: InvoiceProductReportComponent,
   },
   {
     path: 'patient-visit360-view',
-    component: PatientVisit360ViewComponent
-  }
+    component: PatientVisit360ViewComponent,
+  },
 
-
+  {
+    path: 'pet-consultation-home',
+    component: PetConsulationComponent,
+  },
+  {
+    path: 'pet-dynamic-home',
+    component: PetDynamicHomeComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

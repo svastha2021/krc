@@ -1,0 +1,56 @@
+<app-header></app-header>
+<div class="container">
+  <div class="row">
+    <h1>Doctor consulation</h1>
+  </div>
+  <app-patient-header
+    (outputPatientHeader)="patientHeader($event)"
+    [header]="headerDetail"
+  ></app-patient-header>
+  <div>
+    <label class="mar15"
+      ><strong>Department: {{ aptObj.dept_name }}</strong></label
+    >
+    <label class="mar15"
+      ><strong>Doctor: {{ aptObj.doctor_name }}</strong></label
+    >
+  </div>
+
+  <!-- Grid for sections-->
+  <div class="">
+    <mat-grid-list cols="4" rowHeight="100">
+      <mat-grid-tile [routerLink]="['/pet-dynamic-home']" [state]="{
+        visit_no: visit_no,
+        aptObj: aptObj,
+        heading: 'Notes'
+      }">Doctor Notes</mat-grid-tile>
+      <mat-grid-tile
+        [routerLink]="['/pet-dynamic-home']"
+        [state]="{
+          visit_no: visit_no,
+          aptObj: aptObj,
+          heading: 'Cornea and Sclera'
+        }"
+        >Cornea and Sclera</mat-grid-tile
+      >
+      <mat-grid-tile
+        [routerLink]="['/pet-dynamic-home']"
+        [state]="{
+          visit_no: visit_no,
+          aptObj: aptObj,
+          heading: 'Vision Assesment'
+        }"
+        >Vision Assesment</mat-grid-tile
+      >
+      <mat-grid-tile
+        [routerLink]="['/pet-dynamic-home']"
+        [state]="{
+          visit_no: visit_no,
+          aptObj: aptObj,
+          heading: 'Examination of Adnexa'
+        }"
+        >Examination of Adnexa</mat-grid-tile
+      >
+    </mat-grid-list>
+  </div>
+</div>

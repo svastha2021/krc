@@ -1,0 +1,59 @@
+<app-header></app-header>
+<div class="container">
+  <div class="row">
+    <h1>{{currentHeading}}</h1>
+  </div>
+  <!-- <div class="row">
+    <div class="container" *ngIf="patientHeader">
+      <div class="row header-border margin-20t">
+        <div class="">
+          <label class="mar20"
+            >Patient Id: {{ patientHeader?.patient_id }}</label
+          >
+          <label class="mar20"
+            >Patient Name: {{ patientHeader?.patient_name }}</label
+          >
+          <label class="mar20">Age: {{ patientHeader?.age }}</label>
+          <label class="mar20">Sex: {{ patientHeader?.sex }}</label>
+          <label class="mar20">Phone: {{ patientHeader?.mobile_no }}</label>
+          <label class="mar20"
+            >Patient Type: {{ patientHeader?.patient_type_name }}</label
+          >
+
+          <label class="mar20"
+            >Total Invoice Amount: {{ patientHeader?.net_inv_amount }}</label
+          >
+          <label class="mar20"
+            >Total Paid: {{ patientHeader?.net_inv_paid }}</label
+          >
+          <label class="mar20"
+            >Total Balance: {{ patientHeader?.net_inv_balance }}</label
+          >
+          <label class="mar20"
+            >Advance Adjusted: {{ patientHeader?.advance_amount_paid }}</label
+          >
+          <label class="mar20"
+            >Advance Balance: {{ patientHeader?.advance_amount_balance }}</label
+          >
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <div *ngIf="currentHeading === 'Notes'">
+    doc notes
+  </div>
+  <div *ngIf="currentHeading !== 'Notes'">
+    <ng-template [ngIf]="currentHeading">        
+        <app-vet-dynamic-section
+        [visit_no]="visit_no"
+        [metaData]="vetMetaData"
+        [headerDetail]="patientHeader"
+        [heading]="currentHeading"
+        (backEmit)="gotoConsultHome()"
+      ></app-vet-dynamic-section>
+    </ng-template>    
+</div>
+</div>
+
+
+

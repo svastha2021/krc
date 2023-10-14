@@ -6,7 +6,7 @@ import {
   EventEmitter,
   Input,
   Output,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { VetServiceService } from './vet-service.service';
@@ -15,6 +15,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.component';
 import { UtilityService } from '../utilities/services/utility.service';
 import { MatSelect } from '@angular/material/select';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-vet-dynamic-section',
   templateUrl: './vet-consult-section.component.html',
@@ -39,6 +40,8 @@ export class VetConsultSectionComponent  {
   }
   @Output() isActive= new EventEmitter();
 
+  @Output() backEmit= new EventEmitter();
+
   dynamicForm!: FormGroup;
   showPreviousTable = false;
   examDetailData: any;
@@ -56,16 +59,19 @@ export class VetConsultSectionComponent  {
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
     private utility: UtilityService,
-    private cdRef: ChangeDetectorRef
+    
   ) {}
   
   ngOnInit(): void {
-   
+   console.log(this.visit_no)
   }
   dynamicExamData: any = [];
 
   get() {
     return this.dynamicForm.controls;
+  }
+  back2Section(){
+    this.backEmit.emit();
   }
 entireData:any[] = [];
   getDetail() {    
