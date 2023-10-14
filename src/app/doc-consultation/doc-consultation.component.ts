@@ -118,6 +118,7 @@ export class DocConsultationComponent implements OnInit {
   isActiveGP:boolean = false;
   isActiveMedicine:boolean = false;
   isActiveLab:boolean = false;
+  isActivePet:boolean = false;
   showPreviousDocNotes:boolean = false;
 
 
@@ -511,5 +512,9 @@ export class DocConsultationComponent implements OnInit {
 
   isEmitActiveLab(element: any) {
     this.isActiveLab =  element;
+  }
+
+  isEmitActivePet(element: any) {
+    this.isActivePet =  element;
   }
 }
