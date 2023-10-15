@@ -160,13 +160,13 @@ export class PetHistoryComponent {
         width: '500px',
         data: 'History Saved Successfully',
       });
-      this.resetRecord();
     });
   }
 
   emitHistory() {
+    let petHistory;
     this.isActivePet.emit(
-      this.petBoolean
+      petHistory = [this.petBoolean, this.visit_no, this.visit_date]
     );
   }
 
@@ -175,7 +175,6 @@ export class PetHistoryComponent {
     this.petHistoryService.fetchPrevDeatils(patient_id).subscribe(data => {
       console.log('getHistory',data);
       this.historyDetailData = data.results;
-      this.historyDetailData = this.historyDetailData.reverse();
       this.setCurrentObjectData();
     })
   }

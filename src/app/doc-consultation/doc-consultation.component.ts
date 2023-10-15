@@ -545,6 +545,8 @@ export class DocConsultationComponent implements OnInit {
   }
 
   isEmitActivePet(element: any) {
-    this.isActivePet =  element;
+    this.isActivePet =  element[0];
+    this.visit_no = element[1];
+    this.visit_date = element[2]
   }
 }
