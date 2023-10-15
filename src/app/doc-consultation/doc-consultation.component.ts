@@ -109,20 +109,22 @@ export class DocConsultationComponent implements OnInit {
   chiefComplaintList: any = [];
   HistoryOfCurrentCompliantList: any = [];
   illnessList: any = [];
-  isActive: boolean = false;
+  isActive:boolean = false;
   isSectionActive: boolean = false;
-  isActiveVital: boolean = false;
-  isActiveVisual: boolean = false;
-  isActivePGP: boolean = false;
-  isActiveObjective: boolean = false;
-  isActiveSubjective: boolean = false;
-  isActiveExamination: boolean = false;
-  isActiveIOP: boolean = false;
-  isActiveDiagonsis: boolean = false;
-  isActiveGP: boolean = false;
-  isActiveMedicine: boolean = false;
-  isActiveLab: boolean = false;
-  showPreviousDocNotes: boolean = false;
+  isActiveVital:boolean = false;
+  isActiveVisual:boolean = false;
+  isActivePGP:boolean = false;
+  isActiveObjective:boolean = false;
+  isActiveSubjective:boolean = false;
+  isActiveExamination:boolean = false;
+  isActiveIOP:boolean = false;
+  isActiveDiagonsis:boolean = false;
+  isActiveGP:boolean = false;
+  isActiveMedicine:boolean = false;
+  isActiveLab:boolean = false;
+  isActivePet:boolean = false;
+  showPreviousDocNotes:boolean = false;
+
 
   // [{khi_code:'bp',khi_desc:'Bloop pressure'}, {khi_code:'height',khi_desc:'Height'}];
   constructor(
@@ -528,7 +530,7 @@ export class DocConsultationComponent implements OnInit {
   currentHeading = '';
   getPetMetaData(sectionHeading: string) {
     this.currentHeading = sectionHeading;
-this.visit_no = 2
+
     if (this.visit_no) {
       this.docService
         .getPetMetaData(
@@ -540,5 +542,9 @@ this.visit_no = 2
           this.vetMetaData = data.results;
         });
     }
+  }
+
+  isEmitActivePet(element: any) {
+    this.isActivePet =  element;
   }
 }
