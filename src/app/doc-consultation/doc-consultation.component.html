@@ -854,7 +854,7 @@
       
     </mat-expansion-panel>
     
-    <!-- <mat-expansion-panel
+    <mat-expansion-panel
     hideToggle
     class="margin-20b doc-consult-expansion-container"
     *ngIf="aptObj.dept_id === 'D0004'"
@@ -876,7 +876,56 @@
     ></app-vet-dynamic-section>
     </ng-template>
     
-  </mat-expansion-panel> -->
+  </mat-expansion-panel>
+
+
+  <mat-expansion-panel
+    hideToggle
+    class="margin-20b doc-consult-expansion-container"
+    *ngIf="aptObj.dept_id === 'D0004'"
+  >
+    <mat-expansion-panel-header  (click)="getPetMetaData('Antirior Segment After pupillary Dilation')" hideToggle>
+      <mat-panel-title>Antirior Segment After pupillary Dilation</mat-panel-title>
+      <mat-slide-toggle [checked]="isSectionActive" disabled></mat-slide-toggle>
+      <mat-panel-description> </mat-panel-description>
+    </mat-expansion-panel-header>
+    
+    <ng-template [ngIf]="currentHeading === 'Antirior Segment After pupillary Dilation' ">
+      <app-vet-dynamic-section
+      [visit_no]="visit_no"
+      [visit_date]="visit_date"
+      [headerDetail]="headerDetail"
+      [heading]="currentHeading"
+      [metaData]="vetMetaData"
+      (isActive)="isSectionActive = $event"
+    ></app-vet-dynamic-section>
+    </ng-template>
+    
+  </mat-expansion-panel>
+
+  <mat-expansion-panel
+    hideToggle
+    class="margin-20b doc-consult-expansion-container"
+    *ngIf="aptObj.dept_id === 'D0004'"
+  >
+    <mat-expansion-panel-header  (click)="getPetMetaData('Fundus')" hideToggle>
+      <mat-panel-title>Fundus</mat-panel-title>
+      <mat-slide-toggle [checked]="isSectionActive" disabled></mat-slide-toggle>
+      <mat-panel-description> </mat-panel-description>
+    </mat-expansion-panel-header>
+    
+    <ng-template [ngIf]="currentHeading === 'Fundus' ">
+      <app-vet-dynamic-section
+      [visit_no]="visit_no"
+      [visit_date]="visit_date"
+      [headerDetail]="headerDetail"
+      [heading]="currentHeading"
+      [metaData]="vetMetaData"
+      (isActive)="isSectionActive = $event"
+    ></app-vet-dynamic-section>
+    </ng-template>
+    
+  </mat-expansion-panel>
 
   <!-- Pet Treatment -->
   <mat-expansion-panel hideToggle class="margin-20b doc-consult-expansion-container" *ngIf="aptObj.dept_id === 'D0004'">

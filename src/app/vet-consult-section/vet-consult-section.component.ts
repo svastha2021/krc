@@ -183,7 +183,7 @@ entireData:any[] = [];
       org_id: localStorage.getItem('org_id'),
       branch_id: localStorage.getItem('branch_id'),
       user_id: localStorage.getItem('user_id'),
-      dept_id: 'D004',
+      dept_id: 'D0004',
       patient_id: this.headerDetail.patient_id,
       visit_no: this.visit_no,
       payloadList: this.petPayloadList      

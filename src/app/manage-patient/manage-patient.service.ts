@@ -45,12 +45,7 @@ export class ManagePatientService {
 
   fetchPatientSchedule(from_date: string): Observable<any> {
     let headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
-    // return this.http.get(
-
-    //   'https://node-dev.vibhavatech.com/v1/fetchpatientschedule/KRC/KRC0001?from_date=2023-06-01&to_date=2023-06-20',
-    //   { headers: headers }
-    // );
+    headers.append('Content-Type', 'application/json');    
     return this.http.get(
       environment.apiUrl +
         'fetchpatientschedule/' +
