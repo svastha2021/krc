@@ -756,8 +756,6 @@
         (isActivePet)='isEmitActivePet($event)'
       ></app-pet-history>
     </mat-expansion-panel>
-    
-      
            
       <mat-expansion-panel
         hideToggle
@@ -879,8 +877,40 @@
     </ng-template>
     
   </mat-expansion-panel> -->
-    
 
+  <!-- Pet Treatment -->
+  <mat-expansion-panel hideToggle class="margin-20b doc-consult-expansion-container" *ngIf="aptObj.dept_id === 'D0004'">
+    <mat-expansion-panel-header>
+      <mat-panel-title> Diagnosis </mat-panel-title>
+      <mat-slide-toggle [checked]="isActivePetDiagonsis" disabled></mat-slide-toggle>
+      <mat-panel-description>
+        
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <app-pet-diagnosis
+      [aptObj]="aptObj"
+      [visit_no]="visit_no"
+      [headerDetail]="headerDetail"
+      (isActivePetDiagnosis)='isEmitActivePetDiagonsis($event)'
+    ></app-pet-diagnosis>
+  </mat-expansion-panel>
+  
+  <!-- Pet Treatment -->
+  <mat-expansion-panel hideToggle class="margin-20b doc-consult-expansion-container" *ngIf="aptObj.dept_id === 'D0004'">
+    <mat-expansion-panel-header>
+      <mat-panel-title> Treatment </mat-panel-title>
+      <mat-slide-toggle [checked]="isActiveTreatment" disabled></mat-slide-toggle>
+      <mat-panel-description>
+        
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <app-pet-treatment
+      [aptObj]="aptObj"
+      [visit_no]="visit_no"
+      [headerDetail]="headerDetail"
+      (isActiveTreatment)='isEmitActiveTreatment($event)'
+    ></app-pet-treatment>
+  </mat-expansion-panel>
 
   </div>
   <div class="row"></div>

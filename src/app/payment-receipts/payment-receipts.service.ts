@@ -10,9 +10,10 @@ export class PaymentReceiptsService {
   constructor(private http: HttpClient) { }
 
   getBranchList():Observable<any>{
+    let org_id = localStorage.getItem('org_id');
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.get(environment.apiUrl + 'branches/KRC',
+    return this.http.get(environment.apiUrl + 'branches/'+org_id,
     { headers: headers })
   }
 
@@ -92,8 +93,9 @@ export class PaymentReceiptsService {
   }
 
   private getSupplierListUrl(branch_id: any) {
+    let org_id = localStorage.getItem('org_id');
     const baseUrl = environment.apiUrl;
-    let returnUrl = baseUrl + "suppliers/KRC/" + branch_id;
+    let returnUrl = baseUrl + "suppliers/" + org_id + "/" + branch_id;
     return returnUrl;
   }
 

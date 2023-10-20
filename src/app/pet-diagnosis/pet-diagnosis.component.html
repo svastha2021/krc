@@ -1,0 +1,85 @@
+<div class="container mar10lr">
+    <div class="row">
+        <div class="col-md-4" *ngIf="!showPreviousTable">
+            <button class="btn btn-success ms-2" (click)="displayPrevious()">Show Previous</button>
+        </div>
+        <div class="col-md-4" *ngIf="showPreviousTable">
+            <div>
+                <li class="mx-2">Visit#: <strong>{{showVisitNo}}</strong></li>
+                <li class="mx-2">Visit Date: <strong>{{showVisitDate | date : "dd-MM-yyyy"}}</strong></li>
+            </div>
+            <ul class="pagination pointer">
+                <li class="page-item" [ngClass]="{'disabled': recordIndex === 0 || diagnosisDetailData.length == 0 }">
+                    <a class="page-link" (click)="prevItem()">Previous</a>
+                </li>
+                <li class="page-item" [ngClass]="{'disabled': recordIndex === undefined || recordIndex === getLastRecordIndex() }">
+                    <a class="page-link" (click)="nextItem()">Next</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="error-container" *ngIf="!visit_no">Please save doctor notes to save Diagnosis details</div>
+    <form [formGroup]="diagnosisForm">
+        <div class="row mar-5b">
+            <div class="col-md-3">
+                <label class="form-label mar20t">Tentative Diagnosis</label>
+            </div>
+            <div class="col-md-9">
+                <textarea type="text"  class="form-control margin-10t" formControlName="tentative_diag"></textarea>
+            </div>
+        </div>
+        <div class="row mar-5b">
+            <div class="col-md-3">
+                <label class="form-label mar20t">Confirmatory Diagnosis</label>
+            </div>
+            <div class="col-md-9">
+                <textarea type="text"  class="form-control margin-10t" formControlName="confirm_diag"></textarea>
+            </div>
+        </div>
+        <div class="row mar-5b">
+            <div class="col-md-3">
+                <label class="form-label mar20t">Direct Opthalmoscope</label>
+            </div>
+            <div class="col-md-9">
+                <textarea type="text"  class="form-control margin-10t" formControlName="direct_opthol"></textarea>
+            </div>
+        </div>
+        <div class="row mar-5b">
+            <div class="col-md-3">
+                <label class="form-label mar20t">Indirect Opthalmoscope</label>
+            </div>
+            <div class="col-md-9">
+                <textarea type="text"  class="form-control margin-10t" formControlName="indirect_opthol"></textarea>
+            </div>
+        </div>
+        <div class="row mar-5b">
+            <div class="col-md-3">
+                <label class="form-label mar20t">Diagnotic Agents</label>
+            </div>
+            <div class="col-md-9">
+                <textarea type="text"  class="form-control margin-10t" formControlName="diagnostic_agent"></textarea>
+            </div>
+        </div>
+        <div class="row mar-5b">
+            <div class="col-md-3">
+                <label class="form-label mar20t">Advise</label>
+            </div>
+            <div class="col-md-9">
+                <textarea type="text"  class="form-control margin-10t" formControlName="advise"></textarea>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 pointer txt-center">
+        <button type="button" class="btn btn-success margin-10t" (click)="saveDiagnosis()" *ngIf="!showPreviousTable" [disabled]="!visit_no">
+            Save
+        </button>
+        <button type="button" class="btn btn-success margin-20t" (click)="back()" *ngIf="showPreviousTable">
+            Back
+        </button>
+    </div>
+    <div class="col-md-4"></div>
+</div>

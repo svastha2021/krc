@@ -116,6 +116,8 @@ import { VetConsultSectionComponent } from './vet-consult-section/vet-consult-se
 import { MultiselectComponent } from './multiselect/multiselect.component';
 import { PetRegistrationComponent } from './pet-registration/pet-registration.component';
 import { PetHistoryComponent } from './pet-history/pet-history.component';
+import { PetTreatmentComponent } from './pet-treatment/pet-treatment.component';
+import { PetDiagnosisComponent } from './pet-diagnosis/pet-diagnosis.component';
 //import { InvoicePaymentTable } from './invoice-payment-report/invoice-payment-table/invoice-payment-table.component';
 //import { InvoiceProductTable } from './invoice-product-report/invoice-product-table/invoice-product-table.component';
 @NgModule({
@@ -222,7 +224,9 @@ import { PetHistoryComponent } from './pet-history/pet-history.component';
     VetConsultSectionComponent,    
     MultiselectComponent,
     PetRegistrationComponent,
-    PetHistoryComponent
+    PetHistoryComponent,
+    PetTreatmentComponent,
+    PetDiagnosisComponent
   ],
   imports: [
     BrowserModule,

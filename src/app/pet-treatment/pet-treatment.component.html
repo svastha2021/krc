@@ -1,0 +1,85 @@
+<div class="container mar10lr">
+    <div class="row">
+        <div class="col-md-4" *ngIf="!showPreviousTable">
+            <button class="btn btn-success ms-2" (click)="displayPrevious()">Show Previous</button>
+        </div>
+        <div class="col-md-4" *ngIf="showPreviousTable">
+            <div>
+                <li class="mx-2">Visit#: <strong>{{showVisitNo}}</strong></li>
+                <li class="mx-2">Visit Date: <strong>{{showVisitDate | date : "dd-MM-yyyy"}}</strong></li>
+            </div>
+            <ul class="pagination pointer">
+                <li class="page-item" [ngClass]="{'disabled': recordIndex === 0 || treatmentDetailData.length == 0 }">
+                    <a class="page-link" (click)="prevItem()">Previous</a>
+                </li>
+                <li class="page-item" [ngClass]="{'disabled': recordIndex === undefined || recordIndex === getLastRecordIndex() }">
+                    <a class="page-link" (click)="nextItem()">Next</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="error-container" *ngIf="!visit_no">Please save doctor notes to save Treatment Plan details</div>
+    <form [formGroup]="treatmentForm">
+        <div class="row mar-5b">
+            <div class="col-md-3">
+                <label class="form-label mar20t">Medical</label>
+            </div>
+            <div class="col-md-9">
+                <textarea type="text"  class="form-control margin-10t" formControlName="medical_reco"></textarea>
+            </div>
+        </div>
+        <div class="row mar-5b">
+            <div class="col-md-3">
+                <label class="form-label mar-top-5">Review on</label>
+            </div>
+            <div class="col-md-9">
+                <input type="date"  class="form-control margin-10t" formControlName="medi_review_on"/>
+            </div>
+        </div>
+        <div class="row mar-5b">
+            <div class="col-md-3">
+                <label class="form-label mar20t">Surgical</label>
+            </div>
+            <div class="col-md-9">
+                <textarea type="text"  class="form-control margin-10t" formControlName="surgical"></textarea>
+            </div>
+        </div>
+        <div class="row mar-5b">
+            <div class="col-md-3">
+                <label class="form-label mar20t">Post- op medications</label>
+            </div>
+            <div class="col-md-9">
+                <textarea type="text"  class="form-control margin-10t" formControlName="postop_medi"></textarea>
+            </div>
+        </div>
+        <div class="row mar-5b">
+            <div class="col-md-3">
+                <label class="form-label mar-top-5">Review on:</label>
+            </div>
+            <div class="col-md-9">
+                <input type="date"  class="form-control margin-10t" formControlName="op_review_on"/>
+            </div>
+        </div>
+        <div class="row mar-5b">
+            <div class="col-md-3">
+                <label class="form-label mar20t">Discharge Summary</label>
+            </div>
+            <div class="col-md-9">
+                <textarea type="text"  class="form-control margin-10t" formControlName="discharge_summary"></textarea>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 pointer txt-center">
+        <button type="button" class="btn btn-success margin-10t" (click)="saveTreatment()" *ngIf="!showPreviousTable" [disabled]="!visit_no">
+            Save
+        </button>
+        <button type="button" class="btn btn-success margin-20t" (click)="back()" *ngIf="showPreviousTable">
+            Back
+        </button>
+    </div>
+    <div class="col-md-4"></div>
+</div>
