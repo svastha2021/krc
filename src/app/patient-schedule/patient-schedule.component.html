@@ -10,9 +10,9 @@
             <div class="row">
                 <div class="col-3">
                     <div class="supplier-item">
-                        <label for="bu" class="form-label fs">Month</label>
+                        <label for="bu" class="form-label fs">Schedule Type</label>
                         <select class="form-control" name="bu" formControlName="bu" (change)="changeMonth()">
-                            <option *ngFor="let bu of buList" [value]="bu.bu_id">{{bu.bu_name}}</option>
+                            <option *ngFor="let bu of scheduleRef" [value]="bu.ref_code">{{bu.ref_desc}}</option>
 
                         </select>
                     </div>
@@ -45,14 +45,14 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <button (click)="getInsuSummay()" class="btn btn-primary mt-4">Submit</button>
+                    <button (click)="getInsuSummay()" class="btn btn-success mt-4">Submit</button>
                 </div>
             </div>
         </div>
         <br>
     </form>
     <div class="container mar20t pad0" *ngIf="showScheduleForm">
-        <button class="btn btn-primary" (click)="addRecord()">Add Record</button>
+        <button class="btn btn-success" (click)="addRecord()">Add Record</button>
 
         <div class="table-responsive-lg col-lg-12" style="margin-top:20px" *ngIf="tableData && tableData.length>0">
             <table class="table table-bordered">
@@ -94,7 +94,7 @@
                 </tbody>
             </table>
 
-            <button type="button" class="btn btn-primary mar20tb" (click)="updateDetails()">
+            <button type="button" class="btn btn-success mar20tb" (click)="updateDetails()">
                 Save
             </button>
         </div>

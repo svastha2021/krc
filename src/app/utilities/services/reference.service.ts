@@ -138,4 +138,11 @@ export class ReferenceService {
       headers: headers,
     });
   }
+
+
+  getSchedule(): Observable<any> {   
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(environment.apiUrl + 'references/Schedule');
+  }
 }
