@@ -38,6 +38,16 @@ export class MultiselectComponent implements OnInit {
         inputRE.value = value;
       }
     }
+    if (this.left === '_LE') {
+      let value = event.value.toString();
+      const inputRE = document.getElementById(
+        this.setIDs(_formName, this.left)
+      ) as HTMLInputElement | null;
+      console.log(inputRE);
+      if (inputRE != undefined) {
+        inputRE.value = value;
+      }
+    }
 
     // this.examForm.controls[formName].setValue(value);
   }

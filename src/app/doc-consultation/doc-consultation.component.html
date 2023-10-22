@@ -303,64 +303,7 @@
       </button>
     </mat-expansion-panel>
 
-    <!-- vital paramaters collapsible -->
-    <mat-expansion-panel hideToggle class="margin-20b doc-consult-expansion-container" *ngIf="aptObj.dept_id !== 'D0004'">
-      <mat-expansion-panel-header>
-        <mat-panel-title> Vital Parameters </mat-panel-title>
-        <mat-slide-toggle [checked]="isActiveVital" disabled></mat-slide-toggle>
-        <mat-panel-description> </mat-panel-description>
-      </mat-expansion-panel-header>
-      <div *ngIf="!showVitalPrevious">
-        <button class="btn btn-success ms-2" (click)="displayPrevious()">
-          Show Previous
-        </button>
-        <div *ngFor="let param of vitalParametersList; let i = index">
-          <div class="row margin-20l">
-            <label [for]="param.khi_desc" class="form-label margin-20t">{{
-              param.khi_desc
-            }}</label>
-
-            <input
-              type="text"
-              class="form-control col-lg-6 contact-input"
-              [placeholder]="param.khi_desc"
-              [id]="param.khi_code"
-            />
-
-            <input
-              type="text"
-              class="form-control col-lg-6 contact-input margin-20l"
-              placeholder="Notes"
-              [id]="setNotesId(param.khi_code)"
-            />
-          </div>
-        </div>
-        <button
-          type="button"
-          [disabled]="!visit_no"
-          class="btn btn-warning margin-20t"
-          (click)="saveVitalParams()"
-        >
-          <i class="fa-solid fa-paper-plane mar5r"></i>
-          Save
-        </button>
-      </div>
-      <div *ngIf="showVitalPrevious">
-        <app-previous-vital
-          [visit_no]="visit_no"
-          [headerDetail]="headerDetail"
-        ></app-previous-vital>
-        <button
-          type="button"
-          *ngIf="showVitalPrevious"
-          class="btn btn-danger mar20tb"
-          (click)="showVitalPrevious = false"
-        >
-          <i class="fa-solid fa-arrow-left mar5r"></i>
-          Back
-        </button>
-      </div>
-    </mat-expansion-panel>
+    
 
     <!-- Dialysis Notes -->
     <mat-expansion-panel
@@ -445,96 +388,7 @@
       </div>
     </mat-expansion-panel>
 
-    <!-- <mat-expansion-panel
-      hideToggle
-      class="margin-20b doc-consult-expansion-container"
-      *ngIf="aptObj.dept_id === 'D0002'"
-    >
-      <mat-expansion-panel-header>
-        <mat-panel-title> Basic </mat-panel-title>
-        <mat-panel-description>
-          
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <app-opthal-basic
-        [visit_no]="visit_no"
-        [visit_date]="visit_date"
-        [headerDetail]="headerDetail"
-      ></app-opthal-basic>
-    </mat-expansion-panel>
-
-    <mat-expansion-panel
-      hideToggle
-      class="margin-20b doc-consult-expansion-container"
-      *ngIf="aptObj.dept_id === 'D0002'"
-    >
-      <mat-expansion-panel-header>
-        <mat-panel-title> Refraction </mat-panel-title>
-        <mat-panel-description>
-          
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <app-opthal-refraction
-        [visit_no]="visit_no"
-        [visit_date]="visit_date"
-        [headerDetail]="headerDetail"
-      ></app-opthal-refraction>
-    </mat-expansion-panel>
-
-    <mat-expansion-panel
-      hideToggle
-      class="margin-20b doc-consult-expansion-container"
-      *ngIf="aptObj.dept_id === 'D0002'"
-    >
-      <mat-expansion-panel-header>
-        <mat-panel-title> Spectacle </mat-panel-title>
-        <mat-panel-description>
-          
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <app-opthal-spectacle
-        [visit_no]="visit_no"
-        [visit_date]="visit_date"
-        [headerDetail]="headerDetail"
-      ></app-opthal-spectacle>
-    </mat-expansion-panel> -->
-
-    <!-- Opthal Slit-Lamp paramaters tab -->
-    <!-- <mat-expansion-panel
-      hideToggle
-      class="margin-20b doc-consult-expansion-container"
-      *ngIf="aptObj.dept_id === 'D0002'"
-    >
-      <mat-expansion-panel-header>
-        <mat-panel-title> Slit-Lamp </mat-panel-title>
-        <mat-panel-description>
-          
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <app-slit-lamp
-        [visit_no]="visit_no"
-        [visit_date]="visit_date"
-        [headerDetail]="headerDetail"
-      ></app-slit-lamp>
-    </mat-expansion-panel> -->
-
-    <!-- Opthal Medical paramaters tab -->
-    <!-- <mat-expansion-panel
-    hideToggle
-    class="margin-20b doc-consult-expansion-container"
-    *ngIf="aptObj.dept_id === 'D0002'">
-    <mat-expansion-panel-header>
-      <mat-panel-title> Medical Examination </mat-panel-title>
-      <mat-panel-description>
-        
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <app-medical-examination
-      [visit_no]="visit_no"
-      [visit_date]="visit_date"
-      [headerDetail]="headerDetail"
-    ></app-medical-examination>
-  </mat-expansion-panel> -->
+    
 
     <!-- Opthal Visual paramaters tab -->
     <mat-expansion-panel
@@ -709,36 +563,7 @@
       </app-glass-prescription>
     </mat-expansion-panel>
 
-    <!-- pharma -->
-    <mat-expansion-panel hideToggle class="margin-20b doc-consult-expansion-container" *ngIf="aptObj.dept_id !== 'D0004'">
-      <mat-expansion-panel-header>
-        <mat-panel-title> Medicine </mat-panel-title>
-        <mat-slide-toggle
-          [checked]="isActiveMedicine"
-          disabled
-        ></mat-slide-toggle>
-        <mat-panel-description> </mat-panel-description>
-      </mat-expansion-panel-header>
-      <app-med-prescription
-        [visit_no]="visit_no"
-        [headerDetail]="headerDetail"
-        (isActiveMedicine)="isEmitActiveMedicine($event)"
-      ></app-med-prescription>
-    </mat-expansion-panel>
-
-    <!-- Lab -->
-    <mat-expansion-panel hideToggle class="margin-20b doc-consult-expansion-container" *ngIf="aptObj.dept_id !== 'D0004'">
-      <mat-expansion-panel-header>
-        <mat-panel-title> Lab </mat-panel-title>
-        <mat-slide-toggle [checked]="isActiveLab" disabled></mat-slide-toggle>
-        <mat-panel-description> </mat-panel-description>
-      </mat-expansion-panel-header>
-      <app-lab-prescription
-        [visit_no]="visit_no"
-        [headerDetail]="headerDetail"
-        (isActiveLab)="isEmitActiveLab($event)"
-      ></app-lab-prescription>
-    </mat-expansion-panel>
+    
 
     <!-- Pet History -->
     <mat-expansion-panel hideToggle class="margin-20b doc-consult-expansion-container" *ngIf="aptObj.dept_id === 'D0004'">
@@ -756,30 +581,87 @@
         (isActivePet)='isEmitActivePet($event)'
       ></app-pet-history>
     </mat-expansion-panel>
-           
-      <mat-expansion-panel
-        hideToggle
-        class="margin-20b doc-consult-expansion-container"
-        *ngIf="aptObj.dept_id === 'D0004'"
-      >
-        <mat-expansion-panel-header (click)="getPetMetaData('Vision Assesment')" hideToggle>
-          <mat-panel-title>Vision Assesment</mat-panel-title>
-          <mat-slide-toggle [checked]="isSectionActive" disabled></mat-slide-toggle>
-          <mat-panel-description> </mat-panel-description>
-        </mat-expansion-panel-header>
-        
-        <ng-template [ngIf]="currentHeading === 'Vision Assesment' ">
-          <app-vet-dynamic-section
+           <!-- vital paramaters collapsible -->
+    <mat-expansion-panel hideToggle class="margin-20b doc-consult-expansion-container">
+      <mat-expansion-panel-header>
+        <mat-panel-title> Vital Parameters </mat-panel-title>
+        <mat-slide-toggle [checked]="isActiveVital" disabled></mat-slide-toggle>
+        <mat-panel-description> </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div *ngIf="!showVitalPrevious">
+        <button class="btn btn-success ms-2" (click)="displayPrevious()">
+          Show Previous
+        </button>
+        <div *ngFor="let param of vitalParametersList; let i = index">
+          <div class="row margin-20l">
+            <label [for]="param.khi_desc" class="form-label margin-20t">{{
+              param.khi_desc
+            }}</label>
+
+            <input
+              type="text"
+              class="form-control col-lg-6 contact-input"
+              [placeholder]="param.khi_desc"
+              [id]="param.khi_code"
+            />
+
+            <input
+              type="text"
+              class="form-control col-lg-6 contact-input margin-20l"
+              placeholder="Notes"
+              [id]="setNotesId(param.khi_code)"
+            />
+          </div>
+        </div>
+        <button
+          type="button"
+          [disabled]="!visit_no"
+          class="btn btn-warning margin-20t"
+          (click)="saveVitalParams()"
+        >
+          <i class="fa-solid fa-paper-plane mar5r"></i>
+          Save
+        </button>
+      </div>
+      <div *ngIf="showVitalPrevious">
+        <app-previous-vital
           [visit_no]="visit_no"
-          [visit_date]="visit_date"
           [headerDetail]="headerDetail"
-          [heading]="currentHeading"
-          [metaData]="vetMetaData"
-          (isActive)="isSectionActive = $event"
-        ></app-vet-dynamic-section>
-        </ng-template>
-        
-      </mat-expansion-panel>
+        ></app-previous-vital>
+        <button
+          type="button"
+          *ngIf="showVitalPrevious"
+          class="btn btn-danger mar20tb"
+          (click)="showVitalPrevious = false"
+        >
+          <i class="fa-solid fa-arrow-left mar5r"></i>
+          Back
+        </button>
+      </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel
+      hideToggle
+      class="margin-20b doc-consult-expansion-container"
+      *ngIf="aptObj.dept_id === 'D0004'"
+    >
+      <mat-expansion-panel-header (click)="getPetMetaData('Vision Assesment')" hideToggle>
+        <mat-panel-title>Vision Assesment</mat-panel-title>
+        <mat-slide-toggle [checked]="isSectionActive" disabled></mat-slide-toggle>
+        <mat-panel-description> </mat-panel-description>
+      </mat-expansion-panel-header>
+      
+      <ng-template [ngIf]="currentHeading === 'Vision Assesment' ">
+        <app-vet-dynamic-section
+        [visit_no]="visit_no"
+        [visit_date]="visit_date"
+        [headerDetail]="headerDetail"
+        [heading]="currentHeading"
+        [metaData]="vetMetaData"
+        (isActive)="isSectionActive = $event"
+      ></app-vet-dynamic-section>
+      </ng-template>
+      
+    </mat-expansion-panel>
    
       <mat-expansion-panel
       hideToggle
@@ -959,6 +841,38 @@
       [headerDetail]="headerDetail"
       (isActiveTreatment)='isEmitActiveTreatment($event)'
     ></app-pet-treatment>
+  </mat-expansion-panel>
+
+
+  <!-- pharma -->
+  <mat-expansion-panel hideToggle class="margin-20b doc-consult-expansion-container" >
+    <mat-expansion-panel-header>
+      <mat-panel-title> Medicine </mat-panel-title>
+      <mat-slide-toggle
+        [checked]="isActiveMedicine"
+        disabled
+      ></mat-slide-toggle>
+      <mat-panel-description> </mat-panel-description>
+    </mat-expansion-panel-header>
+    <app-med-prescription
+      [visit_no]="visit_no"
+      [headerDetail]="headerDetail"
+      (isActiveMedicine)="isEmitActiveMedicine($event)"
+    ></app-med-prescription>
+  </mat-expansion-panel>
+
+  <!-- Lab -->
+  <mat-expansion-panel hideToggle class="margin-20b doc-consult-expansion-container" >
+    <mat-expansion-panel-header>
+      <mat-panel-title> Lab </mat-panel-title>
+      <mat-slide-toggle [checked]="isActiveLab" disabled></mat-slide-toggle>
+      <mat-panel-description> </mat-panel-description>
+    </mat-expansion-panel-header>
+    <app-lab-prescription
+      [visit_no]="visit_no"
+      [headerDetail]="headerDetail"
+      (isActiveLab)="isEmitActiveLab($event)"
+    ></app-lab-prescription>
   </mat-expansion-panel>
 
   </div>
