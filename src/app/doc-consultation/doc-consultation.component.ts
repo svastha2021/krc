@@ -462,14 +462,14 @@ export class DocConsultationComponent implements OnInit {
       visit_no: this.visit_no,
       health_lists: this.vitalList,
     };
-    // this.docService.updateVital(vitalPram).subscribe((data) => {
-    //   console.log(data);
-    //   this.isActiveVital = true;
-    //   this.dialog.open(InfoDialogComponent, {
-    //     width: '500px',
-    //     data: 'Vital Params updated Successfully',
-    //   });
-    // });
+    this.docService.updateVital(vitalPram).subscribe((data) => {
+      console.log(data);
+      this.isActiveVital = true;
+      this.dialog.open(InfoDialogComponent, {
+        width: '500px',
+        data: 'Vital Params updated Successfully',
+      });
+    });
   }
 
   getVitalData() {
