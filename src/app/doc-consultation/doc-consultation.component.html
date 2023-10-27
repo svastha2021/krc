@@ -756,6 +756,19 @@
         (isActivePet)='isEmitActivePet($event)'
       ></app-pet-history>
     </mat-expansion-panel>
+
+      <!-- Pet Visit -->
+      <mat-expansion-panel hideToggle class="margin-20b doc-consult-expansion-container" *ngIf="aptObj.dept_id === 'D0004'">
+        <mat-expansion-panel-header>
+          <mat-panel-title> Pet Visit 360 </mat-panel-title>
+          <mat-slide-toggle [checked]="isActiveTreatment" disabled></mat-slide-toggle>
+          <mat-panel-description>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div *ngIf="patientHistory">
+          <app-pet-visit360-view [tableData]="patientHistory"></app-pet-visit360-view>
+        </div>
+      </mat-expansion-panel>
            
       <mat-expansion-panel
         hideToggle

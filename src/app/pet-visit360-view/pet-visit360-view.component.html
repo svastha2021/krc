@@ -1,0 +1,446 @@
+<div *ngIf="!isShowPatientDetails">
+    <section class="example-container mat-elevation-z8" tabindex="0">
+
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 mat-mdc-table">
+
+            <ng-container matColumnDef="visit_no">
+                <th mat-header-cell *matHeaderCellDef> Visit No. </th>
+                <td mat-cell *matCellDef="let element"> {{element.visit_no}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="visit_date">
+                <th mat-header-cell *matHeaderCellDef> Visit Date </th>
+                <td mat-cell *matCellDef="let element"> {{element.visit_date | date: 'dd-MM-yyyy'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="view">
+                <th mat-header-cell *matHeaderCellDef> View </th>
+                <td mat-cell *matCellDef="let element"> <mat-icon
+                        (click)="goToPatientVisit(element)">visibility</mat-icon> </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </section>
+</div>
+<div *ngIf="isShowPatientDetails">
+    <div class="container">
+        <div class="txt-left">
+            <button type="button" class="btn btn-clr mar20t" [useExistingCss]="true" id="print-to-pdf"
+                printSectionId="print-section" ngxPrint>Print to Pdf</button>
+            <button type="button" class="btn btn-clr mar20t margin-10l" (click)="back()">Back</button>
+        </div>
+        <div id="print-section">
+            <div class="space-10"></div>
+            <h5>History</h5>
+            <mat-card *ngIf="petData">
+                <div class="mar-10b">
+                    <div class="row pet-label">
+                        <label class="form-label">Primary compliant</label>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label margin-20t">Primary compliant: </label>
+                            {{petData.main_complaint}}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label margin-20t">Date of Onset: </label>
+                            {{petData.main_complaint_from | date: 'dd-MM-yyyy'}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label margin-20t">Complaint Status: </label>
+                            {{petData.curr_treatment}}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label margin-20t">Complaint Notes: </label>
+                            {{petData.curr_treatment_dtl}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mar-10b">
+                    <div class="row pet-label">
+                        <label class="form-label">Concurrent Disease</label>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label margin-20t">Concurrent Disease: </label>
+                            {{petData.concurrent_disease}}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label margin-20t">Comments: </label>
+                            {{petData.concurrent_disease_dtl}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mar-10b">
+                    <div class="row pet-label">
+                        <label class="form-label">Current Treatment: </label>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="form-label margin-20t">Comments: </label>
+                            {{petData.medication_dtl}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mar-10b">
+                    <div class="row pet-label">
+                        <label class="form-label">Clinical Symptoms Observed </label>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 pg-10">
+                        </div>
+                        <div class="col-md-4 pg-10">
+                            <label class="form-label ">Right Eye</label>
+                        </div>
+                        <div class="col-md-4 pg-10">
+                            <label class="form-label ">Left Eye</label>
+                        </div>
+                    </div>
+                    <div class="row mar-5b">
+                        <div class="col-md-2 pg">
+                            <label class="form-label pg-t">Lacrimation: </label>
+                        </div>
+                        <div class="col-md-5 flex-align">
+                            {{petData.lacrimation_right}}
+                        </div>
+                        <div class="col-md-5 flex-align">
+                            {{petData.lacrimation_left}}
+                        </div>
+                    </div>
+                    <div class="row mar-5b">
+                        <div class="col-md-2 pg">
+                            <label class="form-label pg-t">Pain: </label>
+                        </div>
+                        <div class="col-md-5 flex-align">
+                            {{petData.pain_right}}
+                        </div>
+                        <div class="col-md-5 flex-align">
+                            {{petData.pain_left}}
+                        </div>
+                    </div>
+                    <div class="row mar-5b">
+                        <div class="col-md-2 pg">
+                            <label class="form-label pg-t">Blepharospasm: </label>
+                        </div>
+                        <div class="col-md-5 flex-align">
+                            {{petData.blepharospasm_right}}
+                        </div>
+                        <div class="col-md-5 flex-align">
+                            {{petData.blepharospasm_left}}
+                        </div>
+                    </div>
+                    <div class="row mar-5b">
+                        <div class="col-md-2 pg">
+                            <label class="form-label pg-t">Photophobia: </label>
+                        </div>
+                        <div class="col-md-5 flex-align">
+                            {{petData.photophobia_right}}
+                        </div>
+                        <div class="col-md-5 flex-align">
+                            {{petData.photophobia_left}}
+                        </div>
+                    </div>
+
+                    <div class="row mar-5b">
+                        <div class="col-md-6">
+                            <label class="form-label margin-20t">Attitude: </label>
+                            {{petData.attitude}}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label margin-20t">Restraint: </label>
+                            {{petData.restraint_dtl}}
+                        </div>
+                    </div>
+                </div>
+            </mat-card>
+            <div *ngIf="petData.independent_tab[0]">
+                <div *ngFor="let independent of petData.independent_tab">
+                    <div class="space-10"></div>
+                    <h5>{{independent.heading}}</h5>
+                    <div *ngFor="let subHeading of independent.sub_headings">
+                        <h6>{{subHeading.sub_heading}}</h6>
+                        <mat-card *ngFor="let details of subHeading.pet_details">
+                            <div class="row mar-5b mar20t">
+                                <div class="col-md-3">
+                                    <label class="form-label">{{details.column_name_text}}: </label>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <div class="col-3">{{details.column_name_le}}</div>
+                                        <div class="col-3">{{details.column_name_rem_le}}</div>
+                                        <div class="col-3">{{details.column_name_re}}</div>
+                                        <div class="col-3">{{details.column_name_rem_re}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-card>
+                    </div>
+                </div>
+            </div>
+            <div class="space-10"></div>
+            <h5>Visit Information</h5>
+            <mat-card *ngIf="petData">
+                <mat-card-content class="row d-flex fs-medium">
+                    <div class="col-6">Visit No: {{petData.visit_no}}</div>
+                    <div class="col-6">Visit Date: {{petData.visit_date | date: 'dd-MM-yyyy'}}</div>
+                    <div class="col-6">Prev Visit No: {{petData.prev_visit_no}}</div>
+                    <div class="col-6">Prev Visit Date: {{petData.prev_visit_date | date: 'dd-MM-yyyy'}}</div>
+                </mat-card-content>
+            </mat-card>
+            <div class="space-10"></div>
+            <div class="mat-card" *ngIf="petData?.health_lastvisit">
+                <h5>Vital Parameter</h5>
+                <table class="table table-bordered fs-medium">
+                    <thead class="thead-dark table-header-background">
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                            <th>Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let vitalData of petData.health_lastvisit">
+                            <td>
+                                {{vitalData.khi_desc}}
+                            </td>
+                            <td>
+                                {{vitalData.khi_value}}
+                            </td>
+                            <td>
+                                {{vitalData.khi_notes}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="space-10"></div>
+            <div class="mat-card" *ngIf="petData?.test_lastvisit">
+                <h5>Tests Underwent</h5>
+                <table class="table table-bordered fs-medium">
+                    <thead class="thead-dark table-header-background">
+                        <tr>
+                            <th>Sl No</th>
+                            <th>Visit #</th>
+                            <th>Visit Date</th>
+                            <th>Test</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let testData of petData.test_lastvisit; let i = index">
+                            <td>
+                                {{i+1}}
+                            </td>
+                            <td>
+                                {{testData.product_name}}
+                            </td>
+                            <td>
+                                {{testData.test_date | date: 'dd-MM-yyyy'}}
+                            </td>
+                            <td>
+                                {{testData.test_notes}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="space-10"></div>
+            <div class="table-responsive-lg col-lg-12 mat-card" style="margin-top:20px"
+                *ngIf="petData && petData.medicine_lastvisit">
+                <h5>Medicines recommended</h5>
+                <table class="table table-bordered fs-small">
+                    <thead class="thead-dark table-header-background">
+                        <tr>
+                            <th rowspan="2">#</th>
+                            <th rowspan="2">Product Name</th>
+                            <th colspan="2">Morning</th>
+                            <th colspan="2">Noon</th>
+                            <th colspan="2">Evening</th>
+                            <th colspan="2">Night</th>
+                            <th colspan="3">Adhoc</th>
+                            <th rowspan="2">Days</th>
+                            <th rowspan="2">Remarks</th>
+                        </tr>
+
+                        <tr>
+                            <th>BF</th>
+                            <th>AF</th>
+                            <th>BF</th>
+                            <th>AF</th>
+                            <th>BF</th>
+                            <th>AF</th>
+                            <th>BF</th>
+                            <th>AF</th>
+                            <th>Notes</th>
+                            <th>BF</th>
+                            <th>AF</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let medicineData of petData.medicine_lastvisit; let i=index">
+                            <td scope="row">{{i+1}}</td>
+                            <td>
+                                {{medicineData.product_name}}
+                            </td>
+
+                            <td class="w-5">{{medicineData.morning_bf}}</td>
+                            <td class="w-5">{{medicineData.morning_af}}</td>
+
+                            <td class="w-5">{{medicineData.noon_bf}}</td>
+                            <td class="w-5">{{medicineData.noon_af}}</td>
+
+                            <td class="w-5">{{medicineData.evening_bf}}</td>
+                            <td class="w-5">{{medicineData.evening_af}}</td>
+
+                            <td class="w-5">{{medicineData.night_bf}}</td>
+                            <td class="w-5">{{medicineData.night_af}}</td>
+
+                            <td class="">{{medicineData.other_time_desc}}</td>
+                            <td class="w-5">{{medicineData.other_time_bf}}</td>
+                            <td class="w-5">{{medicineData.other_time_af}}</td>
+                            <td>{{medicineData.no_of_days}}</td>
+                            <td>{{medicineData.remarks}}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="space-10"></div>
+            <div class="mat-card" *ngIf="petData?.dialysis_notes">
+                <h5>Dialysis Notes</h5>
+                <table class="table table-bordered fs-medium">
+                    <thead class="thead-dark table-header-background">
+                        <tr>
+                            <th>Dialysis Notes</th>
+                            <th>Prescription Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let dialysisData of petData.dialysis_notes">
+                            <td>
+                                {{dialysisData.dialysis_notes}}
+                            </td>
+                            <td>
+                                {{dialysisData.prescription_date | date: 'dd-MM-yyyy'}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div *ngIf="petData.diagnostic_input[0]">
+                <div class="space-10"></div>
+                <h5>Diagnosis</h5>
+                <mat-card>
+                    <div class="row mar-5b mar20t">
+                        <div class="col-md-3">
+                            <label class="form-label">Tentative Diagnosis: </label>
+                        </div>
+                        <div class="col-md-9">
+                            {{petData.diagnostic_input[0].tentative_diag}}
+                        </div>
+                    </div>
+                    <div class="row mar-5b mar20t">
+                        <div class="col-md-3">
+                            <label class="form-label">Confirmatory Diagnosis: </label>
+                        </div>
+                        <div class="col-md-9">
+                            {{petData.diagnostic_input[0].confirm_diag}}
+                        </div>
+                    </div>
+                    <div class="row mar-5b mar20t">
+                        <div class="col-md-3">
+                            <label class="form-label">Direct Opthalmoscope: </label>
+                        </div>
+                        <div class="col-md-9">
+                            {{petData.diagnostic_input[0].direct_opthol}}
+                        </div>
+                    </div>
+                    <div class="row mar-5b mar20t">
+                        <div class="col-md-3">
+                            <label class="form-label">Indirect Opthalmoscope: </label>
+                        </div>
+                        <div class="col-md-9">
+                            {{petData.diagnostic_input[0].indirect_opthol}}
+                        </div>
+                    </div>
+                    <div class="row mar-5b mar20t">
+                        <div class="col-md-3">
+                            <label class="form-label">Diagnotic Agents: </label>
+                        </div>
+                        <div class="col-md-9">
+                            {{petData.diagnostic_input[0].diagnostic_agent}}
+                        </div>
+                    </div>
+                    <div class="row mar-5b mar20t">
+                        <div class="col-md-3">
+                            <label class="form-label">Advise: </label>
+                        </div>
+                        <div class="col-md-9">
+                            {{petData.diagnostic_input[0].advise}}
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+            <div *ngIf="petData.treatment_input[0]">
+                <div class="space-10"></div>
+                <h5>Treatment Plan</h5>
+                <mat-card>
+                    <div class="row mar-5b mar20t">
+                        <div class="col-md-3">
+                            <label class="form-label">Medical: </label>
+                        </div>
+                        <div class="col-md-9">
+                            {{petData.treatment_input[0].medical_reco}}
+                        </div>
+                    </div>
+                    <div class="row mar-5b">
+                        <div class="col-md-3">
+                            <label class="form-label mar-top-5">Review on: </label>
+                        </div>
+                        <div class="col-md-9">
+                            {{petData.treatment_input[0].medi_review_on | date: 'dd-MM-yyyy'}}
+                        </div>
+                    </div>
+                    <div class="row mar-5b mar20t">
+                        <div class="col-md-3">
+                            <label class="form-label">Surgical: </label>
+                        </div>
+                        <div class="col-md-9">
+                            {{petData.treatment_input[0].surgical}}
+                        </div>
+                    </div>
+                    <div class="row mar-5b mar20t">
+                        <div class="col-md-3">
+                            <label class="form-label">Post- op medications: </label>
+                        </div>
+                        <div class="col-md-9">
+                            {{petData.treatment_input[0].postop_medi}}
+                        </div>
+                    </div>
+                    <div class="row mar-5b">
+                        <div class="col-md-3">
+                            <label class="form-label mar-top-5">Review on:</label>
+                        </div>
+                        <div class="col-md-9">
+                            {{petData.treatment_input[0].op_review_on | date: 'dd-MM-yyyy'}}
+                        </div>
+                    </div>
+                    <div class="row mar-5b mar20t">
+                        <div class="col-md-3">
+                            <label class="form-label">Discharge Summary: </label>
+                        </div>
+                        <div class="col-md-9">
+                            {{petData.treatment_input[0].discharge_summary}}
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+        <br>
+    </div>
+</div>

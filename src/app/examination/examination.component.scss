@@ -4,7 +4,7 @@
 .txt-b {
     font-weight: 500;
 }
-::ng-deep .mat-form-field-underline {
+:host ::ng-deep .mat-form-field-underline {
     display: none;
 }
 .mat-form-field {
@@ -15,7 +15,7 @@
     border: 1px solid rgba(0, 0, 0, 0.125);
     border-radius: 0.25rem;
 }
-::ng-deep .mat-select-panel-wrap {
+:host ::ng-deep .mat-select-panel-wrap {
     flex-basis: 89% !important;
     transform: translate(28px, 44px) !important;
 }
@@ -36,10 +36,10 @@
     padding: 15px;
 }
 
-::ng-deep .mat-select-arrow {
+:host ::ng-deep .mat-select-arrow {
     display: none;
 }
 
-::ng-deep .mat-select-panel {
+:host ::ng-deep .mat-select-panel {
     font-size: 15px !important;
 }
