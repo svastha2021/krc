@@ -119,6 +119,8 @@ import { PetHistoryComponent } from './pet-history/pet-history.component';
 import { PetTreatmentComponent } from './pet-treatment/pet-treatment.component';
 import { PetDiagnosisComponent } from './pet-diagnosis/pet-diagnosis.component';
 import { PetVisit360ViewComponent } from './pet-visit360-view/pet-visit360-view.component';
+import {ViewPetFieldImage} from './utilities/pet-section-field-image-view/pet-section-field-image-view.component';
+import { ImageDrawingModule } from 'ngx-image-drawing';
 //import { InvoicePaymentTable } from './invoice-payment-report/invoice-payment-table/invoice-payment-table.component';
 //import { InvoiceProductTable } from './invoice-product-report/invoice-product-table/invoice-product-table.component';
 @NgModule({
@@ -228,7 +230,8 @@ import { PetVisit360ViewComponent } from './pet-visit360-view/pet-visit360-view.
     PetHistoryComponent,
     PetTreatmentComponent,
     PetDiagnosisComponent,
-    PetVisit360ViewComponent
+    PetVisit360ViewComponent,
+    ViewPetFieldImage
   ],
   imports: [
     BrowserModule,
@@ -240,7 +243,8 @@ import { PetVisit360ViewComponent } from './pet-visit360-view/pet-visit360-view.
     MaterialModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    ImageDrawingModule
   ],
   providers: [AuthService, DatePipe],
   bootstrap: [AppComponent]

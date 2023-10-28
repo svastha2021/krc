@@ -15,29 +15,32 @@ import { MatDialog } from '@angular/material/dialog';
 import { InfoDialogComponent } from '../utilities/info-dialog/info-dialog.component';
 import { UtilityService } from '../utilities/services/utility.service';
 import { MatSelect } from '@angular/material/select';
+import { ViewPetFieldImage } from '../utilities/pet-section-field-image-view/pet-section-field-image-view.component';
+import { ReplaySubject } from 'rxjs/internal/ReplaySubject';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-vet-dynamic-section',
   templateUrl: './vet-consult-section.component.html',
   styleUrls: ['./vet-consult-section.component.scss'],
 })
-export class VetConsultSectionComponent  {
+export class VetConsultSectionComponent {
   @ViewChild(MatSelect) matSelect: MatSelect | undefined;
   @Input() headerDetail: any;
   @Input() visit_no: any;
   _heading: any;
-  @Input() set heading(value: string){
+  @Input() set heading(value: string) {
     console.log('input', value);
     this._heading = value;
-  } 
+  }
   @Input() visit_date: any;
   _metaData: any;
   @Input() set metaData(value: any) {
     console.log('input', value);
     if (value) {
-     this.sectionParamData = value;
+      this.sectionParamData = value;
     }
   }
-  @Output() isActive= new EventEmitter();
+  @Output() isActive = new EventEmitter();
 
   dynamicForm!: FormGroup;
   showPreviousTable = false;
@@ -58,33 +61,34 @@ export class VetConsultSectionComponent  {
     private utility: UtilityService,
     private cdRef: ChangeDetectorRef
   ) {}
-  
-  ngOnInit(): void {
-   
-  }
+
+  ngOnInit(): void {}
   dynamicExamData: any = [];
 
   get() {
     return this.dynamicForm.controls;
   }
-entireData:any[] = [];
-  getDetail() {    
+  entireData: any[] = [];
+  getDetail() {
     const patient_id = this.headerDetail.patient_id;
-    this.vetService.previousVetData(patient_id, this._heading).subscribe(data => {
-      this.entireData = data.results;
-      // this.examDetailData = data.results;
-       this.entireData = this.entireData.reverse();
-       this.setCurrentExamData();
-    })
+    this.vetService
+      .previousVetData(patient_id, this._heading)
+      .subscribe((data) => {
+        this.entireData = data.results;
+        // this.examDetailData = data.results;
+        this.entireData = this.entireData.reverse();
+        this.setCurrentExamData();
+      });
   }
 
   setCurrentExamData() {
     //this.examForm.patchValue(this.examDetailData[this.getLastRecordIndex()]);
     this.showVisitNo = this.entireData[this.getLastRecordIndex()].visit_no;
-  // this.showVisitDate = this.utility.convertDate(
-  //     this.examDetailData[this.getLastRecordIndex()].visit_date
-  //   );
-  this.sectionParamData = this.entireData[this.getLastRecordIndex()].sub_headings;
+    // this.showVisitDate = this.utility.convertDate(
+    //     this.examDetailData[this.getLastRecordIndex()].visit_date
+    //   );
+    this.sectionParamData =
+      this.entireData[this.getLastRecordIndex()].sub_headings;
     if (this.getLastRecordIndex() <= 0) {
       this.recordIndex = 0;
     }
@@ -96,7 +100,7 @@ entireData:any[] = [];
 
   prevItem() {
     this.prevCounter++;
-    this.setCurrentNotesAfterChange();   
+    this.setCurrentNotesAfterChange();
   }
 
   nextItem() {
@@ -107,11 +111,10 @@ entireData:any[] = [];
   setCurrentNotesAfterChange() {
     this.sectionParamData = [];
     this.recordIndex = this.getLastRecordIndex() - this.prevCounter;
-    this.sectionParamData =
-      this.entireData[this.recordIndex].sub_headings;
-      this.visit_no = this.entireData[this.recordIndex].visit_no;
-      this.showVisitNo = this.visit_no;
-      
+    this.sectionParamData = this.entireData[this.recordIndex].sub_headings;
+    this.visit_no = this.entireData[this.recordIndex].visit_no;
+    this.showVisitNo = this.visit_no;
+
     //this.examForm.patchValue(this.examDetailData[this.recordIndex]); // give us back the item of where we are now
   }
 
@@ -186,26 +189,22 @@ entireData:any[] = [];
       dept_id: 'D0004',
       patient_id: this.headerDetail.patient_id,
       visit_no: this.visit_no,
-      payloadList: this.petPayloadList      
-    };  
-    
+      payloadList: this.petPayloadList,
+    };
 
-    this.vetService.saveVetData(params).subscribe(data => {
+    this.vetService.saveVetData(params).subscribe((data) => {
       this.isActive.emit(true);
       this.dialog.open(InfoDialogComponent, {
         width: '500px',
-        data: 'Data Saved Successfully'
-      })
-    })
+        data: 'Data Saved Successfully',
+      });
+    });
   }
-
-  
 
   back() {
     this.showPreviousTable = false;
     //this.showVisitNo = this.visit_no;
   }
-
 
   convertToStr(event: any, _formName: any) {
     console.log(event);
@@ -219,5 +218,73 @@ entireData:any[] = [];
 
   emitExamination() {
     this.isActive.emit(this.examinationBoolean);
+  }
+
+  displayFieldImage(property: any, eye:string) {
+    const viewImage = this.dialog.open(ViewPetFieldImage, {
+      width: '800px',
+      data: property,
+    });
+
+    viewImage.afterClosed().subscribe((data) => {
+      let blobfile =  data.file;
+      let field = data.field;
+      console.log(data);
+      if (blobfile) {
+        let imageName = this.headerDetail.patient_id +'-'+field.heading_seq_no+'-'+field.sub_heading_seq_no+'-'+field.column_name_text.trim()+'-'+field.column_name_le+'-'+this.visit_no;
+        let blobtofile= new File([blobfile], imageName+".png");
+        console.log('file edit', blobtofile);
+        const formData = new FormData();
+        
+        
+        //file.name = imageName;
+        formData.append('image', blobtofile);
+        formData.append('org_id',localStorage.getItem('org_id')!);
+        formData.append('branch_id',localStorage.getItem('branch_id')!);
+        formData.append('user_id',localStorage.getItem('user_id')!);
+
+        formData.append('patient_id', this.headerDetail.patient_id);
+        formData.append('heading_seq_no',field.heading_seq_no);
+        formData.append('sub_heading_seq_no',field.sub_heading_seq_no);
+        formData.append('column_name_seq_no',field.column_name_seq_no);
+
+        formData.append('column_name', field.column_name);
+        formData.append('heading',field.heading);
+        formData.append('sub_heading',field.sub_heading);
+        formData.append('eye',eye);
+        
+        this.vetService.uploadFile(formData,this.headerDetail.patient_id).subscribe((data) => {
+          this.dialog.open(InfoDialogComponent, {
+            width: '500px',
+            data: 'Image Saved Successfully',
+          });
+        });
+      }
+    });
+  }
+
+  convertFile(file: File) {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      let payload = {
+        org_id: localStorage.getItem('org_id'),
+        branch_id: localStorage.getItem('branch_id'),
+        user_id: localStorage.getItem('user_id'),
+        dept_id: 'D0004',
+        patient_id: this.headerDetail.patient_id,
+        visit_no: this.visit_no,
+        file_name: 'shan123.png',
+        image: reader.result,
+      };
+
+      this.vetService.uploadFileBase64(payload).subscribe((data) => {
+        this.dialog.open(InfoDialogComponent, {
+          width: '500px',
+          data: 'Image Saved Successfully',
+        });
+      });
+      console.log(reader.result);
+    };
   }
 }

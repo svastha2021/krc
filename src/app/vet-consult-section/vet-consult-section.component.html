@@ -57,15 +57,18 @@
           <label class="form-label pg-t">{{ property.column_name_text }}</label>
         </div>
         <div class="col-md-5 flex-align" *ngIf="!showPreviousTable">
-          <!-- <div class="col-4">
-            <img
-              *ngIf="
-                property.column_name_text === 'Cornial Thickness Peripheral'
-              "
-              src="../../assets/consult-images/sreniaLeft.png"
+          <div class="col-md-1">
+            <!-- <img
+              *ngIf="property.image_le === 'Y'"
+              [src]="property.image_le_path"
               alt="image"
-            />
-          </div> -->
+            /> -->
+            <mat-icon
+              *ngIf="property.image_re === 'Y'"
+              (click)="displayFieldImage(property, 'R')"
+              >remove_red_eye</mat-icon
+            >
+          </div>
           <div class="col-1">
             <app-multiselect
               *ngIf="property.column_name_type === 'LOV'"
@@ -99,7 +102,7 @@
               alt="image"
             />
           </div> -->
-          
+
           <div class="col-3">
             <input
               type="text"
@@ -122,15 +125,13 @@
         </div>
 
         <div class="col-md-5 flex-align" *ngIf="!showPreviousTable">
-          <!-- <div class="col-3">
-            <img
-              *ngIf="
-                property.column_name_text === 'Cornial Thickness Peripheral'
-              "
-              src="../../assets/consult-images/sreniaLeft.png"
-              alt="image"
-            />
-          </div> -->
+          <div class="col-1">
+            <mat-icon
+              *ngIf="property.image_le === 'Y'"
+              (click)="displayFieldImage(property, 'L')"
+              >remove_red_eye</mat-icon
+            >
+          </div>
           <div class="col-1">
             <app-multiselect
               *ngIf="property.column_name_type === 'LOV'"
@@ -215,3 +216,4 @@
   </div>
   <div class="col-md-4"></div>
 </div>
+

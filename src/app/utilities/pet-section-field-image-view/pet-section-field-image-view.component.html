@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Image</h1>
+<div mat-dialog-content class="field-img-container">
+  <img [src]="data.image_le_path" alt="image" />
+  <!-- <image-drawing
+    [src]="data.image_le_path"
+    outputMimeType="'image/png'"
+    [height]="200"
+    (save)="save($event)"
+    >
+</image-drawing> -->
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Ok</button>
+
+  
+</div>
