@@ -1,0 +1,77 @@
+.example-container {
+    height: 400px;
+    overflow: auto;
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+  tr.mat-footer-row {
+    font-weight: bold;
+  }
+  
+  .mat-table-sticky {
+    border-top: 1px solid #e0e0e0;
+  }
+
+  .mat-table {
+    overflow-x: scroll;
+    max-width: 99%;
+  }
+  
+  .mat-cell,
+  .mat-header-cell {
+    word-wrap: initial;
+    display: table-cell;
+    padding: 0px 10px;
+    line-break: unset;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: middle;
+  }
+  
+  .mat-row,
+  .mat-header-row {
+    display: table-row;
+  }
+
+  //Patient visit 360
+  .mar20 {
+    margin: 20px;
+}
+
+.space-10 {
+    height: 10px;
+}
+
+.fs-medium {
+  font-size: medium;
+}
+
+@media print {
+  .fs-medium {
+    font-size: 10px;
+  }
+  .fs-small {
+    font-size: 7px;
+  }
+}
+
+.txt-left {
+  text-align: end;
+}
+
+.btn-clr {
+    color: white;
+    background-color: green;
+}
+
+.table-header-background {
+  color: #f2f2f2;
+  background-color: #008d45;
+}
+
+.margin-10l {
+  margin-left: 10px;
+}

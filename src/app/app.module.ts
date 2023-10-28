@@ -118,6 +118,7 @@ import { PetRegistrationComponent } from './pet-registration/pet-registration.co
 import { PetHistoryComponent } from './pet-history/pet-history.component';
 import { PetTreatmentComponent } from './pet-treatment/pet-treatment.component';
 import { PetDiagnosisComponent } from './pet-diagnosis/pet-diagnosis.component';
+import { PetVisit360ViewComponent } from './pet-visit360-view/pet-visit360-view.component';
 //import { InvoicePaymentTable } from './invoice-payment-report/invoice-payment-table/invoice-payment-table.component';
 //import { InvoiceProductTable } from './invoice-product-report/invoice-product-table/invoice-product-table.component';
 @NgModule({
@@ -226,7 +227,8 @@ import { PetDiagnosisComponent } from './pet-diagnosis/pet-diagnosis.component';
     PetRegistrationComponent,
     PetHistoryComponent,
     PetTreatmentComponent,
-    PetDiagnosisComponent
+    PetDiagnosisComponent,
+    PetVisit360ViewComponent
   ],
   imports: [
     BrowserModule,
