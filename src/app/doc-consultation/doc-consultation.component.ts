@@ -540,7 +540,7 @@ export class DocConsultationComponent implements OnInit {
   currentHeading = '';
   getPetMetaData(sectionHeading: string) {
     this.currentHeading = sectionHeading;
-
+this.visit_no=3
     if (this.visit_no) {
       this.docService
         .getPetMetaData(

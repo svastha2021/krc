@@ -1,0 +1,14 @@
+.field-img-container {
+    height:500px;
+
+    img {
+        width: 100%; /* or any custom size */
+        height: 100%; 
+        object-fit: contain;
+    }
+
+    .tools {
+        display:none
+    }
+}
+

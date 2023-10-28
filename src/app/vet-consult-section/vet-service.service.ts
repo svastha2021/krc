@@ -45,6 +45,31 @@ export class VetServiceService {
     });
   }
 
+
+  public uploadFile(formData: any, imageName:string): Observable<any> {
+    //let headers = new HttpHeaders();
+    //headers.append('Content-Type', 'application/json');
+    //headers['Content-Type'] = `multipart/form-data; boundary=${form._boundary}`;
+//     const config = {
+//       headers:{
+//           'Content-Type' : `multipart/form-data; boundary=${formData._boundary}`,
+//       }
+// };
+    //let payload = {image: {formData}};
+    console.log(formData)
+    return this.http.post('http://localhost:4002/upload?id='+imageName, formData);
+  }
+
+
+
+  public uploadFileBase64(payload: any): Observable<any> {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    
+    console.log(payload)
+    return this.http.post('http://localhost:3000/v1/uploadimage', payload);
+  }
+
   public previousVetData(pid: string, heading: string): Observable<any> {
     let org_id = localStorage.getItem('org_id');
     let branch_id = localStorage.getItem('branch_id');
