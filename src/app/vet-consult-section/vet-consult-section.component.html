@@ -65,7 +65,7 @@
             /> -->
             <mat-icon
               *ngIf="property.image_re === 'Y'"
-              (click)="displayFieldImage(property)"
+              (click)="displayFieldImage(property, 'R')"
               >remove_red_eye</mat-icon
             >
           </div>
@@ -128,7 +128,7 @@
           <div class="col-1">
             <mat-icon
               *ngIf="property.image_le === 'Y'"
-              (click)="displayFieldImage(property)"
+              (click)="displayFieldImage(property, 'L')"
               >remove_red_eye</mat-icon
             >
           </div>

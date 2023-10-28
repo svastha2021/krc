@@ -220,33 +220,40 @@ export class VetConsultSectionComponent {
     this.isActive.emit(this.examinationBoolean);
   }
 
-  displayFieldImage(property: any) {
+  displayFieldImage(property: any, eye:string) {
     const viewImage = this.dialog.open(ViewPetFieldImage, {
       width: '800px',
       data: property,
     });
 
     viewImage.afterClosed().subscribe((data) => {
-      let file =  data.file;
+      let blobfile =  data.file;
       let field = data.field;
       console.log(data);
-      if (file) {
-        console.log('file edit', file);
+      if (blobfile) {
+        let imageName = this.headerDetail.patient_id +'-'+field.heading_seq_no+'-'+field.sub_heading_seq_no+'-'+field.column_name_text.trim()+'-'+field.column_name_le+'-'+this.visit_no;
+        let blobtofile= new File([blobfile], imageName+".png");
+        console.log('file edit', blobtofile);
         const formData = new FormData();
-        let payload = {
-          org_id: localStorage.getItem('org_id'),
-          branch_id: localStorage.getItem('branch_id'),
-          user_id: localStorage.getItem('user_id'),
-          dept_id: 'D0004',
-          patient_id: this.headerDetail.patient_id,
-          visit_no: this.visit_no,
-        };
-        let imageName = this.headerDetail.patient_id +'-'+field.heading_seq_no+'-'+field.sub_heading_seq_no+'-'+field.column_name_text.trim()+'-'+field.column_name_le+'-'+this.visit_no
+        
+        
         //file.name = imageName;
-        formData.append('image', file);
+        formData.append('image', blobtofile);
+        formData.append('org_id',localStorage.getItem('org_id')!);
+        formData.append('branch_id',localStorage.getItem('branch_id')!);
+        formData.append('user_id',localStorage.getItem('user_id')!);
+
+        formData.append('patient_id', this.headerDetail.patient_id);
+        formData.append('heading_seq_no',field.heading_seq_no);
+        formData.append('sub_heading_seq_no',field.sub_heading_seq_no);
+        formData.append('column_name_seq_no',field.column_name_seq_no);
+
+        formData.append('column_name', field.column_name);
+        formData.append('heading',field.heading);
+        formData.append('sub_heading',field.sub_heading);
+        formData.append('eye',eye);
         
-        
-        this.vetService.uploadFile(formData,imageName).subscribe((data) => {
+        this.vetService.uploadFile(formData,this.headerDetail.patient_id).subscribe((data) => {
           this.dialog.open(InfoDialogComponent, {
             width: '500px',
             data: 'Image Saved Successfully',

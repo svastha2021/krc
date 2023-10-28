@@ -46,18 +46,9 @@ export class VetServiceService {
   }
 
 
-  public uploadFile(formData: any, imageName:string): Observable<any> {
-    //let headers = new HttpHeaders();
-    //headers.append('Content-Type', 'application/json');
-    //headers['Content-Type'] = `multipart/form-data; boundary=${form._boundary}`;
-//     const config = {
-//       headers:{
-//           'Content-Type' : `multipart/form-data; boundary=${formData._boundary}`,
-//       }
-// };
-    //let payload = {image: {formData}};
-    console.log(formData)
-    return this.http.post('http://localhost:4002/upload?id='+imageName, formData);
+  public uploadFile(formData: any, pid:string): Observable<any> {    
+    console.log(formData);
+    return this.http.post('http://localhost:4002/upload?id='+pid, formData);
   }
 
 
