@@ -48,7 +48,7 @@ export class VetServiceService {
 
   public uploadFile(formData: any, pid:string): Observable<any> {    
     console.log(formData);
-    return this.http.post('http://localhost:4002/upload?id='+pid, formData);
+    return this.http.post(environment.apiUrl+'upload', formData);
   }
 
 

@@ -241,16 +241,17 @@ export class VetConsultSectionComponent {
         formData.append('image', blobtofile);
         formData.append('org_id',localStorage.getItem('org_id')!);
         formData.append('branch_id',localStorage.getItem('branch_id')!);
-        formData.append('user_id',localStorage.getItem('user_id')!);
+        formData.append('dept_id','D0004');
 
         formData.append('patient_id', this.headerDetail.patient_id);
         formData.append('heading_seq_no',field.heading_seq_no);
         formData.append('sub_heading_seq_no',field.sub_heading_seq_no);
         formData.append('column_name_seq_no',field.column_name_seq_no);
 
-        formData.append('column_name', field.column_name);
+        formData.append('column_name', field.column_name_text.trim());
         formData.append('heading',field.heading);
         formData.append('sub_heading',field.sub_heading);
+        formData.append('visit_no',this.visit_no);
         formData.append('eye',eye);
         
         this.vetService.uploadFile(formData,this.headerDetail.patient_id).subscribe((data) => {
