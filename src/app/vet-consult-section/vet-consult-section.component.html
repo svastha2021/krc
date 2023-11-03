@@ -93,15 +93,13 @@
           </div>
         </div>
         <div class="col-md-5 flex-align" *ngIf="showPreviousTable">
-          <!-- <div class="col-3">
-            <img
-              *ngIf="
-                property.column_name_text === 'Cornial Thickness Peripheral'
-              "
-              src="../../assets/consult-images/sreniaLeft.png"
-              alt="image"
-            />
-          </div> -->
+          <div class="col-md-1">
+           
+            <mat-icon
+              *ngIf="property.image_re === 'Y'"
+              (click)="displayFieldImage(property, 'R')"
+              >remove_red_eye</mat-icon
+            ></div>
 
           <div class="col-3">
             <input
@@ -157,15 +155,13 @@
         </div>
 
         <div class="col-md-5 flex-align" *ngIf="showPreviousTable">
-          <!-- <div class="col-4">
-            <img
-              *ngIf="
-                property.column_name_text === 'Cornial Thickness Peripheral'
-              "
-              src="../../assets/consult-images/sreniaLeft.png"
-              alt="image"
-            />
-          </div> -->
+          <div class="col-1">
+            <mat-icon
+              *ngIf="property.image_le === 'Y'"
+              (click)="displayFieldImage(property, 'L')"
+              >remove_red_eye</mat-icon
+            >
+          </div>
 
           <div class="col-3">
             <input

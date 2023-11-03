@@ -142,12 +142,19 @@ export class VetConsultSectionComponent {
           column_name_re: '',
           column_name_rem_re: '',
           column_name_rem_le: '',
-        };
+          image_re:'',
+          image_le:'',
+          heading_seq_no:0,
+          sub_heading_seq_no:0        };
         petParam.column_name_prefix = prop.column_name_prefix;
         petParam.column_name_text = prop.column_name_text;
         petParam.sub_heading = prop.sub_heading;
         petParam.heading = prop.heading;
         petParam.column_name_seq_no = prop.column_name_seq_no;
+        petParam.image_re = prop.image_re;
+        petParam.image_le = prop.image_le;
+        petParam.heading_seq_no = prop.heading_seq_no;
+        petParam.sub_heading_seq_no = prop.sub_heading_seq_no;
         const inputLE = document.getElementById(
           this.setIDs(prop.column_name_prefix, '_LE')
         ) as HTMLInputElement | null;
@@ -220,7 +227,9 @@ export class VetConsultSectionComponent {
     this.isActive.emit(this.examinationBoolean);
   }
 
-  displayFieldImage(property: any, eye:string) {
+  displayFieldImage(property: any, eye:string) {  
+    property.showPrevious =this.showPreviousTable; 
+    property.eye = eye;
     const viewImage = this.dialog.open(ViewPetFieldImage, {
       width: '800px',
       data: property,
