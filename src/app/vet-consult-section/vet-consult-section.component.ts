@@ -240,7 +240,7 @@ export class VetConsultSectionComponent {
       let field = data.field;
       console.log(data);
       if (blobfile) {
-        let imageName = this.headerDetail.patient_id +'-'+field.heading_seq_no+'-'+field.sub_heading_seq_no+'-'+field.column_name_text.trim()+'-'+field.column_name_le+'-'+this.visit_no;
+        let imageName = this.headerDetail.patient_id +'-'+field.heading_seq_no+'-'+field.sub_heading_seq_no+'-'+field.column_name_text.trim()+'-'+eye+'-'+this.visit_no;
         let blobtofile= new File([blobfile], imageName+".png");
         console.log('file edit', blobtofile);
         const formData = new FormData();
