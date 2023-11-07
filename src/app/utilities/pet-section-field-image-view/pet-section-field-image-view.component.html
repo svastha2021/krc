@@ -1,20 +1,41 @@
 <h1 mat-dialog-title>Image</h1>
 <div mat-dialog-content class="field-img-container">
-  <img [src]="data.image_re_path" alt="image" *ngIf="data.image_re_path!== null && data.showPrevious && data.eye === 'R'" />
-  <img [src]="data.image_le_path" alt="image" *ngIf="data.showPrevious && data.eye === 'L' && data.image_le_path!== null" />
-  <p *ngIf="data.showPrevious && data.eye === 'L' && data.image_le_path=== null">NO Image to view</p>
-  <p *ngIf="data.showPrevious && data.eye === 'R' && data.image_re_path=== null">NO Image to view</p>
+  <img
+    [src]="data.image_re_path"
+    alt="image"
+    *ngIf="data.image_re_path !== null && data.showPrevious && data.eye === 'R'"
+  />
+  <img
+    [src]="data.image_le_path"
+    alt="image"
+    *ngIf="data.showPrevious && data.eye === 'L' && data.image_le_path !== null"
+  />
+  <p
+    *ngIf="data.showPrevious && data.eye === 'L' && data.image_le_path === null"
+  >
+    NO Image to view
+  </p>
+  <p
+    *ngIf="data.showPrevious && data.eye === 'R' && data.image_re_path === null"
+  >
+    NO Image to view
+  </p>
   <image-drawing
     [src]="data.image_re_path"
-    outputMimeType="'image/png'"
-    [height]="200"
+    outputMimeType="'image/png'"    
     (save)="save($event)"
-    *ngIf="!data.showPrevious"
+    *ngIf="!data.showPrevious && data.eye === 'R'"
+  >
+  </image-drawing>
+
+  <image-drawing
+    [src]="data.image_le_path"
+    outputMimeType="'image/png'"    
+    (save)="save($event)"
+    *ngIf="!data.showPrevious && data.eye === 'L'"
     >
-</image-drawing>
+  </image-drawing>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Ok</button>
-
-  
 </div>
