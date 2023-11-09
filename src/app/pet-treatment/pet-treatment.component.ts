@@ -77,7 +77,7 @@ export class PetTreatmentComponent {
 
   emitTreatment() {
     this.isActiveTreatment.emit(
-      this.treatmentBoolean
+      [this.treatmentBoolean,this.visit_no]
     );
   }
 

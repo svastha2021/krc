@@ -121,6 +121,8 @@ import { PetDiagnosisComponent } from './pet-diagnosis/pet-diagnosis.component';
 import { PetVisit360ViewComponent } from './pet-visit360-view/pet-visit360-view.component';
 import {ViewPetFieldImage} from './utilities/pet-section-field-image-view/pet-section-field-image-view.component';
 import { ImageDrawingModule } from 'ngx-image-drawing';
+import { PetConsulationComponent } from './pet-consulation/pet-consulation.component';
+import { PetDynamicHomeComponent } from './pet-dynamic-home/pet-dynamic-home.component';
 //import { InvoicePaymentTable } from './invoice-payment-report/invoice-payment-table/invoice-payment-table.component';
 //import { InvoiceProductTable } from './invoice-product-report/invoice-product-table/invoice-product-table.component';
 @NgModule({
@@ -231,7 +233,9 @@ import { ImageDrawingModule } from 'ngx-image-drawing';
     PetTreatmentComponent,
     PetDiagnosisComponent,
     PetVisit360ViewComponent,
-    ViewPetFieldImage
+    ViewPetFieldImage,
+    PetDynamicHomeComponent,
+    PetConsulationComponent
   ],
   imports: [
     BrowserModule,

@@ -59,7 +59,7 @@ export class AppointmentTableComponent implements OnInit {
   }
 
   goToConsult(apt: any) {
-    this.router.navigate(['/doc-consult'], { state: apt });
+    this.router.navigate(['/pet-consultation-home'], { state: apt });
   }
 
 }

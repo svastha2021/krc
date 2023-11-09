@@ -25,6 +25,7 @@ export type aptModel = {
   doctor_name: string;
   dept_id: string;
   dept_name: string;
+  visit_no?:any;
 };
 
 @Injectable({
