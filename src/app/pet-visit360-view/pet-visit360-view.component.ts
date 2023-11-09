@@ -5,6 +5,7 @@ import { InvoiceService } from '../invoice/invoice.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { PatientVisit360ViewService } from '../patient-visit360-view/patient-visit360-view.service';
+import { ReferenceService } from '../utilities/services/reference.service';
 
 @Component({
   selector: 'app-pet-visit360-view',
@@ -14,8 +15,9 @@ import { PatientVisit360ViewService } from '../patient-visit360-view/patient-vis
 export class PetVisit360ViewComponent {
 
   @Input() tableData: any;
+  patientDetails: any;
   constructor(private router: Router, private formBuilder: FormBuilder, private is: InvoiceService,
-              private pvService: PatientVisit360ViewService, private dialog: MatDialog, private route: ActivatedRoute) { }
+              private pvService: PatientVisit360ViewService, private dialog: MatDialog, private route: ActivatedRoute, private ref: ReferenceService,) { }
   dataSource: any;
   isShowPatientDetails: any = false;
 
@@ -49,6 +51,13 @@ export class PetVisit360ViewComponent {
     this.pvService.getPatientData(data.patient_id, data.org_id, data.branch_id, visitNo, visitDate[0]).subscribe(data => {
       this.petData = data;
     })
+    this.getPatientDetails(data.patient_id);
+  }
+
+  getPatientDetails(patient_id: any) {
+    this.ref.fetchHeader(patient_id).subscribe(data => {
+      this.patientDetails = data;
+    });
   }
 
   getPatientHeader(petData: any) {
