@@ -78,7 +78,7 @@ export class PetDiagnosisComponent {
 
   emitDiagnosis() {
     this.isActivePetDiagonsis.emit(
-      this.diagnosisBoolean
+      [this.diagnosisBoolean, this.visit_no]
     );
   }
 

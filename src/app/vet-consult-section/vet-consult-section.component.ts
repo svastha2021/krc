@@ -41,6 +41,7 @@ export class VetConsultSectionComponent {
     }
   }
   @Output() isActive = new EventEmitter();
+  @Output() backEmit= new EventEmitter();
 
   dynamicForm!: FormGroup;
   showPreviousTable = false;
@@ -62,7 +63,9 @@ export class VetConsultSectionComponent {
     private cdRef: ChangeDetectorRef
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.visit_no)
+  }
   dynamicExamData: any = [];
 
   get() {
@@ -200,7 +203,9 @@ export class VetConsultSectionComponent {
     };
 
     this.vetService.saveVetData(params).subscribe((data) => {
-      this.isActive.emit(true);
+      this.isActive.emit(
+        [false, this.visit_no, this.visit_date]
+      );
       this.dialog.open(InfoDialogComponent, {
         width: '500px',
         data: 'Data Saved Successfully',
@@ -225,6 +230,10 @@ export class VetConsultSectionComponent {
 
   emitExamination() {
     this.isActive.emit(this.examinationBoolean);
+  }
+
+  back2Section(){
+    this.backEmit.emit();
   }
 
   displayFieldImage(property: any, eye:string) {  
