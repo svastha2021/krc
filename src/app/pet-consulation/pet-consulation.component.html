@@ -24,15 +24,14 @@
         aptObj: aptObj,
         heading: 'Notes'
       }">Doctor Notes</mat-grid-tile>
-      <mat-grid-tile
-        [routerLink]="['/pet-dynamic-home']"
-        [state]="{
-          visit_no: visit_no,
-          aptObj: aptObj,
-          heading: 'Cornea and Sclera'
-        }"
-        >Cornea and Sclera</mat-grid-tile
-      >
+
+      <mat-grid-tile [routerLink]="['/pet-dynamic-home']" [state]="{
+        visit_no: visit_no,
+        aptObj: aptObj,
+        heading: 'Pet Visit 360'
+      }">Pet Visit 360</mat-grid-tile>
+
+      
       <mat-grid-tile
         [routerLink]="['/pet-dynamic-home']"
         [state]="{
@@ -50,6 +49,16 @@
           heading: 'Examination of Adnexa'
         }"
         >Examination of Adnexa</mat-grid-tile
+      >
+
+      <mat-grid-tile
+        [routerLink]="['/pet-dynamic-home']"
+        [state]="{
+          visit_no: visit_no,
+          aptObj: aptObj,
+          heading: 'Cornea and Sclera'
+        }"
+        >Cornea and Sclera</mat-grid-tile
       >
 
       <mat-grid-tile

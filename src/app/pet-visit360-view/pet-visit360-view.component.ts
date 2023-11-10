@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { PatientVisit360ViewService } from '../patient-visit360-view/patient-visit360-view.service';
 import { ReferenceService } from '../utilities/services/reference.service';
+import { DocConsultationService } from '../doc-consultation/doc-consultation.service';
 
 @Component({
   selector: 'app-pet-visit360-view',
@@ -17,7 +18,10 @@ export class PetVisit360ViewComponent {
   @Input() tableData: any;
   patientDetails: any;
   constructor(private router: Router, private formBuilder: FormBuilder, private is: InvoiceService,
-              private pvService: PatientVisit360ViewService, private dialog: MatDialog, private route: ActivatedRoute, private ref: ReferenceService,) { }
+              private pvService: PatientVisit360ViewService, 
+              private dialog: MatDialog, private route: ActivatedRoute, 
+              private ref: ReferenceService,
+              private docService:DocConsultationService) { }
   dataSource: any;
   isShowPatientDetails: any = false;
 
@@ -31,9 +35,18 @@ export class PetVisit360ViewComponent {
   petData: any;
   patientHeaderData: any;
   visitData: any;
+ 
   
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource(this.tableData);
+    let patientHeader = JSON.parse(localStorage.getItem('header')!);
+    this.docService
+    .fetchPrevDeatils(patientHeader.patient_id)
+    .subscribe((data) => {
+      console.log(data.results);
+      this.dataSource = new MatTableDataSource(data.results);
+      //this.setCurrentPatientData();
+    });
+    //this.dataSource = new MatTableDataSource(this.tableData);
   }
 
   displayedColumns: string[] = ['visit_no', 'visit_date', 'view'];

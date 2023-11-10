@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="container">
   <div class="row">
-    <h1>{{currentHeading}}</h1>
+    <h1>{{ currentHeading }}</h1>
   </div>
   <!-- <div class="row">
     <div class="container" *ngIf="patientHeader">
@@ -41,15 +41,23 @@
   </div> -->
   <div *ngIf="currentHeading === 'Notes'">
     <app-pet-history
-        [aptObj]="this.aptObj"
-        [visit_no]="visit_no"
-        [headerDetail]="patientHeader" 
-        (isActivePet)="gotoConsultHome($event)"       
-      ></app-pet-history>
+      [aptObj]="this.aptObj"
+      [visit_no]="visit_no"
+      [headerDetail]="patientHeader"
+      (isActivePet)="gotoConsultHome($event)"
+    ></app-pet-history>
+  </div>
+
+  <div *ngIf="currentHeading === 'Pet Visit 360'">    
+    <ng-template [ngIf]="currentHeading">
+      <app-pet-visit360-view
+        
+      ></app-pet-visit360-view>
+    </ng-template>
   </div>
   <div *ngIf="metaDataRoute">
-    <ng-template [ngIf]="currentHeading">        
-        <app-vet-dynamic-section
+    <ng-template [ngIf]="currentHeading">
+      <app-vet-dynamic-section
         [visit_no]="20"
         [metaData]="vetMetaData"
         [headerDetail]="patientHeader"
@@ -57,41 +65,33 @@
         (isActive)="gotoConsultHome($event)"
         (backEmit)="gotoConsultHome()"
       ></app-vet-dynamic-section>
-    </ng-template>     
-    
-    
-</div>
+    </ng-template>
+  </div>
 
-<div *ngIf="currentHeading === 'Diagnosis'">
-  <app-pet-diagnosis
+  <div *ngIf="currentHeading === 'Diagnosis'">
+    <app-pet-diagnosis
       [aptObj]="aptObj"
       [visit_no]="visit_no"
       [headerDetail]="patientHeader"
-      (isActivePetDiagnosis)='gotoConsultHome($event)'
+      (isActivePetDiagnosis)="gotoConsultHome($event)"
     ></app-pet-diagnosis>
-</div>
+  </div>
 
-
-<div *ngIf="currentHeading === 'Treatment'">
-  <app-pet-treatment
+  <div *ngIf="currentHeading === 'Treatment'">
+    <app-pet-treatment
       [aptObj]="aptObj"
       [visit_no]="visit_no"
       [headerDetail]="patientHeader"
-      (isActiveTreatment)='gotoConsultHome($event)'
+      (isActiveTreatment)="gotoConsultHome($event)"
     ></app-pet-treatment>
+  </div>
+  <div>
+    <button
+      type="button"
+      class="btn btn-success mar20t"
+      (click)="gotoConsultHome()"
+    >
+      Back to Sections
+    </button>
+  </div>
 </div>
-<div>
-  <button
-  type="button"
-  class="btn btn-success mar20t"
-  (click)="gotoConsultHome()"
-  
->
-  Back to Sections
-</button>
-</div>
-
-</div>
-
-
-
