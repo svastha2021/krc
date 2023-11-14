@@ -66,8 +66,8 @@ export class PatientRegistrationComponent implements OnInit {
     }
     this.convertTodayTostr();
     this.patientRegObj.branch_id = localStorage.getItem('branch_id') || '';
-    this.patientRegObj.user_id = localStorage.getItem('org_id') || '';
-    this.patientRegObj.org_id = localStorage.getItem('user_id') || '';
+    this.patientRegObj.user_id = localStorage.getItem('user_id') || '';
+    this.patientRegObj.org_id = localStorage.getItem('org_id') || '';
   }
   fetchPatientTypes() {
     this.ps.getPatientTypes().subscribe((data) => {
