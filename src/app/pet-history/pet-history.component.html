@@ -29,7 +29,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <label class="form-label margin-20t">Primary compliant</label>
+                    <label class="form-label margin-20t">Primary compliant <span class="vertical-top"><mat-icon> format_list_bulleted</mat-icon></span></label>
                     <select type="dropdown" class="form-control" formControlName="main_complaint" required>
                       <option value="" selected disabled>-Select-</option>
                       <option *ngFor="let vaValue of primaryComplaintList" value="{{vaValue.ref_code}}">{{vaValue.ref_desc}}</option>
@@ -42,7 +42,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <label class="form-label margin-20t">Complaint Status</label>
+                    <label class="form-label margin-20t">Complaint Status <span class="vertical-top"><mat-icon> format_list_bulleted</mat-icon></span></label>
                     <select type="dropdown" class="form-control" formControlName="curr_treatment" required>
                       <option value="" selected disabled>-Select-</option>
                       <option *ngFor="let vaValue of complaintStatusList" value="{{vaValue.ref_code}}">{{vaValue.ref_desc}}</option>
@@ -57,7 +57,7 @@
 
         <div class="mar-10b">
             <div class="row pet-label">
-                <label class="form-label">Concurrent  Disease</label>
+                <label class="form-label">Concurrent  Disease <span class="vertical-top"><mat-icon> format_list_bulleted</mat-icon></span></label>
             </div>
             <div class="row">
                 <div class="col-md-6">
@@ -102,7 +102,7 @@
             </div>
             <div class="row mar-5b">
                 <div class="col-md-2 pg">
-                    <label class="form-label pg-t">Lacrimation</label>
+                    <label class="form-label pg-t">Lacrimation<span class="vertical-top"><mat-icon> format_list_bulleted</mat-icon></span></label>
                 </div>
                 <div class="col-md-5 flex-align">
                     <select type="dropdown" class="form-control" formControlName="lacrimation_right" required>
@@ -119,7 +119,7 @@
             </div>
             <div class="row mar-5b">
                 <div class="col-md-2 pg">
-                    <label class="form-label pg-t">Pain</label>
+                    <label class="form-label pg-t">Pain <span class="vertical-top"><mat-icon> format_list_bulleted</mat-icon></span></label>
                 </div>
                 <div class="col-md-5 flex-align">
                     <select type="dropdown" class="form-control" formControlName="pain_right" required>
@@ -136,7 +136,7 @@
             </div>
             <div class="row mar-5b">
                 <div class="col-md-2 pg">
-                    <label class="form-label pg-t">Blepharospasm</label>
+                    <label class="form-label pg-t">Blepharospasm <span class="vertical-top"><mat-icon> format_list_bulleted</mat-icon></span></label>
                 </div>
                 <div class="col-md-5 flex-align">
                     <select type="dropdown" class="form-control" formControlName="blepharospasm_right" required>
@@ -153,7 +153,7 @@
             </div>
             <div class="row mar-5b">
                 <div class="col-md-2 pg">
-                    <label class="form-label pg-t">Photophobia</label>
+                    <label class="form-label pg-t">Photophobia <span class="vertical-top"><mat-icon> format_list_bulleted</mat-icon></span></label>
                 </div>
                 <div class="col-md-5 flex-align">
                     <select type="dropdown" class="form-control" formControlName="photophobia_right" required>

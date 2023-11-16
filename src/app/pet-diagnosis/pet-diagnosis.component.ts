@@ -18,7 +18,7 @@ export class PetDiagnosisComponent {
   @Input() visit_no: string = '';
   @Input() visit_date: any;
   @Input() aptObj: any = {};
-  @Output() isActivePetDiagonsis = new EventEmitter();
+  @Output() isActivePetDiagnosis = new EventEmitter();
   diagnosisForm!: FormGroup;
   diagnosisBoolean: boolean = false;
   isActiveDiagnosis: any;
@@ -77,7 +77,7 @@ export class PetDiagnosisComponent {
   }
 
   emitDiagnosis() {
-    this.isActivePetDiagonsis.emit(
+    this.isActivePetDiagnosis.emit(
       [this.diagnosisBoolean, this.visit_no]
     );
   }

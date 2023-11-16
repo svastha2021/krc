@@ -16,6 +16,7 @@ export class LabPrescriptionComponent implements OnInit {
   headerDetail: any;
   @Input()
   visit_no: string = '';
+  @Input() aptObj: any;
   @Output() isActiveLab = new EventEmitter();
   labTest: LabItem[] = [];
   displayedColumns = ['id', 'test_id', 'test_date', 'test_notes', 'action'];
@@ -123,7 +124,7 @@ export class LabPrescriptionComponent implements OnInit {
 
   emitLab() {
     this.isActiveLab.emit(
-      this.labBoolean
+      [this.labBoolean,this.visit_no]
     );
   }
 }

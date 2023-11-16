@@ -25,6 +25,16 @@
         heading: 'Notes'
       }">Doctor Notes</mat-grid-tile>
 
+      <mat-grid-tile
+        [routerLink]="['/pet-dynamic-home']"
+        [state]="{
+          visit_no: visit_no,
+          aptObj: aptObj,
+          heading: 'Vital Parameters'
+        }"
+        >Vital Parameters</mat-grid-tile
+      >
+
       <mat-grid-tile [routerLink]="['/pet-dynamic-home']" [state]="{
         visit_no: visit_no,
         aptObj: aptObj,
@@ -125,6 +135,26 @@
       heading: 'Treatment'
     }"
     >Treatment</mat-grid-tile
+  >
+
+  <mat-grid-tile
+    [routerLink]="['/pet-dynamic-home']"
+    [state]="{
+      visit_no: visit_no,
+      aptObj: aptObj,
+      heading: 'Medicine'
+    }"
+    >Medicine</mat-grid-tile
+  >
+
+  <mat-grid-tile
+    [routerLink]="['/pet-dynamic-home']"
+    [state]="{
+      visit_no: visit_no,
+      aptObj: aptObj,
+      heading: 'Lab'
+    }"
+    >Lab</mat-grid-tile
   >
   </mat-grid-list>
   </div>

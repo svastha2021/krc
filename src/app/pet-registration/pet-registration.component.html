@@ -79,26 +79,6 @@
     
             <div class="col-md-4">
                 <div class=" mar-top-5">
-                    <label for="deworming_status" class="form-label">Deworming Status<span class="vertical-top"><mat-icon> format_list_bulleted</mat-icon></span><span class="txt-danger">*</span></label>
-                    <select type="dropdown" class="form-control" formControlName="deworming_status" required>
-                        <option value="" selected disabled>-Select-</option>
-                        <option value="Y">Yes</option>
-                        <option value="N">No</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class=" mar-top-5">
-                    <label for="defecation" class="form-label">Defication</label>
-                    <input type="text" class="form-control" name="defecation" formControlName="defecation">
-                </div>
-            </div>
-        </div>
-    
-        <div class="row">
-            <div class="col-md-4">
-                <div class=" mar-top-5">
                     <label for="sterilized" class="form-label">Sterilized<span class="vertical-top"><mat-icon> format_list_bulleted</mat-icon></span><span class="txt-danger">*</span></label>
                     <select type="dropdown" class="form-control" formControlName="sterilized" required>
                         <option value="" selected disabled>-Select-</option>
@@ -110,15 +90,6 @@
                 <div class=" mar-top-5">
                     <label for="last_steril_date" class="form-label">Sterilized Date</label>
                     <input type="date" class="form-control" formControlName="last_steril_date">
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class=" mar-top-5">
-                    <label for="living_condition" class="form-label">Living Conditon<span class="vertical-top"><mat-icon> format_list_bulleted</mat-icon></span></label>
-                    <select type="dropdown" class="form-control" formControlName="living_condition">
-                        <option value="" selected disabled>-Select-</option>
-                        <option *ngFor="let vaValue of livingConditionList" value="{{vaValue.ref_code}}">{{vaValue.ref_desc}}</option>
-                    </select>
                 </div>
             </div>
         </div>
@@ -134,24 +105,56 @@
                     </select>
                 </div>
             </div>
+
             <div class="col-md-4">
                 <div class=" mar-top-5">
                     <label for="last_vaccinated_date" class="form-label">Vaccinated Date</label>
                     <input type="date" class="form-control" name="last_vaccinated_date" formControlName="last_vaccinated_date">
                 </div>
             </div>
+
+            <div class="col-md-4">
+                <div class=" mar-top-5">
+                    <label for="deworming_status" class="form-label">Deworming Status<span class="vertical-top"><mat-icon> format_list_bulleted</mat-icon></span><span class="txt-danger">*</span></label>
+                    <select type="dropdown" class="form-control" formControlName="deworming_status" required>
+                        <option value="" selected disabled>-Select-</option>
+                        <option value="Y">Yes</option>
+                        <option value="N">No</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-md-4">
+                <div class=" mar-top-5">
+                    <label for="living_condition" class="form-label">Living Conditon<span class="vertical-top"><mat-icon> format_list_bulleted</mat-icon></span></label>
+                    <select type="dropdown" class="form-control" formControlName="living_condition">
+                        <option value="" selected disabled>-Select-</option>
+                        <option *ngFor="let vaValue of livingConditionList" value="{{vaValue.ref_code}}">{{vaValue.ref_desc}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-4 mar-top-5">
+                <label for="eating_habit" class="form-label">Eating Habit</label>
+                <input type="text" class="form-control" name="eating_habit" formControlName="eating_habit">
+            </div>
+
+            <div class="col-md-4">
+                <div class=" mar-top-5">
+                    <label for="defecation" class="form-label">Defication</label>
+                    <input type="text" class="form-control" name="defecation" formControlName="defecation">
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
             <div class="col-md-4">
                 <div class=" mar-top-5">
                     <label for="urination" class="form-label">Urination</label>
                     <input type="text" class="form-control" name="urination" formControlName="urination">
                 </div> 
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-4 mar-top-5">
-                <label for="eating_habit" class="form-label">Eating Habit</label>
-                <input type="text" class="form-control" name="eating_habit" formControlName="eating_habit">
             </div>
             <div class="col-md-4 mar-top-5">
                 <label for="drinking_habit" class="form-label">Drinking Habit</label>

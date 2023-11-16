@@ -15,7 +15,7 @@
             </ng-container>
     
             <ng-container matColumnDef="test_id">
-                <mat-header-cell *matHeaderCellDef> Lab Test Name </mat-header-cell>
+                <mat-header-cell *matHeaderCellDef> Lab Test Name <span class="vertical-top"><mat-icon> format_list_bulleted</mat-icon></span> </mat-header-cell>
                 <mat-cell *matCellDef="let element">
                     <select [(ngModel)]="element.test_id" placeholder="Product name" class="form-control">
                         <option *ngFor="let product of labTest" [value]="product.product_id">{{product.product_name}}</option>
@@ -34,7 +34,7 @@
                 <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
                 <mat-cell *matCellDef="let element">
                     <mat-form-field floatLabel="never">
-                        <input type="date"  required  matInput
+                        <input type="date"  matInput
                                 name="test_date"  [(ngModel)]="element.test_date" id="test_date" >                            
                     </mat-form-field>
                 </mat-cell>

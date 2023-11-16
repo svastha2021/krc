@@ -37,6 +37,7 @@ export class MedPrescriptionComponent implements OnInit {
   headerDetail: any;
   @Input()
   visit_no: any;
+  @Input() aptObj: any;
   @Output() isActiveMedicine = new EventEmitter();
   pharmaList: any = [];
   tableData: LabItem[] = [];
@@ -124,7 +125,7 @@ export class MedPrescriptionComponent implements OnInit {
 
   emitMedicine() {
     this.isActiveMedicine.emit(
-      this.medicineBoolean
+      [this.medicineBoolean,this.visit_no]
     );
   }
 }
