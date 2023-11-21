@@ -26,6 +26,19 @@ export type aptModel = {
   dept_id: string;
   dept_name: string;
   visit_no?:any;
+  petHistoryBoolean: boolean;
+  petVitalBoolean: boolean;
+  petVisionBoolean: boolean;
+  petAdnexaBoolean: boolean;
+  petCorneaBoolean: boolean;
+  petIOPBoolean: boolean;
+  petPosteriorBoolean: boolean;
+  petAntiriorBoolean: boolean;
+  petFundusBoolean: boolean;
+  petDiagnosisBoolean: boolean;
+  petTreatmentBoolean: boolean;
+  petMedicineBoolean: boolean;
+  petLabBoolean: boolean;
 };
 
 @Injectable({

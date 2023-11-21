@@ -204,7 +204,7 @@ export class VetConsultSectionComponent {
 
     this.vetService.saveVetData(params).subscribe((data) => {
       this.isActive.emit(
-        [false, this.visit_no, this.visit_date]
+        [true, this.visit_no, this.visit_date]
       );
       this.dialog.open(InfoDialogComponent, {
         width: '500px',

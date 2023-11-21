@@ -23,7 +23,7 @@
         visit_no: visit_no,
         aptObj: aptObj,
         heading: 'Notes'
-      }">Doctor Notes</mat-grid-tile>
+      }">Doctor Notes <i *ngIf="aptObj.petHistoryBoolean" class="fa fa-check" aria-hidden="true"></i></mat-grid-tile>
 
       <mat-grid-tile
         [routerLink]="['/pet-dynamic-home']"
@@ -32,7 +32,7 @@
           aptObj: aptObj,
           heading: 'Vital Parameters'
         }"
-        >Vital Parameters</mat-grid-tile
+        >Vital Parameters <i *ngIf="aptObj.petVitalBoolean" class="fa fa-check" aria-hidden="true"></i></mat-grid-tile
       >
 
       <mat-grid-tile [routerLink]="['/pet-dynamic-home']" [state]="{
@@ -49,7 +49,7 @@
           aptObj: aptObj,
           heading: 'Vision Assesment'
         }"
-        >Vision Assesment</mat-grid-tile
+        >Vision Assesment <i *ngIf="aptObj.petVisionBoolean" class="fa fa-check" aria-hidden="true"></i></mat-grid-tile
       >
       <mat-grid-tile
         [routerLink]="['/pet-dynamic-home']"
@@ -58,7 +58,7 @@
           aptObj: aptObj,
           heading: 'Examination of Adnexa'
         }"
-        >Examination of Adnexa</mat-grid-tile
+        >Examination of Adnexa <i *ngIf="aptObj.petAdnexaBoolean" class="fa fa-check" aria-hidden="true"></i></mat-grid-tile
       >
 
       <mat-grid-tile
@@ -68,7 +68,7 @@
           aptObj: aptObj,
           heading: 'Cornea and Sclera'
         }"
-        >Cornea and Sclera</mat-grid-tile
+        >Cornea and Sclera <i *ngIf="aptObj.petCorneaBoolean" class="fa fa-check" aria-hidden="true"></i></mat-grid-tile
       >
 
       <mat-grid-tile
@@ -78,7 +78,7 @@
         aptObj: aptObj,
         heading: 'IOP and AC'
       }"
-      >IOP and AC</mat-grid-tile
+      >IOP and AC <i *ngIf="aptObj.petIOPBoolean" class="fa fa-check" aria-hidden="true"></i></mat-grid-tile
     >
     
 
@@ -90,7 +90,7 @@
         aptObj: aptObj,
         heading: 'Posterior Segment After pupillary Dilation'
       }"
-      >Posterior Segment After pupillary Dilation</mat-grid-tile
+      >Posterior Segment After pupillary Dilation <i *ngIf="aptObj.petPosteriorBoolean" class="fa fa-check" aria-hidden="true"></i></mat-grid-tile
     >
     
 
@@ -101,7 +101,7 @@
         aptObj: aptObj,
         heading: 'Antirior Segment After pupillary Dilation'
       }"
-      >Antirior Segment After pupillary Dilation</mat-grid-tile
+      >Antirior Segment After pupillary Dilation <i *ngIf="aptObj.petAntiriorBoolean" class="fa fa-check" aria-hidden="true"></i></mat-grid-tile
     >
     
 
@@ -112,7 +112,7 @@
       aptObj: aptObj,
       heading: 'Fundus'
     }"
-    >Fundus</mat-grid-tile
+    >Fundus <i *ngIf="aptObj.petFundusBoolean" class="fa fa-check" aria-hidden="true"></i></mat-grid-tile
   >
   
 
@@ -123,7 +123,7 @@
       aptObj: aptObj,
       heading: 'Diagnosis'
     }"
-    >Diagnosis</mat-grid-tile
+    >Diagnosis <i *ngIf="aptObj.petDiagnosisBoolean" class="fa fa-check" aria-hidden="true"></i></mat-grid-tile
   >
 
 
@@ -134,7 +134,7 @@
       aptObj: aptObj,
       heading: 'Treatment'
     }"
-    >Treatment</mat-grid-tile
+    >Treatment <i *ngIf="aptObj.petTreatmentBoolean" class="fa fa-check" aria-hidden="true"></i></mat-grid-tile
   >
 
   <mat-grid-tile
@@ -144,7 +144,7 @@
       aptObj: aptObj,
       heading: 'Medicine'
     }"
-    >Medicine</mat-grid-tile
+    >Medicine <i *ngIf="aptObj.petMedicineBoolean" class="fa fa-check" aria-hidden="true"></i></mat-grid-tile
   >
 
   <mat-grid-tile
@@ -154,7 +154,7 @@
       aptObj: aptObj,
       heading: 'Lab'
     }"
-    >Lab</mat-grid-tile
+    >Lab <i *ngIf="aptObj.petLabBoolean" class="fa fa-check" aria-hidden="true"></i></mat-grid-tile
   >
   </mat-grid-list>
   </div>
