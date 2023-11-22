@@ -54,6 +54,10 @@ export class VetConsultSectionComponent {
   showVisitNo: any;
   examinationBoolean: boolean = false;
   sectionParamData: any[] = [];
+  filesList: any = [];
+  showFiles = false;
+  imageSrc: any = '';
+  videoSrc: any = '';
   constructor(
     private vetService: VetServiceService,
     private ref: ReferenceService,
@@ -305,5 +309,33 @@ export class VetConsultSectionComponent {
       });
       console.log(reader.result);
     };
+  }
+
+  view(path: any) {
+    this.videoSrc = '';
+    this.imageSrc = '';
+    if (path.indexOf('pdf') >= 0) {
+      window.open(path, '_blank');
+    }
+    if (path.indexOf('.mp4') >= 0) {
+      this.videoSrc = path;
+    } else {
+      this.imageSrc = path;      
+    }
+  }
+  retrieveFiles() {
+    this.showFiles = true;
+    this.filesList = [];
+    this.vetService
+      .getFiles(this.headerDetail.patient_id, this._heading)
+      .subscribe((data:any) => {
+        let temp = data;
+        for (let i = 0; i < temp.length; i++) {
+          let tempObj = { fileName: '', filePath: '' };
+          tempObj.fileName = temp[i].split('/')[4];
+          tempObj.filePath = temp[i];
+          this.filesList.push(tempObj);
+        }
+      });
   }
 }

@@ -61,6 +61,29 @@ export class VetServiceService {
     return this.http.post('http://localhost:3000/v1/uploadimage', payload);
   }
 
+  public getFiles(pid: string, heading: string): Observable<any> {
+    let org_id = localStorage.getItem('org_id');
+    let branch_id = localStorage.getItem('branch_id');
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+
+    let url =
+      environment.apiUrl +
+      'fetchfiles/' +
+      org_id +
+      '/' +
+      branch_id +
+      '/' +
+      pid +
+      '?heading=' +
+      heading;
+
+    return this.http.get(url, {
+      headers: headers,
+    });
+  }
+
+
   public previousVetData(pid: string, heading: string): Observable<any> {
     let org_id = localStorage.getItem('org_id');
     let branch_id = localStorage.getItem('branch_id');
