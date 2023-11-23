@@ -52,6 +52,8 @@ import { PatientVisit360ViewComponent } from './patient-visit360-view/patient-vi
 import { PetRegistrationComponent } from './pet-registration/pet-registration.component';
 import { PetConsulationComponent } from './pet-consulation/pet-consulation.component';
 import { PetDynamicHomeComponent } from './pet-dynamic-home/pet-dynamic-home.component';
+import { ManagePetComponent } from './manage-pet/manage-pet.component';
+import { PetHealthComponent } from './pet-health/pet-health.component';
 
 const routes: Routes = [
   {
@@ -265,6 +267,14 @@ const routes: Routes = [
     path: 'pet-dynamic-home',
     component: PetDynamicHomeComponent,
   },
+  {
+    path: 'manage-pet',
+    component: ManagePetComponent
+  },
+  {
+    path: 'pet-health',
+    component: PetHealthComponent
+  }
 
 
 ];

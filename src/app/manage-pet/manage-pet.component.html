@@ -1,0 +1,79 @@
+<app-header></app-header>
+<div class="container">
+  <app-base-detail></app-base-detail>
+    <h1>Manage Pet</h1>
+    <div class="row">
+
+    </div>
+    <div>
+        <mat-form-field class="mar20lr" appearance="fill">
+            <mat-label>Select Search Type</mat-label>
+            <mat-select placeholder="select"  required [(ngModel)]="searchType" (valueChange)="changeSearchType()">
+                <mat-option value="phone_no">Phone Number</mat-option>
+                <mat-option value="patient_name">Pet Name</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="mar20lr" appearance="fill" *ngIf="searchType === 'patient_name'">
+            <mat-label>Pet Name</mat-label>
+            <input required matInput type="text" [(ngModel)]="patient_name">
+        </mat-form-field>
+
+        <mat-form-field class="mar20lr" appearance="fill" *ngIf="searchType === 'phone_no'">
+            <mat-label>Phone Number</mat-label>
+            <input required matInput type="number" [(ngModel)]="phone_no">
+        </mat-form-field>
+
+    </div>
+    <div>
+        <!-- <button mat-button (click)="onNoClick()">No Thanks</button> -->
+        <button  mat-button [disabled]="!phone_no && !patient_name"  (click)="fetchDetails()"
+        >Retrieve</button>
+    </div>
+
+
+    <div *ngIf="patientNameList && patientNameList.length>0">
+        <mat-table #table [dataSource]="dataSource" class="mat-elevation-z8">
+            <ng-container matColumnDef="radio">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <mat-radio-group [(ngModel)]="selectedPerson" (change)="selectUser()">
+                        <mat-radio-button [value]="row"></mat-radio-button>
+                    </mat-radio-group>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="patient_name">
+                <mat-header-cell *matHeaderCellDef>Pet Name</mat-header-cell>
+                <mat-cell *matCellDef="let element;let i = index;"> {{element.patient_name}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="father_name">
+                <mat-header-cell *matHeaderCellDef>Owner Name</mat-header-cell>
+                <mat-cell *matCellDef="let element;let i = index;"> {{element.father_name}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="mobile_no">
+                <mat-header-cell *matHeaderCellDef>Phone Number</mat-header-cell>
+                <mat-cell *matCellDef="let element;let i = index;"> {{element.mobile_no}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="age">
+                <mat-header-cell *matHeaderCellDef>Age</mat-header-cell>
+                <mat-cell *matCellDef="let element;let i = index;"> {{element.age}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="dob">
+                <mat-header-cell *matHeaderCellDef>DOB</mat-header-cell>
+                <mat-cell *matCellDef="let element;let i = index;"> {{element.dob | date: 'dd/MM/yyyy'}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="sex">
+                <mat-header-cell *matHeaderCellDef>Sex</mat-header-cell>
+                <mat-cell *matCellDef="let element;let i = index;"> {{element.sex}} </mat-cell>
+            </ng-container>
+            <!-- <ng-container matColumnDef="patient_type">
+                <mat-header-cell *matHeaderCellDef>Patient Type</mat-header-cell>
+                <mat-cell *matCellDef="let element;let i = index;"> {{element.patient_type}} </mat-cell>
+            </ng-container> -->
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        <div *ngIf="patientNameList.length===0">no Records</div>
+    </div>
+
+</div>

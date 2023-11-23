@@ -1,0 +1,29 @@
+.mar20 {
+    margin: 20px;
+}
+
+.space-10 {
+    height: 10px;
+}
+
+.fs-medium {
+  font-size: medium;
+}
+
+@media print {
+  .fs-medium {
+    font-size: 10px;
+  }
+  .fs-small {
+    font-size: 7px;
+  }
+}
+
+.txt-left {
+  text-align: end;
+}
+
+.btn-clr {
+  color: white;
+  background-color: green;
+}

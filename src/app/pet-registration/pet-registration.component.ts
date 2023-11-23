@@ -32,22 +32,6 @@ export class PetRegistrationComponent {
 
   ngOnInit(): void {
 
-    if (history.state && history.state.patient_id) {
-      this.petRegObj = history.state;
-      this.updatePet = true;
-      this.patient_id = history.state.patient_id;
-    }
-
-    this.ref.getPaymentModes('STERIL').subscribe(data => {
-      this.sterilizedList = data.results;
-    })
-    this.ref.getPaymentModes('ANITYPE').subscribe(data => {
-      this.animalList = data.results;
-    })
-    this.ref.getPaymentModes('LIVCOND').subscribe(data => {
-      this.livingConditionList = data.results;
-    })
-
     this.petRegistrationForm = this.formBuilder.group({
       patient_id: [],
       dob: [],
@@ -73,6 +57,25 @@ export class PetRegistrationComponent {
       patient_name: [],
       patient_type_name: [],
       alt_mobile_no: []
+    })
+
+    if (history.state && history.state.patient_id) {
+      this.petRegistrationForm.patchValue(history.state);
+      this.patient_id = history.state.patient_id;
+      // this.petRegistrationForm.controls.last_steril_date.setValue(this.utility.convertTodayTostrDDMMYYYY(history.state.last_steril_date));
+      // this.petRegistrationForm.controls.dob.setValue(this.utility.convertTodayTostrDDMMYYYY(history.state.dob));
+      this.petRegObj = this.petRegistrationForm.value;
+      this.updatePet = true;
+    }
+
+    this.ref.getPaymentModes('STERIL').subscribe(data => {
+      this.sterilizedList = data.results;
+    })
+    this.ref.getPaymentModes('ANITYPE').subscribe(data => {
+      this.animalList = data.results;
+    })
+    this.ref.getPaymentModes('LIVCOND').subscribe(data => {
+      this.livingConditionList = data.results;
     })
   }
 
@@ -118,7 +121,7 @@ export class PetRegistrationComponent {
 
   goBack() {
     if (this.updatePet) {
-      this.router.navigate(['/manage-patient'], { state: this.petRegObj });
+      this.router.navigate(['/manage-pet'], { state: this.petRegObj });
     } else {
       this.router.navigate(['/landing']);
     }
