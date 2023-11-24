@@ -60,6 +60,7 @@ export class PetRegistrationComponent {
     })
 
     if (history.state && history.state.patient_id) {
+      this.getBreedList(history.state.animal_type);
       this.petRegistrationForm.patchValue(history.state);
       this.patient_id = history.state.patient_id;
       // this.petRegistrationForm.controls.last_steril_date.setValue(this.utility.convertTodayTostrDDMMYYYY(history.state.last_steril_date));
