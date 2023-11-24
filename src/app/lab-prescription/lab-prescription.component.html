@@ -7,6 +7,14 @@
             Add Row
         </button>
         <button class="btn btn-success ms-2" (click)="displayPrevious()">Show Previous</button>
+
+        <button class="btn btn-success ms-2" (click)="retrieveFiles()">
+            view Files
+          </button>
+        <button class="btn btn-success ms-2" (click)="showFiles = false;">
+            close File list
+          </button>
+
         <mat-table #table [dataSource]="dataSource">
             <!-- Test ID Column -->
             <ng-container matColumnDef="id">
@@ -68,7 +76,39 @@
         </button>
     </div>
 </div>
-
+<div class="col-md-12" *ngIf="showFiles">
+            <div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">File Name</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of filesList; let i = index">
+                    <td>{{ item.fileName }}</td>
+                    <td>
+                      <mat-icon
+                        title="preview"
+                        class="edit-icon"
+                        aria-hidden="false"
+                        aria-label="edit icon"
+                        (click)="view(item.filePath)"
+                        >preview
+                      </mat-icon>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div >
+              <img *ngIf="imageSrc != ''" style="height: 200px; width: 200px" [src]="imageSrc" />
+        
+              <video *ngIf="videoSrc != ''" style="height: 400px; width: 400px" [src]="videoSrc" controls></video>
+            </div>
+            
+          </div>
 <app-previous-lab [headerData]="headerDetail" *ngIf="showPreviousTable"></app-previous-lab>
 <button type="button" *ngIf="showPreviousTable" class="btn btn-danger mar20tb" (click)="showPreviousTable = false">
   Back
